@@ -1,38 +1,813 @@
-.App {
+/* src/App.css */
+
+/* --- Google Fonts: SF Pro Text / Display (iOS font inspiration) alternatives --- */
+/* Using Montserrat for bold headings, Lato for clean body text, Noto Sans TC for Chinese. */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+/* --- Variables (Good practice for consistent colors) --- */
+:root {
+  /* Pink Palette */
+  --color-primary-pink: #F7CAC9;
+  /* Soft, muted pink */
+  --color-accent-pink: #E78E9E;
+  /* Deeper rose pink */
+  --color-button-hover: #D67A8C;
+  /* Even deeper pink for hover */
+
+  /* Neutral Palette */
+  --color-background: #FBFBFB;
+  /* Almost white, clean background */
+  --color-card-background: #FFFFFF;
+  /* Pure white for cards */
+  --color-text-dark: #333333;
+  /* Dark charcoal for main text */
+  --color-text-medium: #666666;
+  /* Medium gray for secondary text */
+  --color-border-light: #EEEEEE;
+  /* Very light gray for subtle borders */
+
+  /* Fonts */
+  --font-primary: 'Montserrat', sans-serif;
+  --font-secondary: 'Lato', sans-serif;
+  --font-chinese: 'Noto Sans TC', sans-serif;
+}
+
+/* --- Global Styles --- */
+body {
+  font-family: var(--font-secondary), var(--font-chinese), 'Arial', sans-serif;
+  /* Body text using Lato */
+  line-height: 1.6;
+  margin: 0;
+  background-color: var(--color-background);
+  color: var(--color-text-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Global Container - Keeps content centered and at an appropriate width */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+/* --- Header (For ResumePage) - Minimal top section, only for background color --- */
+.header {
+  background-color: var(--color-primary-pink);
+  /* Soft pink background */
+  color: var(--color-card-background);
+  /* White text */
+  padding: 0;
+  /* Remove inner padding, handled by profile-section */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  /* Soft shadow */
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+/* --- Card Section Styles - Mimics Apple's clean card design --- */
+.card {
+  background-color: var(--color-card-background);
+  border-radius: 14px;
+  /* Larger border-radius for softer look */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  /* Light, soft shadow */
+  margin-bottom: 40px;
+  /* More spacing */
+  padding: 40px;
+  /* More inner padding */
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  /* Faster animation */
+  border: 1px solid var(--color-border-light);
+  /* Thin, light border for added polish */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  /* Slight lift on hover */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  /* Slightly deeper shadow */
+}
+
+/* Unified section heading style */
+.section-title {
+  color: var(--color-accent-pink);
+  /* Deeper rose pink for headings */
+  border-bottom: 1px solid var(--color-border-light);
+  /* Very thin light separator */
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  font-family: var(--font-primary), var(--font-chinese);
+  font-size: 2.4em;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* --- Item Styles (for Experience, Education, Additional Info) --- */
+.item {
+  margin-bottom: 35px;
+}
+
+.item:last-child {
+  margin-bottom: 0;
+}
+
+.item h3 {
+  color: var(--color-text-dark);
+  margin-bottom: 8px;
+  font-size: 1.8em;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.item .date {
+  color: var(--color-text-medium);
+  font-family: var(--font-secondary);
+  font-style: normal;
+  font-size: 1em;
+  margin-bottom: 15px;
+}
+
+.item p {
+  color: var(--color-text-dark);
+  font-size: 1.05em;
+  line-height: 1.7;
+}
+
+.item ul {
+  list-style: none;
+  padding: 0;
+  color: var(--color-text-dark);
+}
+
+.item ul li {
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 20px;
+  font-size: 1.05em;
+}
+
+.item ul li::before {
+  /* Custom bullet point */
+  content: '•';
+  color: var(--color-accent-pink);
+  font-size: 1.2em;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 700;
+}
+
+/* --- Profile Specific Styles - Centered Profile Picture Optimization --- */
+.profile-section {
+  padding: 40px;
+  margin-top: 0px;
+  position: relative;
+  z-index: 10;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.profile-header-centered {
   display: flex;
   flex-direction: column;
+  /* Stack vertically */
+  align-items: center;
+  /* Center horizontally */
+  margin-bottom: 35px;
+}
+
+.profile-photo-lg {
+  /* Larger profile photo style */
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--color-primary-pink);
+  /* Soft pink border */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  /* More prominent, yet soft shadow */
+  transition: transform 0.3s ease-out;
+  margin-bottom: 25px;
+  /* Spacing below photo */
+}
+
+.profile-photo-lg:hover {
+  transform: scale(1.03);
+}
+
+.profile-text-centered h1 {
+  font-size: 30px;
+  margin: 0;
+  color: var(--color-text-dark);
+  letter-spacing: -0.04em;
+}
+
+.profile-text-centered .english-name {
+  font-family: var(--font-secondary), sans-serif;
+  font-size: 1.8em;
+  color: var(--color-text-medium);
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.profile-text-centered .title {
+  font-size: 24px;
+  color: var(--color-text-medium);
+  font-weight: 400;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.contact-info {
+  margin-bottom: 25px;
+  /* 與社群圖標的間距 */
+  color: var(--color-text-dark);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.contact-info p {
+  margin: 8px 0;
+  /* 行間距 */
+  display: flex;
+  align-items: center;
+  /* 垂直對齊圖標和文字 */
+  justify-content: center;
+  /* 水平置中 */
+}
+
+.contact-info .icon-small {
+  /* 聯絡資訊旁的圖標 */
+  font-size: 1.1em;
+  color: var(--color-accent-pink);
+  margin-right: 8px;
+  width: 20px;
+  /* 統一寬度，防止圖標大小不一造成晃動 */
+  text-align: center;
+}
+
+/* 新增社群圖標樣式 (在 Profile 區塊內) */
+.profile-social-links {
+  display: flex;
+  flex-wrap: wrap;
+  /* 允許換行 */
+  justify-content: center;
+  /* 水平置中 */
+  gap: 15px;
+  /* 圖標間距 */
+  margin-top: 25px;
+  /* 與上方文字聯絡資訊的間距 */
+  margin-bottom: 20px;
+  /* 與關於我區塊的間距 */
+}
+
+.profile-social-item {
+  /* 在 Profile 內的社群圖標樣式 */
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 50px;
+  /* 圖標尺寸可以比 Links 區塊中的小一點 */
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border-light);
+  color: var(--color-accent-pink);
+  font-size: 2em;
+  /* 圖標大小 */
+  text-decoration: none;
+  transition: all 0.25s ease-out;
+  background-color: var(--color-card-background);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
-.App-link {
-  color: #61dafb;
+.profile-social-item:hover {
+  color: var(--color-card-background);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, var(--color-primary-pink), var(--color-accent-pink));
+  border-color: transparent;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.bio-text {
+  color: var(--color-text-dark);
+  font-size: 1.05em;
+  line-height: 1.7;
+  max-width: 700px;
+  /* Limits bio width for readability */
+  margin: 0 auto;
+  /* Centers the bio text */
+}
+
+/* --- Projects Specific Styles --- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.project-card {
+  background-color: var(--color-card-background);
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.project-card h3 {
+  margin-top: 0;
+  font-size: 1.6em;
+  color: var(--color-text-dark);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.project-card h3 a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease-out;
+}
+
+.project-card h3 a:hover {
+  color: var(--color-accent-pink);
+  text-decoration: underline;
+}
+
+.project-card .date {
+  font-family: var(--font-secondary);
+  font-size: 0.95em;
+  color: var(--color-text-medium);
+  margin-bottom: 12px;
+}
+
+.project-card .short-description {
+  font-size: 1.05em;
+  color: var(--color-text-dark);
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.tech-tag {
+  background-color: var(--color-primary-pink);
+  color: var(--color-text-dark);
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.88em;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 0.2s ease-out;
+}
+
+.tech-tag:hover {
+  background-color: var(--color-accent-pink);
+  color: var(--color-card-background);
+}
+
+/* --- Project Detail Page Styles --- */
+.main-detail {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.main-detail .card {
+  padding: 50px;
+}
+
+.main-detail h2 {
+  font-size: 2.8em;
+  margin-bottom: 20px;
+  color: var(--color-accent-pink);
+}
+
+.project-tech-detail {
+  margin-top: 25px;
+  margin-bottom: 35px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.project-links {
+  margin-top: 40px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease-out;
+  font-size: 1.05em;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+}
+
+.btn i {
+  margin-right: 10px;
+  font-size: 1.1em;
+}
+
+.btn-primary {
+  background-color: var(--color-accent-pink);
+  color: var(--color-card-background);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-button-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary {
+  background-color: var(--color-border-light);
+  color: var(--color-text-dark);
+  border: 1px solid var(--color-border-light);
+}
+
+.btn-secondary:hover {
+  background-color: #E0E0E0;
+  color: var(--color-text-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 30px;
+  color: var(--color-accent-pink);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1em;
+  transition: color 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.back-link:hover {
+  color: var(--color-button-hover);
+  text-decoration: underline;
+  transform: translateX(-5px);
+}
+
+/* --- Skills Specific Styles --- */
+.skill-category {
+  margin-bottom: 25px;
+}
+
+.skill-category h3 {
+  color: var(--color-text-dark);
+  margin-bottom: 15px;
+  font-size: 1.4em;
+  font-weight: 500;
+}
+
+.skill-category ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-category ul li {
+  background-color: var(--color-primary-pink);
+  color: var(--color-text-dark);
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 400;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out;
+}
+
+.skill-category ul li:hover {
+  background-color: var(--color-accent-pink);
+  color: var(--color-card-background);
+}
+
+/* --- Footer --- */
+.footer {
+  background-color: var(--color-primary-pink);
+  color: var(--color-card-background);
+  text-align: center;
+  padding: 30px;
+  margin-top: 50px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+  font-weight: 300;
+}
+
+/* --- Home Page Styles - Clean, elegant homepage --- */
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 這裡將背景改為米白色 */
+  background-color: var(--color-background);
+  /* 使用你 App.css 中定義的米白色變數 */
+  /* 文字顏色改為深色，以在淺色背景上更清晰 */
+  color: var(--color-text-dark);
+  text-align: center;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-page::before {
+  /* 移除背景紋理，將 content 設置為 none */
+  content: none;
+}
+
+
+.home-header {
+  position: relative;
+  z-index: 1;
+  padding: 50px;
+  /* 保持這個半透明粉色調，作為中間的焦點區塊 */
+  background-color: rgba(247, 202, 201, 0.6);
+  /* 使用 var(--color-primary-pink) 的半透明版本 */
+  border-radius: 20px;
+  /* 調整陰影更柔和 */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  /* 輕微的邊框 */
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.home-profile-photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* 邊框顏色改為深一點的粉色 */
+  border: 5px solid var(--color-accent-pink);
+  margin-bottom: 30px;
+  /* 調整陰影 */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.home-header h1 {
+  font-family: var(--font-primary), var(--font-chinese);
+  font-size: 4.5em;
+  margin-bottom: 15px;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  /* 標題文字改為深色 */
+  color: var(--color-text-dark);
+  /* 調整陰影 */
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.home-header p {
+  font-size: 2.2em;
+  font-weight: 300;
+  margin-bottom: 40px;
+  /* 內文顏色改為中灰色 */
+  color: var(--color-text-medium);
+}
+
+.btn-primary-lg {
+  display: inline-block;
+  /* 保持粉色按鈕 */
+  background-color: var(--color-accent-pink);
+  color: var(--color-card-background);
+  padding: 18px 35px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 1.3em;
+  font-weight: 600;
+  transition: background-color 0.2s ease-out, transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  margin-top: 30px;
+  border: 1px solid var(--color-accent-pink);
+}
+
+.btn-primary-lg:hover {
+  background-color: var(--color-button-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.home-social-links {
+  margin-top: 50px;
+}
+
+.home-social-links a {
+  /* 社群圖標顏色改為深色粉色 */
+  color: var(--color-accent-pink);
+  font-size: 3.2em;
+  margin: 0 20px;
+  transition: color 0.2s ease-out, transform 0.2s ease-out;
+  /* 調整陰影 */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.home-social-links a:hover {
+  /* hover 時加深粉色 */
+  color: var(--color-button-hover);
+  transform: scale(1.1);
+}
+
+/* --- Not Found Page Styles --- */
+.not-found-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-accent-pink), var(--color-button-hover));
+  color: var(--color-card-background);
+  padding: 30px;
+}
+
+.not-found-page h1 {
+  font-size: 5.5em;
+  margin-bottom: 25px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.not-found-page p {
+  font-size: 2em;
+  margin-bottom: 40px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+
+/* --- Responsive adjustments --- */
+@media (max-width: 768px) {
+  .profile-section {
+    margin-top: -60px;
+    /* Adjust this value if photo is cut */
   }
-  to {
-    transform: rotate(360deg);
+
+  .profile-photo-lg {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 20px;
+  }
+
+  .profile-text-centered h1 {
+    font-size: 2.8em;
+  }
+
+  .profile-text-centered .title {
+    font-size: 1.4em;
+  }
+
+  .bio-text {
+    font-size: 1em;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header h1 {
+    font-size: 2.8em;
+  }
+
+  .header .title {
+    font-size: 1.4em;
+  }
+
+  .card {
+    padding: 30px;
+  }
+
+  .section-title {
+    font-size: 2.2em;
+  }
+
+  .item h3 {
+    font-size: 1.6em;
+  }
+
+  .item ul li {
+    padding-left: 20px;
+  }
+
+  .item ul li::before {
+    font-size: 1.2em;
+  }
+
+  .skill-category ul {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .home-header h1 {
+    font-size: 3.5em;
+  }
+
+  .home-header p {
+    font-size: 1.8em;
+  }
+
+  .home-social-links a {
+    font-size: 2.5em;
+    margin: 0 15px;
+  }
+
+  .btn-primary-lg {
+    font-size: 1.2em;
+    padding: 15px 30px;
+  }
+
+  .main-detail h2 {
+    font-size: 2.4em;
+  }
+
+  .btn {
+    padding: 12px 25px;
+    font-size: 1em;
+  }
+}
+
+/* --- Additional responsive for very small screens --- */
+@media (max-width: 480px) {
+  .profile-section {
+    margin-top: -40px;
+  }
+
+  .profile-photo-lg {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 15px;
+  }
+
+  .profile-text-centered h1 {
+    font-size: 2.2em;
+  }
+
+  .profile-text-centered .title {
+    font-size: 1.1em;
+  }
+
+  .home-header h1 {
+    font-size: 2.8em;
+  }
+
+  .home-header p {
+    font-size: 1.2em;
+  }
+
+  .home-social-links a {
+    font-size: 2em;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .card {
+    padding: 25px;
+  }
+
+  .section-title {
+    font-size: 1.8em;
+  }
+
+  .item h3 {
+    font-size: 1.4em;
+  }
+
+  .project-card h3 {
+    font-size: 1.4em;
+  }
+
+  .tech-tag {
+    font-size: 0.85em;
+    padding: 7px 12px;
+  }
+
+  .btn-primary-lg {
+    font-size: 1.1em;
+    padding: 12px 25px;
+  }
+
+  .not-found-page h1 {
+    font-size: 4em;
+  }
+
+  .not-found-page p {
+    font-size: 1.4em;
   }
 }
