@@ -7,33 +7,15 @@ function Profile({ data }) {
                 <img src={data.photo} alt={data.name} className="profile-photo-lg" />
                 <div className="profile-text-centered">
                     <h1>{data.name}</h1>
-                    {/* <p className="english-name">{data.englishName}</p>  */}
+                    <div className="profile-english-name">Cindy Liu</div>
                     <p className="title">{data.title}</p>
-
-                    {/* 新增聯絡資訊 */}
                     <div className="contact-info">
-                        {data.contact.phone && (
-                            <p><i className="fas fa-phone-alt icon-small"></i> {data.contact.phone}</p>
-                        )}
-                        {data.contact.location && (
-                            <p><i className="fas fa-map-marker-alt icon-small"></i> {data.contact.location}</p>
-                        )}
                     </div>
-
-                    {/* 新增社群圖標 */}
                     <div className="profile-social-links">
-                        {data.socialLinks && data.socialLinks.map(link => (
-                            <a
-                                key={link.name}
-                                href={link.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="profile-social-item" /* 新增 profile-social-item 類別 */
-                                title={link.name}
-                            >
-                                <i className={link.icon}></i>
-                            </a>
-                        ))}
+                        <a href="http://linkedin.com/in/yuchenliu0401/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i className="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/yuchen-land" target="_blank" rel="noopener noreferrer" title="GitHub"><i className="fab fa-github"></i></a>
+                        <a href="mailto:yuchen880401@gmail.com" target="_blank" rel="noopener noreferrer" title="Email"><i className="fas fa-envelope"></i></a>
+                        <a href="https://yourwebsite.com" target="_blank" rel="noopener noreferrer" title="Website"><i className="fas fa-globe"></i></a>
                     </div>
                 </div>
             </div>
