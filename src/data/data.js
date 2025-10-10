@@ -43,26 +43,32 @@ export const internalLinks = [
 // Education
 export const education = [
   {
-    school: "National Taiwan University",
-    degree: "Ph.D. in Computer Science",
-    period: "2021 - 2025",
+    school: "National Cheng Kung University",
+    degree: "Ph.D. in Electrical Engineering",
+    period: "09/2024 - On Leave",
     level: "phd",
     description: [
-      "Research Lab: Human-Computer Interaction Lab",
-      "Publications: 3 papers published in top-tier conferences (CHI, UIST)",
-      "Scholarship: Presidential Research Fellowship (2022-2024)",
+      "Scholarship: NSTC Doctoral Research Scholarship",
     ],
+    links: {
+      scholarship: "https://www.nstc.gov.tw/sci/ch/detail/13b9f964-9623-4681-b53c-833c3e136e97",
+    },
   },
   {
-    school: "National Chiao Tung University",
-    degree: "Master of Science in Computer Science",
-    period: "2019 - 2021",
+    school: "National Central University",
+    degree: "Master of Information Management",
+    period: "09/2022 - 07/2024",
     level: "master",
     description: [
       "Research Lab: Software Engineering Lab",
-      "Thesis: Advanced Web Development Frameworks",
+      "Advisor: Prof. Example Name",
+      "Thesis: Design and Implementation of an Adaptive Path Selection Method in SDN-based SRv6",
       "Scholarship: Academic Excellence Award (2020)",
     ],
+    links: {
+      lab: "https://se.im.ncu.edu.tw/",
+      advisor: "https://example.com/professor-profile",
+    },
   },
   {
     school: "National Taiwan University",
@@ -135,6 +141,44 @@ export const skills = {
   database: ["MongoDB", "MySQL", "PostgreSQL", "Redis"],
   tools: ["Git", "Docker", "AWS", "Linux", "Postman", "Figma"],
 };
+
+// Publications
+export const publications = [
+  {
+    authors: "Yu.-Chen. Liu et al.",
+    title: "Design and Implementation of an Adaptive Path Selection in SDN-Enabled SRv6",
+    venue: "APNOMS 2025",
+    location: "Kaohsiung, Taiwan",
+    date: "Sep. 22-24, 2025",
+    status: "Accepted",
+    type: "conference",
+  },
+];
+
+// Language Proficiency
+export const languages = [
+  {
+    name: "TOEFL iBT",
+    score: "83",
+    details: "Reading: 21 | Listening: 23 | Speaking: 18 | Writing: 21",
+  },
+];
+
+// Activities & Involvement
+export const activities = [
+  {
+    organization: "Microsoft",
+    role: "Coding Angels Girls TECHgether",
+    activity: "Vision AI DevKit Workshop",
+    period: "2023",
+  },
+  {
+    organization: "Open HCI Workshop",
+    role: "Technical Team",
+    activity: "Human-Computer Interaction Workshop",
+    period: "2022 - 2023",
+  },
+];
 
 // Project Portfolio
 export const projects = [
