@@ -41,7 +41,7 @@ export default function PortfolioPage() {
             My Portfolio
           </h1>
           <p className="text-gray-700 text-lg md:text-xl max-w-2xl mx-auto">
-            A showcase of projects I've built and contributed to
+            A showcase of projects I&apos;ve built and contributed to
           </p>
         </div>
 
@@ -86,7 +86,7 @@ export default function PortfolioPage() {
         {/* CTA Section */}
         <div className="mt-20 text-center bg-white/70 backdrop-blur-glass rounded-3xl p-12 shadow-lg animate-fade-in border-0">
           <h3 className="text-3xl font-bold text-gray-800 mb-4">
-            Let's Collaborate
+            Let&apos;s Collaborate
           </h3>
           <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
             Interested in working together or want to learn more about my projects? 

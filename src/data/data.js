@@ -246,7 +246,7 @@ export const projects = [
     ],
     image: "/images/projects/bonbunny.jpg",
     tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS","DevOps"],
-    demo: "https://your-demo-site.com",
+    demo: "https://bonbunny.vercel.app/",
     featured: true,
   },
   {
@@ -271,6 +271,7 @@ export const projects = [
     image: "/images/projects/renting_system.jpg",
     tags: ["Team Leader", "Next.js", "React", "UML Plant Diagram"],
     github: "https://github.com/yuchen-land/renting-system-front",
+    demo: "https://renting-system-front.vercel.app/",
     featured: false,
   },
   {
@@ -297,17 +298,17 @@ export const projects = [
     github: "https://github.com/yuchen-land/2-pass-assembler",
     featured: false,
   },
-  {
-    id: 7,
-    title: "Holly World Renting System",
-    description: [
-      "Collaborated with the Ministry of Education to design a **bilingual** app-based card game, instructing upper elementary students in C++ basics. Aligned with bilingual education policies, the project incorporated assessments to measure effectiveness.",
-      "Achieved a **70% contribution rate**, and developed UI and interface scripting for the app.",
-      "Optimized self-learning for novice programmers through gamified projects, achieving an 80% improvement in learning efficiency as reported by educators and users.",
-    ],
-    image: "/images/projects/holly_world.jpg",
-    tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS","DevOps"],
-    demo: "http://www.holly-world.com.tw/",
-    featured: true,
-  },
+//   {
+//     id: 7,
+//     title: "Holly World Renting System",
+//     description: [
+//       "Collaborated with the Ministry of Education to design a **bilingual** app-based card game, instructing upper elementary students in C++ basics. Aligned with bilingual education policies, the project incorporated assessments to measure effectiveness.",
+//       "Achieved a **70% contribution rate**, and developed UI and interface scripting for the app.",
+//       "Optimized self-learning for novice programmers through gamified projects, achieving an 80% improvement in learning efficiency as reported by educators and users.",
+//     ],
+//     image: "/images/projects/holly_world.jpg",
+//     tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS","DevOps"],
+//     demo: "http://www.holly-world.com.tw/",
+//     featured: true,
+//   },
 ];

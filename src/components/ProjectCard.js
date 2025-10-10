@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function ProjectCard({ project }) {
   const [imgError, setImgError] = useState(false);
@@ -10,9 +11,11 @@ export default function ProjectCard({ project }) {
       {/* Project Image */}
       <div className="relative h-56 bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100 overflow-hidden">
         {!imgError ? (
-          <img
+          <Image
             src={project.image}
             alt={project.title}
+            width={400}
+            height={224}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             onError={() => setImgError(true)}
           />
