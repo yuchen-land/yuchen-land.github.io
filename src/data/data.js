@@ -22,16 +22,16 @@ export const socialLinks = [
     icon: "linkedin",
     color: "from-blue-600 to-blue-800",
   },
-  {
-    name: "Email",
-    url: "mailto:yuchen.land@example.com",
-    icon: "email",
-    color: "from-rose-500 to-pink-600",
-  },
 ];
 
 // Internal Page Links
 export const internalLinks = [
+  {
+    name: "About",
+    path: "/about",
+    icon: "user",
+    color: "from-rose-500 to-pink-600",
+  },
   {
     name: "Portfolio",
     path: "/portfolio",
