@@ -48,22 +48,26 @@ export default function Home() {
         </div>
 
         {/* Name & Title with Premium Typography */}
-        <div className="text-center mb-16 animate-fade-in-up space-y-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-violet-600 via-purple-600 to-rose-600 text-transparent bg-clip-text animate-gradient tracking-tight">
+        <div className="text-center mb-14 animate-fade-in-up space-y-3">
+          <h1 className="text-3xl md:text-5xl font-light mb-3 bg-gradient-to-r from-violet-600 via-purple-600 to-rose-600 text-transparent bg-clip-text animate-gradient tracking-wide">
             {personalInfo.name}
           </h1>
-          <p className="text-xl md:text-2xl text-slate-700 font-medium tracking-wide">
+          <p className="text-base md:text-lg text-slate-600 font-light tracking-wide">
             {personalInfo.title}
           </p>
-          <p className="text-base md:text-lg text-slate-600 max-w-md mx-auto">
+          <p className="text-sm md:text-base text-slate-500 max-w-lg mx-auto font-light leading-relaxed">
             {personalInfo.description}
+          </p>
+          <p className="text-xs md:text-sm text-slate-400 font-light">
+            {personalInfo.email}
           </p>
         </div>
 
-        {/* Premium Link Buttons */}
-        <div className="w-full max-w-md space-y-6 animate-fade-in">
-          {/* Internal Links */}
-          <div className="flex justify-center gap-6 mb-8">
+        {/* Premium Link Buttons - All Icons in One Row */}
+        <div className="w-full max-w-2xl animate-fade-in">
+          {/* All Links in Single Row */}
+          <div className="flex justify-center gap-4 md:gap-6">
+            {/* Internal Links */}
             {internalLinks.map((link) => (
               <Link
                 key={link.name}
@@ -71,28 +75,13 @@ export default function Home() {
                 className="group relative"
               >
                 {/* Button with Gradient */}
-                <div className={`relative w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br ${link.color} rounded-2xl flex items-center justify-center text-white shadow-xl transition-all duration-500 hover:scale-110 hover:-translate-y-2 hover:shadow-2xl overflow-hidden`}>
+                <div className={`relative w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br ${link.color} rounded-2xl flex items-center justify-center text-white shadow-xl transition-all duration-500 hover:scale-110 hover:-translate-y-2 hover:shadow-2xl overflow-hidden`}>
                   {/* Shine Effect */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
-                  {link.icon === "user" && (
-                    <svg
-                      className="w-9 h-9 md:w-11 md:h-11 relative z-10"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-                  )}
                   {link.icon === "briefcase" && (
                     <svg
-                      className="w-9 h-9 md:w-11 md:h-11 relative z-10"
+                      className="w-8 h-8 md:w-10 md:h-10 relative z-10"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -108,15 +97,13 @@ export default function Home() {
                 </div>
                 
                 {/* Tooltip */}
-                <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg font-medium">
+                <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg font-medium">
                   {link.name}
                 </span>
               </Link>
             ))}
-          </div>
 
-          {/* Social Links */}
-          <div className="flex justify-center gap-6">
+            {/* Social Links */}
             {socialLinks.map((link) => (
               <a
                 key={link.name}
@@ -125,13 +112,13 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="group relative"
               >
-                <div className={`relative w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br ${link.color} rounded-2xl flex items-center justify-center text-white shadow-xl transition-all duration-500 hover:scale-110 hover:-translate-y-2 hover:shadow-2xl overflow-hidden`}>
+                <div className={`relative w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br ${link.color} rounded-2xl flex items-center justify-center text-white shadow-xl transition-all duration-500 hover:scale-110 hover:-translate-y-2 hover:shadow-2xl overflow-hidden`}>
                   {/* Shine Effect */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
                   {link.icon === "github" && (
                     <svg
-                      className="w-9 h-9 md:w-11 md:h-11 relative z-10"
+                      className="w-8 h-8 md:w-10 md:h-10 relative z-10"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
@@ -144,16 +131,31 @@ export default function Home() {
                   )}
                   {link.icon === "linkedin" && (
                     <svg
-                      className="w-9 h-9 md:w-11 md:h-11 relative z-10"
+                      className="w-8 h-8 md:w-10 md:h-10 relative z-10"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                     </svg>
                   )}
+                  {link.icon === "email" && (
+                    <svg
+                      className="w-8 h-8 md:w-10 md:h-10 relative z-10"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                      />
+                    </svg>
+                  )}
                 </div>
                 
-                <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-sm px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg font-medium">
+                <span className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg font-medium">
                   {link.name}
                 </span>
               </a>

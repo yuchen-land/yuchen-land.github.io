@@ -4,8 +4,8 @@ export const personalInfo = {
   title: "Software Engineer",
   description: "Hey! I'm Cindy. Welcome to my creative space! Explore my projects and the brand I built here.",
   avatar: "/images/avatar.jpg",
-  email: "your.email@example.com",
-  location: "Taiwan",
+  email: "yuchen880401@gmail.com",
+  location: "Taipei, Taiwan",
 };
 
 // Social Links
@@ -22,16 +22,16 @@ export const socialLinks = [
     icon: "linkedin",
     color: "from-blue-600 to-blue-800",
   },
+  {
+    name: "Email",
+    url: "mailto:yuchen.land@example.com",
+    icon: "email",
+    color: "from-rose-500 to-pink-600",
+  },
 ];
 
 // Internal Page Links
 export const internalLinks = [
-  {
-    name: "About",
-    path: "/about",
-    icon: "user",
-    color: "from-rose-500 to-pink-600",
-  },
   {
     name: "Portfolio",
     path: "/portfolio",
