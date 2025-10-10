@@ -1,99 +1,87 @@
-# 個人作品集網站
+# Premium Portfolio Website
 
-使用 Next.js、React 和 Tailwind CSS 建立的個人作品集網站，部署至 GitHub Pages。
+A modern, elegant portfolio website built with Next.js, React, and Tailwind CSS, deployed to GitHub Pages.
 
-## 功能特色
+## ✨ Features
 
-- 🎨 現代化設計，包含動畫和漸層效果
-- 📱 完全響應式設計，支援各種裝置
-- 🎭 毛玻璃效果（Glassmorphism）
-- ✨ 精緻的動畫效果
-- 🔗 Linktree 風格首頁
-- 📄 履歷展示頁面
-- 💼 作品集展示頁面
+- 🎨 Premium modern design with animations and gradient effects
+- 📱 Fully responsive design for all devices
+- 🎭 Glassmorphism effects for a sophisticated look
+- ✨ Smooth animations and transitions
+- 🔗 Linktree-style homepage
+- 📄 Professional resume/about page
+- 💼 Project portfolio showcase
 
-## 技術棧
+## 🛠️ Tech Stack
 
-- **框架**: Next.js 15.5.4
-- **UI 函式庫**: React 19.2.0
-- **樣式**: Tailwind CSS 3.4.17
-- **部署**: GitHub Pages
+- **Framework**: Next.js 15.5.4
+- **UI Library**: React 19.2.0
+- **Styling**: Tailwind CSS 3.4.17
+- **Deployment**: GitHub Pages
 
-## 開始使用
+## 🚀 Getting Started
 
-### 安裝依賴
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 本地開發
+### Local Development
 
 ```bash
 npm run dev
 ```
 
-網站將運行在 http://localhost:3010
+The site will be running at http://localhost:3010
 
-### 建置專案
+### Build Project
 
 ```bash
 npm run build
 ```
 
-### 匯出靜態網站
+### Export Static Site
 
 ```bash
 npm run export
 ```
 
-## 自訂內容
+## 🎨 Customization
 
-### 更新個人資料
+### Update Personal Information
 
-編輯 `src/data/data.js` 檔案：
+Edit the `src/data/data.js` file:
 
-1. **個人資訊**: 更新 `personalInfo` 物件
-2. **社群連結**: 修改 `socialLinks` 陣列
-3. **學歷**: 編輯 `education` 陣列
-4. **工作經歷**: 更新 `experience` 陣列
-5. **技術棧**: 修改 `skills` 物件
-6. **專案作品**: 編輯 `projects` 陣列
+1. **Personal Info**: Update the `personalInfo` object
+2. **Social Links**: Modify the `socialLinks` array
+3. **Education**: Edit the `education` array
+4. **Experience**: Update the `experience` array
+5. **Skills**: Modify the `skills` object
+6. **Projects**: Edit the `projects` array
 
-### 新增圖片
+### Add Images
 
-- **大頭貼**: 放置於 `public/images/avatar.jpg`
-- **專案截圖**: 放置於 `public/images/projects/`
+- **Avatar**: Place at `public/images/avatar.jpg`
+- **Project Screenshots**: Place in `public/images/projects/`
 
-## 部署到 GitHub Pages
+## 🚀 Deploy to GitHub Pages
 
-### 1. 更新 next.config.js
+The project is configured with GitHub Actions for automatic deployment.
 
-將 `basePath` 改為你的 repository 名稱：
+### Enable GitHub Pages
 
-```javascript
-basePath: '/your-repo-name',
-```
+1. Go to your repository Settings
+2. Navigate to "Pages" section
+3. Under Source, select "GitHub Actions"
+4. The workflow will automatically deploy on push to main branch
 
-### 2. 推送到 GitHub
+Your site will be available at: `https://yuchen-land.github.io/personal-land/`
 
-```bash
-git add .
-git commit -m "Initial commit"
-git push origin main
-```
-
-### 3. 啟用 GitHub Pages
-
-1. 前往 Repository Settings
-2. 找到 "Pages" 設定
-3. Source 選擇 "GitHub Actions"
-4. 自動部署將會開始
-
-## 專案結構
+## 📁 Project Structure
 
 ```
-yuchen-land/
+personal-land/
 ├── public/
 │   └── images/
 │       ├── avatar.jpg
@@ -119,6 +107,15 @@ yuchen-land/
 └── package.json
 ```
 
-## 授權
+## 🎯 Design Features
+
+- **Elegant Color Scheme**: Violet, purple, and rose gradients
+- **Modern Typography**: Inter font family for clean readability
+- **Smooth Animations**: Fade-in, blob, and gradient animations
+- **Hover Effects**: Interactive elements with scale and translate transforms
+- **Glassmorphism**: Backdrop blur effects for premium feel
+- **Responsive Layout**: Mobile-first design approach
+
+## 📝 License
 
 MIT License
