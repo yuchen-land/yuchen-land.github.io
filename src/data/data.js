@@ -91,24 +91,55 @@ export const education = [
 // Work Experience
 export const experience = [
   {
-    company: "Tech Company Inc.",
-    position: "Full Stack Developer",
-    period: "2024 - Present",
+    company: "CyberLink",
+    position: "Software Engineer",
+    period: "10/2024 - Present",
     description: [
-      "Developed and maintained enterprise-level management systems",
-      "Built RESTful APIs using React and Spring Boot architecture",
-      "Optimized web performance, improving load times by 30%",
+      "Developed and implemented core features for MyEdit image, audio, video projects (e.g., Magic Designer, Podcast Studio, Video Editor, Homepage, SEO) with React, maintaining a strong UI/UX focus for professional performance and smooth user experience.",
+      "Integrated GA and multi-source data, reducing marketing analysis time by 86% and discrepancies by 96%, optimizing SEO.",
+      "Automated weekly report generation (n8n, GA, Sheets), boosting efficiency >97% (4h to 5min) and eliminating errors.",
+      "Orchestrated cross-functional collaboration (RD, SEO, PMs, QA, Designers), reducing team workload by 60% and ensuring precise project delivery."
+    ],
+    type: "work",
+    links: {
+      myedit: "https://myedit.online/"
+    }
+  },
+  {
+    company: "MOXA",
+    position: "Software Quality Assurance Intern",
+    period: "07/2023 - 09/2023",
+    description: [
+      "Developed automated test tool using Python for Linux Serial Port Burning project.",
+      "Conducted system test for Industrial PC projects involving Win10 image, Win10, and Win11.",
+    ],
+    type: "intern",
+  },
+  {
+    company: "National Center for High-Performance Computing",
+    position: "Research Assistant",
+    period: "05/2023 - 02/2024",
+    description: [
+      "Spearheaded research and extensive thesis writing focused on Multi-access Edge Computing (MEC) architecture. ",
+      "Investigated deployment scenarios and critical evolution from ETSI and 3GPP standards to 5G, B5G, and emerging 6G technologies. ",
+      "Explored the integration and impact of Low Earth Orbit (LEO) satellite communication within MEC frameworks.",
+    ],
+    type: "work",
+    highlights: ["Multi-access Edge Computing (MEC)", "5G/B5G/6G", "LEO Satellite Communication", "Thesis Writing"],
+  },
+  {
+    company: "National Central University",
+    position: "Web Programming Course Teaching Assistant",
+    period: "03/2023 - 06/2023",
+    description: [
     ],
     type: "work",
   },
   {
-    company: "Startup Co.",
-    position: "Software Engineer Intern",
-    period: "2023 - 2024",
+    company: "CAI-YO ENTERPRISE CO., LTD.",
+    position: "Software Developer Intern",
+    period: "03/2020 - 09/2021",
     description: [
-      "Assisted in developing frontend feature modules",
-      "Participated in daily Scrum meetings and code reviews",
-      "Learned team collaboration and agile development processes",
     ],
     type: "intern",
   },
@@ -116,10 +147,14 @@ export const experience = [
 
 // Skills & Technologies
 export const skills = {
+    programming: [
+    "C",
+    "C++",
+    "Python",
+  ],
   frontend: [
     "React",
     "Next.js",
-    "Vue.js",
     "TypeScript",
     "JavaScript",
     "Tailwind CSS",
@@ -127,14 +162,23 @@ export const skills = {
   ],
   backend: [
     "Node.js",
-    "Express",
-    "Spring Boot",
-    "Java",
     "Python",
     "RESTful API",
   ],
-  database: ["MongoDB", "MySQL", "PostgreSQL", "Redis"],
-  tools: ["Git", "Docker", "AWS", "Linux", "Postman", "Figma"],
+
+  tools: [
+    "Git",
+    "Docker",
+    "Linux",
+    "Arduino IDE",
+  ],
+  design: [
+    "Figma",
+    "Photoshop",
+    "Illustrator",
+    "Autodesk 3ds Max",
+    "Unity",
+  ],
 };
 
 // Publications

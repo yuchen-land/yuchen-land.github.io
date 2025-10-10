@@ -216,12 +216,59 @@ export default function AboutPage() {
                     )}
                   </p>
                   <ul className="space-y-3">
-                    {exp.description.map((desc, i) => (
-                      <li key={i} className="text-gray-600 flex items-start gap-3">
-                        <span className="text-rose-500 mt-1.5 text-lg">▸</span>
-                        <span className="flex-1">{desc}</span>
-                      </li>
-                    ))}
+                    {exp.description.map((desc, i) => {
+                      // Check if this is CyberLink experience with MyEdit link
+                      if (exp.links?.myedit && desc.includes("MyEdit")) {
+                        const parts = desc.split("MyEdit");
+                        return (
+                          <li key={i} className="text-gray-600 flex items-start gap-3">
+                            <span className="text-rose-500 mt-1.5 text-lg">▸</span>
+                            <span className="flex-1">
+                              {parts[0]}
+                              <a
+                                href={exp.links.myedit}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-bold text-rose-600 hover:text-rose-700 underline decoration-2 underline-offset-2"
+                              >
+                                MyEdit
+                              </a>
+                              {parts[1]}
+                            </span>
+                          </li>
+                        );
+                      }
+                      
+                      // Check if this description has any highlights (bold text)
+                      if (exp.highlights && exp.highlights.length > 0) {
+                        let hasHighlight = false;
+                        
+                        // Check if any highlight exists in this description
+                        for (const highlight of exp.highlights) {
+                          if (desc.includes(highlight)) {
+                            hasHighlight = true;
+                            const parts = desc.split(highlight);
+                            return (
+                              <li key={i} className="text-gray-600 flex items-start gap-3">
+                                <span className="text-rose-500 mt-1.5 text-lg">▸</span>
+                                <span className="flex-1">
+                                  {parts[0]}
+                                  <span className="font-bold text-gray-800">{highlight}</span>
+                                  {parts[1]}
+                                </span>
+                              </li>
+                            );
+                          }
+                        }
+                      }
+                      
+                      return (
+                        <li key={i} className="text-gray-600 flex items-start gap-3">
+                          <span className="text-rose-500 mt-1.5 text-lg">▸</span>
+                          <span className="flex-1">{desc}</span>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </div>
@@ -250,8 +297,10 @@ export default function AboutPage() {
                   <span className="capitalize">
                     {category === "frontend" && "Frontend Development"}
                     {category === "backend" && "Backend Development"}
+                    {category === "programming" && "Programming Languages"}
                     {category === "database" && "Database & Storage"}
-                    {category === "tools" && "Tools & Platforms"}
+                    {category === "tools" && "Development Tools"}
+                    {category === "design" && "Design & Multimedia"}
                   </span>
                 </h3>
                 <div className="flex flex-wrap gap-3">
