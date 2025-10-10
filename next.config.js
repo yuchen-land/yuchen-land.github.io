@@ -4,8 +4,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/personal-land' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/personal-land/' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/yuchen.github.io' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/yuchen.github.io/' : '',
 }
 
 module.exports = nextConfig
