@@ -1,8 +1,8 @@
 // Personal Information
 export const personalInfo = {
   name: "Yu-Chen(Cindy), Liu",
-  title: "Software Engineer",
-  description: "Hey! I'm Cindy. Welcome to my creative space! Explore my projects and the brand I built here.",
+  title: "Software Engineer & Pâtissier",
+  description: "Hey! I'm Cindy. Welcome to my creative space!\nExplore my projects and the brand I built here.",
   avatar: "/images/avatar.jpg",
   email: "yuchen880401@gmail.com",
   location: "Taipei, Taiwan",
@@ -43,10 +43,47 @@ export const internalLinks = [
 // Education
 export const education = [
   {
-    school: "Your University Name",
+    school: "National Taiwan University",
+    degree: "Ph.D. in Computer Science",
+    period: "2021 - 2025",
+    level: "phd",
+    description: [
+      "Research Lab: Human-Computer Interaction Lab",
+      "Publications: 3 papers published in top-tier conferences (CHI, UIST)",
+      "Scholarship: Presidential Research Fellowship (2022-2024)",
+    ],
+  },
+  {
+    school: "National Chiao Tung University",
+    degree: "Master of Science in Computer Science",
+    period: "2019 - 2021",
+    level: "master",
+    description: [
+      "Research Lab: Software Engineering Lab",
+      "Thesis: Advanced Web Development Frameworks",
+      "Scholarship: Academic Excellence Award (2020)",
+    ],
+  },
+  {
+    school: "National Taiwan University",
     degree: "Bachelor of Science in Computer Science",
-    period: "2019 - 2023",
-    description: "Major in Software Engineering, Minor in Data Science",
+    period: "2015 - 2019",
+    level: "bachelor",
+    description: [
+      "Major in Software Engineering, Minor in Data Science",
+      "Dean's List: All semesters (2015-2019)",
+      "Scholarship: Merit-based Scholarship (2016-2018)",
+    ],
+  },
+  {
+    school: "Taipei First Girls' High School",
+    degree: "High School Diploma",
+    period: "2012 - 2015",
+    level: "high-school",
+    description: [
+      "Academic Excellence in Mathematics and Science",
+      "Science Fair Award: First Place in Computer Science (2014)",
+    ],
   },
 ];
 

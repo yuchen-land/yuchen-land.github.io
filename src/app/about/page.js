@@ -3,12 +3,12 @@ import { education, experience, skills } from "@/data/data";
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-50 py-16 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50 py-16 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Back Button */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-violet-600 hover:text-violet-700 mb-12 group font-medium transition-colors"
+          className="inline-flex items-center gap-2 text-rose-600 hover:text-rose-700 mb-12 group font-medium transition-colors"
         >
           <svg
             className="w-5 h-5 transition-transform group-hover:-translate-x-1"
@@ -28,10 +28,10 @@ export default function AboutPage() {
 
         {/* Header */}
         <div className="text-center mb-20 animate-fade-in-down">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-violet-600 via-purple-600 to-rose-600 text-transparent bg-clip-text tracking-tight">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-pink-400 via-rose-400 to-orange-400 text-transparent bg-clip-text tracking-tight">
             About Me
           </h1>
-          <p className="text-slate-600 text-lg md:text-xl max-w-2xl mx-auto">
+          <p className="text-gray-700 text-lg md:text-xl max-w-2xl mx-auto">
             My education, experience, and technical expertise
           </p>
         </div>
@@ -39,10 +39,10 @@ export default function AboutPage() {
         {/* Education */}
         <section className="mb-20 animate-fade-in-up">
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white text-2xl shadow-lg">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center text-white text-2xl shadow-lg">
               🎓
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
               Education
             </h2>
           </div>
@@ -50,19 +50,49 @@ export default function AboutPage() {
             {education.map((edu, index) => (
               <div
                 key={index}
-                className="bg-white/80 backdrop-blur-glass rounded-3xl p-8 shadow-xl card-hover border border-slate-100"
+                className="bg-white/70 backdrop-blur-glass rounded-3xl p-8 shadow-lg card-hover border-0"
               >
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
-                  <h3 className="text-2xl font-bold text-slate-800">
-                    {edu.school}
-                  </h3>
-                  <span className="text-violet-600 font-semibold bg-violet-50 px-4 py-1.5 rounded-full text-sm mt-2 md:mt-0">
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-2xl font-bold text-gray-800">
+                      {edu.school}
+                    </h3>
+                    {/* Level Badge */}
+                    {edu.level === "phd" && (
+                      <span className="text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-bold">
+                        Ph.D.
+                      </span>
+                    )}
+                    {edu.level === "master" && (
+                      <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold">
+                        Master
+                      </span>
+                    )}
+                    {edu.level === "bachelor" && (
+                      <span className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-bold">
+                        Bachelor
+                      </span>
+                    )}
+                    {edu.level === "high-school" && (
+                      <span className="text-xs bg-orange-100 text-orange-700 px-3 py-1 rounded-full font-bold">
+                        High School
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-rose-600 font-semibold bg-rose-50 px-4 py-1.5 rounded-full text-sm mt-2 md:mt-0">
                     {edu.period}
                   </span>
                 </div>
-                <p className="text-slate-700 font-semibold text-lg mb-2">{edu.degree}</p>
+                <p className="text-gray-700 font-semibold text-lg mb-4">{edu.degree}</p>
                 {edu.description && (
-                  <p className="text-slate-600">{edu.description}</p>
+                  <ul className="space-y-2">
+                    {edu.description.map((desc, i) => (
+                      <li key={i} className="text-gray-600 flex items-start gap-3">
+                        <span className="text-pink-400 mt-1 text-sm">•</span>
+                        <span className="flex-1">{desc}</span>
+                      </li>
+                    ))}
+                  </ul>
                 )}
               </div>
             ))}
@@ -72,40 +102,40 @@ export default function AboutPage() {
         {/* Experience */}
         <section className="mb-20 animate-fade-in-up">
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-white text-2xl shadow-lg">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-orange-500 flex items-center justify-center text-white text-2xl shadow-lg">
               💼
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
               Experience
             </h2>
           </div>
-          <div className="relative pl-12 border-l-2 border-violet-200">
+          <div className="relative pl-12 border-l-2 border-pink-200">
             {experience.map((exp, index) => (
               <div key={index} className="mb-12 relative">
                 {/* Timeline Dot */}
-                <div className="absolute -left-[49px] top-2 w-6 h-6 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full border-4 border-slate-50 shadow-lg"></div>
+                <div className="absolute -left-[49px] top-2 w-6 h-6 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full border-4 border-pink-50 shadow-lg"></div>
 
-                <div className="bg-white/80 backdrop-blur-glass rounded-3xl p-8 shadow-xl card-hover border border-slate-100">
+                <div className="bg-white/70 backdrop-blur-glass rounded-3xl p-8 shadow-lg card-hover border-0">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
-                    <h3 className="text-2xl font-bold text-slate-800">
+                    <h3 className="text-2xl font-bold text-gray-800">
                       {exp.position}
                     </h3>
-                    <span className="text-violet-600 font-semibold bg-violet-50 px-4 py-1.5 rounded-full text-sm mt-2 md:mt-0">
+                    <span className="text-rose-600 font-semibold bg-rose-50 px-4 py-1.5 rounded-full text-sm mt-2 md:mt-0">
                       {exp.period}
                     </span>
                   </div>
-                  <p className="text-slate-700 font-semibold text-lg mb-4 flex items-center gap-2">
+                  <p className="text-gray-700 font-semibold text-lg mb-4 flex items-center gap-2">
                     {exp.company}
                     {exp.type === "intern" && (
-                      <span className="text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-bold">
+                      <span className="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-bold">
                         INTERNSHIP
                       </span>
                     )}
                   </p>
                   <ul className="space-y-3">
                     {exp.description.map((desc, i) => (
-                      <li key={i} className="text-slate-600 flex items-start gap-3">
-                        <span className="text-violet-500 mt-1.5 text-lg">▸</span>
+                      <li key={i} className="text-gray-600 flex items-start gap-3">
+                        <span className="text-rose-500 mt-1.5 text-lg">▸</span>
                         <span className="flex-1">{desc}</span>
                       </li>
                     ))}
@@ -119,10 +149,10 @@ export default function AboutPage() {
         {/* Skills */}
         <section className="animate-fade-in-up">
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center text-white text-2xl shadow-lg">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center text-white text-2xl shadow-lg">
               🛠️
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
               Skills & Technologies
             </h2>
           </div>
@@ -130,10 +160,10 @@ export default function AboutPage() {
             {Object.entries(skills).map(([category, items]) => (
               <div
                 key={category}
-                className="bg-white/80 backdrop-blur-glass rounded-3xl p-8 shadow-xl card-hover border border-slate-100"
+                className="bg-white/70 backdrop-blur-glass rounded-3xl p-8 shadow-lg card-hover border-0"
               >
-                <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-gradient-to-r from-violet-500 to-purple-600"></span>
+                <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-gradient-to-r from-pink-400 to-rose-500"></span>
                   <span className="capitalize">
                     {category === "frontend" && "Frontend Development"}
                     {category === "backend" && "Backend Development"}
@@ -145,7 +175,7 @@ export default function AboutPage() {
                   {items.map((skill) => (
                     <span
                       key={skill}
-                      className="bg-gradient-to-r from-violet-500 to-purple-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-default"
+                      className="bg-pink-100/80 text-rose-700 px-5 py-2.5 rounded-xl text-sm font-semibold shadow-sm hover:shadow-md hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-default border border-pink-200/50"
                     >
                       {skill}
                     </span>

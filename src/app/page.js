@@ -19,7 +19,7 @@ export default function Home() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,182,193,0.15),transparent_60%)]"></div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-16">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20 md:py-16">
         {/* Sweet Avatar - Youthful Style */}
         <div className="mb-12 animate-fade-in-down">
           <div className="relative group">
@@ -32,9 +32,9 @@ export default function Home() {
             {/* Pastel Border Ring */}
             <div className="absolute -inset-1 bg-gradient-to-br from-pink-300/30 to-rose-300/30 rounded-full"></div>
             
-            {/* Avatar Container with Soft Shadow */}
+            {/* Avatar Container with Soft Shadow - Remove filter */}
             <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden bg-white p-1 group-hover:scale-105 transition-transform duration-700 shadow-[0_8px_30px_rgb(251,207,232,0.4)]">
-              <div className="w-full h-full rounded-full overflow-hidden bg-gradient-to-br from-pink-50 to-rose-50">
+              <div className="w-full h-full rounded-full overflow-hidden bg-white">
                 {!imgError ? (
                   <img
                     src={personalInfo.avatar}
@@ -54,25 +54,32 @@ export default function Home() {
 
         {/* Sweet & Professional Typography */}
         <div className="text-center mb-16 animate-fade-in-up space-y-5 max-w-3xl mx-auto px-4">
-          {/* Name with Soft Gradient - Smaller & Elegant */}
-          <div className="relative mb-8">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-light mb-3 bg-gradient-to-r from-pink-400 via-rose-400 to-orange-400 text-transparent bg-clip-text animate-gradient tracking-wide">
+          {/* Name with Soft Gradient - Fix clipping with overflow */}
+          <div className="relative mb-8 pb-3 overflow-visible">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-3 bg-gradient-to-r from-pink-400 via-rose-400 to-orange-400 text-transparent bg-clip-text animate-gradient tracking-wide leading-[1.3] pb-1">
               {personalInfo.name}
             </h1>
             {/* Elegant Underline */}
             <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-24 h-0.5 bg-gradient-to-r from-pink-300 via-rose-300 to-orange-300 rounded-full opacity-60"></div>
           </div>
           
-          {/* Title Badge - Refined */}
-          <div className="inline-block backdrop-blur-sm bg-white/60 rounded-full px-6 py-2.5 border border-pink-200/50 shadow-lg">
-            <p className="text-sm md:text-base text-rose-600 font-medium tracking-wider">
-              {personalInfo.title}
-            </p>
+          {/* Title Badges - Two Separate Blocks */}
+          <div className="flex items-center justify-center gap-3 flex-wrap">
+            <div className="backdrop-blur-sm bg-white/60 rounded-full px-6 py-2.5 border border-pink-200/50 shadow-lg">
+              <p className="text-sm md:text-base text-rose-600 font-medium tracking-wider">
+                Software Engineer
+              </p>
+            </div>
+            <div className="backdrop-blur-sm bg-white/60 rounded-full px-6 py-2.5 border border-pink-200/50 shadow-lg">
+              <p className="text-sm md:text-base text-rose-600 font-medium tracking-wider">
+                Pâtissier
+              </p>
+            </div>
           </div>
           
           {/* Description Card - More Compact */}
-          <div className="backdrop-blur-md bg-white/70 rounded-2xl p-6 border border-pink-200/30 shadow-[0_8px_30px_rgb(251,207,232,0.3)]">
-            <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+          <div className="backdrop-blur-md bg-white/50 rounded-2xl p-6 border-0 shadow-[0_8px_30px_rgb(251,207,232,0.2)]">
+            <p className="text-sm md:text-base text-gray-700 leading-relaxed whitespace-pre-line">
               {personalInfo.description}
             </p>
           </div>
@@ -89,7 +96,7 @@ export default function Home() {
         </div>
 
         {/* Icon Navigation - Sweet & Professional */}
-        <div className="w-full max-w-5xl animate-fade-in px-4">
+        <div className="w-full max-w-5xl animate-fade-in px-4 mb-20">
           <div className="flex justify-center items-center gap-3 md:gap-5">
             {/* Internal Links */}
             {internalLinks.map((link, index) => (
@@ -225,9 +232,9 @@ export default function Home() {
           </div>
         </div>
         
-        {/* Footer */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center animate-fade-in">
-          <p className="text-rose-400/60 text-xs tracking-[0.25em]">
+        {/* Footer - Fixed at bottom with proper spacing */}
+        <div className="mt-auto pt-8">
+          <p className="text-rose-400/60 text-xs tracking-[0.25em] text-center">
             WELCOME
           </p>
         </div>
