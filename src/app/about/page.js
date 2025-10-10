@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { education, experience, skills, publications, languages, activities } from "@/data/data";
 
+export const metadata = {
+  title: "About Me - Yu-Chen(Cindy), Liu",
+  description: "Learn more about my education, experience, skills, and professional journey as a Software Engineer.",
+};
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50 py-16 px-4">
@@ -322,7 +327,7 @@ export default function AboutPage() {
         <section className="mb-20 animate-fade-in-up">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center text-white text-2xl shadow-lg">
-              �
+              🌐
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
               Language Proficiency

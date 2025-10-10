@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Portfolio - Full Stack Developer",
+  title: "Yu-Chen(Cindy), Liu - Software Engineer",
   description: "Welcome to my professional portfolio showcasing my work and expertise",
 };
 

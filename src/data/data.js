@@ -209,13 +209,13 @@ export const activities = [
     organization: "Microsoft",
     role: "Coding Angels Girls TECHgether",
     activity: "Vision AI DevKit Workshop",
-    period: "2023",
+    period: "2019",
   },
   {
     organization: "Open HCI Workshop",
     role: "Technical Team",
     activity: "Human-Computer Interaction Workshop",
-    period: "2022 - 2023",
+    period: "2022",
   },
 ];
 
@@ -223,46 +223,67 @@ export const activities = [
 export const projects = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description:
-      "A full-featured online shopping platform with cart, checkout, and order management capabilities.",
-    image: "/images/projects/project1.jpg",
-    tags: ["React", "Node.js", "MongoDB", "Stripe"],
-    github: "https://github.com/yourusername/ecommerce-platform",
-    demo: "https://your-demo-site.com",
+    title: "MyEdit",
+    description: [
+      "**Developed and implemented core features** for major image, audio, and video projects (e.g., Magic Designer, Podcast Studio, Video Editor).",
+      "**Prioritized a strong UI/UX focus** using React to ensure professional performance and a seamless user experience.",
+      "Integrated Google Analytics and multi-source data to optimize SEO, cutting marketing analysis time by 86% and reducing data discrepancies by 96%.",
+      "Orchestrated cross-functional collaboration across RD, SEO, PM, QA, and design teams, which slashed team workload by 60% and guaranteed precise project delivery."
+    ],
+    image: "/images/projects/myedit.jpg",
+    tags: ["React", "Node.js", "Javascript"],
+    github: "https://github.com/CindyLiu-CL",
+    demo: "https://myedit.online/en",
     featured: true,
   },
   {
     id: 2,
-    title: "Task Management System",
-    description:
-      "Team collaboration tool supporting task assignment, progress tracking, and real-time notifications.",
-    image: "/images/projects/project2.jpg",
-    tags: ["Vue.js", "Spring Boot", "MySQL", "WebSocket"],
-    github: "https://github.com/yourusername/task-manager",
+    title: "BonBunny Pastry Studio - Modern Artisanal Pastry E-commerce Platform",
+    description: [
+      "Developed a high-performance **e-commerce platform using Next.js 14 (App Router), TypeScript, and Tailwind CSS.** Focused on a responsive, glassmorphism-designed frontend to enhance the online presentation and sales of artisanal pastries.",
+      "Implemented core features including an intuitive shopping cart, personalized wishlists, streamlined checkout, and a coupon system. Utilized Framer Motion for smooth animations and Zustand for efficient state management. Integrated JWT authentication for user management and built an admin dashboard covering product CRUD, order processing, and customer management, significantly optimizing operations.",
+      "Adhered to ESLint code standards and Git version control, ensuring high code quality. This platform successfully elevated brand online presence, expanded sales potential, and optimized operational efficiency.",
+    ],
+    image: "/images/projects/bonbunny.jpg",
+    tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS","DevOps"],
     demo: "https://your-demo-site.com",
     featured: true,
   },
   {
     id: 3,
-    title: "Weather Forecast App",
-    description:
-      "Weather application integrating third-party APIs to provide weekly forecasts.",
-    image: "/images/projects/project3.jpg",
-    tags: ["React", "OpenWeather API", "Tailwind CSS"],
-    github: "https://github.com/yourusername/weather-app",
-    demo: "https://your-demo-site.com",
+    title: "Linux Serial Port Burning Test Tool",
+    description: [
+      "Developed a Python test tool with **pyserial** to control serial ports for throughput testing and data transmission accuracy verification.",
+      "Implemented a **modular architecture**, optimized serial port testing efficiency, and **created a user-friendly interface for seamless procedures.**",
+    ],github: "https://fir-mandarin-dc1.notion.site/MOXA-f7348ef5700d4f339ce71741b1b0dcea",
+    image: "/images/projects/linux_serial_port.jpg",
+    tags: ["Python", "Pyserial", "Linux", "UML Plant Diagram", "Arm","x86","Embedded"],
     featured: false,
   },
   {
     id: 4,
-    title: "Blog Platform",
-    description:
-      "Personal blogging platform with Markdown editing, tag categorization, and comment functionality.",
+    title: "Software Engineering, Renting system",
+    description: [
+      "Implemented **Agile Development** to systematize customer rental and return processes, building a website with manager backend and customer frontend to address market challenges.",
+      "**Led team** in implementing front-end and back-end separation, **reducing development time from six months to one and a half months.**",
+      "Executed systematic integration, boosting company transaction efficiency by almost 60%, cutting paper-based operations by nearly 80%, and reducing personnel costs by around 50%.",
+    ],
+    image: "/images/projects/renting_system.jpg",
+    tags: ["Team Leader", "Next.js", "React", "UML Plant Diagram"],
+    github: "https://github.com/yuchen-land/renting-system-front",
+    featured: false,
+  },
+  {
+    id: 5,
+    title: "Clchemy : A Board Game App for Learning C++ Programming Language",
+    description: [
+      "Collaborated with the Ministry of Education to design a **bilingual** app-based card game, instructing upper elementary students in C++ basics. Aligned with bilingual education policies, the project incorporated assessments to measure effectiveness.",
+      "Achieved a **70% contribution rate**, and developed UI and interface scripting for the app.",
+      "Optimized self-learning for novice programmers through gamified projects, achieving an 80% improvement in learning efficiency as reported by educators and users.",
+    ],
     image: "/images/projects/project4.jpg",
-    tags: ["Next.js", "MDX", "Tailwind CSS", "Vercel"],
-    github: "https://github.com/yourusername/blog",
-    demo: "https://your-demo-site.com",
+    tags: ["Team Leader", "C++", "C#", "Unity", "Autodesk 3ds Max"],
+    demo: "https://www.youtube.com/watch?v=z9RUuTXWAO0&feature=youtu.be",
     featured: false,
   },
 ];
