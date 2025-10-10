@@ -97,26 +97,29 @@ export default function AboutPage() {
                       let link = null;
                       
                       if (desc.includes("Research Lab:") && edu.links?.lab) {
-                        link = { url: edu.links.lab, text: "Visit Lab" };
+                        link = { url: edu.links.lab, icon: "lab" };
                       } else if (desc.includes("Advisor:") && edu.links?.advisor) {
-                        link = { url: edu.links.advisor, text: "Profile" };
+                        link = { url: edu.links.advisor, icon: "advisor" };
                       } else if (desc.includes("Scholarship:") && edu.links?.scholarship) {
-                        link = { url: edu.links.scholarship, text: "Learn More" };
+                        link = { url: edu.links.scholarship, icon: "scholarship" };
                       }
                       
                       return (
                         <li key={i} className="text-gray-600 flex items-start gap-3">
                           <span className="text-pink-400 mt-1 text-sm">•</span>
-                          <span className="flex-1">
+                          <span className="flex-1 flex items-center gap-2">
                             {content}
                             {link && (
                               <a
                                 href={link.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="ml-2 text-rose-500 hover:text-rose-600 underline text-sm font-medium"
+                                className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-rose-100 hover:bg-rose-200 text-rose-600 hover:text-rose-700 transition-all hover:scale-110"
+                                title={link.icon === "lab" ? "Visit Lab" : link.icon === "advisor" ? "View Profile" : "Learn More"}
                               >
-                                ({link.text} ↗)
+                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
                               </a>
                             )}
                           </span>

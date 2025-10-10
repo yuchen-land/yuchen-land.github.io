@@ -60,36 +60,31 @@ export const education = [
     period: "09/2022 - 07/2024",
     level: "master",
     description: [
-      "Research Lab: Software Engineering Lab",
-      "Advisor: Prof. Example Name",
+      "Advisor: Prof. Pang-Wei Tsai, NCKU, EE ",
       "Thesis: Design and Implementation of an Adaptive Path Selection Method in SDN-based SRv6",
-      "Scholarship: Academic Excellence Award (2020)",
     ],
     links: {
-      lab: "https://se.im.ncu.edu.tw/",
-      advisor: "https://example.com/professor-profile",
+      advisor: "https://www.itlab.ee.ncku.edu.tw/pwtsai/index.html",
     },
   },
   {
-    school: "National Taiwan University",
-    degree: "Bachelor of Science in Computer Science",
-    period: "2015 - 2019",
+    school: "National Taiwan Normal University",
+    degree: "Bachelor of Technology Application and Human Resource Development",
+    period: "09/2018 - 07/2022",
     level: "bachelor",
     description: [
-      "Major in Software Engineering, Minor in Data Science",
-      "Dean's List: All semesters (2015-2019)",
-      "Scholarship: Merit-based Scholarship (2016-2018)",
+      "Advisor: Prof. Fan-Hsun Tseng, NCKU , CSIE ",
     ],
+    links: {
+      advisor: "https://sites.google.com/site/fanhsuntseng/home",
+    },
   },
   {
-    school: "Taipei First Girls' High School",
+    school: "Taipei Municipal Zhong Shan Girls High School",
     degree: "High School Diploma",
-    period: "2012 - 2015",
+    period: "09/2014 - 06/2017",
     level: "high-school",
-    description: [
-      "Academic Excellence in Mathematics and Science",
-      "Science Fair Award: First Place in Computer Science (2014)",
-    ],
+    
   },
 ];
 
