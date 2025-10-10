@@ -44,14 +44,14 @@ export default function ProjectCard({ project }) {
         
         {/* Description - support both string and array */}
         {Array.isArray(project.description) ? (
-          <ul className="text-gray-600 mb-6 space-y-2">
+          <ul className="text-gray-600 mb-6 space-y-2.5 list-none">
             {project.description.map((item, i) => {
               // Check if text contains **bold** markers
               const parts = item.split(/\*\*(.*?)\*\*/g);
               return (
-                <li key={i} className="flex items-start gap-2 text-sm leading-relaxed">
-                  <span className="text-rose-400 mt-1 text-xs">•</span>
-                  <span className="flex-1">
+                <li key={i} className="text-sm leading-relaxed pl-5 relative">
+                  <span className="text-rose-400 absolute left-0 top-1 text-xs">•</span>
+                  <span className="block">
                     {parts.map((part, idx) => 
                       idx % 2 === 1 ? (
                         <strong key={idx} className="font-bold text-gray-800">{part}</strong>
