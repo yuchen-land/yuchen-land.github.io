@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["'GenYoGothic'", "'Noto Sans TC'", "sans-serif"],
+      },
       colors: {
         // 粉色系主題色
         primary: {

@@ -2,6 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import GenYoGothic Font (源樣黑體) */
+@font-face {
+  font-family: 'GenYoGothic';
+  src: url('https://cdn.jsdelivr.net/gh/ButTaiwan/genyog-font/font/GenYoGothic-R.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GenYoGothic';
+  src: url('https://cdn.jsdelivr.net/gh/ButTaiwan/genyog-font/font/GenYoGothic-M.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GenYoGothic';
+  src: url('https://cdn.jsdelivr.net/gh/ButTaiwan/genyog-font/font/GenYoGothic-B.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GenYoGothic';
+  src: url('https://cdn.jsdelivr.net/gh/ButTaiwan/genyog-font/font/GenYoGothic-L.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Global Styles */
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -17,6 +50,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  font-family: 'GenYoGothic', 'Noto Sans TC', sans-serif;
 }
 
 /* Custom Utilities */
