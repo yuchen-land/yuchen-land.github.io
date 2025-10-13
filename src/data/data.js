@@ -239,9 +239,10 @@ export const projects = [
     id: 2,
     title: "BonBunny Pastry Studio - Modern Artisanal Pastry E-commerce Platform",
     description: [
-      "Developed a high-performance **e-commerce platform using Next.js 14 (App Router), TypeScript, and Tailwind CSS.** Focused on a responsive, glassmorphism-designed frontend to enhance the online presentation and sales of artisanal pastries.",
-      "Implemented core features including an intuitive shopping cart, personalized wishlists, streamlined checkout, and a coupon system. Utilized Framer Motion for smooth animations and Zustand for efficient state management. Integrated JWT authentication for user management and built an admin dashboard covering product CRUD, order processing, and customer management, significantly optimizing operations.",
-      "Adhered to ESLint code standards and Git version control, ensuring high code quality. This platform successfully elevated brand online presence, expanded sales potential, and optimized operational efficiency.",
+      "Built a responsive, glassmorphism-themed frontend with **Framer Motion** for enhanced animations and leveraged **Zustand** for efficient state management.",
+      "Implemented core features including a shopping cart, wishlists, a coupon system, and a streamlined checkout process.",
+      "Integrated **JWT authentication** and created a comprehensive admin dashboard for product CRUD, order processing, and customer management.",
+      "Successfully elevated the brand's online presence, expanded sales channels, and significantly optimized operational efficiency."
     ],
     image: `/images/projects/bonbunny.jpg`,
     tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS", "DevOps"],
@@ -270,7 +271,6 @@ export const projects = [
     image: `/images/projects/renting_system.jpg`,
     tags: ["Team Leader", "Next.js", "React", "UML Plant Diagram"],
     github: "https://github.com/yuchen-land/renting-system-front",
-    demo: "https://renting-system-front.vercel.app/",
     featured: false,
   },
   {

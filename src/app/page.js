@@ -25,13 +25,13 @@ export default function Home() {
           <div className="relative group">
             {/* Soft Pink Glow */}
             <div className="absolute -inset-6 bg-gradient-to-r from-pink-300 via-rose-300 to-orange-300 rounded-full opacity-60 blur-2xl group-hover:opacity-80 transition-all duration-1000 animate-gradient"></div>
-            
+
             {/* Cute Decorative Ring */}
             <div className="absolute -inset-3 bg-gradient-to-r from-pink-200/50 via-rose-200/50 to-orange-200/50 rounded-full blur-xl"></div>
-            
+
             {/* Pastel Border Ring */}
             <div className="absolute -inset-1 bg-gradient-to-br from-pink-300/30 to-rose-300/30 rounded-full"></div>
-            
+
             {/* Avatar Container with Soft Shadow - Remove filter */}
             <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden bg-white p-1 group-hover:scale-105 transition-transform duration-700 shadow-[0_8px_30px_rgb(251,207,232,0.4)]">
               <div className="w-full h-full rounded-full overflow-hidden bg-white">
@@ -55,25 +55,25 @@ export default function Home() {
         </div>
 
         {/* Hero Section - Modern UX/UI Design */}
-        <div className="text-center mb-20 animate-fade-in-up space-y-8 max-w-4xl mx-auto px-4">
+        <div className="text-center mb-20 animate-fade-in-up space-y-8 max-w-4xl mx-auto px-4 antialiased">
           {/* Name with Soft Gradient */}
           <div className="relative mb-8 pb-3 overflow-visible">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold mb-4 bg-gradient-to-r from-pink-400 via-rose-400 to-orange-400 text-transparent bg-clip-text animate-gradient tracking-wide leading-[1.2] pb-1">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium mb-4 bg-gradient-to-r from-pink-400 via-rose-400 to-orange-400 text-transparent bg-clip-text animate-gradient tracking-wide leading-[1.3] pb-1 font-[family-name:var(--font-outfit)]">
               {personalInfo.name}
             </h1>
             {/* Elegant Underline */}
             <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-32 h-0.5 bg-gradient-to-r from-pink-300 via-rose-300 to-orange-300 rounded-full opacity-60"></div>
           </div>
-          
+
           {/* Title Badges - Refined */}
           <div className="flex items-center justify-center gap-4 flex-wrap mb-6">
             <div className="backdrop-blur-sm bg-white/70 rounded-full px-6 py-3 border border-pink-200/50 shadow-sm">
-              <p className="text-base md:text-lg text-rose-600 font-medium tracking-wide">
+              <p className="text-sm md:text-base text-rose-600 font-medium tracking-wide font-[family-name:var(--font-comfortaa)]">
                 Software Engineer
               </p>
             </div>
             <div className="backdrop-blur-sm bg-white/70 rounded-full px-6 py-3 border border-pink-200/50 shadow-sm">
-              <p className="text-base md:text-lg text-rose-600 font-medium tracking-wide">
+              <p className="text-sm md:text-base text-rose-600 font-medium tracking-wide font-[family-name:var(--font-comfortaa)]">
                 Pâtissier
               </p>
             </div>
@@ -104,20 +104,20 @@ export default function Home() {
               </a>
             ))}
           </div>
-          
+
           {/* Description - No Background */}
           <div className="max-w-2xl mx-auto">
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed whitespace-pre-line">
+            <p className="text-lg md:text-xl text-gray-600 leading-relaxed tracking-normal whitespace-pre-line font-[family-name:var(--font-caveat)]">
               {personalInfo.description}
             </p>
           </div>
-          
+
           {/* Email - Clean & Simple */}
           <div className="flex items-center justify-center gap-2 text-rose-500 hover:text-rose-600 transition-colors group">
-            <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
             </svg>
-            <a href={`mailto:${personalInfo.email}`} className="text-base md:text-lg tracking-wide">
+            <a href={`mailto:${personalInfo.email}`} className="text-sm md:text-base tracking-wide font-normal font-[family-name:var(--font-comfortaa)]">
               {personalInfo.email}
             </a>
           </div>
@@ -136,7 +136,7 @@ export default function Home() {
                 <div className="relative backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl p-8 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-1 group-hover:shadow-xl group-hover:bg-white/80 overflow-hidden">
                   {/* Gradient Background on Hover */}
                   <div className="absolute inset-0 bg-gradient-to-br from-pink-50/50 to-rose-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"></div>
-                  
+
                   {/* Content */}
                   <div className="relative z-10 flex flex-col items-center text-center space-y-4">
                     {/* Icon */}
@@ -152,17 +152,17 @@ export default function Home() {
                         </svg>
                       )}
                     </div>
-                    
+
                     {/* Title */}
-                    <h3 className="text-xl font-semibold text-gray-800 group-hover:text-rose-600 transition-colors duration-300">
+                    <h3 className="text-xl font-normal text-gray-800 group-hover:text-rose-600 transition-colors duration-300 tracking-[0.01em]">
                       {link.name}
                     </h3>
-                    
+
                     {/* Description */}
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="text-gray-500 text-sm leading-relaxed font-light tracking-[0.01em]">
                       {link.name === "About" ? "Learn about my background, skills, and experience" : "Explore my projects and creative works"}
                     </p>
-                    
+
                     {/* Arrow Icon */}
                     <div className="flex items-center justify-center mt-2">
                       <svg className="w-5 h-5 text-rose-400 group-hover:text-rose-600 group-hover:translate-x-1 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -177,15 +177,15 @@ export default function Home() {
         </div>
 
         {/* Skills & Tech Stack - Add visual interest */}
-        <div className="w-full max-w-4xl animate-fade-in px-4 mb-16">
+        <div className="w-full max-w-4xl animate-fade-in px-4 mb-16 antialiased">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-medium text-gray-700 mb-2">Tech Stack</h2>
+            <h2 className="text-2xl font-light text-gray-700 mb-2 tracking-[0.02em]">Tech Stack</h2>
             <div className="w-16 h-0.5 bg-gradient-to-r from-pink-300 to-rose-300 mx-auto rounded-full"></div>
           </div>
-          
+
           <div className="flex flex-wrap justify-center gap-3">
-            {["React", "Next.js", "JavaScript", "TypeScript", "Node.js","C","C++","C#", "Python", "Tailwind CSS", "Git"].map((tech) => (
-              <div key={tech} className="backdrop-blur-sm bg-white/60 border border-pink-200/50 rounded-full px-4 py-2 text-sm text-gray-700 hover:bg-white/80 hover:scale-105 transition-all duration-300 cursor-default">
+            {["React", "Next.js", "JavaScript", "TypeScript", "Node.js", "C", "C++", "C#", "Python", "Tailwind CSS", "UI/UX", "Git"].map((tech) => (
+              <div key={tech} className="backdrop-blur-sm bg-white/60 border border-pink-200/50 rounded-full px-4 py-2 text-sm text-gray-600 font-light tracking-[0.01em] hover:bg-white/80 hover:scale-105 transition-all duration-300 cursor-default">
                 {tech}
               </div>
             ))}
@@ -193,23 +193,23 @@ export default function Home() {
         </div>
 
         {/* Featured Projects */}
-        <div className="w-full max-w-6xl animate-fade-in px-4 mb-20">
+        <div className="w-full max-w-6xl animate-fade-in px-4 mb-20 antialiased">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-medium text-gray-700 mb-4">Featured Projects</h2>
+            <h2 className="text-3xl font-light text-gray-700 mb-4 tracking-[0.02em]">Featured Projects</h2>
             <div className="w-20 h-0.5 bg-gradient-to-r from-pink-300 to-rose-300 mx-auto rounded-full mb-3"></div>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-gray-500 max-w-2xl mx-auto font-light tracking-[0.01em]">
               Explore some of my favorite projects that showcase my skills in full-stack development, UI/UX design, and problem-solving.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 items-stretch">
             {projects.filter(project => project.featured).map((project) => (
-              <div key={project.id} className="group relative backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl overflow-hidden shadow-lg transition-all duration-300 hover:scale-[1.02] hover:-translate-y-2 hover:shadow-xl hover:bg-white/80">
+              <div key={project.id} className="group relative backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl overflow-hidden shadow-lg transition-all duration-300 hover:scale-[1.02] hover:-translate-y-2 hover:shadow-xl hover:bg-white/80 flex flex-col h-full">
                 {/* Project Image */}
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-48 overflow-hidden flex-shrink-0">
                   <div className="absolute inset-0 bg-gradient-to-br from-pink-50/50 to-rose-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <Image 
-                    src={project.image} 
+                  <Image
+                    src={project.image}
                     alt={project.title}
                     width={400}
                     height={200}
@@ -221,37 +221,40 @@ export default function Home() {
                 </div>
 
                 {/* Project Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-3 group-hover:text-rose-600 transition-colors duration-300 line-clamp-2">
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="text-xl font-normal text-gray-800 mb-3 group-hover:text-rose-600 transition-colors duration-300 line-clamp-2 tracking-[0.01em]">
                     {project.title}
                   </h3>
-                  
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+
+                  <p className="text-gray-500 text-sm leading-relaxed mb-4 line-clamp-3 font-light tracking-[0.01em]">
                     {project.description[0].replace(/\*\*(.*?)\*\*/g, '$1')}
                   </p>
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.slice(0, 4).map((tag) => (
-                      <span key={tag} className="text-xs px-3 py-1 bg-pink-100/80 text-rose-600 rounded-full">
+                      <span key={tag} className="text-xs px-3 py-1 bg-pink-100/80 text-rose-600 rounded-full font-light tracking-[0.01em]">
                         {tag}
                       </span>
                     ))}
                     {project.tags.length > 4 && (
-                      <span className="text-xs px-3 py-1 bg-gray-100/80 text-gray-500 rounded-full">
+                      <span className="text-xs px-3 py-1 bg-gray-100/80 text-gray-500 rounded-full font-light">
                         +{project.tags.length - 4} more
                       </span>
                     )}
                   </div>
 
+                  {/* Spacer */}
+                  <div className="flex-grow"></div>
+
                   {/* Links */}
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4 pt-2">
                     {project.demo && (
-                      <a 
-                        href={project.demo} 
-                        target="_blank" 
+                      <a
+                        href={project.demo}
+                        target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-rose-500 hover:text-rose-600 transition-colors text-sm font-medium"
+                        className="flex items-center gap-2 text-rose-500 hover:text-rose-600 transition-colors text-sm font-light tracking-[0.01em]"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -260,11 +263,11 @@ export default function Home() {
                       </a>
                     )}
                     {project.github && (
-                      <a 
-                        href={project.github} 
-                        target="_blank" 
+                      <a
+                        href={project.github}
+                        target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-gray-600 hover:text-gray-700 transition-colors text-sm font-medium"
+                        className="flex items-center gap-2 text-gray-600 hover:text-gray-700 transition-colors text-sm font-light tracking-[0.01em]"
                       >
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                           <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
@@ -282,7 +285,7 @@ export default function Home() {
           <div className="text-center">
             <Link
               href="/portfolio"
-              className="inline-flex items-center gap-2 backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-full px-8 py-3 text-rose-600 font-medium hover:bg-white/90 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 shadow-sm hover:shadow-lg"
+              className="inline-flex items-center gap-2 backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-full px-8 py-3 text-rose-600 font-light tracking-[0.01em] hover:bg-white/90 hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 shadow-sm hover:shadow-lg"
             >
               <span>View All Projects</span>
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -291,12 +294,12 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        
+
         {/* Footer - Minimal and Elegant */}
         <div className="mt-auto pt-12">
           <div className="text-center space-y-4">
             <div className="w-24 h-0.5 bg-gradient-to-r from-pink-300 via-rose-300 to-orange-300 mx-auto rounded-full opacity-50"></div>
-            <p className="text-rose-400/60 text-sm tracking-[0.2em]">
+            <p className="text-rose-400/60 text-xs tracking-[0.25em] font-light">
               WELCOME TO MY SPACE
             </p>
           </div>
