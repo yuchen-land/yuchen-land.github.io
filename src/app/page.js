@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import Navbar from "@/components/Navbar";
 import {
   personalInfo,
   socialLinks,
@@ -15,6 +16,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50 relative overflow-hidden">
+      <Navbar />
+
       {/* Soft Gradient Orbs - Pastel Colors */}
       <div className="absolute top-20 left-20 w-[500px] h-[500px] bg-gradient-to-br from-pink-200/40 via-rose-200/40 to-pink-300/40 rounded-full blur-3xl animate-blob"></div>
       <div className="absolute top-40 right-20 w-[500px] h-[500px] bg-gradient-to-br from-orange-200/40 via-pink-200/40 to-rose-300/40 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
@@ -24,7 +27,7 @@ export default function Home() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,182,193,0.15),transparent_60%)]"></div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20 md:py-16">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20 md:py-16 pt-32 md:pt-40">
         {/* Sweet Avatar - Youthful Style */}
         <div className="mb-12 animate-fade-in-down">
           <div className="relative group">
@@ -124,10 +127,55 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Email - Clean & Simple */}
-          <div className="flex items-center justify-center gap-2 text-rose-500 hover:text-rose-600 transition-colors group">
+          {/* CTA Buttons - Primary Actions */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 mt-8">
+            {/* Contact Me - Primary CTA */}
+            <a
+              href={`mailto:${personalInfo.email}`}
+              className="inline-flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full px-8 py-3 text-sm md:text-base font-light tracking-[0.01em] hover:shadow-xl hover:scale-105 transition-all duration-300 shadow-lg"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+              Contact Me
+            </a>
+
+            {/* Portfolio Button */}
+            <Link
+              href="/portfolio"
+              className="inline-flex items-center gap-2 backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-full px-8 py-3 text-sm md:text-base text-rose-600 font-light tracking-[0.01em] hover:bg-white/90 hover:scale-105 hover:shadow-lg transition-all duration-300 shadow-sm"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"
+                />
+              </svg>
+              View Portfolio
+            </Link>
+          </div>
+
+          {/* Email - Subtle Display */}
+          <div className="flex items-center justify-center gap-2 text-rose-400 text-sm mt-6 opacity-70 hover:opacity-100 transition-opacity">
             <svg
-              className="w-4 h-4 group-hover:scale-110 transition-transform"
+              className="w-4 h-4"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -139,22 +187,31 @@ export default function Home() {
                 d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
               />
             </svg>
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="text-sm md:text-base tracking-wide font-normal font-[family-name:var(--font-comfortaa)]"
-            >
+            <span className="text-xs tracking-[0.01em] font-light font-[family-name:var(--font-comfortaa)]">
               {personalInfo.email}
-            </a>
+            </span>
           </div>
         </div>
 
         {/* Navigation Cards - Modern UX/UI Design */}
-        <div className="w-full max-w-4xl animate-fade-in px-4 mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="w-full max-w-5xl animate-fade-in px-4 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
             {/* Internal Links - Large Feature Cards */}
             {internalLinks.map((link, index) => (
-              <Link key={link.name} href={link.path} className="group relative">
-                <div className="relative backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl p-8 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-1 group-hover:shadow-xl group-hover:bg-white/80 overflow-hidden">
+              <Link
+                key={link.name}
+                href={link.path}
+                className={`group relative ${
+                  link.name === "Portfolio" ? "md:col-span-1 lg:col-span-1" : ""
+                }`}
+              >
+                <div
+                  className={`relative backdrop-blur-sm border rounded-3xl p-8 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-2 group-hover:shadow-xl overflow-hidden ${
+                    link.name === "Portfolio"
+                      ? "bg-gradient-to-br from-pink-100/70 to-rose-100/70 border-pink-300/60 group-hover:bg-gradient-to-br group-hover:from-pink-100/90 group-hover:to-rose-100/90"
+                      : "bg-white/70 border-pink-200/50 group-hover:bg-white/80"
+                  }`}
+                >
                   {/* Gradient Background on Hover */}
                   <div className="absolute inset-0 bg-gradient-to-br from-pink-50/50 to-rose-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"></div>
 
@@ -229,37 +286,71 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Skills & Tech Stack - Add visual interest */}
-        <div className="w-full max-w-4xl animate-fade-in px-4 mb-16 antialiased">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-light text-gray-700 mb-2 tracking-[0.02em]">
+        {/* Skills & Tech Stack - Categorized */}
+        <div className="w-full max-w-4xl animate-fade-in px-4 mb-20 antialiased">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-light text-gray-700 mb-2 tracking-[0.02em]">
               Tech Stack
             </h2>
-            <div className="w-16 h-0.5 bg-gradient-to-r from-pink-300 to-rose-300 mx-auto rounded-full"></div>
+            <div className="w-20 h-0.5 bg-gradient-to-r from-pink-300 to-rose-300 mx-auto rounded-full mb-3"></div>
+            <p className="text-gray-500 text-sm font-light tracking-[0.01em]">
+              Technologies I work with
+            </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-3">
-            {[
-              "React",
-              "Next.js",
-              "JavaScript",
-              "TypeScript",
-              "Node.js",
-              "C",
-              "C++",
-              "C#",
-              "Python",
-              "Tailwind CSS",
-              "UI/UX",
-              "Git",
-            ].map((tech) => (
-              <div
-                key={tech}
-                className="backdrop-blur-sm bg-white/60 border border-pink-200/50 rounded-full px-4 py-2 text-sm text-gray-600 font-light tracking-[0.01em] hover:bg-white/80 hover:scale-105 transition-all duration-300 cursor-default"
-              >
-                {tech}
+          <div className="space-y-8">
+            {/* Frontend */}
+            <div>
+              <h3 className="text-sm font-medium text-rose-600 mb-4 tracking-[0.05em] uppercase">
+                Frontend
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {["React", "Next.js", "JavaScript", "TypeScript", "Tailwind CSS"].map(
+                  (tech) => (
+                    <div
+                      key={tech}
+                      className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-full px-5 py-2.5 text-sm text-gray-700 font-light tracking-[0.01em] hover:bg-white/90 hover:scale-105 hover:shadow-md transition-all duration-300"
+                    >
+                      {tech}
+                    </div>
+                  )
+                )}
               </div>
-            ))}
+            </div>
+
+            {/* Backend */}
+            <div>
+              <h3 className="text-sm font-medium text-rose-600 mb-4 tracking-[0.05em] uppercase">
+                Backend
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {["Node.js", "Python", "C", "C++", "C#"].map((tech) => (
+                  <div
+                    key={tech}
+                    className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-full px-5 py-2.5 text-sm text-gray-700 font-light tracking-[0.01em] hover:bg-white/90 hover:scale-105 hover:shadow-md transition-all duration-300"
+                  >
+                    {tech}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Tools & Other */}
+            <div>
+              <h3 className="text-sm font-medium text-rose-600 mb-4 tracking-[0.05em] uppercase">
+                Tools & Design
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {["Git", "Docker", "Figma", "UI/UX Design"].map((tech) => (
+                  <div
+                    key={tech}
+                    className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-full px-5 py-2.5 text-sm text-gray-700 font-light tracking-[0.01em] hover:bg-white/90 hover:scale-105 hover:shadow-md transition-all duration-300"
+                  >
+                    {tech}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -271,21 +362,20 @@ export default function Home() {
             </h2>
             <div className="w-20 h-0.5 bg-gradient-to-r from-pink-300 to-rose-300 mx-auto rounded-full mb-3"></div>
             <p className="text-gray-500 max-w-2xl mx-auto font-light tracking-[0.01em]">
-              Explore some of my favorite projects that showcase my skills in
-              full-stack development, UI/UX design, and problem-solving.
+              Selected projects that best showcase my skills in full-stack development, UI/UX design, and innovative problem-solving.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12 items-stretch">
             {projects
               .filter((project) => project.featured)
               .map((project) => (
                 <div
                   key={project.id}
-                  className="group relative backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl overflow-hidden shadow-lg transition-all duration-300 hover:scale-[1.02] hover:-translate-y-2 hover:shadow-xl hover:bg-white/80 flex flex-col h-full"
+                  className="group relative backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl overflow-hidden shadow-lg transition-all duration-300 hover:scale-[1.03] hover:-translate-y-3 hover:shadow-2xl hover:bg-white/85 flex flex-col h-full"
                 >
                   {/* Project Image */}
-                  <div className="relative h-48 overflow-hidden flex-shrink-0">
+                  <div className="relative h-40 overflow-hidden flex-shrink-0 bg-gradient-to-br from-pink-50 to-rose-50">
                     <div className="absolute inset-0 bg-gradient-to-br from-pink-50/50 to-rose-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <Image
                       src={project.image}
@@ -301,28 +391,28 @@ export default function Home() {
                   </div>
 
                   {/* Project Content */}
-                  <div className="p-6 flex flex-col flex-1">
-                    <h3 className="text-xl font-normal text-gray-800 mb-3 group-hover:text-rose-600 transition-colors duration-300 line-clamp-2 tracking-[0.01em]">
+                  <div className="p-5 flex flex-col flex-1">
+                    <h3 className="text-lg font-normal text-gray-800 mb-2 group-hover:text-rose-600 transition-colors duration-300 line-clamp-2 tracking-[0.01em]">
                       {project.title}
                     </h3>
 
-                    <p className="text-gray-500 text-sm leading-relaxed mb-4 line-clamp-3 font-light tracking-[0.01em]">
+                    <p className="text-gray-500 text-xs leading-relaxed mb-3 line-clamp-2 font-light tracking-[0.01em]">
                       {project.description[0].replace(/\*\*(.*?)\*\*/g, "$1")}
                     </p>
 
                     {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.slice(0, 4).map((tag) => (
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {project.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="text-xs px-3 py-1 bg-pink-100/80 text-rose-600 rounded-full font-light tracking-[0.01em]"
+                          className="text-xs px-2.5 py-1 bg-pink-100/80 text-rose-600 rounded-full font-light tracking-[0.01em]"
                         >
                           {tag}
                         </span>
                       ))}
-                      {project.tags.length > 4 && (
-                        <span className="text-xs px-3 py-1 bg-gray-100/80 text-gray-500 rounded-full font-light">
-                          +{project.tags.length - 4} more
+                      {project.tags.length > 3 && (
+                        <span className="text-xs px-2.5 py-1 bg-gray-100/80 text-gray-500 rounded-full font-light">
+                          +{project.tags.length - 3}
                         </span>
                       )}
                     </div>

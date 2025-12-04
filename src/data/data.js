@@ -258,7 +258,7 @@ export const projects = [
     ], github: "https://fir-mandarin-dc1.notion.site/MOXA-f7348ef5700d4f339ce71741b1b0dcea",
     image: `/images/projects/linux_serial_port.jpg`,
     tags: ["Python", "Pyserial", "Linux", "UML Plant Diagram", "Arm", "x86", "Embedded"],
-    featured: false,
+    featured: true,
   },
   {
     id: 4,
