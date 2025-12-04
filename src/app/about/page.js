@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
 import { education, experience, skills, publications, languages, activities } from "@/data/data";
 
 export const metadata = {
@@ -8,60 +9,90 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50 py-16 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Back Button */}
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-rose-600 hover:text-rose-700 mb-12 group font-medium transition-colors"
-        >
-          <svg
-            className="w-5 h-5 transition-transform group-hover:-translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50">
+      <Navbar />
+
+      <div className="relative z-10 min-h-screen py-16 px-4 pt-32 md:pt-40">
+        <div className="max-w-6xl mx-auto">
+          {/* Back Button */}
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-rose-600 hover:text-rose-700 mb-12 group font-medium transition-colors"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
-          Back to Home
-        </Link>
+            <svg
+              className="w-5 h-5 transition-transform group-hover:-translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+            Back to Home
+          </Link>
 
-        {/* Header */}
-        <div className="text-center mb-20 animate-fade-in-down">
-          <h1 className="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-pink-400 via-rose-400 to-orange-400 text-transparent bg-clip-text tracking-tight">
-            About Me
-          </h1>
-          <div className="max-w-4xl mx-auto backdrop-blur-md bg-white/50 rounded-3xl p-10 md:p-12 border-0 shadow-[0_8px_30px_rgb(251,207,232,0.2)]">
-            <p className="text-gray-700 text-base md:text-lg leading-relaxed text-left">
-              A proactive and curious <span className="font-semibold text-rose-600">software engineer</span> with a passion for building products that simplify&nbsp;life.
-            </p>
-            <p className="text-gray-700 text-base md:text-lg leading-relaxed mt-5 text-left">
-              I thrive in dynamic teams, enjoy turning complex ideas into reality, and am always ready to bring positive energy and fresh perspectives to every project.
+          {/* Header */}
+          <div className="mb-16 animate-fade-in-down">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-pink-400 via-rose-400 to-orange-400 text-transparent bg-clip-text tracking-tight">
+              About Me
+            </h1>
+            <p className="text-gray-600 text-lg md:text-xl max-w-2xl font-light">
+              Discover my journey, skills, and passion for building great products
             </p>
           </div>
-        </div>
 
-        {/* Education */}
-        <section className="mb-20 animate-fade-in-up">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center text-white text-2xl shadow-lg">
-              🎓
+          {/* Introduction */}
+          <div className="max-w-4xl mx-auto mb-20 animate-fade-in-up">
+            <div className="backdrop-blur-sm bg-gradient-to-br from-pink-100/70 to-rose-100/70 border border-pink-200/50 rounded-3xl p-10 md:p-12 shadow-lg">
+              <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-5 font-light">
+                A proactive and curious <span className="font-semibold text-rose-600">software engineer</span> with a passion for building products that simplify life. I thrive in dynamic teams, enjoy turning complex ideas into reality, and am always ready to bring positive energy and fresh perspectives to every project.
+              </p>
+              <div className="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-pink-200/50">
+                <div className="text-center">
+                  <p className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-rose-400 text-transparent bg-clip-text">
+                    1+
+                  </p>
+                  <p className="text-xs text-gray-600 mt-1">Years Experience</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-2xl font-bold bg-gradient-to-r from-rose-400 to-orange-400 text-transparent bg-clip-text">
+                    6+
+                  </p>
+                  <p className="text-xs text-gray-600 mt-1">Projects Built</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-pink-400 text-transparent bg-clip-text">
+                    10+
+                  </p>
+                  <p className="text-xs text-gray-600 mt-1">Skills & Tech</p>
+                </div>
+              </div>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-              Education
-            </h2>
           </div>
-          <div className="space-y-6">
-            {education.map((edu, index) => (
-              <div
-                key={index}
-                className="bg-white/70 backdrop-blur-glass rounded-3xl p-8 shadow-lg card-hover border-0"
-              >
+
+          {/* Education */}
+          <section className="mb-24 animate-fade-in-up">
+            <div className="flex items-center gap-3 mb-10">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center text-white text-2xl shadow-lg">
+                🎓
+              </div>
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+                  Education
+                </h2>
+                <p className="text-xs text-gray-500 mt-1">{education.length} credentials</p>
+              </div>
+            </div>
+            <div className="space-y-6">
+              {education.map((edu, index) => (
+                <div
+                  key={index}
+                  className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl p-8 shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300 hover:-translate-y-1"
+                >
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <h3 className="text-2xl font-bold text-gray-800">
@@ -135,25 +166,28 @@ export default function AboutPage() {
                 )}
               </div>
             ))}
-          </div>
-        </section>
-
-        {/* Publications */}
-        <section className="mb-20 animate-fade-in-up">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center text-white text-2xl shadow-lg">
-              📚
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-              Publications
-            </h2>
-          </div>
-          <div className="space-y-6">
-            {publications.map((pub, index) => (
-              <div
-                key={index}
-                className="bg-white/70 backdrop-blur-glass rounded-3xl p-8 shadow-lg card-hover border-0"
-              >
+          </section>
+
+          {/* Publications */}
+          <section className="mb-24 animate-fade-in-up">
+            <div className="flex items-center gap-3 mb-10">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center text-white text-2xl shadow-lg">
+                📚
+              </div>
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+                  Publications
+                </h2>
+                <p className="text-xs text-gray-500 mt-1">{publications.length} publication{publications.length !== 1 ? "s" : ""}</p>
+              </div>
+            </div>
+            <div className="space-y-6">
+              {publications.map((pub, index) => (
+                <div
+                  key={index}
+                  className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl p-8 shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300 hover:-translate-y-1"
+                >
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
                     {index + 1}
@@ -184,26 +218,29 @@ export default function AboutPage() {
                 </div>
               </div>
             ))}
-          </div>
-        </section>
-
-        {/* Experience */}
-        <section className="mb-20 animate-fade-in-up">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-orange-500 flex items-center justify-center text-white text-2xl shadow-lg">
-              💼
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-              Experience
-            </h2>
-          </div>
+          </section>
+
+          {/* Experience */}
+          <section className="mb-24 animate-fade-in-up">
+            <div className="flex items-center gap-3 mb-10">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-orange-500 flex items-center justify-center text-white text-2xl shadow-lg">
+                💼
+              </div>
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+                  Experience
+                </h2>
+                <p className="text-xs text-gray-500 mt-1">{experience.length} position{experience.length !== 1 ? "s" : ""}</p>
+              </div>
+            </div>
           <div className="relative pl-12 border-l-2 border-pink-200">
             {experience.map((exp, index) => (
               <div key={index} className="mb-12 relative">
                 {/* Timeline Dot */}
                 <div className="absolute -left-[49px] top-2 w-6 h-6 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full border-4 border-pink-50 shadow-lg"></div>
 
-                <div className="bg-white/70 backdrop-blur-glass rounded-3xl p-8 shadow-lg card-hover border-0">
+                <div className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl p-8 shadow-md hover:shadow-lg transition-all duration-300">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
                     <h3 className="text-2xl font-bold text-gray-800">
                       {exp.position}
@@ -278,24 +315,27 @@ export default function AboutPage() {
                 </div>
               </div>
             ))}
-          </div>
-        </section>
-
-        {/* Skills & Technologies */}
-        <section className="mb-20 animate-fade-in-up">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center text-white text-2xl shadow-lg">
-              🛠️
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-              Skills & Technologies
-            </h2>
-          </div>
+          </section>
+
+          {/* Skills & Technologies */}
+          <section className="mb-24 animate-fade-in-up">
+            <div className="flex items-center gap-3 mb-10">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center text-white text-2xl shadow-lg">
+                🛠️
+              </div>
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+                  Skills & Technologies
+                </h2>
+                <p className="text-xs text-gray-500 mt-1">{Object.keys(skills).length} categories</p>
+              </div>
+            </div>
           <div className="grid md:grid-cols-2 gap-8">
             {Object.entries(skills).map(([category, items]) => (
               <div
                 key={category}
-                className="bg-white/70 backdrop-blur-glass rounded-3xl p-8 shadow-lg card-hover border-0"
+                className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl p-8 shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300 hover:-translate-y-1"
               >
                 <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-gradient-to-r from-pink-400 to-rose-500"></span>
@@ -320,24 +360,27 @@ export default function AboutPage() {
                 </div>
               </div>
             ))}
-          </div>
-        </section>
-
-        {/* Language Proficiency */}
-        <section className="mb-20 animate-fade-in-up">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center text-white text-2xl shadow-lg">
-              🌐
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-              Language Proficiency
-            </h2>
-          </div>
+          </section>
+
+          {/* Language Proficiency */}
+          <section className="mb-24 animate-fade-in-up">
+            <div className="flex items-center gap-3 mb-10">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center text-white text-2xl shadow-lg">
+                🌐
+              </div>
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+                  Language Proficiency
+                </h2>
+                <p className="text-xs text-gray-500 mt-1">{languages.length} language{languages.length !== 1 ? "s" : ""}</p>
+              </div>
+            </div>
           <div className="space-y-6">
             {languages.map((lang, index) => (
               <div
                 key={index}
-                className="bg-white/70 backdrop-blur-glass rounded-3xl p-8 shadow-lg card-hover border-0"
+                className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl p-8 shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
                   <h3 className="text-2xl font-bold text-gray-800">{lang.name}</h3>
@@ -348,24 +391,27 @@ export default function AboutPage() {
                 <p className="text-gray-600">{lang.details}</p>
               </div>
             ))}
-          </div>
-        </section>
-
-        {/* Activities & Involvement */}
-        <section className="animate-fade-in-up">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white text-2xl shadow-lg">
-              🎯
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-              Activities & Involvement
-            </h2>
-          </div>
+          </section>
+
+          {/* Activities & Involvement */}
+          <section className="animate-fade-in-up">
+            <div className="flex items-center gap-3 mb-10">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white text-2xl shadow-lg">
+                🎯
+              </div>
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+                  Activities & Involvement
+                </h2>
+                <p className="text-xs text-gray-500 mt-1">{activities.length} activit{activities.length !== 1 ? "ies" : "y"}</p>
+              </div>
+            </div>
           <div className="grid md:grid-cols-2 gap-6">
             {activities.map((activity, index) => (
               <div
                 key={index}
-                className="bg-white/70 backdrop-blur-glass rounded-3xl p-6 shadow-lg card-hover border-0"
+                className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl p-6 shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="text-xl font-bold text-gray-800 flex-1">
@@ -379,8 +425,9 @@ export default function AboutPage() {
                 <p className="text-gray-600 text-sm">{activity.activity}</p>
               </div>
             ))}
-          </div>
-        </section>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   );
