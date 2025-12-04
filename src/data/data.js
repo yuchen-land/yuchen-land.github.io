@@ -218,6 +218,232 @@ export const activities = [
   },
 ];
 
+// Documentation Data
+export const projectDocumentation = {
+  1: {
+    id: "myedit",
+    title: "MyEdit",
+    slug: "myedit",
+    overview: {
+      description: "A professional image, audio, and video editing platform built with React and Node.js. MyEdit provides users with powerful tools for content creation while maintaining a smooth, professional user experience.",
+      challenge: "Create a scalable, user-friendly editing platform that supports multiple media types (image, audio, video) while maintaining high performance and professional-grade features.",
+      solution: "Developed a modular React component architecture with integrated Google Analytics and optimized UI/UX design. Implemented cross-functional collaboration systems to streamline team workflows.",
+      impact: "Reduced marketing analysis time by 86% and data discrepancies by 96%. Improved team efficiency by 60% through better SEO optimization.",
+    },
+    techStack: {
+      frontend: ["React", "JavaScript", "HTML/CSS"],
+      backend: ["Node.js"],
+      tools: ["Google Analytics", "Git"],
+    },
+    features: [
+      "Image editing with Magic Designer",
+      "Audio editing with Podcast Studio",
+      "Video editing and processing",
+      "Professional UI/UX interface",
+      "Google Analytics integration",
+      "Multi-source data analysis",
+    ],
+    keyAchievements: [
+      "Reduced marketing analysis time by 86%",
+      "Decreased data discrepancies by 96%",
+      "Improved team workload efficiency by 60%",
+      "Maintained seamless user experience across multiple media types",
+    ],
+    roles: ["Frontend Developer", "UI/UX Designer", "Full-Stack Engineer"],
+    links: {
+      demo: "https://myedit.online/en",
+      github: "https://github.com/CindyLiu-CL",
+    },
+  },
+  2: {
+    id: "bonbunny",
+    title: "BonBunny Pastry Studio - Modern Artisanal Pastry E-commerce Platform",
+    slug: "bonbunny",
+    overview: {
+      description: "A premium e-commerce platform for an artisanal pastry brand, built with Next.js and featuring advanced state management, authentication, and admin dashboard functionality.",
+      challenge: "Build a modern e-commerce platform that combines beautiful glassmorphism design with robust backend systems for product management, orders, and customer relationships.",
+      solution: "Developed responsive frontend with Framer Motion animations, implemented JWT authentication, created comprehensive admin dashboard for CRUD operations, and integrated Zustand for state management.",
+      impact: "Elevated brand online presence, expanded sales channels, significantly optimized operational efficiency.",
+    },
+    techStack: {
+      frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      backend: ["Node.js", "JWT Authentication"],
+      design: ["Glassmorphism UI"],
+      tools: ["Zustand", "Git", "DevOps"],
+    },
+    features: [
+      "Responsive e-commerce frontend with glassmorphism design",
+      "Shopping cart with persistent state",
+      "Wishlist functionality",
+      "Coupon and discount system",
+      "Streamlined checkout process",
+      "JWT-based authentication",
+      "Comprehensive admin dashboard",
+      "Product CRUD operations",
+      "Order processing system",
+      "Customer management",
+    ],
+    keyAchievements: [
+      "Launched fully functional e-commerce platform",
+      "Implemented JWT authentication for secure transactions",
+      "Created admin dashboard for operational efficiency",
+      "Achieved professional brand presence online",
+      "Successfully expanded sales channels",
+    ],
+    roles: ["Founder", "Full-Stack Developer", "UI/UX Designer"],
+    links: {
+      demo: "https://bonbunny.vercel.app/",
+    },
+  },
+  3: {
+    id: "linux-serial-port",
+    title: "Linux Serial Port Burning Test Tool",
+    slug: "linux-serial-port",
+    overview: {
+      description: "A Python-based testing tool for Linux serial port operations, designed to automate throughput testing and data transmission accuracy verification for embedded systems.",
+      challenge: "Create an efficient and user-friendly tool to test serial port functionality, throughput, and data integrity across different architectures (ARM, x86).",
+      solution: "Developed modular Python architecture using pyserial library with optimized serial port handling. Implemented comprehensive testing procedures and created an intuitive user interface.",
+      impact: "Streamlined QA testing process, improved testing efficiency, reduced manual testing time.",
+    },
+    techStack: {
+      programming: ["Python"],
+      libraries: ["Pyserial"],
+      platforms: ["Linux", "ARM", "x86"],
+      tools: ["UML Plant Diagram"],
+    },
+    features: [
+      "Serial port communication and control",
+      "Throughput testing capabilities",
+      "Data transmission accuracy verification",
+      "Support for multiple architectures (ARM, x86)",
+      "Modular architecture for easy extension",
+      "User-friendly testing interface",
+      "Comprehensive error reporting",
+    ],
+    keyAchievements: [
+      "Developed modular, maintainable testing tool",
+      "Optimized serial port testing efficiency",
+      "Created user-friendly interface for QA teams",
+      "Supported multiple embedded architectures",
+    ],
+    roles: ["Software Engineer", "QA Engineer"],
+    links: {
+      documentation: "https://fir-mandarin-dc1.notion.site/MOXA-f7348ef5700d4f339ce71741b1b0dcea",
+    },
+  },
+  4: {
+    id: "renting-system",
+    title: "Software Engineering, Renting System",
+    slug: "renting-system",
+    overview: {
+      description: "An enterprise renting management system built with Agile methodology, featuring separate frontend and backend systems for customer-facing and manager operations.",
+      challenge: "Modernize rental and return processes with a comprehensive web-based system that separates customer experience from manager operations while maintaining data integrity.",
+      solution: "Implemented Agile development with Next.js frontend and Node.js backend separation. Created dual-interface system supporting both customer and manager workflows.",
+      impact: "Reduced development time from 6 months to 1.5 months. Boosted transaction efficiency by 60%. Cut paper-based operations by 80%. Reduced personnel costs by 50%.",
+    },
+    techStack: {
+      frontend: ["Next.js", "React"],
+      backend: ["Node.js"],
+      methodology: ["Agile Development"],
+      tools: ["UML Plant Diagram", "Git"],
+    },
+    features: [
+      "Customer-facing rental interface",
+      "Manager backend system",
+      "Automated rental and return processing",
+      "Real-time inventory management",
+      "Transaction tracking and reporting",
+      "Customer management system",
+      "Payment processing",
+      "Paperless operations",
+    ],
+    keyAchievements: [
+      "Reduced development timeline by 75% (6 months → 1.5 months)",
+      "Improved transaction efficiency by 60%",
+      "Eliminated 80% of paper-based operations",
+      "Reduced personnel costs by 50%",
+      "Successfully led team in front-end/back-end separation",
+    ],
+    roles: ["Team Leader", "Full-Stack Developer", "Project Manager"],
+    links: {
+      github: "https://github.com/yuchen-land/renting-system-front",
+    },
+  },
+  5: {
+    id: "clchemy",
+    title: "Clchemy: A Board Game App for Learning C++ Programming Language",
+    slug: "clchemy",
+    overview: {
+      description: "A bilingual educational card game developed in collaboration with Taiwan's Ministry of Education to teach C++ programming basics to upper elementary students through gamified learning.",
+      challenge: "Design an engaging, bilingual educational game that effectively teaches C++ fundamentals to elementary students while aligning with government education policies.",
+      solution: "Developed gamified card game using C# and Unity with 3D assets created in Autodesk 3ds Max. Incorporated assessment mechanisms to measure learning effectiveness.",
+      impact: "Achieved 70% contribution rate to project. Improved learning efficiency by 80% according to educator feedback. Aligned with bilingual education policies.",
+    },
+    techStack: {
+      programming: ["C++", "C#"],
+      gameEngine: ["Unity"],
+      design: ["Autodesk 3ds Max"],
+      approach: ["Gamified Learning"],
+    },
+    features: [
+      "Bilingual card game interface (English & Traditional Chinese)",
+      "C++ programming concept tutorials",
+      "Interactive gameplay mechanics",
+      "Assessment and progress tracking",
+      "Achievement system",
+      "3D character and asset design",
+      "Educational content aligned with MOE curriculum",
+    ],
+    keyAchievements: [
+      "Collaborated with Taiwan Ministry of Education",
+      "Achieved 80% learning efficiency improvement",
+      "Successfully aligned with bilingual education policies",
+      "Created engaging educational game for elementary students",
+      "70% project contribution rate",
+    ],
+    roles: ["Team Leader", "Game Developer", "UI/UX Designer"],
+    links: {
+      demo: "https://www.youtube.com/watch?v=z9RUuTXWAO0&feature=youtu.be",
+    },
+  },
+  6: {
+    id: "sic-assembler",
+    title: "SIC/XE Two-pass Assembler",
+    slug: "sic-assembler",
+    overview: {
+      description: "A two-pass assembler implementation in C for the SIC/XE instruction set, designed to deepen understanding of the assembly process and low-level programming concepts.",
+      challenge: "Implement a complete assembler that correctly processes SIC/XE assembly language across two passes, handling symbol tables and code generation.",
+      solution: "Developed efficient two-pass assembly process with proper symbol table management and intermediate code handling. Applied phased assembly approach for optimal code generation.",
+      impact: "Enhanced understanding of assembly language fundamentals and compiler design principles.",
+    },
+    techStack: {
+      programming: ["C"],
+      concepts: ["Assembly Language", "Firmware", "Compiler Design"],
+      tools: ["Git"],
+    },
+    features: [
+      "Two-pass assembly process",
+      "Symbol table management",
+      "SIC/XE instruction set support",
+      "Intermediate code generation",
+      "Error detection and reporting",
+      "Modular architecture",
+      "Efficient code generation",
+    ],
+    keyAchievements: [
+      "Implemented complete two-pass assembler",
+      "Proper error handling and detection",
+      "Improved code maintainability",
+      "Enhanced assembly language understanding",
+      "Applicable to modern compiler design concepts",
+    ],
+    roles: ["Software Engineer", "Systems Programmer"],
+    links: {
+      github: "https://github.com/yuchen-land/2-pass-assembler",
+    },
+  },
+};
+
 // Project Portfolio
 export const projects = [
   {
