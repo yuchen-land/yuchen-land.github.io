@@ -1,9 +1,12 @@
-"use client";
-
 import Link from "next/link";
 import { projectDocumentation, projects } from "@/data/data";
 import Navbar from "@/components/Navbar";
-import { useState } from "react";
+
+export async function generateStaticParams() {
+  return Object.keys(projectDocumentation).map((id) => ({
+    id: id.toString(),
+  }));
+}
 
 export default function ProjectDocPage({ params }) {
   const doc = projectDocumentation[params.id];
@@ -16,7 +19,9 @@ export default function ProjectDocPage({ params }) {
             Project Not Found
           </h1>
           <p className="text-gray-600 mb-8">
-            The project documentation you&apos;re looking for doesn&apos;t exist yet.
+            The project documentation you
+            {`'`}re looking for doesn
+            {`'`}t exist yet.
           </p>
           <Link
             href="/portfolio"
