@@ -74,6 +74,148 @@ export default function AboutPage() {
             </div>
           </div>
 
+          {/* Experience - MOVED TO FIRST */}
+          <section className="mb-24 animate-fade-in-up">
+            <div className="flex items-center gap-3 mb-10">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-orange-500 flex items-center justify-center text-white text-2xl shadow-lg">
+                💼
+              </div>
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+                  Experience
+                </h2>
+                <p className="text-xs text-gray-500 mt-1">{experience.length} position{experience.length !== 1 ? "s" : ""}</p>
+              </div>
+            </div>
+          <div className="relative pl-12 border-l-2 border-pink-200">
+            {experience.map((exp, index) => (
+              <div key={index} className="mb-12 relative">
+                {/* Timeline Dot */}
+                <div className="absolute -left-[49px] top-2 w-6 h-6 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full border-4 border-pink-50 shadow-lg"></div>
+
+                <div className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl p-8 shadow-md hover:shadow-lg transition-all duration-300">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                    <h3 className="text-2xl font-bold text-gray-800">
+                      {exp.position}
+                    </h3>
+                    <span className="text-rose-600 font-semibold bg-rose-50 px-4 py-1.5 rounded-full text-sm mt-2 md:mt-0">
+                      {exp.period}
+                    </span>
+                  </div>
+                  <p className="text-gray-700 font-semibold text-lg mb-4 flex items-center gap-2">
+                    {exp.company}
+                    {exp.type === "intern" && (
+                      <span className="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-bold">
+                        INTERNSHIP
+                      </span>
+                    )}
+                  </p>
+                  <ul className="space-y-3">
+                    {exp.description.map((desc, i) => {
+                      // Check if this is CyberLink experience with MyEdit link
+                      if (exp.links?.myedit && desc.includes("MyEdit")) {
+                        const parts = desc.split("MyEdit");
+                        return (
+                          <li key={i} className="text-gray-600 flex items-start gap-3">
+                            <span className="text-rose-500 mt-1.5 text-lg">▸</span>
+                            <span className="flex-1">
+                              {parts[0]}
+                              <a
+                                href={exp.links.myedit}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-bold text-rose-600 hover:text-rose-700 underline decoration-2 underline-offset-2"
+                              >
+                                MyEdit
+                              </a>
+                              {parts[1]}
+                            </span>
+                          </li>
+                        );
+                      }
+
+                      // Check if this description has any highlights (bold text)
+                      if (exp.highlights && exp.highlights.length > 0) {
+                        let hasHighlight = false;
+
+                        // Check if any highlight exists in this description
+                        for (const highlight of exp.highlights) {
+                          if (desc.includes(highlight)) {
+                            hasHighlight = true;
+                            const parts = desc.split(highlight);
+                            return (
+                              <li key={i} className="text-gray-600 flex items-start gap-3">
+                                <span className="text-rose-500 mt-1.5 text-lg">▸</span>
+                                <span className="flex-1">
+                                  {parts[0]}
+                                  <span className="font-bold text-gray-800">{highlight}</span>
+                                  {parts[1]}
+                                </span>
+                              </li>
+                            );
+                          }
+                        }
+                      }
+
+                      return (
+                        <li key={i} className="text-gray-600 flex items-start gap-3">
+                          <span className="text-rose-500 mt-1.5 text-lg">▸</span>
+                          <span className="flex-1">{desc}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </div>
+            ))}
+            </div>
+          </section>
+
+          {/* Skills & Technologies - MOVED TO SECOND */}
+          <section className="mb-24 animate-fade-in-up">
+            <div className="flex items-center gap-3 mb-10">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center text-white text-2xl shadow-lg">
+                🛠️
+              </div>
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+                  Skills & Technologies
+                </h2>
+                <p className="text-xs text-gray-500 mt-1">{Object.keys(skills).length} categories</p>
+              </div>
+            </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {Object.entries(skills).map(([category, items]) => (
+              <div
+                key={category}
+                className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl p-8 shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300 hover:-translate-y-1"
+              >
+                <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-gradient-to-r from-pink-400 to-rose-500"></span>
+                  <span className="capitalize">
+                    {category === "frontend" && "Frontend Development"}
+                    {category === "backend" && "Backend Development"}
+                    {category === "programming" && "Programming Languages"}
+                    {category === "database" && "Database & Storage"}
+                    {category === "tools" && "Development Tools"}
+                    {category === "design" && "Design & Multimedia"}
+                  </span>
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                  {items.map((skill) => (
+                    <span
+                      key={skill}
+                      className="bg-pink-100/80 text-rose-700 px-5 py-2.5 rounded-xl text-sm font-semibold shadow-sm hover:shadow-md hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-default border border-pink-200/50"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+            </div>
+          </section>
+
           {/* Education */}
           <section className="mb-24 animate-fade-in-up">
             <div className="flex items-center gap-3 mb-10">
@@ -215,148 +357,6 @@ export default function AboutPage() {
                       <span>{pub.date}</span>
                     </div>
                   </div>
-                </div>
-              </div>
-            ))}
-            </div>
-          </section>
-
-          {/* Experience */}
-          <section className="mb-24 animate-fade-in-up">
-            <div className="flex items-center gap-3 mb-10">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-orange-500 flex items-center justify-center text-white text-2xl shadow-lg">
-                💼
-              </div>
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-                  Experience
-                </h2>
-                <p className="text-xs text-gray-500 mt-1">{experience.length} position{experience.length !== 1 ? "s" : ""}</p>
-              </div>
-            </div>
-          <div className="relative pl-12 border-l-2 border-pink-200">
-            {experience.map((exp, index) => (
-              <div key={index} className="mb-12 relative">
-                {/* Timeline Dot */}
-                <div className="absolute -left-[49px] top-2 w-6 h-6 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full border-4 border-pink-50 shadow-lg"></div>
-
-                <div className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl p-8 shadow-md hover:shadow-lg transition-all duration-300">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
-                    <h3 className="text-2xl font-bold text-gray-800">
-                      {exp.position}
-                    </h3>
-                    <span className="text-rose-600 font-semibold bg-rose-50 px-4 py-1.5 rounded-full text-sm mt-2 md:mt-0">
-                      {exp.period}
-                    </span>
-                  </div>
-                  <p className="text-gray-700 font-semibold text-lg mb-4 flex items-center gap-2">
-                    {exp.company}
-                    {exp.type === "intern" && (
-                      <span className="text-xs bg-pink-100 text-pink-700 px-3 py-1 rounded-full font-bold">
-                        INTERNSHIP
-                      </span>
-                    )}
-                  </p>
-                  <ul className="space-y-3">
-                    {exp.description.map((desc, i) => {
-                      // Check if this is CyberLink experience with MyEdit link
-                      if (exp.links?.myedit && desc.includes("MyEdit")) {
-                        const parts = desc.split("MyEdit");
-                        return (
-                          <li key={i} className="text-gray-600 flex items-start gap-3">
-                            <span className="text-rose-500 mt-1.5 text-lg">▸</span>
-                            <span className="flex-1">
-                              {parts[0]}
-                              <a
-                                href={exp.links.myedit}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="font-bold text-rose-600 hover:text-rose-700 underline decoration-2 underline-offset-2"
-                              >
-                                MyEdit
-                              </a>
-                              {parts[1]}
-                            </span>
-                          </li>
-                        );
-                      }
-                      
-                      // Check if this description has any highlights (bold text)
-                      if (exp.highlights && exp.highlights.length > 0) {
-                        let hasHighlight = false;
-                        
-                        // Check if any highlight exists in this description
-                        for (const highlight of exp.highlights) {
-                          if (desc.includes(highlight)) {
-                            hasHighlight = true;
-                            const parts = desc.split(highlight);
-                            return (
-                              <li key={i} className="text-gray-600 flex items-start gap-3">
-                                <span className="text-rose-500 mt-1.5 text-lg">▸</span>
-                                <span className="flex-1">
-                                  {parts[0]}
-                                  <span className="font-bold text-gray-800">{highlight}</span>
-                                  {parts[1]}
-                                </span>
-                              </li>
-                            );
-                          }
-                        }
-                      }
-                      
-                      return (
-                        <li key={i} className="text-gray-600 flex items-start gap-3">
-                          <span className="text-rose-500 mt-1.5 text-lg">▸</span>
-                          <span className="flex-1">{desc}</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </div>
-            ))}
-            </div>
-          </section>
-
-          {/* Skills & Technologies */}
-          <section className="mb-24 animate-fade-in-up">
-            <div className="flex items-center gap-3 mb-10">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center text-white text-2xl shadow-lg">
-                🛠️
-              </div>
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-                  Skills & Technologies
-                </h2>
-                <p className="text-xs text-gray-500 mt-1">{Object.keys(skills).length} categories</p>
-              </div>
-            </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            {Object.entries(skills).map(([category, items]) => (
-              <div
-                key={category}
-                className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl p-8 shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300 hover:-translate-y-1"
-              >
-                <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-gradient-to-r from-pink-400 to-rose-500"></span>
-                  <span className="capitalize">
-                    {category === "frontend" && "Frontend Development"}
-                    {category === "backend" && "Backend Development"}
-                    {category === "programming" && "Programming Languages"}
-                    {category === "database" && "Database & Storage"}
-                    {category === "tools" && "Development Tools"}
-                    {category === "design" && "Design & Multimedia"}
-                  </span>
-                </h3>
-                <div className="flex flex-wrap gap-3">
-                  {items.map((skill) => (
-                    <span
-                      key={skill}
-                      className="bg-pink-100/80 text-rose-700 px-5 py-2.5 rounded-xl text-sm font-semibold shadow-sm hover:shadow-md hover:scale-105 hover:-translate-y-1 transition-all duration-300 cursor-default border border-pink-200/50"
-                    >
-                      {skill}
-                    </span>
-                  ))}
                 </div>
               </div>
             ))}
