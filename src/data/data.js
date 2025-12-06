@@ -205,7 +205,7 @@ export const languages = [
 // Master's Thesis
 export const thesis = {
   title: "Design and Implementation of an Adaptive Path Selection Method in SDN-based SRv6",
-  degree: "Master's Thesis",
+  degree: "Master&apos;s Thesis",
   image: `/images/projects/master_thesis.jpg`, 
   advisor: {
     name: "Prof. Pang-Wei Tsai",
