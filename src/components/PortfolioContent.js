@@ -104,7 +104,7 @@ export default function PortfolioContent() {
               Academic & Research
             </h2>
             <p className="text-xs text-gray-500 mt-1">
-              Master's Thesis & Publications
+              Master&apos;s Thesis & Publications
             </p>
           </div>
         </div>
