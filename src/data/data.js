@@ -266,7 +266,7 @@ export const projectDocumentation = {
       impact: "Elevated brand online presence, expanded sales channels, significantly optimized operational efficiency.",
     },
     techStack: {
-      frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion","Supabase"],
       backend: ["Node.js", "JWT Authentication"],
       design: ["Glassmorphism UI"],
       tools: ["Zustand", "Git", "DevOps"],
@@ -484,7 +484,7 @@ export const projects = [
     ], github: "https://fir-mandarin-dc1.notion.site/MOXA-f7348ef5700d4f339ce71741b1b0dcea",
     image: `/images/projects/linux_serial_port.jpg`,
     tags: ["Python", "Pyserial", "Linux", "UML Plant Diagram", "Arm", "x86", "Embedded"],
-    featured: true,
+    featured: false,
   },
   {
     id: 4,
@@ -523,17 +523,31 @@ export const projects = [
     github: "https://github.com/yuchen-land/2-pass-assembler",
     featured: false,
   },
-  //   {
-  //     id: 7,
-  //     title: "Holly World Renting System",
-  //     description: [
-  //       "Collaborated with the Ministry of Education to design a **bilingual** app-based card game, instructing upper elementary students in C++ basics. Aligned with bilingual education policies, the project incorporated assessments to measure effectiveness.",
-  //       "Achieved a **70% contribution rate**, and developed UI and interface scripting for the app.",
-  //       "Optimized self-learning for novice programmers through gamified projects, achieving an 80% improvement in learning efficiency as reported by educators and users.",
-  //     ],
-  //     image: "/images/projects/holly_world.jpg",
-  //     tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS","DevOps"],
-  //     demo: "http://www.holly-world.com.tw/",
-  //     featured: true,
-  //   },
+    {
+      id: 7,
+      title: "Holly World Renting System",
+      description: [
+        "CAI-YO ENTERPRISE CO. Web-based rental management system development, utilizing Agile methodology to separate frontend and backend systems for customer and manager operations.",
+        "Gained **foundational 1.5 years of practical front-end development experience**, focusing on **UI/UX** implementation and basic API integration",
+        "Contributed to streamlining rental and return processes, enhancing overall operational efficiency.",
+      ],
+      image: "/images/projects/hollyworld.jpg",
+      tags: ["Founder", "CSS", "HTML", "JavaScript"],
+      demo: "http://www.holly-world.com.tw/",
+      featured: false,
+    },
+    {
+      id: 8,
+      title: "Holly World V2.0 - E-commerce Platform",
+      description: [
+        "Migrated platform to Next.js 13/React 19 (SSR/TanStack Query), **reducing First Contentful Paint (FCP) by  50%.**",
+        "Enforced end-to-end type safety and validation using **TypeScript** and **Zod**, reducing runtime errors by approximately 40%.",
+        "Maintained code quality via **Jest** for testing and **Husky** for pre-commit hooks.",
+        "Engineered custom **Node.js scripts** to automate product data validation and image synchronization, eliminating manual workflows and **boosting maintenance efficiency by 70%.**"
+      ],
+      image: "/images/projects/hollyworld2.jpg",
+      tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
+      demo: "https://holly-world-v2-0.vercel.app",
+      featured: true,
+    },
 ];
