@@ -29,7 +29,7 @@ export default function Home() {
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20 md:py-16 pt-32 md:pt-40">
         {/* Sweet Avatar - Youthful Style */}
-        <div className="mb-12 animate-fade-in-down">
+        <div className="mb-16 animate-fade-in-down">
           <div className="relative group">
             {/* Soft Pink Glow */}
             <div className="absolute -inset-6 bg-gradient-to-r from-pink-300 via-rose-300 to-orange-300 rounded-full opacity-60 blur-2xl group-hover:opacity-80 transition-all duration-1000 animate-gradient"></div>
@@ -283,74 +283,6 @@ export default function Home() {
                 </div>
               </Link>
             ))}
-          </div>
-        </div>
-
-        {/* Skills & Tech Stack - Categorized */}
-        <div className="w-full max-w-4xl animate-fade-in px-4 mb-20 antialiased">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-light text-gray-700 mb-2 tracking-[0.02em]">
-              Tech Stack
-            </h2>
-            <div className="w-20 h-0.5 bg-gradient-to-r from-pink-300 to-rose-300 mx-auto rounded-full mb-3"></div>
-            <p className="text-gray-500 text-sm font-light tracking-[0.01em]">
-              Technologies I work with
-            </p>
-          </div>
-
-          <div className="space-y-8">
-            {/* Frontend */}
-            <div>
-              <h3 className="text-sm font-medium text-rose-600 mb-4 tracking-[0.05em] uppercase">
-                Frontend
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {["React", "Next.js", "JavaScript", "TypeScript", "Tailwind CSS"].map(
-                  (tech) => (
-                    <div
-                      key={tech}
-                      className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-full px-5 py-2.5 text-sm text-gray-700 font-light tracking-[0.01em] hover:bg-white/90 hover:scale-105 hover:shadow-md transition-all duration-300"
-                    >
-                      {tech}
-                    </div>
-                  )
-                )}
-              </div>
-            </div>
-
-            {/* Backend */}
-            <div>
-              <h3 className="text-sm font-medium text-rose-600 mb-4 tracking-[0.05em] uppercase">
-                Backend
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {["Node.js", "Python", "C", "C++", "C#"].map((tech) => (
-                  <div
-                    key={tech}
-                    className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-full px-5 py-2.5 text-sm text-gray-700 font-light tracking-[0.01em] hover:bg-white/90 hover:scale-105 hover:shadow-md transition-all duration-300"
-                  >
-                    {tech}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Tools & Other */}
-            <div>
-              <h3 className="text-sm font-medium text-rose-600 mb-4 tracking-[0.05em] uppercase">
-                Tools & Design
-              </h3>
-              <div className="flex flex-wrap gap-3">
-                {["Git", "Docker", "Figma", "UI/UX Design"].map((tech) => (
-                  <div
-                    key={tech}
-                    className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-full px-5 py-2.5 text-sm text-gray-700 font-light tracking-[0.01em] hover:bg-white/90 hover:scale-105 hover:shadow-md transition-all duration-300"
-                  >
-                    {tech}
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
 
