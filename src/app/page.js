@@ -5,7 +5,6 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import {
   personalInfo,
-  socialLinks,
   internalLinks,
   projects,
 } from "@/data/data";
