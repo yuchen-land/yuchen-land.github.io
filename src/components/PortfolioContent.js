@@ -105,7 +105,7 @@ export default function PortfolioContent() {
               </p>
             </div>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 items-stretch">
             {filteredFeatured.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
@@ -129,7 +129,7 @@ export default function PortfolioContent() {
               </p>
             </div>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
             {filteredOther.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
