@@ -1,13 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { projects, thesis } from "@/data/data";
+import { projects, thesis, tagCategories } from "@/data/data";
 import ProjectCard from "@/components/ProjectCard";
 import AcademicCard from "@/components/AcademicCard";
 import { useState } from "react";
 
 export default function PortfolioContent() {
-  const [selectedTag, setSelectedTag] = useState(null);
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [expandedCategories, setExpandedCategories] = useState({
+    frontend: true,
+    backend: true,
+    languages: true,
+    tools: false,
+    specialization: false,
+  });
 
   const featuredProjects = projects.filter((p) => p.featured);
   const otherProjects = projects.filter((p) => !p.featured);
@@ -15,17 +22,50 @@ export default function PortfolioContent() {
   // Get all unique tags (including thesis tags)
   const allTags = [...new Set([...projects.flatMap((p) => p.tags), ...thesis.tags])].sort();
 
-  // Filter projects based on selected tag
-  const filteredFeatured = selectedTag
-    ? featuredProjects.filter((p) => p.tags.includes(selectedTag))
-    : featuredProjects;
+  // Filter projects based on selected tags
+  const filteredFeatured = selectedTags.length === 0
+    ? featuredProjects
+    : featuredProjects.filter((p) => 
+        selectedTags.some((tag) => p.tags.includes(tag))
+      );
 
-  const filteredOther = selectedTag
-    ? otherProjects.filter((p) => p.tags.includes(selectedTag))
-    : otherProjects;
+  const filteredOther = selectedTags.length === 0
+    ? otherProjects
+    : otherProjects.filter((p) => 
+        selectedTags.some((tag) => p.tags.includes(tag))
+      );
 
-  // Check if thesis matches selected tag
-  const thesisMatchesTag = selectedTag ? thesis.tags.includes(selectedTag) : true;
+  // Check if thesis matches selected tags
+  const thesisMatchesTag = selectedTags.length === 0 
+    ? true 
+    : selectedTags.some((tag) => thesis.tags.includes(tag));
+
+  // Toggle category expansion
+  const toggleCategory = (categoryKey) => {
+    setExpandedCategories((prev) => ({
+      ...prev,
+      [categoryKey]: !prev[categoryKey],
+    }));
+  };
+
+  // Toggle tag selection (multi-select)
+  const toggleTag = (tag) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+    );
+  };
+
+  // Toggle all tags on/off
+  const toggleAllTags = () => {
+    if (selectedTags.length === 0) {
+      // Select all tags
+      const allTags = Object.values(tagCategories).flatMap((cat) => cat.tags);
+      setSelectedTags(allTags);
+    } else {
+      // Clear all tags
+      setSelectedTags([]);
+    }
+  };
 
   return (
     <>
@@ -40,36 +80,101 @@ export default function PortfolioContent() {
       </div>
 
       {/* Tag Filter */}
-      <div className="mb-16 animate-fade-in">
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
-            Filter by Technology
-          </h3>
-          {selectedTag && (
-            <button
-              onClick={() => setSelectedTag(null)}
-              className="text-xs text-rose-600 hover:text-rose-700 font-medium underline transition-colors"
+      <div className="mb-12 animate-fade-in">
+        <details className="group">
+          <summary className="flex items-center justify-between cursor-pointer select-none py-3 px-4 rounded-lg hover:bg-gray-50/50 transition-colors">
+            <span className="text-xs font-medium text-gray-500 uppercase tracking-widest">
+              Filter by Technology {selectedTags.length > 0 && `(${selectedTags.length})`}
+            </span>
+            <svg
+              className="w-4 h-4 text-gray-400 transition-transform duration-300 group-open:rotate-180"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              Clear Filter
-            </button>
-          )}
-        </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+              />
+            </svg>
+          </summary>
 
-        <div className="flex flex-wrap gap-2">
-          {allTags.map((tag) => (
-            <button
-              key={tag}
-              onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                selectedTag === tag
-                  ? "bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg scale-105"
-                  : "bg-white/70 border border-pink-200/50 text-gray-700 hover:bg-white/90 hover:border-pink-300/70"
-              }`}
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
+          {/* Tag Categories - Subtle Design */}
+          <div className="space-y-3 pt-4">
+            {/* All Button */}
+            <div className="flex items-center gap-2 pb-3 border-b border-pink-200/20 px-4">
+              <button
+                onClick={toggleAllTags}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+                  selectedTags.length > 0
+                    ? "bg-rose-500 text-white shadow-md"
+                    : "text-gray-600 hover:text-rose-600 hover:bg-rose-50/50"
+                }`}
+              >
+                {selectedTags.length > 0 ? "✓ All Selected" : "All"}
+              </button>
+              {selectedTags.length > 0 && (
+                <button
+                  onClick={() => setSelectedTags([])}
+                  className="text-xs text-gray-500 hover:text-rose-600 transition-colors font-medium"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+
+            {Object.entries(tagCategories).map(([categoryKey, category]) => (
+              <div key={categoryKey} className="border-l-2 border-pink-200/40 pl-4 py-2">
+                <button
+                  onClick={() => toggleCategory(categoryKey)}
+                  className="flex items-center justify-between w-full py-2 hover:opacity-80 transition-opacity"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">{category.icon}</span>
+                    <span className="text-xs font-medium text-gray-600">{category.name}</span>
+                    <span className="text-xs text-gray-400">({category.tags.length})</span>
+                  </div>
+                  <svg
+                    className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${
+                      expandedCategories[categoryKey] ? "rotate-180" : ""
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                    />
+                  </svg>
+                </button>
+
+                {/* Category Tags */}
+                {expandedCategories[categoryKey] && (
+                  <div className="flex flex-wrap gap-2 mt-2 ml-6">
+                    {category.tags.map((tag) => (
+                      <button
+                        key={tag}
+                        onClick={() => toggleTag(tag)}
+                        className={`px-3 py-1 rounded-full text-xs transition-all duration-200 ${
+                          selectedTags.includes(tag)
+                            ? "bg-rose-500 text-white shadow-md"
+                            : "text-gray-600 hover:text-rose-600 hover:bg-rose-50/50"
+                        }`}
+                      >
+                        {selectedTags.includes(tag) ? "✓ " : ""}{tag}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </details>
       </div>
 
       {/* Featured Projects */}
@@ -141,18 +246,18 @@ export default function PortfolioContent() {
       )}
 
       {/* No Results */}
-      {filteredFeatured.length === 0 && filteredOther.length === 0 && !thesisMatchesTag && selectedTag && (
+      {filteredFeatured.length === 0 && filteredOther.length === 0 && !thesisMatchesTag && selectedTags.length > 0 && (
         <div className="text-center py-20 animate-fade-in">
           <div className="text-6xl mb-4">🔍</div>
           <h3 className="text-2xl font-bold text-gray-800 mb-2">No Projects Found</h3>
           <p className="text-gray-600 mb-8">
-            No projects found with the {`"`}{selectedTag}{`"`} technology.
+            No projects found with the selected technologies.
           </p>
           <button
-            onClick={() => setSelectedTag(null)}
+            onClick={() => setSelectedTags([])}
             className="inline-flex items-center gap-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full px-6 py-3 font-medium hover:scale-105 transition-transform"
           >
-            Clear Filter
+            Clear Filters
           </button>
         </div>
       )}

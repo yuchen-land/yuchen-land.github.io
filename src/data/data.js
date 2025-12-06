@@ -588,3 +588,37 @@ export const projects = [
       featured: true,
     },
 ];
+
+// Tag Categories
+export const tagCategories = {
+  frontend: {
+    name: "Frontend",
+    icon: "🎨",
+    color: "from-blue-400 to-cyan-500",
+    tags: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "HTML", "CSS", "Framer Motion"],
+  },
+  backend: {
+    name: "Backend",
+    icon: "⚙️",
+    color: "from-purple-400 to-pink-500",
+    tags: ["Node.js", "DevOps", "Supabase"],
+  },
+  languages: {
+    name: "Programming Languages",
+    icon: "💻",
+    color: "from-orange-400 to-red-500",
+    tags: ["C", "C++", "Python", "C#"],
+  },
+  tools: {
+    name: "Tools & Platforms",
+    icon: "🛠️",
+    color: "from-green-400 to-emerald-500",
+    tags: ["Git", "Docker", "Linux", "Figma", "Unity", "Autodesk 3ds Max", "UML Plant Diagram", "Pyserial", "Arduino IDE", "Arm", "x86"],
+  },
+  specialization: {
+    name: "Specialization",
+    icon: "⭐",
+    color: "from-rose-400 to-pink-500",
+    tags: ["Founder", "Team Leader", "Assembly Language", "Firmware", "IPv6", "Segment Routing", "SDN", "Path Selection", "Network Resilience", "APNOMS 2025", "Embedded"],
+  },
+};
