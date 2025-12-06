@@ -7,9 +7,9 @@ export default function ProjectCard({ project }) {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="bg-white/70 backdrop-blur-glass rounded-3xl overflow-hidden shadow-lg card-hover border-0 group">
+    <div className="bg-white/70 backdrop-blur-glass rounded-3xl overflow-hidden shadow-lg card-hover border-0 group flex flex-col h-full">
       {/* Project Image */}
-      <div className="relative h-56 bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100 overflow-hidden">
+      <div className="relative h-56 bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100 overflow-hidden flex-shrink-0">
         {!imgError ? (
           <Image
             src={project.image}
@@ -24,7 +24,7 @@ export default function ProjectCard({ project }) {
             {project.title.charAt(0)}
           </div>
         )}
-        
+
         {/* Featured Badge */}
         {project.featured && (
           <div className="absolute top-5 right-5 bg-gradient-to-r from-pink-400 to-rose-500 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-1.5 shadow-xl">
@@ -34,17 +34,17 @@ export default function ProjectCard({ project }) {
             FEATURED
           </div>
         )}
-        
+
         {/* Gradient Overlay on Hover */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       </div>
 
       {/* Project Info */}
-      <div className="p-8">
+      <div className="p-8 flex flex-col flex-1">
         <h3 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-rose-600 transition-colors">
           {project.title}
         </h3>
-        
+
         {/* Description - support both string and array */}
         {Array.isArray(project.description) ? (
           <ul className="text-gray-600 mb-6 space-y-2.5 list-none">
@@ -55,7 +55,7 @@ export default function ProjectCard({ project }) {
                 <li key={i} className="text-sm leading-relaxed pl-5 relative">
                   <span className="text-rose-400 absolute left-0 top-1 text-xs">•</span>
                   <span className="block">
-                    {parts.map((part, idx) => 
+                    {parts.map((part, idx) =>
                       idx % 2 === 1 ? (
                         <strong key={idx} className="font-bold text-gray-800">{part}</strong>
                       ) : (
@@ -84,11 +84,11 @@ export default function ProjectCard({ project }) {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 pt-2">
+        <div className="grid grid-cols-2 gap-3 pt-2 mt-auto">
           {/* Documentation Link - Ready to launch (commented out for now)
           <a
             href={`/projects/${project.id}`}
-            className="flex-1 bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-3 px-5 rounded-xl text-center text-sm font-semibold hover:scale-105 transition-all duration-300 shadow-lg flex items-center justify-center gap-2"
+            className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-3 px-5 rounded-xl text-center text-sm font-semibold hover:scale-105 transition-all duration-300 shadow-lg flex items-center justify-center gap-2"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -102,7 +102,7 @@ export default function ProjectCard({ project }) {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 min-h-[44px] bg-gradient-to-r from-gray-600 to-gray-800 text-white py-3 px-5 rounded-xl text-center text-sm font-semibold hover:scale-105 hover:shadow-lg transition-all duration-300 shadow-md flex items-center justify-center gap-2"
+              className={`min-h-[44px] bg-gradient-to-r from-gray-600 to-gray-800 text-white py-3 px-5 rounded-xl text-center text-sm font-semibold hover:scale-105 hover:shadow-lg transition-all duration-300 shadow-md flex items-center justify-center gap-2 ${!project.demo ? 'col-span-2' : ''}`}
             >
               {project.github.includes('github.com') ? (
                 <>
@@ -126,7 +126,7 @@ export default function ProjectCard({ project }) {
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 min-h-[44px] bg-gradient-to-r from-pink-400 to-rose-500 text-white py-3 px-5 rounded-xl text-center text-sm font-semibold hover:scale-105 hover:shadow-lg transition-all duration-300 shadow-md flex items-center justify-center gap-2"
+              className={`min-h-[44px] bg-gradient-to-r from-pink-400 to-rose-500 text-white py-3 px-5 rounded-xl text-center text-sm font-semibold hover:scale-105 hover:shadow-lg transition-all duration-300 shadow-md flex items-center justify-center gap-2 ${!project.github ? 'col-span-2' : ''}`}
             >
               <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
