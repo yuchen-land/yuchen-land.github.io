@@ -2,7 +2,7 @@
 export const personalInfo = {
   name: "Yu-Chen(Cindy), Liu",
   title: "Software Engineer & Pâtissier",
-  description: "Hey! I'm Cindy. Welcome to my creative space!\nExplore my projects and the brand I built here.",
+  description: "Hi! I'm Cindy. Welcome to my creative space!\nExplore my projects and the brand I built here.",
   avatar: `/images/avatar.jpg`,
   email: "yuchen880401@gmail.com",
   location: "Taipei, Taiwan",
