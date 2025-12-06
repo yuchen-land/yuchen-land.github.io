@@ -14,27 +14,6 @@ export default function AboutPage() {
 
       <div className="relative z-10 min-h-screen py-16 px-4 pt-32 md:pt-40">
         <div className="max-w-6xl mx-auto">
-          {/* Back Button */}
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-rose-600 hover:text-rose-700 mb-12 group font-medium transition-colors"
-          >
-            <svg
-              className="w-5 h-5 transition-transform group-hover:-translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
-            Back to Home
-          </Link>
-
           {/* Header */}
           <div className="mb-16 animate-fade-in-down">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-pink-400 via-rose-400 to-orange-400 text-transparent bg-clip-text tracking-tight">

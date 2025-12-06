@@ -26,27 +26,6 @@ export default function PortfolioContent() {
 
   return (
     <>
-      {/* Back Button */}
-      <Link
-        href="/"
-        className="inline-flex items-center gap-2 text-rose-600 hover:text-rose-700 mb-12 group font-medium transition-colors"
-      >
-        <svg
-          className="w-5 h-5 transition-transform group-hover:-translate-x-1"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          strokeWidth={2}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M10 19l-7-7m0 0l7-7m-7 7h18"
-          />
-        </svg>
-        Back to Home
-      </Link>
-
       {/* Header */}
       <div className="text-center mb-16 animate-fade-in-down">
         <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-pink-400 via-rose-400 to-orange-400 text-transparent bg-clip-text tracking-tight">
