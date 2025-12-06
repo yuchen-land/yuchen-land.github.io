@@ -41,35 +41,37 @@ export default function ProjectCard({ project }) {
 
       {/* Project Info */}
       <div className="p-8 flex flex-col flex-1">
-        <h3 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-rose-600 transition-colors">
-          {project.title}
-        </h3>
+        <div className="flex-1">
+          <h3 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-rose-600 transition-colors">
+            {project.title}
+          </h3>
 
-        {/* Description - support both string and array */}
-        {Array.isArray(project.description) ? (
-          <ul className="text-gray-600 mb-6 space-y-2.5 list-none">
-            {project.description.map((item, i) => {
-              // Check if text contains **bold** markers
-              const parts = item.split(/\*\*(.*?)\*\*/g);
-              return (
-                <li key={i} className="text-sm leading-relaxed pl-5 relative">
-                  <span className="text-rose-400 absolute left-0 top-1 text-xs">•</span>
-                  <span className="block">
-                    {parts.map((part, idx) =>
-                      idx % 2 === 1 ? (
-                        <strong key={idx} className="font-bold text-gray-800">{part}</strong>
-                      ) : (
-                        part
-                      )
-                    )}
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
-        ) : (
-          <p className="text-gray-600 mb-6 line-clamp-2 leading-relaxed">{project.description}</p>
-        )}
+          {/* Description - support both string and array */}
+          {Array.isArray(project.description) ? (
+            <ul className="text-gray-600 mb-6 space-y-2.5 list-none">
+              {project.description.map((item, i) => {
+                // Check if text contains **bold** markers
+                const parts = item.split(/\*\*(.*?)\*\*/g);
+                return (
+                  <li key={i} className="text-sm leading-relaxed pl-5 relative">
+                    <span className="text-rose-400 absolute left-0 top-1 text-xs">•</span>
+                    <span className="block">
+                      {parts.map((part, idx) =>
+                        idx % 2 === 1 ? (
+                          <strong key={idx} className="font-bold text-gray-800">{part}</strong>
+                        ) : (
+                          part
+                        )
+                      )}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className="text-gray-600 mb-6 line-clamp-2 leading-relaxed">{project.description}</p>
+          )}
+        </div>
 
         {/* Tech Tags */}
         <div className="flex flex-wrap gap-2 mb-6">
@@ -84,7 +86,7 @@ export default function ProjectCard({ project }) {
         </div>
 
         {/* Action Buttons */}
-        <div className="grid grid-cols-2 gap-3 pt-2 mt-auto">
+        <div className="grid grid-cols-2 gap-3 pt-2">
           {/* Documentation Link - Ready to launch (commented out for now)
           <a
             href={`/projects/${project.id}`}
