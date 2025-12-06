@@ -202,6 +202,30 @@ export const languages = [
   },
 ];
 
+// Master's Thesis
+export const thesis = {
+  title: "Design and Implementation of an Adaptive Path Selection Method in SDN-based SRv6",
+  degree: "Master's Thesis",
+  image: `/images/projects/master_thesis.jpg`, 
+  advisor: {
+    name: "Prof. Pang-Wei Tsai",
+    url: "https://www.itlab.ee.ncku.edu.tw/pwtsai/index.html",
+  },
+  institution: "National Central University",
+  department: "Information Management",
+  year: "2024",
+  highlights: [
+    "SRv6 uses segment identifiers within IPv6 addresses for flexible and adjustable routing, optimizing network resources based on application demands and transmission paths.",
+    "This study proposes a Probabilistic Routing Optimization Algorithm (PROA) to improve SRv6's adaptive control and packet forwarding within a single domain.",
+    "Results show that PROA significantly enhances fault recovery time, packet loss rate, and resource utilization compared to traditional intra-domain and segment routing protocols.",
+  ],
+  tags: ["IPv6", "Segment Routing", "SRv6", "SDN", "Path Selection", "Network Resilience", "APNOMS 2025"],
+  links: {
+    advisor: "https://www.itlab.ee.ncku.edu.tw/pwtsai/index.html",
+    conference: "https://apnoms.org/2025/",
+  },
+};
+
 // Activities & Involvement
 export const activities = [
   {

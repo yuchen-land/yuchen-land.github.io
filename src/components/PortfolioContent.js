@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { projects } from "@/data/data";
+import { projects, thesis } from "@/data/data";
 import ProjectCard from "@/components/ProjectCard";
+import AcademicCard from "@/components/AcademicCard";
 import { useState } from "react";
 
 export default function PortfolioContent() {
@@ -112,6 +113,24 @@ export default function PortfolioContent() {
           </div>
         </section>
       )}
+
+      {/* Academic & Research Section */}
+      <section className="mb-24 animate-fade-in-up">
+        <div className="flex items-center gap-3 mb-10">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center text-white text-xl shadow-lg">
+            🎓
+          </div>
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-rose-400 to-pink-500 text-transparent bg-clip-text">
+              Academic & Research
+            </h2>
+            <p className="text-xs text-gray-500 mt-1">
+              Master's Thesis & Publications
+            </p>
+          </div>
+        </div>
+        <AcademicCard thesis={thesis} />
+      </section>
 
       {/* Other Projects */}
       {filteredOther.length > 0 && (
