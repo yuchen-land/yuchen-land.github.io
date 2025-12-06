@@ -12,8 +12,8 @@ export default function PortfolioContent() {
   const featuredProjects = projects.filter((p) => p.featured);
   const otherProjects = projects.filter((p) => !p.featured);
 
-  // Get all unique tags
-  const allTags = [...new Set(projects.flatMap((p) => p.tags))].sort();
+  // Get all unique tags (including thesis tags)
+  const allTags = [...new Set([...projects.flatMap((p) => p.tags), ...thesis.tags])].sort();
 
   // Filter projects based on selected tag
   const filteredFeatured = selectedTag
@@ -23,6 +23,9 @@ export default function PortfolioContent() {
   const filteredOther = selectedTag
     ? otherProjects.filter((p) => p.tags.includes(selectedTag))
     : otherProjects;
+
+  // Check if thesis matches selected tag
+  const thesisMatchesTag = selectedTag ? thesis.tags.includes(selectedTag) : true;
 
   return (
     <>
@@ -94,22 +97,24 @@ export default function PortfolioContent() {
       )}
 
       {/* Academic & Research Section */}
-      <section className="mb-24 animate-fade-in-up">
-        <div className="flex items-center gap-3 mb-10">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center text-white text-xl shadow-lg">
-            🎓
+      {thesisMatchesTag && (
+        <section className="mb-24 animate-fade-in-up">
+          <div className="flex items-center gap-3 mb-10">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center text-white text-xl shadow-lg">
+              🎓
+            </div>
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-rose-400 to-pink-500 text-transparent bg-clip-text">
+                Academic & Research
+              </h2>
+              <p className="text-xs text-gray-500 mt-1">
+                Master&apos;s Thesis & Publications
+              </p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-rose-400 to-pink-500 text-transparent bg-clip-text">
-              Academic & Research
-            </h2>
-            <p className="text-xs text-gray-500 mt-1">
-              Master&apos;s Thesis & Publications
-            </p>
-          </div>
-        </div>
-        <AcademicCard thesis={thesis} />
-      </section>
+          <AcademicCard thesis={thesis} />
+        </section>
+      )}
 
       {/* Other Projects */}
       {filteredOther.length > 0 && (
@@ -136,7 +141,7 @@ export default function PortfolioContent() {
       )}
 
       {/* No Results */}
-      {filteredFeatured.length === 0 && filteredOther.length === 0 && selectedTag && (
+      {filteredFeatured.length === 0 && filteredOther.length === 0 && !thesisMatchesTag && selectedTag && (
         <div className="text-center py-20 animate-fade-in">
           <div className="text-6xl mb-4">🔍</div>
           <h3 className="text-2xl font-bold text-gray-800 mb-2">No Projects Found</h3>
