@@ -473,7 +473,7 @@ export const projects = [
   {
     id: 1,
     title: "MyEdit",
-    period: "10/2024 - Present",
+    period: "2024 - Present",
     description: [
       "**Developed and implemented core features** for major image, audio, and video projects (e.g., Magic Designer, Podcast Studio, Video Editor).",
       "**Prioritized a strong UI/UX focus** using React to ensure professional performance and a seamless user experience.",
@@ -489,7 +489,7 @@ export const projects = [
   {
     id: 2,
     title: "BonBunny Pastry Studio - Modern Artisanal Pastry E-commerce Platform",
-    period: "2024",
+    period: "2025 - Present",
     description: [
       "Built a responsive, glassmorphism-themed frontend with **Framer Motion** for enhanced animations and leveraged **Zustand** for efficient state management.",
       "Implemented core features including a shopping cart, wishlists, a coupon system, and a streamlined checkout process.",
@@ -504,7 +504,7 @@ export const projects = [
   {
     id: 3,
     title: "Linux Serial Port Burning Test Tool",
-    period: "07/2023 - 09/2023",
+    period: "2023",
     description: [
       "Developed a Python test tool with **pyserial** to control serial ports for throughput testing and data transmission accuracy verification.",
       "Implemented a **modular architecture**, optimized serial port testing efficiency, and **created a user-friendly interface for seamless procedures.**",
@@ -516,7 +516,7 @@ export const projects = [
   {
     id: 4,
     title: "Software Engineering, Renting system",
-    period: "2023",
+    period: "2022 - 2023",
     description: [
       "Implemented **Agile Development** to systematize customer rental and return processes, building a website with manager backend and customer frontend to address market challenges.",
       "**Led team** in implementing front-end and back-end separation, **reducing development time from six months to one and a half months.**",
@@ -530,7 +530,7 @@ export const projects = [
   {
     id: 5,
     title: "Clchemy : A Board Game App for Learning C++ Programming Language",
-    period: "2021 - 2022",
+    period: "2020 - 2021",
     description: [
       "Collaborated with the Ministry of Education to design a **bilingual** app-based card game, instructing upper elementary students in C++ basics. Aligned with bilingual education policies, the project incorporated assessments to measure effectiveness.",
       "Achieved a **70% contribution rate**, and developed UI and interface scripting for the app.",
@@ -557,7 +557,7 @@ export const projects = [
     {
       id: 7,
       title: "Holly World Renting System",
-      period: "03/2020 - 09/2021",
+      period: "2019 - Present",
       description: [
         "CAI-YO ENTERPRISE CO. Web-based rental management system development, utilizing Agile methodology to separate frontend and backend systems for customer and manager operations.",
         "Gained **foundational 1.5 years of practical front-end development experience**, focusing on **UI/UX** implementation and basic API integration",
@@ -571,7 +571,7 @@ export const projects = [
     {
       id: 8,
       title: "Holly World V2.0 - E-commerce Platform",
-      period: "2024 - Present",
+      period: "2025 - Present",
       description: [
         "Migrated platform to Next.js 13/React 19 (SSR/TanStack Query), **reducing First Contentful Paint (FCP) by  50%.**",
         "Enforced end-to-end type safety and validation using **TypeScript** and **Zod**, reducing runtime errors by approximately 40%.",
