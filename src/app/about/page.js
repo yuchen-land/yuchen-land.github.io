@@ -33,13 +33,13 @@ export default function AboutPage() {
               <div className="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-pink-200/50">
                 <div className="text-center">
                   <p className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-rose-400 text-transparent bg-clip-text">
-                    1+
+                    3+
                   </p>
                   <p className="text-xs text-gray-600 mt-1">Years Experience</p>
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold bg-gradient-to-r from-rose-400 to-orange-400 text-transparent bg-clip-text">
-                    6+
+                    8+
                   </p>
                   <p className="text-xs text-gray-600 mt-1">Projects Built</p>
                 </div>

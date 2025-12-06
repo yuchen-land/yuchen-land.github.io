@@ -131,16 +131,20 @@ export const experience = [
     position: "Web Programming Course Teaching Assistant",
     period: "03/2023 - 06/2023",
     description: [
+      "Assisted professors and mentored students on core Web Programming concepts, enhancing communication skills."
     ],
     type: "work",
+    highlights: ["enhancing communication skills"],
   },
   {
     company: "CAI-YO ENTERPRISE CO., LTD.",
     position: "Software Developer Intern",
     period: "03/2020 - 09/2021",
     description: [
+      "Gained foundational 1.5 years of practical front-end development experience, focusing on UI/UX implementation and basic API integration"
     ],
     type: "intern",
+    highlights: ["Gained foundational 1.5 years of practical front-end development experience"],
   },
 ];
 
