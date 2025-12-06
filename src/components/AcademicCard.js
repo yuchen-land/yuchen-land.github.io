@@ -38,9 +38,16 @@ export default function AcademicCard({ thesis }) {
 
       {/* Project Info - 與 Project Card 一致 */}
       <div className="p-8">
-        <h3 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-rose-600 transition-colors">
-          {thesis.title}
-        </h3>
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <h3 className="text-2xl font-bold text-gray-800 group-hover:text-rose-600 transition-colors flex-1">
+            {thesis.title}
+          </h3>
+          {thesis.year && (
+            <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full whitespace-nowrap flex-shrink-0 mt-1">
+              {thesis.year}
+            </span>
+          )}
+        </div>
 
         {/* Academic Info */}
         <div className="grid grid-cols-2 gap-3 mb-6">

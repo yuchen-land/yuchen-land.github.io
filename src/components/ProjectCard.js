@@ -42,9 +42,16 @@ export default function ProjectCard({ project }) {
       {/* Project Info */}
       <div className="p-8 flex flex-col flex-1">
         <div className="flex-1">
-          <h3 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-rose-600 transition-colors">
-            {project.title}
-          </h3>
+          <div className="flex items-start justify-between gap-3 mb-3">
+            <h3 className="text-2xl font-bold text-gray-800 group-hover:text-rose-600 transition-colors flex-1">
+              {project.title}
+            </h3>
+            {project.period && (
+              <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full whitespace-nowrap flex-shrink-0 mt-1">
+                {project.period}
+              </span>
+            )}
+          </div>
 
           {/* Description - support both string and array */}
           {Array.isArray(project.description) ? (
