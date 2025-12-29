@@ -587,6 +587,28 @@ export const projects = [
       demo: "https://holly-world-v2-0.vercel.app",
       featured: true,
     },
+    {
+      id: 9,
+      title: "Traditional Peanut Candy Brand Website",
+      period: "2025 - Present",
+      description: [
+      ],
+      image: "/images/projects/Peanut_Candy.png",
+      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
+      demo: "https://lotus-peanut-candy.vercel.app",
+      featured: false,
+    },
+    {
+      id: 10,
+      title: "Muse Classic - Korean Clothing E-commerce Platform",
+      period: "2025 - Present",
+      description: [
+      ],
+      image: "/images/projects/muse_classic.png",
+      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
+      demo: "https://muse-classic.vercel.app/",
+      featured: false,
+    },
 ];
 
 // Tag Categories
