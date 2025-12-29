@@ -594,7 +594,7 @@ export const projects = [
       description: [
       ],
       image: "/images/projects/Peanut_Candy.png",
-      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
+      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
       demo: "https://lotus-peanut-candy.vercel.app",
       featured: false,
     },
@@ -605,7 +605,7 @@ export const projects = [
       description: [
       ],
       image: "/images/projects/muse_classic.png",
-      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
+      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
       demo: "https://muse-classic.vercel.app/",
       featured: false,
     },
