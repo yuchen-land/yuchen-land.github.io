@@ -178,7 +178,7 @@ export default function PortfolioContent() {
       </div>
 
       {/* Featured Projects */}
-      {filteredFeatured.length > 0 && (
+      {(filteredFeatured.length > 0 || thesisMatchesTag) && (
         <section className="mb-24 animate-fade-in-up">
           <div className="flex items-center gap-3 mb-10">
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center text-white text-xl shadow-lg">
@@ -189,7 +189,7 @@ export default function PortfolioContent() {
                 Featured Projects
               </h2>
               <p className="text-xs text-gray-500 mt-1">
-                {filteredFeatured.length} project{filteredFeatured.length !== 1 ? "s" : ""}
+                {filteredFeatured.length + (thesisMatchesTag ? 1 : 0)} project{filteredFeatured.length + (thesisMatchesTag ? 1 : 0) !== 1 ? "s" : ""}
               </p>
             </div>
           </div>
@@ -197,27 +197,8 @@ export default function PortfolioContent() {
             {filteredFeatured.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
+            {thesisMatchesTag && <AcademicCard thesis={thesis} />}
           </div>
-        </section>
-      )}
-
-      {/* Academic & Research Section */}
-      {thesisMatchesTag && (
-        <section className="mb-24 animate-fade-in-up">
-          <div className="flex items-center gap-3 mb-10">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center text-white text-xl shadow-lg">
-              🎓
-            </div>
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-rose-400 to-pink-500 text-transparent bg-clip-text">
-                Academic & Research
-              </h2>
-              <p className="text-xs text-gray-500 mt-1">
-                Master&apos;s Thesis & Publications
-              </p>
-            </div>
-          </div>
-          <AcademicCard thesis={thesis} />
         </section>
       )}
 

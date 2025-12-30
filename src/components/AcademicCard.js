@@ -7,9 +7,9 @@ export default function AcademicCard({ thesis }) {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="bg-white/70 backdrop-blur-glass rounded-3xl overflow-hidden shadow-lg card-hover border-0 group">
+    <div className="bg-white/70 backdrop-blur-glass rounded-3xl overflow-hidden shadow-lg card-hover border-0 group flex flex-col h-full">
       {/* Banner Image - 與 Project Card 完全一致 */}
-      <div className="relative h-56 bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100 overflow-hidden">
+      <div className="relative h-56 bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100 overflow-hidden flex-shrink-0">
         {thesis.image && !imgError ? (
           <Image
             src={thesis.image}
@@ -37,50 +37,52 @@ export default function AcademicCard({ thesis }) {
       </div>
 
       {/* Project Info - 與 Project Card 一致 */}
-      <div className="p-8">
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <h3 className="text-2xl font-bold text-gray-800 group-hover:text-rose-600 transition-colors flex-1">
-            {thesis.title}
-          </h3>
-          {thesis.year && (
-            <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full whitespace-nowrap flex-shrink-0 mt-1">
-              {thesis.year}
-            </span>
-          )}
-        </div>
-
-        {/* Academic Info */}
-        <div className="grid grid-cols-2 gap-3 mb-6">
-          <div className="bg-rose-50/50 rounded-xl p-3 border border-rose-100/50">
-            <p className="text-xs text-gray-500 font-medium mb-1">Advisor</p>
-            <p className="text-sm font-semibold text-gray-800">{thesis.advisor.name}</p>
+      <div className="p-8 flex flex-col flex-1">
+        <div className="flex-1">
+          <div className="mb-3">
+            <h3 className="text-2xl font-bold text-gray-800 group-hover:text-rose-600 transition-colors mb-2">
+              {thesis.title}
+            </h3>
+            {thesis.year && (
+              <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-3 py-1 rounded-full inline-block">
+                {thesis.year}
+              </span>
+            )}
           </div>
-          <div className="bg-rose-50/50 rounded-xl p-3 border border-rose-100/50">
-            <p className="text-xs text-gray-500 font-medium mb-1">Institution</p>
-            <p className="text-sm font-semibold text-gray-800">{thesis.institution}</p>
+
+          {/* Academic Info */}
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            <div className="bg-rose-50/50 rounded-xl p-3 border border-rose-100/50">
+              <p className="text-xs text-gray-500 font-medium mb-1">Advisor</p>
+              <p className="text-sm font-semibold text-gray-800">{thesis.advisor.name}</p>
+            </div>
+            <div className="bg-rose-50/50 rounded-xl p-3 border border-rose-100/50">
+              <p className="text-xs text-gray-500 font-medium mb-1">Institution</p>
+              <p className="text-sm font-semibold text-gray-800">{thesis.institution}</p>
+            </div>
           </div>
-        </div>
 
-        {/* Research Highlights - 與 Project description 一致 */}
-        <ul className="text-gray-600 mb-6 space-y-2.5 list-none">
-          {thesis.highlights.map((highlight, index) => (
-            <li key={index} className="text-sm leading-relaxed pl-5 relative">
-              <span className="text-rose-400 absolute left-0 top-1 text-xs">•</span>
-              <span className="block">{highlight}</span>
-            </li>
-          ))}
-        </ul>
+          {/* Research Highlights - 與 Project description 一致 */}
+          <ul className="text-gray-600 mb-6 space-y-2.5 list-none">
+            {thesis.highlights.map((highlight, index) => (
+              <li key={index} className="text-sm leading-relaxed pl-5 relative">
+                <span className="text-rose-400 absolute left-0 top-1 text-xs">•</span>
+                <span className="block">{highlight}</span>
+              </li>
+            ))}
+          </ul>
 
-        {/* Tech Tags - 與 Project Card 一致 */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {thesis.tags.map((tag) => (
-            <span
-              key={tag}
-              className="bg-rose-50 text-rose-700 px-4 py-1.5 rounded-xl text-xs font-semibold border border-rose-100"
-            >
-              {tag}
-            </span>
-          ))}
+          {/* Tech Tags - 與 Project Card 一致 */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {thesis.tags.map((tag) => (
+              <span
+                key={tag}
+                className="bg-rose-50 text-rose-700 px-4 py-1.5 rounded-xl text-xs font-semibold border border-rose-100"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Action Buttons - 與 Project Card 一致 */}
