@@ -210,7 +210,7 @@ export const languages = [
 export const thesis = {
   title: "Design and Implementation of an Adaptive Path Selection Method in SDN-based SRv6",
   degree: "Master&apos;s Thesis",
-  image: `/images/projects/master_thesis.jpg`, 
+  image: `/images/projects/master_thesis.jpg`,
   advisor: {
     name: "Prof. Pang-Wei Tsai",
     url: "https://www.itlab.ee.ncku.edu.tw/pwtsai/index.html",
@@ -294,7 +294,7 @@ export const projectDocumentation = {
       impact: "Elevated brand online presence, expanded sales channels, significantly optimized operational efficiency.",
     },
     techStack: {
-      frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion","Supabase"],
+      frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Supabase"],
       backend: ["Node.js", "JWT Authentication"],
       design: ["Glassmorphism UI"],
       tools: ["Zustand", "Git", "DevOps"],
@@ -558,35 +558,57 @@ export const projects = [
     github: "https://github.com/yuchen-land/2-pass-assembler",
     featured: false,
   },
-    {
-      id: 7,
-      title: "Holly World Renting System",
-      period: "2019 - Present",
-      description: [
-        "CAI-YO ENTERPRISE CO. Web-based rental management system development, utilizing Agile methodology to separate frontend and backend systems for customer and manager operations.",
-        "Gained **foundational 1.5 years of practical front-end development experience**, focusing on **UI/UX** implementation and basic API integration",
-        "Contributed to streamlining rental and return processes, enhancing overall operational efficiency.",
-      ],
-      image: "/images/projects/hollyworld.jpg",
-      tags: ["Founder", "CSS", "HTML", "JavaScript"],
-      demo: "http://www.holly-world.com.tw/",
-      featured: false,
-    },
-    {
-      id: 8,
-      title: "Holly World V2.0 - E-commerce Platform",
-      period: "2025 - Present",
-      description: [
-        "Migrated platform to Next.js 13/React 19 (SSR/TanStack Query), **reducing First Contentful Paint (FCP) by  50%.**",
-        "Enforced end-to-end type safety and validation using **TypeScript** and **Zod**, reducing runtime errors by approximately 40%.",
-        "Maintained code quality via **Jest** for testing and **Husky** for pre-commit hooks.",
-        "Engineered custom **Node.js scripts** to automate product data validation and image synchronization, eliminating manual workflows and **boosting maintenance efficiency by 70%.**"
-      ],
-      image: "/images/projects/hollyworld2.jpg",
-      tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
-      demo: "https://holly-world-v2-0.vercel.app",
-      featured: true,
-    },
+  {
+    id: 7,
+    title: "Holly World Renting System",
+    period: "2019 - Present",
+    description: [
+      "CAI-YO ENTERPRISE CO. Web-based rental management system development, utilizing Agile methodology to separate frontend and backend systems for customer and manager operations.",
+      "Gained **foundational 1.5 years of practical front-end development experience**, focusing on **UI/UX** implementation and basic API integration",
+      "Contributed to streamlining rental and return processes, enhancing overall operational efficiency.",
+    ],
+    image: "/images/projects/hollyworld.jpg",
+    tags: ["Founder", "CSS", "HTML", "JavaScript"],
+    demo: "http://www.holly-world.com.tw/",
+    featured: false,
+  },
+  {
+    id: 8,
+    title: "Holly World V2.0 - E-commerce Platform",
+    period: "2025 - Present",
+    description: [
+      "Migrated platform to Next.js 13/React 19 (SSR/TanStack Query), **reducing First Contentful Paint (FCP) by  50%.**",
+      "Enforced end-to-end type safety and validation using **TypeScript** and **Zod**, reducing runtime errors by approximately 40%.",
+      "Maintained code quality via **Jest** for testing and **Husky** for pre-commit hooks.",
+      "Engineered custom **Node.js scripts** to automate product data validation and image synchronization, eliminating manual workflows and **boosting maintenance efficiency by 70%.**"
+    ],
+    image: "/images/projects/hollyworld2.jpg",
+    tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
+    demo: "https://holly-world-v2-0.vercel.app",
+    featured: true,
+  },
+  {
+    id: 9,
+    title: "Traditional Peanut Candy Brand Website",
+    period: "2025 - Present",
+    description: [
+    ],
+    image: "/images/projects/Peanut_Candy.jpg",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    demo: "https://lotus-peanut-candy.vercel.app",
+    featured: false,
+  },
+  {
+    id: 10,
+    title: "Muse Classic - Korean Clothing E-commerce Platform",
+    period: "2025 - Present",
+    description: [
+    ],
+    image: "/images/projects/muse_classic.jpg",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    demo: "https://muse-classic.vercel.app/",
+    featured: false,
+  },
 ];
 
 // Tag Categories
