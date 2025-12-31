@@ -221,3 +221,17 @@ html {
               linear-gradient(135deg, #667eea 0%, #764ba2 100%) border-box;
   border: 2px solid transparent;
 }
+
+/* Typewriter Cursor Blink Animation */
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}

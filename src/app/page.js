@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
+import TypewriterText from "@/components/TypewriterText";
 import {
   personalInfo,
   internalLinks,
@@ -27,32 +28,30 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20 md:py-16 pt-32 md:pt-40">
-        {/* Sweet Avatar - Youthful Style */}
-        <div className="mb-16 animate-fade-in-down">
+        {/* Elegant Avatar */}
+        <div className="mb-12 animate-fade-in-down">
           <div className="relative group">
-            {/* Soft Pink Glow */}
-            <div className="absolute -inset-6 bg-gradient-to-r from-pink-300 via-rose-300 to-orange-300 rounded-full opacity-60 blur-2xl group-hover:opacity-80 transition-all duration-1000 animate-gradient"></div>
+            {/* Subtle Ambient Glow */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-rose-200/40 via-pink-200/40 to-rose-200/40 rounded-full blur-2xl group-hover:from-rose-200/60 group-hover:via-pink-200/60 group-hover:to-rose-200/60 transition-all duration-700"></div>
 
-            {/* Cute Decorative Ring */}
-            <div className="absolute -inset-3 bg-gradient-to-r from-pink-200/50 via-rose-200/50 to-orange-200/50 rounded-full blur-xl"></div>
+            {/* Refined Border Ring */}
+            <div className="absolute -inset-0.5 bg-gradient-to-br from-rose-300/40 via-pink-200/30 to-rose-300/40 rounded-full"></div>
 
-            {/* Pastel Border Ring */}
-            <div className="absolute -inset-1 bg-gradient-to-br from-pink-300/30 to-rose-300/30 rounded-full"></div>
-
-            {/* Avatar Container with Soft Shadow - Remove filter */}
-            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden bg-white p-1 group-hover:scale-105 transition-transform duration-700 shadow-[0_8px_30px_rgb(251,207,232,0.4)]">
+            {/* Avatar Container */}
+            <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden bg-white p-0.5 group-hover:scale-105 transition-all duration-500 shadow-[0_4px_24px_rgba(251,207,232,0.35)]">
               <div className="w-full h-full rounded-full overflow-hidden bg-white">
                 {!imgError ? (
                   <Image
                     src={personalInfo.avatar}
                     alt={personalInfo.name}
-                    width={160}
-                    height={160}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    width={144}
+                    height={144}
+                    priority
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     onError={() => setImgError(true)}
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-pink-300 via-rose-300 to-orange-300 text-white text-6xl md:text-7xl font-light">
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-rose-300 to-pink-300 text-white text-5xl md:text-6xl font-light">
                     {personalInfo.name.charAt(0)}
                   </div>
                 )}
@@ -61,43 +60,54 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Hero Section - Modern UX/UI Design */}
-        <div className="text-center mb-20 animate-fade-in-up space-y-8 max-w-4xl mx-auto px-4 antialiased">
-          {/* Name with Soft Gradient */}
-          <div className="relative mb-8 pb-3 overflow-visible">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium mb-4 bg-gradient-to-r from-pink-400 via-rose-400 to-orange-400 text-transparent bg-clip-text animate-gradient tracking-wide leading-[1.3] pb-1 font-[family-name:var(--font-outfit)]">
+        {/* Hero Content */}
+        <div className="text-center mb-16 animate-fade-in-up space-y-6 max-w-3xl mx-auto px-4 antialiased">
+          {/* Name */}
+          <div className="relative mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium bg-gradient-to-r from-rose-400 via-pink-400 to-rose-400 text-transparent bg-clip-text tracking-tight leading-tight font-[family-name:var(--font-outfit)]">
               {personalInfo.name}
             </h1>
             {/* Elegant Underline */}
-            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-32 h-0.5 bg-gradient-to-r from-pink-300 via-rose-300 to-orange-300 rounded-full opacity-60"></div>
+            <div className="mt-3 mx-auto w-16 h-px bg-gradient-to-r from-transparent via-rose-300 to-transparent"></div>
           </div>
 
-          {/* Title Badges - Refined */}
-          <div className="flex items-center justify-center gap-4 flex-wrap mb-6">
-            <div className="backdrop-blur-sm bg-white/70 rounded-2xl px-6 py-3 border border-pink-200/50 shadow-sm">
-              <p className="text-sm md:text-base text-rose-600 font-medium tracking-wide font-[family-name:var(--font-comfortaa)]">
-                Software Engineer
-              </p>
+          {/* Typewriter Title */}
+          <div className="flex items-center justify-center">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-rose-50/80 border border-rose-100">
+              <span className="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span>
+              <span className="text-sm md:text-base text-rose-600 font-medium tracking-wide font-[family-name:var(--font-comfortaa)]">
+                <TypewriterText
+                  texts={[
+                    "Software Engineer",
+                    "Frontend Developer",
+                    "Full-Stack Developer",
+                    "UI/UX Enthusiast",
+                    "Pâtissier"
+                  ]}
+                  typingSpeed={80}
+                  deletingSpeed={40}
+                  pauseTime={2500}
+                />
+              </span>
             </div>
           </div>
 
-
-          {/* Description - No Background */}
-          <div className="max-w-2xl mx-auto">
-            <p className="text-lg md:text-xl text-gray-600 leading-relaxed tracking-normal whitespace-pre-line font-[family-name:var(--font-caveat)]">
+          {/* Description */}
+          <div className="max-w-xl mx-auto pt-2">
+            <p className="text-base md:text-lg text-gray-500 leading-relaxed tracking-normal font-[family-name:var(--font-caveat)]">
               {personalInfo.description}
             </p>
           </div>
 
-          {/* CTA Buttons - Primary Actions */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 mt-8">
-            {/* Contact Me - Primary CTA */}
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
+            {/* Contact Me */}
             <a
               href={`mailto:${personalInfo.email}`}
-              className="inline-flex items-center gap-2 backdrop-blur-sm bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-2xl px-8 py-3 text-sm md:text-base font-light tracking-[0.01em] hover:shadow-lg hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-md"
+              className="group inline-flex items-center gap-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full px-6 py-2.5 text-sm font-medium tracking-wide hover:from-rose-600 hover:to-pink-600 hover:scale-105 transition-all duration-300 shadow-sm hover:shadow-md"
             >
               <svg
-                className="w-5 h-5"
+                className="w-4 h-4 group-hover:scale-110 transition-transform"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -105,7 +115,7 @@ export default function Home() {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={2}
+                  strokeWidth={1.5}
                   d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                 />
               </svg>
@@ -115,10 +125,10 @@ export default function Home() {
             {/* Portfolio Button */}
             <Link
               href="/portfolio"
-              className="inline-flex items-center gap-2 backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-2xl px-8 py-3 text-sm md:text-base text-rose-600 font-light tracking-[0.01em] hover:bg-white/80 hover:scale-105 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 shadow-sm"
+              className="group inline-flex items-center gap-2 bg-white/80 border border-rose-200 rounded-full px-6 py-2.5 text-sm text-rose-600 font-medium tracking-wide hover:border-rose-300 hover:bg-white hover:scale-105 transition-all duration-300 shadow-sm"
             >
               <svg
-                className="w-5 h-5"
+                className="w-4 h-4 text-rose-500 group-hover:text-rose-600 transition-colors"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -126,7 +136,7 @@ export default function Home() {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={2}
+                  strokeWidth={1.5}
                   d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"
                 />
               </svg>
@@ -134,22 +144,9 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Email - Subtle Display */}
-          <div className="flex items-center justify-center gap-2 text-rose-400 text-sm mt-6 opacity-70 hover:opacity-100 transition-opacity">
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-              />
-            </svg>
-            <span className="text-xs tracking-[0.01em] font-light font-[family-name:var(--font-comfortaa)]">
+          {/* Email - Minimal */}
+          <div className="pt-4">
+            <span className="text-xs text-rose-400/70 font-light tracking-wide">
               {personalInfo.email}
             </span>
           </div>
