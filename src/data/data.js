@@ -39,10 +39,10 @@ export const internalLinks = [
     color: "from-violet-500 to-purple-600",
   },
   {
-    name: "Hobbies",
+    name: "Beyond",
     path: "/hobbies",
-    icon: "heart",
-    color: "from-pink-500 to-rose-600",
+    icon: "sparkles",
+    color: "from-amber-500 to-orange-600",
   },
 ];
 

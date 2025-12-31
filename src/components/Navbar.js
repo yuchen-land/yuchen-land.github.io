@@ -19,8 +19,8 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-          ? "backdrop-blur-md bg-white/80 shadow-md border-b border-pink-200/50"
-          : "bg-transparent"
+        ? "backdrop-blur-md bg-white/80 shadow-md border-b border-pink-200/50"
+        : "bg-transparent"
         }`}
     >
       <div className="max-w-6xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
@@ -86,7 +86,7 @@ export default function Navbar() {
             href="/hobbies"
             className="hidden sm:block text-sm text-gray-600 hover:text-rose-600 transition-colors font-light tracking-[0.01em]"
           >
-            Hobbies
+            Beyond
           </Link>
 
           {/* Action Icons */}
@@ -202,7 +202,7 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-base text-gray-600 hover:text-rose-600 transition-colors font-light tracking-[0.01em] py-2 px-3 rounded-lg hover:bg-rose-50"
             >
-              Hobbies
+              Beyond
             </Link>
           </div>
         </div>
