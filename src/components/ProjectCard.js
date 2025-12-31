@@ -2,8 +2,13 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { projectDocumentation } from "@/data/data";
 
 export default function ProjectCard({ project }) {
+  const doc = projectDocumentation[project.id];
+  const hasDocumentation = doc !== undefined;
+  const projectSlug = doc?.slug;
   const [imgError, setImgError] = useState(false);
 
   return (
@@ -27,26 +32,16 @@ export default function ProjectCard({ project }) {
 
         {/* Type Badge - Top Left */}
         {project.type && (
-          <div className={`absolute top-5 left-5 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg ${project.type === "frontend"
-            ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white"
-            : project.type === "backend"
-              ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
-              : "bg-gradient-to-r from-emerald-500 to-teal-500 text-white"
-            }`}>
-            {project.type === "frontend" && "🎨"}
-            {project.type === "backend" && "⚙️"}
-            {project.type === "fullstack" && "🔗"}
-            <span className="ml-0.5">
-              {project.type === "frontend" && "Frontend"}
-              {project.type === "backend" && "Backend"}
-              {project.type === "fullstack" && "Full-stack"}
-            </span>
+          <div className="absolute top-5 left-5 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg bg-white/90 text-gray-700 backdrop-blur-sm">
+            {project.type === "frontend" && "Frontend"}
+            {project.type === "backend" && "Backend"}
+            {project.type === "fullstack" && "Full-stack"}
           </div>
         )}
 
         {/* Featured Badge - Top Right */}
         {project.featured && (
-          <div className="absolute top-5 right-5 bg-gradient-to-r from-pink-400 to-rose-500 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-1.5 shadow-xl">
+          <div className="absolute top-5 right-5 bg-rose-500 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-1.5 shadow-xl">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
@@ -112,55 +107,59 @@ export default function ProjectCard({ project }) {
         </div>
 
         {/* Action Buttons */}
-        <div className="grid grid-cols-2 gap-3 pt-2">
-          {/* Documentation Link - Ready to launch (commented out for now)
-          <a
-            href={`/projects/${project.id}`}
-            className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-3 px-5 rounded-xl text-center text-sm font-semibold hover:scale-105 transition-all duration-300 shadow-lg flex items-center justify-center gap-2"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Learn More
-          </a>
-          */}
+        <div className="space-y-3 pt-2">
+          {/* GitHub and Demo buttons */}
+          <div className="grid grid-cols-2 gap-3">
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`min-h-[44px] bg-gray-800 text-white py-3 px-5 rounded-xl text-center text-sm font-semibold hover:bg-gray-700 transition-all duration-300 shadow-sm flex items-center justify-center gap-2 ${!project.demo ? 'col-span-2' : ''}`}
+              >
+                {project.github.includes('github.com') ? (
+                  <>
+                    <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                      <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                    </svg>
+                    <span>GitHub</span>
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <span>Document</span>
+                  </>
+                )}
+              </a>
+            )}
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`min-h-[44px] bg-rose-500 text-white py-3 px-5 rounded-xl text-center text-sm font-semibold hover:bg-rose-600 transition-all duration-300 shadow-sm flex items-center justify-center gap-2 ${!project.github ? 'col-span-2' : ''}`}
+              >
+                <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                </svg>
+                <span>Live Demo</span>
+              </a>
+            )}
+          </div>
 
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`min-h-[44px] bg-gradient-to-r from-gray-600 to-gray-800 text-white py-3 px-5 rounded-xl text-center text-sm font-semibold hover:scale-105 hover:shadow-lg transition-all duration-300 shadow-md flex items-center justify-center gap-2 ${!project.demo ? 'col-span-2' : ''}`}
-            >
-              {project.github.includes('github.com') ? (
-                <>
-                  <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                    <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-                  </svg>
-                  <span>GitHub</span>
-                </>
-              ) : (
-                <>
-                  <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  <span>Document</span>
-                </>
-              )}
-            </a>
-          )}
-          {project.demo && (
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`min-h-[44px] bg-gradient-to-r from-pink-400 to-rose-500 text-white py-3 px-5 rounded-xl text-center text-sm font-semibold hover:scale-105 hover:shadow-lg transition-all duration-300 shadow-md flex items-center justify-center gap-2 ${!project.github ? 'col-span-2' : ''}`}
+          {/* View Details button - below other buttons */}
+          {hasDocumentation && projectSlug && (
+            <Link
+              href={`/projects/${projectSlug}`}
+              className="min-h-[44px] w-full bg-white border-2 border-rose-200 text-rose-600 py-3 px-5 rounded-xl text-center text-sm font-semibold hover:bg-rose-50 hover:border-rose-300 transition-all duration-300 flex items-center justify-center gap-2"
             >
               <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              <span>Live Demo</span>
-            </a>
+              <span>View Details</span>
+            </Link>
           )}
         </div>
       </div>
