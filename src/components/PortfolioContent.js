@@ -8,7 +8,6 @@ import { useState } from "react";
 
 export default function PortfolioContent() {
   const [selectedTags, setSelectedTags] = useState([]);
-  const [selectedType, setSelectedType] = useState("all");
   const [expandedCategories, setExpandedCategories] = useState({
     frontend: true,
     backend: true,
@@ -20,43 +19,21 @@ export default function PortfolioContent() {
   const featuredProjects = projects.filter((p) => p.featured);
   const otherProjects = projects.filter((p) => !p.featured);
 
-  // Get all unique tags (including thesis tags)
-  const allTags = [...new Set([...projects.flatMap((p) => p.tags), ...thesis.tags])].sort();
-
-  // Filter projects based on selected type AND tags
-  const filterByTypeAndTags = (projectList) => {
-    let filtered = projectList;
-
-    // Filter by type first
-    if (selectedType !== "all") {
-      filtered = filtered.filter((p) => p.type === selectedType);
-    }
-
-    // Then filter by tags
-    if (selectedTags.length > 0) {
-      filtered = filtered.filter((p) =>
-        selectedTags.some((tag) => p.tags.includes(tag))
-      );
-    }
-
-    return filtered;
+  // Filter projects based on selected tags only
+  const filterByTags = (projectList) => {
+    if (selectedTags.length === 0) return projectList;
+    return projectList.filter((p) =>
+      selectedTags.some((tag) => p.tags.includes(tag))
+    );
   };
 
-  const filteredFeatured = filterByTypeAndTags(featuredProjects);
-  const filteredOther = filterByTypeAndTags(otherProjects);
+  const filteredFeatured = filterByTags(featuredProjects);
+  const filteredOther = filterByTags(otherProjects);
 
-  // Check if thesis matches selected tags (thesis doesn't have type, so only filter by tags)
+  // Check if thesis matches selected tags
   const thesisMatchesTag = selectedTags.length === 0
-    ? (selectedType === "all") // only show thesis when "all" types is selected
-    : selectedTags.some((tag) => thesis.tags.includes(tag)) && selectedType === "all";
-
-  // Project type options
-  const typeOptions = [
-    { value: "all", label: "All", icon: "📦", color: "from-gray-500 to-gray-600" },
-    { value: "frontend", label: "Frontend", icon: "🎨", color: "from-blue-500 to-cyan-500" },
-    { value: "backend", label: "Backend", icon: "⚙️", color: "from-purple-500 to-pink-500" },
-    { value: "fullstack", label: "Full-stack", icon: "🔗", color: "from-emerald-500 to-teal-500" },
-  ];
+    ? true
+    : selectedTags.some((tag) => thesis.tags.includes(tag));
 
   // Toggle category expansion
   const toggleCategory = (categoryKey) => {
@@ -76,11 +53,9 @@ export default function PortfolioContent() {
   // Toggle all tags on/off
   const toggleAllTags = () => {
     if (selectedTags.length === 0) {
-      // Select all tags
       const allTags = Object.values(tagCategories).flatMap((cat) => cat.tags);
       setSelectedTags(allTags);
     } else {
-      // Clear all tags
       setSelectedTags([]);
     }
   };
@@ -88,40 +63,13 @@ export default function PortfolioContent() {
   return (
     <>
       {/* Header */}
-      <div className="text-center mb-16 animate-fade-in-down">
+      <div className="text-center mb-12 animate-fade-in-down">
         <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-pink-400 via-rose-400 to-orange-400 text-transparent bg-clip-text tracking-tight">
           My Portfolio
         </h1>
         <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto font-light">
           A collection of projects showcasing my skills in full-stack development, UI/UX design, and problem-solving
         </p>
-      </div>
-
-      {/* Quick Type Filter */}
-      <div className="mb-6 animate-fade-in">
-        <div className="flex flex-wrap justify-center gap-3">
-          {typeOptions.map((option) => (
-            <button
-              key={option.value}
-              onClick={() => setSelectedType(option.value)}
-              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${selectedType === option.value
-                ? `bg-gradient-to-r ${option.color} text-white shadow-lg scale-105`
-                : "bg-white/70 text-gray-600 hover:bg-white hover:shadow-md border border-gray-200/50"
-                }`}
-            >
-              <span>{option.icon}</span>
-              <span>{option.label}</span>
-              <span className={`text-xs px-2 py-0.5 rounded-full ${selectedType === option.value
-                ? "bg-white/20"
-                : "bg-gray-100"
-                }`}>
-                {option.value === "all"
-                  ? projects.length
-                  : projects.filter(p => p.type === option.value).length}
-              </span>
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* Tag Filter */}

@@ -632,13 +632,13 @@ export const tagCategories = {
     name: "Frontend",
     icon: "🎨",
     color: "from-blue-400 to-cyan-500",
-    tags: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "HTML", "CSS", "Framer Motion"],
+    tags: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "HTML", "CSS", "Framer Motion", "Radix UI"],
   },
   backend: {
     name: "Backend",
     icon: "⚙️",
     color: "from-purple-400 to-pink-500",
-    tags: ["Node.js", "FastAPI", "RESTful API Design", "DevOps", "Supabase"],
+    tags: ["Node.js", "Express.js", "FastAPI", "RESTful API Design", "DevOps", "Supabase", "PostgreSQL"],
   },
   languages: {
     name: "Programming Languages",
@@ -650,7 +650,7 @@ export const tagCategories = {
     name: "Tools & Platforms",
     icon: "🛠️",
     color: "from-green-400 to-emerald-500",
-    tags: ["Git", "Docker", "Linux", "Figma", "Unity", "Autodesk 3ds Max", "UML Plant Diagram", "Pyserial", "Arduino IDE", "Arm", "x86"],
+    tags: ["Git", "Docker", "Linux", "Figma", "Unity", "Autodesk 3ds Max", "UML Plant Diagram", "Pyserial", "Arduino IDE", "Arm", "x86", "uv", "Vercel", "Metadata API (SEO)"],
   },
   specialization: {
     name: "Specialization",
