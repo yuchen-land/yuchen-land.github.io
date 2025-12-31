@@ -8,6 +8,7 @@ import { useState } from "react";
 
 export default function PortfolioContent() {
   const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedType, setSelectedType] = useState("all");
   const [expandedCategories, setExpandedCategories] = useState({
     frontend: true,
     backend: true,
@@ -22,23 +23,40 @@ export default function PortfolioContent() {
   // Get all unique tags (including thesis tags)
   const allTags = [...new Set([...projects.flatMap((p) => p.tags), ...thesis.tags])].sort();
 
-  // Filter projects based on selected tags
-  const filteredFeatured = selectedTags.length === 0
-    ? featuredProjects
-    : featuredProjects.filter((p) => 
+  // Filter projects based on selected type AND tags
+  const filterByTypeAndTags = (projectList) => {
+    let filtered = projectList;
+
+    // Filter by type first
+    if (selectedType !== "all") {
+      filtered = filtered.filter((p) => p.type === selectedType);
+    }
+
+    // Then filter by tags
+    if (selectedTags.length > 0) {
+      filtered = filtered.filter((p) =>
         selectedTags.some((tag) => p.tags.includes(tag))
       );
+    }
 
-  const filteredOther = selectedTags.length === 0
-    ? otherProjects
-    : otherProjects.filter((p) => 
-        selectedTags.some((tag) => p.tags.includes(tag))
-      );
+    return filtered;
+  };
 
-  // Check if thesis matches selected tags
-  const thesisMatchesTag = selectedTags.length === 0 
-    ? true 
-    : selectedTags.some((tag) => thesis.tags.includes(tag));
+  const filteredFeatured = filterByTypeAndTags(featuredProjects);
+  const filteredOther = filterByTypeAndTags(otherProjects);
+
+  // Check if thesis matches selected tags (thesis doesn't have type, so only filter by tags)
+  const thesisMatchesTag = selectedTags.length === 0
+    ? (selectedType === "all") // only show thesis when "all" types is selected
+    : selectedTags.some((tag) => thesis.tags.includes(tag)) && selectedType === "all";
+
+  // Project type options
+  const typeOptions = [
+    { value: "all", label: "All", icon: "📦", color: "from-gray-500 to-gray-600" },
+    { value: "frontend", label: "Frontend", icon: "🎨", color: "from-blue-500 to-cyan-500" },
+    { value: "backend", label: "Backend", icon: "⚙️", color: "from-purple-500 to-pink-500" },
+    { value: "fullstack", label: "Full-stack", icon: "🔗", color: "from-emerald-500 to-teal-500" },
+  ];
 
   // Toggle category expansion
   const toggleCategory = (categoryKey) => {
@@ -79,6 +97,33 @@ export default function PortfolioContent() {
         </p>
       </div>
 
+      {/* Quick Type Filter */}
+      <div className="mb-6 animate-fade-in">
+        <div className="flex flex-wrap justify-center gap-3">
+          {typeOptions.map((option) => (
+            <button
+              key={option.value}
+              onClick={() => setSelectedType(option.value)}
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${selectedType === option.value
+                ? `bg-gradient-to-r ${option.color} text-white shadow-lg scale-105`
+                : "bg-white/70 text-gray-600 hover:bg-white hover:shadow-md border border-gray-200/50"
+                }`}
+            >
+              <span>{option.icon}</span>
+              <span>{option.label}</span>
+              <span className={`text-xs px-2 py-0.5 rounded-full ${selectedType === option.value
+                ? "bg-white/20"
+                : "bg-gray-100"
+                }`}>
+                {option.value === "all"
+                  ? projects.length
+                  : projects.filter(p => p.type === option.value).length}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Tag Filter */}
       <div className="mb-12 animate-fade-in">
         <details className="group">
@@ -107,11 +152,10 @@ export default function PortfolioContent() {
             <div className="flex items-center gap-2 pb-3 border-b border-pink-200/20 px-4">
               <button
                 onClick={toggleAllTags}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
-                  selectedTags.length > 0
-                    ? "bg-rose-500 text-white shadow-md"
-                    : "text-gray-600 hover:text-rose-600 hover:bg-rose-50/50"
-                }`}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${selectedTags.length > 0
+                  ? "bg-rose-500 text-white shadow-md"
+                  : "text-gray-600 hover:text-rose-600 hover:bg-rose-50/50"
+                  }`}
               >
                 {selectedTags.length > 0 ? "✓ All Selected" : "All"}
               </button>
@@ -137,9 +181,8 @@ export default function PortfolioContent() {
                     <span className="text-xs text-gray-400">({category.tags.length})</span>
                   </div>
                   <svg
-                    className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${
-                      expandedCategories[categoryKey] ? "rotate-180" : ""
-                    }`}
+                    className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${expandedCategories[categoryKey] ? "rotate-180" : ""
+                      }`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -160,11 +203,10 @@ export default function PortfolioContent() {
                       <button
                         key={tag}
                         onClick={() => toggleTag(tag)}
-                        className={`px-3 py-1 rounded-full text-xs transition-all duration-200 ${
-                          selectedTags.includes(tag)
-                            ? "bg-rose-500 text-white shadow-md"
-                            : "text-gray-600 hover:text-rose-600 hover:bg-rose-50/50"
-                        }`}
+                        className={`px-3 py-1 rounded-full text-xs transition-all duration-200 ${selectedTags.includes(tag)
+                          ? "bg-rose-500 text-white shadow-md"
+                          : "text-gray-600 hover:text-rose-600 hover:bg-rose-50/50"
+                          }`}
                       >
                         {selectedTags.includes(tag) ? "✓ " : ""}{tag}
                       </button>

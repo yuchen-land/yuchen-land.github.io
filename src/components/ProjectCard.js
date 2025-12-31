@@ -25,7 +25,26 @@ export default function ProjectCard({ project }) {
           </div>
         )}
 
-        {/* Featured Badge */}
+        {/* Type Badge - Top Left */}
+        {project.type && (
+          <div className={`absolute top-5 left-5 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg ${project.type === "frontend"
+            ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white"
+            : project.type === "backend"
+              ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+              : "bg-gradient-to-r from-emerald-500 to-teal-500 text-white"
+            }`}>
+            {project.type === "frontend" && "🎨"}
+            {project.type === "backend" && "⚙️"}
+            {project.type === "fullstack" && "🔗"}
+            <span className="ml-0.5">
+              {project.type === "frontend" && "Frontend"}
+              {project.type === "backend" && "Backend"}
+              {project.type === "fullstack" && "Full-stack"}
+            </span>
+          </div>
+        )}
+
+        {/* Featured Badge - Top Right */}
         {project.featured && (
           <div className="absolute top-5 right-5 bg-gradient-to-r from-pink-400 to-rose-500 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-1.5 shadow-xl">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -82,23 +101,14 @@ export default function ProjectCard({ project }) {
 
         {/* Tech Tags */}
         <div className="flex flex-wrap gap-2 mb-6">
-          {project.tags.map((tag) => {
-            // Special styling for Frontend and Backend tags
-            let tagStyle = "bg-rose-50 text-rose-700 border-rose-100"; // default
-            if (tag === "Frontend") {
-              tagStyle = "bg-blue-100 text-blue-700 border-blue-200";
-            } else if (tag === "Backend") {
-              tagStyle = "bg-purple-100 text-purple-700 border-purple-200";
-            }
-            return (
-              <span
-                key={tag}
-                className={`${tagStyle} px-4 py-1.5 rounded-xl text-xs font-semibold border`}
-              >
-                {tag}
-              </span>
-            );
-          })}
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="bg-rose-50 text-rose-700 px-4 py-1.5 rounded-xl text-xs font-semibold border border-rose-100"
+            >
+              {tag}
+            </span>
+          ))}
         </div>
 
         {/* Action Buttons */}
