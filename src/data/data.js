@@ -40,7 +40,7 @@ export const internalLinks = [
   },
   {
     name: "Beyond",
-    path: "/hobbies",
+    path: "/beyond",
     icon: "sparkles",
     color: "from-amber-500 to-orange-600",
   },

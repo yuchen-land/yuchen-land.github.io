@@ -83,7 +83,7 @@ export default function Navbar() {
             Portfolio
           </Link>
           <Link
-            href="/hobbies"
+            href="/beyond"
             className="hidden sm:block text-sm text-gray-600 hover:text-rose-600 transition-colors font-light tracking-[0.01em]"
           >
             Beyond
@@ -198,7 +198,7 @@ export default function Navbar() {
               Portfolio
             </Link>
             <Link
-              href="/hobbies"
+              href="/beyond"
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-base text-gray-600 hover:text-rose-600 transition-colors font-light tracking-[0.01em] py-2 px-3 rounded-lg hover:bg-rose-50"
             >

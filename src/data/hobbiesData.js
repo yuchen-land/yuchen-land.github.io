@@ -105,6 +105,10 @@ export const brandVentures = [
         url: "https://holly-world-v2-0.vercel.app",
         logo: "/images/brands/holly_world.jpg",
         status: "Active",
+        social: {
+            instagram: "https://instagram.com/holly_world",
+            facebook: "https://facebook.com/hollyworld",
+        },
     },
     {
         id: 2,
@@ -115,6 +119,9 @@ export const brandVentures = [
         url: "#",
         logo: "/images/brands/bonbunny.jpg",
         status: "Growing",
+        social: {
+            instagram: "https://instagram.com/bonbunny",
+        },
     },
     {
         id: 3,
@@ -125,6 +132,10 @@ export const brandVentures = [
         url: "https://muse-classic.com",
         logo: "/images/brands/muse_classic.jpg",
         status: "Active",
+        social: {
+            instagram: "https://instagram.com/muse_classic",
+            facebook: "https://facebook.com/museclassic",
+        },
     },
     {
         id: 4,
@@ -135,6 +146,9 @@ export const brandVentures = [
         url: "https://lotus-peanut.com",
         logo: "/images/brands/lotus_peanut.jpg",
         status: "Active",
+        social: {
+            facebook: "https://facebook.com/lotuspeanut",
+        },
     },
     {
         id: 5,
@@ -145,5 +159,6 @@ export const brandVentures = [
         url: "#",
         logo: "/images/brands/tech_blog.jpg",
         status: "Growing",
+        social: {},
     },
 ];
