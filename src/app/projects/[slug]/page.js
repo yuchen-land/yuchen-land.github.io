@@ -1,15 +1,37 @@
+"use client";
+
 import Link from "next/link";
 import { projectDocumentation, projects } from "@/data/data";
 import Navbar from "@/components/Navbar";
+import ImageCarousel from "@/components/ImageCarousel";
+import ScrollProgress from "@/components/ScrollProgress";
+import TableOfContents from "@/components/TableOfContents";
+import StarTimeline from "@/components/StarTimeline";
+import StatsHighlight from "@/components/StatsHighlight";
+import RelatedProjects from "@/components/RelatedProjects";
+import { use } from "react";
 
-export async function generateStaticParams() {
-  return Object.keys(projectDocumentation).map((id) => ({
-    id: id.toString(),
-  }));
+// Helper to find doc by slug
+function findDocBySlug(slug) {
+  return Object.values(projectDocumentation).find((doc) => doc.slug === slug);
+}
+
+// Helper to find project by slug
+function findProjectBySlug(slug) {
+  const doc = findDocBySlug(slug);
+  if (!doc) return null;
+  // Find the project ID from projectDocumentation
+  const docEntry = Object.entries(projectDocumentation).find(
+    ([, d]) => d.slug === slug
+  );
+  if (!docEntry) return null;
+  return projects.find((p) => p.id === parseInt(docEntry[0]));
 }
 
 export default function ProjectDocPage({ params }) {
-  const doc = projectDocumentation[params.id];
+  const resolvedParams = use(params);
+  const doc = findDocBySlug(resolvedParams.slug);
+  const project = findProjectBySlug(resolvedParams.slug);
 
   if (!doc) {
     return (
@@ -19,9 +41,7 @@ export default function ProjectDocPage({ params }) {
             Project Not Found
           </h1>
           <p className="text-gray-600 mb-8">
-            The project documentation you
-            {`'`}re looking for doesn
-            {`'`}t exist yet.
+            The project documentation you&apos;re looking for doesn&apos;t exist yet.
           </p>
           <Link
             href="/portfolio"
@@ -36,9 +56,12 @@ export default function ProjectDocPage({ params }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50">
+      <ScrollProgress />
       <Navbar />
+      <TableOfContents />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 py-20 md:py-24 pt-32 md:pt-40">
+      {/* Main Content with side padding for TOC */}
+      <div className="relative z-10 max-w-4xl mx-auto px-6 py-20 md:py-24 pt-32 md:pt-40 xl:ml-[280px] xl:mr-auto xl:max-w-3xl 2xl:ml-auto 2xl:mr-auto 2xl:max-w-4xl">
         {/* Back Button */}
         <Link
           href="/portfolio"
@@ -61,68 +84,68 @@ export default function ProjectDocPage({ params }) {
         </Link>
 
         {/* Header */}
-        <div className="mb-16 animate-fade-in-down">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 tracking-tight">
+        <header className="mb-16 animate-fade-in-down">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 tracking-tight leading-tight">
             {doc.title}
           </h1>
-          <div className="w-20 h-1 bg-gradient-to-r from-pink-400 to-rose-400 rounded-full"></div>
-        </div>
+          <div className="w-20 h-1 bg-gradient-to-r from-pink-400 to-rose-400 rounded-full mb-6"></div>
 
-        {/* Overview Section */}
-        <section className="mb-20 animate-fade-in-up">
-          <div className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl p-8 md:p-12 shadow-lg">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6 text-rose-600">
-              Overview
-            </h2>
-            <p className="text-gray-700 text-lg leading-relaxed mb-8">
-              {doc.overview.description}
-            </p>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-pink-50/50 rounded-2xl p-6">
-                <h3 className="font-bold text-gray-800 mb-3">Challenge</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {doc.overview.challenge}
-                </p>
-              </div>
-              <div className="bg-rose-50/50 rounded-2xl p-6">
-                <h3 className="font-bold text-gray-800 mb-3">Solution</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {doc.overview.solution}
-                </p>
-              </div>
-              <div className="bg-orange-50/50 rounded-2xl p-6">
-                <h3 className="font-bold text-gray-800 mb-3">Impact</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {doc.overview.impact}
-                </p>
-              </div>
-            </div>
+          {/* Roles */}
+          <div className="flex flex-wrap gap-2">
+            {doc.roles.map((role) => (
+              <span
+                key={role}
+                className="bg-gradient-to-r from-rose-100 to-pink-100 text-rose-700 px-4 py-1.5 rounded-full text-sm font-medium border border-rose-200"
+              >
+                {role}
+              </span>
+            ))}
           </div>
-        </section>
+        </header>
+
+        {/* Project Screenshots Carousel */}
+        {doc.screenshots && doc.screenshots.length > 0 && (
+          <section id="screenshots" className="mb-20 animate-fade-in">
+            <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
+              <span className="text-rose-500">📸</span> Project Screenshots
+            </h2>
+            <div className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-3xl p-6 md:p-8 shadow-lg">
+              <ImageCarousel
+                images={doc.screenshots}
+                title={doc.title}
+              />
+            </div>
+          </section>
+        )}
+
+        {/* Stats Highlight */}
+        <StatsHighlight stats={doc.stats} />
+
+        {/* STAR Timeline */}
+        <StarTimeline star={doc.star} />
 
         {/* Tech Stack Section */}
-        <section className="mb-20 animate-fade-in">
+        <section id="tech" className="mb-20 animate-fade-in">
           <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
             <span className="text-rose-500">⚙️</span> Tech Stack
           </h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {Object.entries(doc.techStack).map(([category, items]) => (
               <div
                 key={category}
-                className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+                className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow"
               >
-                <h3 className="font-bold text-gray-800 mb-4 text-rose-600 capitalize">
+                <h3 className="font-bold text-gray-800 mb-3 text-rose-600 capitalize text-sm">
                   {category.replace(/([A-Z])/g, " $1").trim()}
                 </h3>
-                <ul className="space-y-2">
+                <ul className="space-y-1.5">
                   {items.map((tech) => (
                     <li
                       key={tech}
                       className="text-sm text-gray-600 flex items-center gap-2"
                     >
-                      <span className="w-1.5 h-1.5 bg-rose-400 rounded-full"></span>
+                      <span className="w-1.5 h-1.5 bg-rose-400 rounded-full flex-shrink-0"></span>
                       {tech}
                     </li>
                   ))}
@@ -133,19 +156,19 @@ export default function ProjectDocPage({ params }) {
         </section>
 
         {/* Features Section */}
-        <section className="mb-20 animate-fade-in">
+        <section id="features" className="mb-20 animate-fade-in">
           <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
             <span className="text-rose-500">✨</span> Key Features
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-3">
             {doc.features.map((feature, idx) => (
               <div
                 key={idx}
-                className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
+                className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="flex items-start gap-4">
-                  <div className="text-rose-500 text-xl flex-shrink-0">✓</div>
+                <div className="flex items-start gap-3">
+                  <div className="text-rose-500 text-lg flex-shrink-0">✓</div>
                   <p className="text-gray-700 text-sm leading-relaxed">
                     {feature}
                   </p>
@@ -155,31 +178,8 @@ export default function ProjectDocPage({ params }) {
           </div>
         </section>
 
-        {/* Key Achievements Section */}
-        <section className="mb-20 animate-fade-in">
-          <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
-            <span className="text-rose-500">🏆</span> Key Achievements
-          </h2>
-
-          <div className="space-y-4">
-            {doc.keyAchievements.map((achievement, idx) => (
-              <div
-                key={idx}
-                className="backdrop-blur-sm bg-gradient-to-r from-pink-50/70 to-rose-50/70 border border-pink-200/50 rounded-2xl p-6 shadow-sm"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="bg-gradient-to-br from-pink-400 to-rose-400 text-white w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 font-bold">
-                    {idx + 1}
-                  </div>
-                  <p className="text-gray-700 leading-relaxed">{achievement}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* Roles Section */}
-        <section className="mb-20 animate-fade-in">
+        <section id="roles" className="mb-20 animate-fade-in">
           <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
             <span className="text-rose-500">👤</span> My Roles
           </h2>
@@ -188,7 +188,7 @@ export default function ProjectDocPage({ params }) {
             {doc.roles.map((role) => (
               <div
                 key={role}
-                className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-full px-6 py-3 text-sm font-medium text-rose-600 hover:bg-white/90 transition-all"
+                className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-full px-6 py-3 text-sm font-medium text-rose-600 hover:bg-white/90 transition-all shadow-sm"
               >
                 {role}
               </div>
@@ -197,28 +197,28 @@ export default function ProjectDocPage({ params }) {
         </section>
 
         {/* Links Section */}
-        {Object.keys(doc.links).length > 0 && (
-          <section className="mb-20 animate-fade-in">
+        {doc.links && Object.keys(doc.links).length > 0 && (
+          <section id="links" className="mb-20 animate-fade-in">
             <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
               <span className="text-rose-500">🔗</span> Project Links
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-4">
               {Object.entries(doc.links).map(([linkType, url]) => (
                 <a
                   key={linkType}
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all group"
+                  className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-2xl p-5 shadow-sm hover:shadow-lg hover:scale-[1.02] transition-all group"
                 >
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="font-bold text-gray-800 capitalize mb-1">
                         {linkType.replace(/([A-Z])/g, " $1").trim()}
                       </h3>
-                      <p className="text-xs text-gray-500 truncate">
-                        {url.substring(0, 50)}...
+                      <p className="text-xs text-gray-500 truncate max-w-[200px]">
+                        {url.length > 40 ? url.substring(0, 40) + "..." : url}
                       </p>
                     </div>
                     <svg
@@ -241,9 +241,15 @@ export default function ProjectDocPage({ params }) {
           </section>
         )}
 
+        {/* Related Projects */}
+        <RelatedProjects
+          currentProjectSlug={resolvedParams.slug}
+          currentTags={project?.tags || []}
+        />
+
         {/* CTA Section */}
         <section className="mb-20 animate-fade-in">
-          <div className="backdrop-blur-sm bg-gradient-to-r from-pink-100/70 to-rose-100/70 border border-pink-200/50 rounded-3xl p-12 text-center shadow-lg">
+          <div className="backdrop-blur-sm bg-gradient-to-r from-pink-100/70 to-rose-100/70 border border-pink-200/50 rounded-3xl p-10 md:p-12 text-center shadow-lg">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">
               Interested in this project?
             </h2>
@@ -254,7 +260,7 @@ export default function ProjectDocPage({ params }) {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="mailto:yuchen880401@gmail.com"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full px-8 py-3 font-medium hover:shadow-lg hover:scale-105 transition-all"
+                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full px-8 py-3 font-medium hover:shadow-lg hover:scale-105 transition-all"
               >
                 <svg
                   className="w-5 h-5"
@@ -273,7 +279,7 @@ export default function ProjectDocPage({ params }) {
               </a>
               <Link
                 href="/portfolio"
-                className="inline-flex items-center gap-2 bg-white/70 border border-pink-200/50 text-rose-600 rounded-full px-8 py-3 font-medium hover:bg-white/90 hover:scale-105 transition-all"
+                className="inline-flex items-center justify-center gap-2 bg-white/70 border border-pink-200/50 text-rose-600 rounded-full px-8 py-3 font-medium hover:bg-white/90 hover:scale-105 transition-all"
               >
                 <svg
                   className="w-5 h-5"

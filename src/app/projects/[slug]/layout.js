@@ -1,7 +1,19 @@
 import { projectDocumentation } from "@/data/data";
 
+// Helper to find doc by slug
+function findDocBySlug(slug) {
+  return Object.values(projectDocumentation).find((doc) => doc.slug === slug);
+}
+
+export async function generateStaticParams() {
+  return Object.values(projectDocumentation).map((doc) => ({
+    slug: doc.slug,
+  }));
+}
+
 export async function generateMetadata({ params }) {
-  const doc = projectDocumentation[params.id];
+  const resolvedParams = await params;
+  const doc = findDocBySlug(resolvedParams.slug);
 
   if (!doc) {
     return {
@@ -10,12 +22,14 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  const description = doc.star?.situation || doc.title;
+
   return {
     title: `${doc.title} - Project Documentation`,
-    description: doc.overview.description,
+    description: description,
     openGraph: {
       title: `${doc.title} - Yu-Chen(Cindy), Liu`,
-      description: doc.overview.description,
+      description: description,
       type: "article",
     },
   };
