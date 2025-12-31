@@ -522,6 +522,36 @@ export const projects = [
   },
   {
     id: 4,
+    title: "Lotus Peanut Candy E-Commerce",
+    period: "2025 - Present",
+    description: [
+      "Engineered a decoupled system using **Next.js** for the frontend and **FastAPI (Python)** for the backend. Leveraging **uv** for lightning-fast package management, ensuring high-performance API interactions and a robust development workflow.",
+      "Inspired by traditional Taiwanese heritage, the interface utilizes **Tailwind CSS** to balance modern aesthetics with a warm, artisanal feel. The design features a responsive layout and localized typography (Noto Serif TC) to honor the brand's Yunlin roots.",
+      "Delivered a friction-free journey through smooth page transitions, an intuitive **CartDrawer**, and real-time toast notifications. Optimized for growth via Next.js Metadata API and Vercel deployment to ensure maximum search visibility and global reliability."
+    ],
+    image: "/images/projects/Peanut_Candy.jpg",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "FastAPI", "RESTful API Design", "Python", "uv", "Vercel", "Metadata API (SEO)"],
+    type: "fullstack",
+    demo: "https://lotus-peanut-candy.vercel.app",
+    featured: false,
+  },
+  {
+    id: 5,
+    title: "Muse Classic - Korean Clothing E-commerce Platform",
+    period: "2025 - Present",
+    description: [
+      "Implemented a **Quiet Luxury** design system and custom color palettes to deliver a premium digital experience tailored for high-end market segments.",
+      "Built on Next.js 16 and React 19.2 for peak performance. Utilized **Tailwind CSS** 4 and **Radix UI** to create fluid SVG animations and optimized Server Components, ensuring a frictionless, responsive e-commerce journey.",
+      "Architected dual-backend solutions using **Express.js (TS)** and **FastAPI (Python)**. Leveraged **uv** for high-performance dependency management and integrated Metadata APIs with Vercel for a scalable, SEO-optimized full-stack deployment."
+    ],
+    image: "/images/projects/muse_classic.jpg",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Radix UI", "Express.js", "FastAPI", "uv", "Vercel", "Metadata API (SEO)", "PostgreSQL"],
+    type: "fullstack",
+    demo: "https://muse-classic.vercel.app/",
+    featured: false,
+  },
+  {
+    id: 6,
     title: "Software Engineering, Renting system",
     period: "2022 - 2023",
     description: [
@@ -536,7 +566,7 @@ export const projects = [
     featured: false,
   },
   {
-    id: 5,
+    id: 7,
     title: "Clchemy : A Board Game App for Learning C++ Programming Language",
     period: "2020 - 2021",
     description: [
@@ -550,7 +580,7 @@ export const projects = [
     featured: false,
   },
   {
-    id: 6,
+    id: 8,
     title: "SIC/XE Two-pass Assembler",
     period: "2022",
     description: [
@@ -563,7 +593,7 @@ export const projects = [
     featured: false,
   },
   {
-    id: 7,
+    id: 9,
     title: "Holly World Renting System",
     period: "2019 - Present",
     description: [
@@ -578,7 +608,7 @@ export const projects = [
     featured: false,
   },
   {
-    id: 8,
+    id: 10,
     title: "Holly World V2.0 - E-commerce Platform",
     period: "2025 - Present",
     description: [
@@ -592,37 +622,6 @@ export const projects = [
     type: "fullstack",
     demo: "https://holly-world-v2-0.vercel.app",
     featured: true,
-  },
-  {
-    id: 9,
-    title: "Lotus Peanut Candy E-Commerce",
-    period: "2025 - Present",
-    description: [
-      "Engineered a decoupled system using **Next.js** for the frontend and **FastAPI (Python)** for the backend. Leveraging **uv** for lightning-fast package management, ensuring high-performance API interactions and a robust development workflow.",
-      "Inspired by traditional Taiwanese heritage, the interface utilizes **Tailwind CSS** to balance modern aesthetics with a warm, artisanal feel. The design features a responsive layout and localized typography (Noto Serif TC) to honor the brand's Yunlin roots.",
-      "Delivered a friction-free journey through smooth page transitions, an intuitive **CartDrawer**, and real-time toast notifications. Optimized for growth via Next.js Metadata API and Vercel deployment to ensure maximum search visibility and global reliability."
-
-    ],
-    image: "/images/projects/Peanut_Candy.jpg",
-    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "FastAPI", "RESTful API Design", "Python", "uv", "Vercel", "Metadata API (SEO)"],
-    type: "fullstack",
-    demo: "https://lotus-peanut-candy.vercel.app",
-    featured: false,
-  },
-  {
-    id: 10,
-    title: "Muse Classic - Korean Clothing E-commerce Platform",
-    period: "2025 - Present",
-    description: [
-      "Implemented a **Quiet Luxury** design system and custom color palettes to deliver a premium digital experience tailored for high-end market segments.",
-      "Built on Next.js 16 and React 19.2 for peak performance. Utilized **Tailwind CSS** 4 and **Radix UI** to create fluid SVG animations and optimized Server Components, ensuring a frictionless, responsive e-commerce journey.",
-      "Architected dual-backend solutions using **Express.js (TS)** and **FastAPI (Python)**. Leveraged **uv** for high-performance dependency management and integrated Metadata APIs with Vercel for a scalable, SEO-optimized full-stack deployment."
-    ],
-    image: "/images/projects/muse_classic.jpg",
-    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Radix UI", "Express.js", "FastAPI", "uv", "Vercel", "Metadata API (SEO)", "PostgreSQL"],
-    type: "fullstack",
-    demo: "https://muse-classic.vercel.app/",
-    featured: false,
   },
 ];
 
