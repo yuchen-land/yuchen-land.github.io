@@ -485,7 +485,7 @@ export const projects = [
       "Orchestrated cross-functional collaboration across RD, SEO, PM, QA, and design teams, which slashed team workload by 60% and guaranteed precise project delivery."
     ],
     image: `/images/projects/myedit.jpg`,
-    tags: ["React", "Node.js", "Javascript"],
+    tags: ["Frontend", "React", "Node.js", "Javascript"],
     github: "https://github.com/CindyLiu-CL",
     demo: "https://myedit.online/en",
     featured: true,
@@ -501,7 +501,7 @@ export const projects = [
       "Successfully elevated the brand's online presence, expanded sales channels, and significantly optimized operational efficiency."
     ],
     image: `/images/projects/bonbunny.jpg`,
-    tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS", "DevOps"],
+    tags: ["Frontend", "Backend", "Founder", "Next.js", "React", "TypeScript", "Tailwind CSS", "DevOps"],
     demo: "https://bonbunny.vercel.app/",
     featured: true,
   },
@@ -514,7 +514,7 @@ export const projects = [
       "Implemented a **modular architecture**, optimized serial port testing efficiency, and **created a user-friendly interface for seamless procedures.**",
     ], github: "https://fir-mandarin-dc1.notion.site/MOXA-f7348ef5700d4f339ce71741b1b0dcea",
     image: `/images/projects/linux_serial_port.jpg`,
-    tags: ["Python", "Pyserial", "Linux", "UML Plant Diagram", "Arm", "x86", "Embedded"],
+    tags: ["Backend", "Python", "Pyserial", "Linux", "UML Plant Diagram", "Arm", "x86", "Embedded"],
     featured: false,
   },
   {
@@ -527,7 +527,7 @@ export const projects = [
       "Executed systematic integration, boosting company transaction efficiency by almost 60%, cutting paper-based operations by nearly 80%, and reducing personnel costs by around 50%.",
     ],
     image: `/images/projects/renting_system.jpg`,
-    tags: ["Team Leader", "Next.js", "React", "UML Plant Diagram"],
+    tags: ["Frontend", "Backend", "Team Leader", "Next.js", "React", "UML Plant Diagram"],
     github: "https://github.com/yuchen-land/renting-system-front",
     featured: false,
   },
@@ -568,7 +568,7 @@ export const projects = [
       "Contributed to streamlining rental and return processes, enhancing overall operational efficiency.",
     ],
     image: "/images/projects/hollyworld.jpg",
-    tags: ["Founder", "CSS", "HTML", "JavaScript"],
+    tags: ["Frontend", "Founder", "CSS", "HTML", "JavaScript"],
     demo: "http://www.holly-world.com.tw/",
     featured: false,
   },
@@ -583,7 +583,7 @@ export const projects = [
       "Engineered custom **Node.js scripts** to automate product data validation and image synchronization, eliminating manual workflows and **boosting maintenance efficiency by 70%.**"
     ],
     image: "/images/projects/hollyworld2.jpg",
-    tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
+    tags: ["Frontend", "Backend", "Founder", "Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
     demo: "https://holly-world-v2-0.vercel.app",
     featured: true,
   },
@@ -598,7 +598,7 @@ export const projects = [
 
     ],
     image: "/images/projects/Peanut_Candy.jpg",
-    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "FastAPI", "RESTful API Design", "Python", "uv", "Vercel", "Metadata API (SEO)"],
+    tags: ["Frontend", "Backend", "Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "FastAPI", "RESTful API Design", "Python", "uv", "Vercel", "Metadata API (SEO)"],
     demo: "https://lotus-peanut-candy.vercel.app",
     featured: false,
   },
@@ -609,7 +609,7 @@ export const projects = [
     description: [
     ],
     image: "/images/projects/muse_classic.jpg",
-    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    tags: ["Frontend", "Next.js", "React", "TypeScript", "Tailwind CSS"],
     demo: "https://muse-classic.vercel.app/",
     featured: false,
   },

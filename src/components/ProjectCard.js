@@ -82,14 +82,23 @@ export default function ProjectCard({ project }) {
 
         {/* Tech Tags */}
         <div className="flex flex-wrap gap-2 mb-6">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="bg-rose-50 text-rose-700 px-4 py-1.5 rounded-xl text-xs font-semibold border border-rose-100"
-            >
-              {tag}
-            </span>
-          ))}
+          {project.tags.map((tag) => {
+            // Special styling for Frontend and Backend tags
+            let tagStyle = "bg-rose-50 text-rose-700 border-rose-100"; // default
+            if (tag === "Frontend") {
+              tagStyle = "bg-blue-100 text-blue-700 border-blue-200";
+            } else if (tag === "Backend") {
+              tagStyle = "bg-purple-100 text-purple-700 border-purple-200";
+            }
+            return (
+              <span
+                key={tag}
+                className={`${tagStyle} px-4 py-1.5 rounded-xl text-xs font-semibold border`}
+              >
+                {tag}
+              </span>
+            );
+          })}
         </div>
 
         {/* Action Buttons */}
