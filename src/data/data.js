@@ -614,10 +614,13 @@ export const projects = [
     title: "Muse Classic - Korean Clothing E-commerce Platform",
     period: "2025 - Present",
     description: [
+      "Implemented a **Quiet Luxury** design system and custom color palettes to deliver a premium digital experience tailored for high-end market segments.",
+      "Built on Next.js 16 and React 19.2 for peak performance. Utilized **Tailwind CSS** 4 and **Radix UI** to create fluid SVG animations and optimized Server Components, ensuring a frictionless, responsive e-commerce journey.",
+      "Architected dual-backend solutions using **Express.js (TS)** and **FastAPI (Python)**. Leveraged **uv** for high-performance dependency management and integrated Metadata APIs with Vercel for a scalable, SEO-optimized full-stack deployment."
     ],
     image: "/images/projects/muse_classic.jpg",
-    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    type: "frontend",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Radix UI", "Express.js", "FastAPI", "uv", "Vercel", "Metadata API (SEO)", "PostgreSQL"],
+    type: "fullstack",
     demo: "https://muse-classic.vercel.app/",
     featured: false,
   },
