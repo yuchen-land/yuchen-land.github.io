@@ -18,10 +18,8 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50 relative overflow-hidden">
       <Navbar />
 
-      {/* Soft Gradient Orbs - Pastel Colors */}
-      <div className="absolute top-20 left-20 w-[500px] h-[500px] bg-gradient-to-br from-pink-200/40 via-rose-200/40 to-pink-300/40 rounded-full blur-3xl animate-blob"></div>
-      <div className="absolute top-40 right-20 w-[500px] h-[500px] bg-gradient-to-br from-orange-200/40 via-pink-200/40 to-rose-300/40 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-20 left-1/2 w-[500px] h-[500px] bg-gradient-to-br from-rose-200/40 via-pink-300/40 to-orange-200/40 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+      {/* Soft Gradient Orb - Single optimized blob */}
+      <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] bg-gradient-to-br from-pink-200/30 via-rose-200/30 to-orange-200/30 rounded-full blur-3xl animate-blob-slow"></div>
 
       {/* Soft Light Overlay */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,182,193,0.15),transparent_60%)]"></div>
@@ -32,13 +30,13 @@ export default function Home() {
         <div className="mb-12 animate-fade-in-down">
           <div className="relative group">
             {/* Subtle Ambient Glow */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-rose-200/40 via-pink-200/40 to-rose-200/40 rounded-full blur-2xl group-hover:from-rose-200/60 group-hover:via-pink-200/60 group-hover:to-rose-200/60 transition-all duration-700"></div>
+            <div className="absolute -inset-4 bg-gradient-to-r from-rose-200/40 via-pink-200/40 to-rose-200/40 rounded-full blur-2xl group-hover:from-rose-200/60 group-hover:via-pink-200/60 group-hover:to-rose-200/60 transition-all duration-300"></div>
 
             {/* Refined Border Ring */}
             <div className="absolute -inset-0.5 bg-gradient-to-br from-rose-300/40 via-pink-200/30 to-rose-300/40 rounded-full"></div>
 
             {/* Avatar Container */}
-            <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden bg-white p-0.5 group-hover:scale-105 transition-all duration-500 shadow-[0_4px_24px_rgba(251,207,232,0.35)]">
+            <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden bg-white p-0.5 group-hover:scale-105 transition-all duration-300 shadow-[0_4px_24px_rgba(251,207,232,0.35)]">
               <div className="w-full h-full rounded-full overflow-hidden bg-white">
                 {!imgError ? (
                   <Image
@@ -47,7 +45,7 @@ export default function Home() {
                     width={144}
                     height={144}
                     priority
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     onError={() => setImgError(true)}
                   />
                 ) : (
@@ -267,7 +265,7 @@ export default function Home() {
                       alt={project.title}
                       width={400}
                       height={200}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       onError={(e) => {
                         e.target.src =
                           "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Crect width='400' height='200' fill='%23f8f9fa'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23dee2e6' font-family='sans-serif' font-size='16'%3EProject Image%3C/text%3E%3C/svg%3E";

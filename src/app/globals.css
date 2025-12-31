@@ -117,13 +117,19 @@ html {
 /* Premium Animations */
 @keyframes blob {
   0%, 100% {
-    transform: translate(0, 0) scale(1);
+    transform: translate(0, 0);
   }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
+  50% {
+    transform: translate(30px, -20px);
   }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
+}
+
+@keyframes blob-slow {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(40px, -30px);
   }
 }
 
@@ -180,6 +186,11 @@ html {
   animation: blob 7s infinite;
 }
 
+.animate-blob-slow {
+  animation: blob-slow 20s ease-in-out infinite;
+  will-change: transform;
+}
+
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
@@ -234,4 +245,21 @@ html {
 
 .animate-blink {
   animation: blink 1s step-end infinite;
+}
+
+/* Accessibility: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-blob,
+  .animate-blob-slow,
+  .animate-float {
+    animation: none !important;
+  }
 }
