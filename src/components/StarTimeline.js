@@ -44,35 +44,36 @@ const starSteps = [
 
 function StarStep({ step, content, index, isLast }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   const isArray = Array.isArray(content);
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, x: -50 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.1,
+        ease: [0.25, 0.1, 0.25, 1]
+      }}
       className="relative pl-16 md:pl-20"
     >
       {/* Timeline line */}
       {!isLast && (
-        <div className="absolute left-6 md:left-8 top-14 bottom-0 w-0.5 bg-gradient-to-b from-pink-300 to-pink-100" />
+        <div className="absolute left-6 md:left-8 top-14 bottom-0 w-0.5 bg-gradient-to-b from-pink-200 to-pink-100/50" />
       )}
 
       {/* Step indicator */}
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={isInView ? { scale: 1 } : {}}
-        transition={{ duration: 0.4, delay: index * 0.15 + 0.2, type: "spring" }}
-        className={`absolute left-0 md:left-2 top-0 w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg`}
+      <div
+        className={`absolute left-0 md:left-2 top-0 w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-md`}
       >
         <span className="text-white font-bold text-xl md:text-2xl">{step.letter}</span>
-      </motion.div>
+      </div>
 
       {/* Content card */}
-      <div className={`${step.bgColor} ${step.borderColor} border rounded-2xl p-6 md:p-8 mb-8 backdrop-blur-sm`}>
+      <div className={`${step.bgColor} ${step.borderColor} border rounded-2xl p-6 md:p-8 mb-8`}>
         <div className="mb-4">
           <h3 className="text-xl md:text-2xl font-bold text-gray-800">{step.title}</h3>
           <p className="text-sm text-gray-500">{step.subtitle}</p>
@@ -81,16 +82,13 @@ function StarStep({ step, content, index, isLast }) {
         {isArray ? (
           <ul className="space-y-3">
             {content.map((item, i) => (
-              <motion.li
+              <li
                 key={i}
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.4, delay: index * 0.15 + 0.3 + i * 0.1 }}
                 className="flex items-start gap-3"
               >
                 <span className={`w-2 h-2 rounded-full bg-gradient-to-r ${step.color} mt-2 flex-shrink-0`} />
                 <span className="text-gray-700 leading-relaxed">{item}</span>
-              </motion.li>
+              </li>
             ))}
           </ul>
         ) : (
