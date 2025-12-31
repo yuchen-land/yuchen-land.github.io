@@ -589,12 +589,16 @@ export const projects = [
   },
   {
     id: 9,
-    title: "Traditional Peanut Candy Brand Website",
+    title: "Lotus Peanut Candy E-Commerce",
     period: "2025 - Present",
     description: [
+      "Engineered a decoupled system using **Next.js** for the frontend and **FastAPI (Python)** for the backend. Leveraging **uv** for lightning-fast package management, ensuring high-performance API interactions and a robust development workflow.",
+      "Inspired by traditional Taiwanese heritage, the interface utilizes **Tailwind CSS** to balance modern aesthetics with a warm, artisanal feel. The design features a responsive layout and localized typography (Noto Serif TC) to honor the brand's Yunlin roots.",
+      "Delivered a friction-free journey through smooth page transitions, an intuitive **CartDrawer**, and real-time toast notifications. Optimized for growth via Next.js Metadata API and Vercel deployment to ensure maximum search visibility and global reliability."
+
     ],
     image: "/images/projects/Peanut_Candy.jpg",
-    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "FastAPI", "RESTful API Design", "Python", "uv", "Vercel", "Metadata API (SEO)"],
     demo: "https://lotus-peanut-candy.vercel.app",
     featured: false,
   },
