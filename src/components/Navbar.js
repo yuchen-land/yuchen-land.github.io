@@ -82,6 +82,12 @@ export default function Navbar() {
           >
             Portfolio
           </Link>
+          <Link
+            href="/hobbies"
+            className="hidden sm:block text-sm text-gray-600 hover:text-rose-600 transition-colors font-light tracking-[0.01em]"
+          >
+            Hobbies
+          </Link>
 
           {/* Action Icons */}
           <div className="flex items-center gap-1.5 md:gap-2">
@@ -190,6 +196,13 @@ export default function Navbar() {
               className="text-base text-gray-600 hover:text-rose-600 transition-colors font-light tracking-[0.01em] py-2 px-3 rounded-lg hover:bg-rose-50"
             >
               Portfolio
+            </Link>
+            <Link
+              href="/hobbies"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-base text-gray-600 hover:text-rose-600 transition-colors font-light tracking-[0.01em] py-2 px-3 rounded-lg hover:bg-rose-50"
+            >
+              Hobbies
             </Link>
           </div>
         </div>
