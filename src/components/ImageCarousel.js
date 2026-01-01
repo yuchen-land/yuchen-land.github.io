@@ -26,6 +26,16 @@ export default function ImageCarousel({
     return () => clearInterval(interval);
   }, [autoPlay, autoPlayInterval, images.length]);
 
+  const goToNext = useCallback(() => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  }, [images.length]);
+
+  const goToPrevious = useCallback(() => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  }, [images.length]);
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -40,17 +50,7 @@ export default function ImageCarousel({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isFullscreen]);
-
-  const goToNext = useCallback(() => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-  }, [images.length]);
-
-  const goToPrevious = useCallback(() => {
-    setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  }, [images.length]);
+  }, [isFullscreen, goToPrevious, goToNext]);
 
   const goToSlide = useCallback((index) => {
     setDirection(index > currentIndex ? 1 : -1);

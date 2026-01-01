@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { projectDocumentation, projects } from "@/data/data";
 import Navbar from "@/components/Navbar";
 import ImageCarousel from "@/components/ImageCarousel";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -9,24 +8,8 @@ import TableOfContents from "@/components/TableOfContents";
 import StarTimeline from "@/components/StarTimeline";
 import StatsHighlight from "@/components/StatsHighlight";
 import RelatedProjects from "@/components/RelatedProjects";
+import { findDocBySlug, findProjectBySlug } from "@/utils/projectHelpers";
 import { use } from "react";
-
-// Helper to find doc by slug
-function findDocBySlug(slug) {
-  return Object.values(projectDocumentation).find((doc) => doc.slug === slug);
-}
-
-// Helper to find project by slug
-function findProjectBySlug(slug) {
-  const doc = findDocBySlug(slug);
-  if (!doc) return null;
-  // Find the project ID from projectDocumentation
-  const docEntry = Object.entries(projectDocumentation).find(
-    ([, d]) => d.slug === slug
-  );
-  if (!docEntry) return null;
-  return projects.find((p) => p.id === parseInt(docEntry[0]));
-}
 
 export default function ProjectDocPage({ params }) {
   const resolvedParams = use(params);

@@ -1,14 +1,7 @@
-import { projectDocumentation } from "@/data/data";
-
-// Helper to find doc by slug
-function findDocBySlug(slug) {
-  return Object.values(projectDocumentation).find((doc) => doc.slug === slug);
-}
+import { findDocBySlug, getAllProjectSlugs } from "@/utils/projectHelpers";
 
 export async function generateStaticParams() {
-  return Object.values(projectDocumentation).map((doc) => ({
-    slug: doc.slug,
-  }));
+  return getAllProjectSlugs();
 }
 
 export async function generateMetadata({ params }) {
