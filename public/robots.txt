@@ -1,0 +1,5 @@
+# robots.txt for yuchen-land.github.io
+User-agent: *
+Allow: /
+
+Sitemap: https://yuchen-land.github.io/sitemap.xml

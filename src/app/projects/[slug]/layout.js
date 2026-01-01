@@ -1,7 +1,12 @@
-import { projectDocumentation } from "@/data/data";
+import { findDocBySlug, getAllProjectSlugs } from "@/utils/projectHelpers";
+
+export async function generateStaticParams() {
+  return getAllProjectSlugs();
+}
 
 export async function generateMetadata({ params }) {
-  const doc = projectDocumentation[params.id];
+  const resolvedParams = await params;
+  const doc = findDocBySlug(resolvedParams.slug);
 
   if (!doc) {
     return {
@@ -10,12 +15,14 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  const description = doc.star?.situation || doc.title;
+
   return {
     title: `${doc.title} - Project Documentation`,
-    description: doc.overview.description,
+    description: description,
     openGraph: {
       title: `${doc.title} - Yu-Chen(Cindy), Liu`,
-      description: doc.overview.description,
+      description: description,
       type: "article",
     },
   };
