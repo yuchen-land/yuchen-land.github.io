@@ -36,18 +36,18 @@ export const hobbies = [
     //         { id: 4, src: "/images/hobbies/photography/photo_4.jpg", alt: "Photo 4" },
     //     ],
     // },
-    {
-        id: "musicals",
-        title: "Musicals",
-        icon: "🎭",
-        description: "A passionate theatergoer who loves experiencing the magic of live musicals. From Broadway classics to contemporary productions, I find inspiration in storytelling through music and performance.",
-        gallery: [
-            { id: 1, src: "/images/hobbies/musicals/musical_1.jpg", alt: "Broadway musical theater experience" },
-            { id: 2, src: "/images/hobbies/musicals/musical_2.jpg", alt: "Live musical performance" },
-            { id: 3, src: "/images/hobbies/musicals/musical_3.jpg", alt: "Theater production memory" },
-            { id: 4, src: "/images/hobbies/musicals/musical_4.jpg", alt: "Musical show attendance" },
-        ],
-    },
+    // {
+    //     id: "musicals",
+    //     title: "Musicals",
+    //     icon: "🎭",
+    //     description: "A passionate theatergoer who loves experiencing the magic of live musicals. From Broadway classics to contemporary productions, I find inspiration in storytelling through music and performance.",
+    //     gallery: [
+    //         { id: 1, src: "/images/hobbies/musicals/musical_1.jpg", alt: "Broadway musical theater experience" },
+    //         { id: 2, src: "/images/hobbies/musicals/musical_2.jpg", alt: "Live musical performance" },
+    //         { id: 3, src: "/images/hobbies/musicals/musical_3.jpg", alt: "Theater production memory" },
+    //         { id: 4, src: "/images/hobbies/musicals/musical_4.jpg", alt: "Musical show attendance" },
+    //     ],
+    // },
     {
         id: "pets",
         title: "My Fur Babies",
@@ -67,6 +67,15 @@ export const hobbies = [
 export const hobbyActivities = [
     {
         id: 1,
+        title: "CYBERSEC 2023 臺灣資安大會",
+        type: "Conference",
+        date: "2023",
+        description: "Represented as exhibitor at Taiwan's premier cybersecurity conference.",
+        image: "/images/activities/conference_1.jpg",
+        tags: ["Cybersecurity", "Conference"],
+    },
+    {
+        id: 2,
         title: "Vision AI DevKit Workshop",
         type: "Workshop",
         date: "2019",
@@ -75,7 +84,7 @@ export const hobbyActivities = [
         tags: ["Azure", "AI", "Machine Learning"],
     },
     {
-        id: 2,
+        id: 3,
         title: "Open HCI Workshop",
         type: "Workshop",
         date: "2018",
@@ -83,15 +92,7 @@ export const hobbyActivities = [
         image: "/images/activities/workshop_2.jpg",
         tags: ["Arduino IDE", "Embedded", "HCI", "UX Design"],
     },
-    {
-        id: 3,
-        title: "CYBERSEC 2023 臺灣資安大會",
-        type: "Conference",
-        date: "2023",
-        description: "Represented as exhibitor at Taiwan's premier cybersecurity conference.",
-        image: "/images/activities/conference_1.jpg",
-        tags: ["Cybersecurity", "Conference"],
-    },
+
 ];
 
 // Scholarships Data
@@ -138,8 +139,8 @@ export const brandVentures = [
         logo: "/images/brands/holly_world.jpg",
         status: "Active",
         social: {
-            instagram: "https://instagram.com/holly_world",
-            facebook: "https://facebook.com/hollyworld",
+            instagram: "https://www.instagram.com/hollyworld_888?igsh=cGw0dnBzcm93Y2Y3",
+            facebook: "https://www.facebook.com/chaiyou23316801",
         },
     },
     {
