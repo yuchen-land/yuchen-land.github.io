@@ -34,6 +34,13 @@ const outfit = Outfit({
 export const metadata = {
   title: "Yu-Chen(Cindy), Liu - Software Engineer",
   description: "Welcome to my professional portfolio showcasing my work and expertise",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
