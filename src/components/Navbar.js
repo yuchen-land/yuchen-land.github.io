@@ -18,11 +18,10 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
           ? "backdrop-blur-md bg-white/80 shadow-md border-b border-pink-200/50"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="max-w-6xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
         {/* Left: Mobile Menu Button + Logo */}
@@ -57,7 +56,12 @@ export default function Navbar() {
           </button>
 
           {/* Logo/Name */}
-          <Link href="/" className="group">
+          <Link href="/" className="group flex items-center gap-2">
+            <img
+              src="/icon.png"
+              alt="Logo"
+              className="w-6 h-6 rounded-full"
+            />
             <span className="text-lg font-medium bg-gradient-to-r from-pink-400 via-rose-400 to-orange-400 text-transparent bg-clip-text group-hover:opacity-80 transition-opacity">
               Cindy
             </span>
