@@ -1,29 +1,29 @@
 // Hobbies Data - Gallery sections for creative hobbies
 export const hobbies = [
-    {
-        id: "art",
-        title: "Art & Illustration",
-        icon: "🎨",
-        description: "Drawing and digital illustration have been my creative outlet since childhood. I enjoy exploring different styles from character design to landscape paintings.",
-        gallery: [
-            { id: 1, src: "/images/hobbies/art/art_1.jpg", alt: "Character illustration with vibrant colors" },
-            { id: 2, src: "/images/hobbies/art/art_2.jpg", alt: "Digital landscape painting" },
-            { id: 3, src: "/images/hobbies/art/art_3.jpg", alt: "Creative artwork piece" },
-            { id: 4, src: "/images/hobbies/art/art_4.jpg", alt: "Artistic illustration project" },
-        ],
-    },
-    {
-        id: "pastry",
-        title: "Pastry Making",
-        icon: "🍰",
-        description: "As a certified pâtissier, I find joy in crafting beautiful desserts. From delicate macarons to elegant layer cakes, baking is where art meets science.",
-        gallery: [
-            { id: 1, src: "/images/hobbies/pastry/pastry_1.jpg", alt: "Handcrafted artisanal dessert" },
-            { id: 2, src: "/images/hobbies/pastry/pastry_2.jpg", alt: "Elegant layered cake creation" },
-            { id: 3, src: "/images/hobbies/pastry/pastry_3.jpg", alt: "Delicate French pastry" },
-            { id: 4, src: "/images/hobbies/pastry/pastry_4.jpg", alt: "Beautiful patisserie work" },
-        ],
-    },
+    // {
+    //     id: "art",
+    //     title: "Art & Illustration",
+    //     icon: "🎨",
+    //     description: "Drawing and digital illustration have been my creative outlet since childhood. I enjoy exploring different styles from character design to landscape paintings.",
+    //     gallery: [
+    //         { id: 1, src: "/images/hobbies/art/art_1.jpg", alt: "Character illustration with vibrant colors" },
+    //         { id: 2, src: "/images/hobbies/art/art_2.jpg", alt: "Digital landscape painting" },
+    //         { id: 3, src: "/images/hobbies/art/art_3.jpg", alt: "Creative artwork piece" },
+    //         { id: 4, src: "/images/hobbies/art/art_4.jpg", alt: "Artistic illustration project" },
+    //     ],
+    // },
+    // {
+    //     id: "pastry",
+    //     title: "Pastry Making",
+    //     icon: "🍰",
+    //     description: "As a certified pâtissier, I find joy in crafting beautiful desserts. From delicate macarons to elegant layer cakes, baking is where art meets science.",
+    //     gallery: [
+    //         { id: 1, src: "/images/hobbies/pastry/pastry_1.jpg", alt: "Handcrafted artisanal dessert" },
+    //         { id: 2, src: "/images/hobbies/pastry/pastry_2.jpg", alt: "Elegant layered cake creation" },
+    //         { id: 3, src: "/images/hobbies/pastry/pastry_3.jpg", alt: "Delicate French pastry" },
+    //         { id: 4, src: "/images/hobbies/pastry/pastry_4.jpg", alt: "Beautiful patisserie work" },
+    //     ],
+    // },
     // {
     //     id: "photography",
     //     title: "Photography",
@@ -76,23 +76,22 @@ export const hobbyActivities = [
     },
     {
         id: 2,
+        title: "Open HCI Workshop",
+        type: "Workshop",
+        date: "2021",
+        description: "Human-Computer Interaction workshop as technical team member, working with Arduino IDE and embedded systems.",
+        image: "/images/activities/workshop_2.jpg",
+        tags: ["Arduino IDE", "Embedded", "HCI", "UX Design"],
+    },
+    {
+        id: 3,
         title: "Vision AI DevKit Workshop",
         type: "Workshop",
         date: "2019",
         description: "Microsoft & Coding Angels Girls TECHgether workshop on Azure, AI, and Machine Learning.",
         image: "/images/activities/workshop_1.jpg",
         tags: ["Azure", "AI", "Machine Learning"],
-    },
-    {
-        id: 3,
-        title: "Open HCI Workshop",
-        type: "Workshop",
-        date: "2018",
-        description: "Human-Computer Interaction workshop as technical team member, working with Arduino IDE and embedded systems.",
-        image: "/images/activities/workshop_2.jpg",
-        tags: ["Arduino IDE", "Embedded", "HCI", "UX Design"],
-    },
-
+    }
 ];
 
 // Scholarships Data
