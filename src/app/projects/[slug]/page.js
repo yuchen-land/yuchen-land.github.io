@@ -49,7 +49,7 @@ export default function ProjectDocPage({ params }) {
       <TableOfContents />
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 xl:px-8 py-20 md:py-24 pt-32 md:pt-40">
+      <div className="relative z-10 max-w-3xl mx-auto px-6 py-20 md:py-24 pt-32 md:pt-40">
         {/* Back Button - Subtle */}
         <Link
           href="/portfolio"
