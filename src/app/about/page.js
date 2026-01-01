@@ -42,7 +42,7 @@ export default function AboutPage() {
                   <p className="text-xs text-gray-500 mt-1">Projects Built</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-semibold text-gray-900">10+</p>
+                  <p className="text-2xl font-semibold text-gray-900">15+</p>
                   <p className="text-xs text-gray-500 mt-1">Skills & Tech</p>
                 </div>
               </div>
