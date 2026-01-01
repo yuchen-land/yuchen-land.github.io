@@ -99,9 +99,10 @@ export default function Home() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
-            {/* Contact Me */}
+            {/* Download Resume */}
             <a
-              href={`mailto:${personalInfo.email}`}
+              href="/YuChen_Liu_Resume.pdf"
+              download="YuChen_Liu_Resume.pdf"
               className="group inline-flex items-center gap-2 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full px-6 py-2.5 text-sm font-medium tracking-wide hover:from-rose-600 hover:to-pink-600 hover:scale-105 transition-all duration-300 shadow-sm hover:shadow-md"
             >
               <svg
@@ -114,10 +115,10 @@ export default function Home() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={1.5}
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                 />
               </svg>
-              Contact Me
+              Download Resume
             </a>
 
             {/* Portfolio Button */}
@@ -140,13 +141,6 @@ export default function Home() {
               </svg>
               View Portfolio
             </Link>
-          </div>
-
-          {/* Email - Minimal */}
-          <div className="pt-4">
-            <span className="text-xs text-rose-400/70 font-light tracking-wide">
-              {personalInfo.email}
-            </span>
           </div>
         </div>
 
