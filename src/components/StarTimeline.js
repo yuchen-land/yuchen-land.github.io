@@ -62,37 +62,39 @@ function StarStep({ step, content, index, isLast }) {
     >
       {/* Timeline line */}
       {!isLast && (
-        <div className="absolute left-6 md:left-8 top-14 bottom-0 w-0.5 bg-gradient-to-b from-pink-200 to-pink-100/50" />
+        <div className="absolute left-5 md:left-8 top-12 bottom-0 w-px bg-gradient-to-b from-rose-200/60 to-rose-100/30" />
       )}
 
       {/* Step indicator */}
       <div
-        className={`absolute left-0 md:left-2 top-0 w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-md`}
+        className={`absolute left-0 md:left-2 top-0 w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-sm`}
       >
-        <span className="text-white font-bold text-xl md:text-2xl">{step.letter}</span>
+        <span className="text-white font-semibold text-lg md:text-xl">{step.letter}</span>
       </div>
 
       {/* Content card */}
-      <div className={`${step.bgColor} ${step.borderColor} border rounded-2xl p-6 md:p-8 mb-8`}>
-        <div className="mb-4">
-          <h3 className="text-xl md:text-2xl font-bold text-gray-800">{step.title}</h3>
-          <p className="text-sm text-gray-500">{step.subtitle}</p>
+      <div className="backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl p-5 md:p-6 mb-6 shadow-sm">
+        <div className="mb-3">
+          <h3 className="text-lg font-semibold text-gray-900">{step.title}</h3>
+          <p className="text-xs text-gray-400">{step.subtitle}</p>
         </div>
 
         {isArray ? (
-          <ul className="space-y-3">
+          <ul className="space-y-2">
             {content.map((item, i) => (
               <li
                 key={i}
-                className="flex items-start gap-3"
+                className="flex items-start gap-2.5"
               >
-                <span className={`w-2 h-2 rounded-full bg-gradient-to-r ${step.color} mt-2 flex-shrink-0`} />
-                <span className="text-gray-700 leading-relaxed">{item}</span>
+                <svg className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                <span className="text-gray-700 text-sm leading-relaxed">{item}</span>
               </li>
             ))}
           </ul>
         ) : (
-          <p className="text-gray-700 leading-relaxed">{content}</p>
+          <p className="text-gray-700 text-sm leading-relaxed">{content}</p>
         )}
       </div>
     </motion.div>
@@ -103,9 +105,9 @@ export default function StarTimeline({ star }) {
   if (!star) return null;
 
   return (
-    <section id="star" className="mb-20">
-      <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
-        <span className="text-rose-500">⭐</span> Project Journey (STAR)
+    <section id="star" className="mb-20 animate-fade-in">
+      <h2 className="text-xl font-semibold text-gray-900 mb-6">
+        Project Journey
       </h2>
 
       <div className="relative">

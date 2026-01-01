@@ -50,12 +50,12 @@ export default function RelatedProjects({ currentProjectSlug, currentTags = [] }
   if (relatedProjects.length === 0) return null;
 
   return (
-    <section id="related" className="mb-20">
-      <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
-        <span className="text-rose-500">📁</span> Related Projects
+    <section id="related" className="mb-20 animate-fade-in">
+      <h2 className="text-xl font-semibold text-gray-900 mb-6">
+        Related Projects
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {relatedProjects.map((project, index) => (
           <motion.div
             key={project.id}
@@ -66,7 +66,7 @@ export default function RelatedProjects({ currentProjectSlug, currentTags = [] }
           >
             <Link
               href={`/projects/${project.slug}`}
-              className="group block backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:scale-[1.01]"
+              className="group block backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all"
             >
               {/* Project Image */}
               <div className="relative h-40 bg-gradient-to-br from-pink-50 to-rose-50 overflow-hidden">
@@ -90,17 +90,17 @@ export default function RelatedProjects({ currentProjectSlug, currentTags = [] }
               </div>
 
               {/* Project Info */}
-              <div className="p-5">
-                <h3 className="font-bold text-gray-800 group-hover:text-rose-600 transition-colors mb-2 line-clamp-1">
+              <div className="p-4">
+                <h3 className="font-semibold text-gray-900 group-hover:text-rose-600 transition-colors mb-2 text-sm line-clamp-1">
                   {project.title}
                 </h3>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 mb-3">
+                <div className="flex flex-wrap gap-1 mb-3">
                   {project.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="bg-rose-50 text-rose-600 px-2 py-0.5 rounded-lg text-xs font-medium"
+                      className="text-rose-400 text-xs px-2 py-0.5 bg-rose-50/80 rounded-md"
                     >
                       {tag}
                     </span>
@@ -113,9 +113,9 @@ export default function RelatedProjects({ currentProjectSlug, currentTags = [] }
                 </div>
 
                 {/* View Link */}
-                <div className="flex items-center gap-1 text-sm text-rose-500 font-medium group-hover:gap-2 transition-all">
-                  <span>View Project</span>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center gap-1 text-xs text-gray-500 group-hover:text-rose-500 group-hover:gap-1.5 transition-all">
+                  <span>View details</span>
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </div>

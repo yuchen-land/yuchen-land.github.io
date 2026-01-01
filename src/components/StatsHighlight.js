@@ -100,17 +100,17 @@ function StatCard({ stat, index }) {
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="backdrop-blur-sm bg-white/70 border border-pink-200/50 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+      className="backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
     >
       <div className="flex items-center gap-4">
-        <div className="w-12 h-12 rounded-xl bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-500">
+        <div className="w-11 h-11 rounded-lg bg-rose-50/80 flex items-center justify-center text-rose-400">
           {iconMap[stat.icon] || iconMap.star}
         </div>
         <div>
-          <div className="text-3xl md:text-4xl font-bold text-rose-600">
+          <div className="text-2xl md:text-3xl font-semibold text-gray-900">
             <AnimatedNumber value={stat.value} isInView={isInView} />
           </div>
-          <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
+          <div className="text-sm text-gray-500">{stat.label}</div>
         </div>
       </div>
     </motion.div>
@@ -121,12 +121,12 @@ export default function StatsHighlight({ stats }) {
   if (!stats || stats.length === 0) return null;
 
   return (
-    <section id="stats" className="mb-20">
-      <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
-        <span className="text-rose-500">📊</span> Key Highlights
+    <section id="stats" className="mb-20 animate-fade-in">
+      <h2 className="text-xl font-semibold text-gray-900 mb-6">
+        Key Highlights
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {stats.map((stat, index) => (
           <StatCard key={index} stat={stat} index={index} />
         ))}
