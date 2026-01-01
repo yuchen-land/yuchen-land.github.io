@@ -144,7 +144,7 @@ export const brandVentures = [
     },
     {
         id: 2,
-        name: "Bonbunny",
+        name: "Bonbunny 甜點工作室",
         type: "Pastry Brand",
         role: "Founder",
         description: "Artisanal pastry studio specializing in handcrafted desserts and custom cakes.",
@@ -171,7 +171,7 @@ export const brandVentures = [
         id: 4,
         name: "蓮花生 Lotus Peanut Candy",
         type: "Food Brand",
-        role: "Founder",
+        role: "Co-founder",
         description: "Traditional Taiwanese peanut candy brand with modern packaging and online presence.",
         url: "https://lotus-peanut.com",
         logo: "/images/brands/lotus_peanut.jpg",
