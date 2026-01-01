@@ -2,7 +2,7 @@
 
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
-import { hobbies, hobbyActivities, volunteerService, brandVentures } from "@/data/hobbiesData";
+import { hobbies, hobbyActivities, scholarships, brandVentures } from "@/data/hobbiesData";
 import { useState } from "react";
 
 export default function BeyondPage() {
@@ -188,44 +188,61 @@ export default function BeyondPage() {
                     </div>
                 </section>
 
-                {/* Volunteer Service Section */}
+                {/* Scholarships Section */}
                 <section className="mb-20 animate-fade-in">
                     <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                        Volunteer Service
+                        Scholarships & Awards
                     </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {volunteerService.map((service) => (
+                        {scholarships.map((scholarship) => (
                             <div
-                                key={service.id}
+                                key={scholarship.id}
                                 className="group backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
                             >
-                                {/* Service Image */}
-                                <div className="relative h-40 bg-gradient-to-br from-emerald-50 to-teal-50 overflow-hidden">
-                                    <Image
-                                        src={service.image}
-                                        alt={service.organization}
-                                        fill
-                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                        onError={(e) => {
-                                            e.target.style.display = 'none';
-                                        }}
-                                    />
-                                    {/* Role Badge */}
-                                    <div className="absolute top-3 left-3 px-2.5 py-1 bg-emerald-50/90 backdrop-blur-sm rounded-lg text-xs font-medium text-emerald-600">
-                                        {service.role}
+                                {/* Header with gradient */}
+                                <div className="relative h-20 bg-gradient-to-br from-amber-50 to-rose-50 flex items-center justify-center">
+                                    {/* Trophy/Academic Icon */}
+                                    <div className="text-rose-300/60">
+                                        {scholarship.icon === "trophy" ? (
+                                            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M18.75 4.236c.982.143 1.954.317 2.916.52A6.003 6.003 0 0016.27 9.728M18.75 4.236V4.5c0 2.108-.966 3.99-2.48 5.228M7.73 9.728a6.726 6.726 0 002.748 1.35m3.044 0a6.726 6.726 0 002.748-1.35m-8.592 0a6.966 6.966 0 00.52 3.172M16.27 9.728a6.966 6.966 0 01-.52 3.172" />
+                                            </svg>
+                                        ) : (
+                                            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+                                            </svg>
+                                        )}
+                                    </div>
+                                    {/* Year Badges */}
+                                    <div className="absolute top-3 right-3 flex gap-1">
+                                        {scholarship.years.map((year) => (
+                                            <span key={year} className="px-2 py-0.5 bg-white/80 backdrop-blur-sm rounded-md text-xs font-medium text-rose-500">
+                                                {year}
+                                            </span>
+                                        ))}
                                     </div>
                                 </div>
 
-                                {/* Service Content */}
+                                {/* Content */}
                                 <div className="p-5">
-                                    <div className="flex items-center justify-between mb-2">
-                                        <h3 className="font-medium text-gray-900 text-sm md:text-base">{service.organization}</h3>
-                                        <span className="text-xs text-gray-400">{service.period}</span>
+                                    <div className="flex items-start justify-between gap-2 mb-2">
+                                        <h3 className="font-medium text-gray-900 text-sm leading-tight">{scholarship.name}</h3>
+                                        {scholarship.url && (
+                                            <a
+                                                href={scholarship.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex-shrink-0 text-gray-300 hover:text-rose-400 transition-colors"
+                                            >
+                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                                </svg>
+                                            </a>
+                                        )}
                                     </div>
-                                    <p className="text-sm text-gray-500 leading-relaxed">
-                                        {service.description}
-                                    </p>
+                                    <p className="text-xs text-gray-400 mb-2">{scholarship.nameEn}</p>
+                                    <p className="text-xs text-gray-500 leading-relaxed">{scholarship.organization}</p>
                                 </div>
                             </div>
                         ))}

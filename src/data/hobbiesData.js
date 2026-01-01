@@ -69,31 +69,35 @@ export const hobbyActivities = [
     },
 ];
 
-// Volunteer Service Data
-export const volunteerService = [
+// Scholarships Data
+export const scholarships = [
     {
         id: 1,
-        organization: "Local Community Center",
-        role: "Teaching Assistant",
-        period: "2023 - Present",
-        description: "Helping elderly learn basic computer and smartphone skills, including social media and video calls with family.",
-        image: "/images/volunteer/volunteer_1.jpg",
+        name: "國科會博士班研究獎學金",
+        nameEn: "NSTC PhD Research Scholarship",
+        organization: "國家科學及技術委員會",
+        years: ["2024"],
+        description: "獲選國科會博士班研究獎學金，支持博士班研究計畫。",
+        icon: "trophy",
+        url: "https://www.nstc.gov.tw",
     },
     {
         id: 2,
-        organization: "Animal Shelter",
-        role: "Weekend Volunteer",
-        period: "2022 - 2023",
-        description: "Caring for shelter animals, assisting with adoption events, and helping with social media content.",
-        image: "/images/volunteer/volunteer_2.jpg",
+        name: "鴻海獎學鯨",
+        nameEn: "Foxconn Scholarship",
+        organization: "鴻海教育基金會",
+        years: ["2022"],
+        description: "榮獲第六屆、第七屆鴻海獎學鯨，肯定學業表現與未來發展潛力。",
+        icon: "trophy",
     },
     {
         id: 3,
-        organization: "Children's Coding Workshop",
-        role: "Instructor",
-        period: "2024",
-        description: "Teaching programming basics to elementary school students using Scratch and fun coding games.",
-        image: "/images/volunteer/volunteer_3.jpg",
+        name: "余鑑教授獎學金",
+        nameEn: "Prof. Yu Chien Scholarship",
+        organization: "國立臺灣師範大學科技應用與人力資源發展學系",
+        years: ["2020", "2021"],
+        description: "表彰優異學業成績與積極參與系上活動之貢獻。",
+        icon: "academic",
     },
 ];
 
