@@ -4,14 +4,14 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const sections = [
-  { id: "screenshots", label: "Screenshots", icon: "📸" },
-  { id: "stats", label: "Highlights", icon: "📊" },
-  { id: "star", label: "STAR", icon: "⭐" },
-  { id: "tech", label: "Tech Stack", icon: "⚙️" },
-  { id: "features", label: "Features", icon: "✨" },
-  { id: "roles", label: "Roles", icon: "👤" },
-  { id: "links", label: "Links", icon: "🔗" },
-  { id: "related", label: "Related", icon: "📁" },
+  { id: "screenshots", label: "Screenshots" },
+  { id: "stats", label: "Highlights" },
+  { id: "star", label: "Journey" },
+  { id: "tech", label: "Tech Stack" },
+  { id: "features", label: "Features" },
+  { id: "roles", label: "Roles" },
+  { id: "links", label: "Links" },
+  { id: "related", label: "Related" },
 ];
 
 export default function TableOfContents() {
@@ -67,31 +67,27 @@ export default function TableOfContents() {
         x: isVisible ? 0 : -20,
       }}
       transition={{ duration: 0.3 }}
-      className="fixed left-6 top-1/2 -translate-y-1/2 z-40 hidden xl:block"
+      className="fixed left-4 xl:left-6 top-1/2 -translate-y-1/2 z-40 hidden xl:block"
     >
-      <div className="backdrop-blur-md bg-white/80 border border-pink-200/50 rounded-2xl p-4 shadow-lg">
-        <div className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 px-2">
-          Contents
-        </div>
-        <ul className="space-y-1">
+      <div className="backdrop-blur-sm bg-white/50 border border-white/60 rounded-lg p-2 shadow-sm min-w-[120px]">
+        <ul className="space-y-0.5">
           {sections.map((section) => (
             <li key={section.id}>
               <button
                 onClick={() => scrollToSection(section.id)}
-                className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm transition-all duration-200 ${
+                className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-md text-[11px] transition-all duration-200 ${
                   activeSection === section.id
-                    ? "bg-gradient-to-r from-rose-100 to-pink-100 text-rose-700 font-semibold"
-                    : "text-gray-600 hover:bg-pink-50 hover:text-rose-600"
+                    ? "bg-rose-50/80 text-rose-600 font-medium"
+                    : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"
                 }`}
               >
-                <span className="text-base">{section.icon}</span>
-                <span>{section.label}</span>
                 {activeSection === section.id && (
                   <motion.div
                     layoutId="activeIndicator"
-                    className="ml-auto w-1.5 h-1.5 rounded-full bg-rose-500"
+                    className="w-1 h-1 rounded-full bg-rose-400 flex-shrink-0"
                   />
                 )}
+                <span>{section.label}</span>
               </button>
             </li>
           ))}
