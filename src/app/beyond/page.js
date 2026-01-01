@@ -187,7 +187,7 @@ export default function BeyondPage() {
                             brandVentures.map((brand) => (
                                 <div
                                     key={brand.id}
-                                    className="group backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                                    className="group flex flex-col backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
                                 >
                                     {/* Brand Logo */}
                                     <div className="relative h-40 bg-gradient-to-br from-rose-50 to-pink-50 overflow-hidden">
@@ -210,17 +210,17 @@ export default function BeyondPage() {
                                     </div>
 
                                     {/* Brand Content */}
-                                    <div className="p-5">
+                                    <div className="p-5 flex flex-col flex-grow">
                                         <div className="flex items-center justify-between mb-2">
                                             <h3 className="font-medium text-gray-900">{brand.name}</h3>
                                             <span className="text-xs text-rose-400 font-medium">{brand.role}</span>
                                         </div>
-                                        <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                                        <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-grow">
                                             {brand.description}
                                         </p>
 
                                         {/* Action Buttons */}
-                                        <div className="flex items-center gap-2 flex-wrap">
+                                        <div className="flex items-center gap-2 flex-wrap mt-auto pt-2">
                                             {brand.url && brand.url !== "#" && (
                                                 <a
                                                     href={brand.url}
@@ -389,44 +389,39 @@ export default function BeyondPage() {
                                 {hobby.description}
                             </p>
 
-                            {/* Pet Profile Cards */}
+                            {/* Pet Profile Cards - Clean Cute Design */}
                             {hobby.isPetSection && hobby.pets && (
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                                     {hobby.pets.length === 0 ? (
                                         <EmptyState title="No pets yet" description="Pet profiles will appear here." />
                                     ) : (
                                         hobby.pets.map((pet) => (
                                             <div
                                                 key={pet.id}
-                                                className="group backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                                                className="group backdrop-blur-sm bg-white/70 border border-pink-100/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
                                             >
-                                                {/* Pet Avatar */}
-                                                <div className="relative aspect-square overflow-hidden">
-                                                    <ImageWithSkeleton
-                                                        src={pet.src}
-                                                        alt={`${pet.name} (${pet.nameEn}) - ${pet.type}`}
-                                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                                    />
+                                                {/* Pet Photo - Rounded */}
+                                                <div className="pt-6 pb-3 flex justify-center bg-gradient-to-b from-pink-50/50 to-transparent">
+                                                    <div className="relative w-28 h-28 rounded-full overflow-hidden ring-3 ring-white shadow-md">
+                                                        <ImageWithSkeleton
+                                                            src={pet.src}
+                                                            alt={`${pet.name} (${pet.nameEn}) - ${pet.type}`}
+                                                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                                        />
+                                                    </div>
                                                 </div>
+
                                                 {/* Pet Info */}
-                                                <div className="p-4 text-center">
-                                                    <div className="text-2xl mb-1">{pet.emoji}</div>
-                                                    <h3 className="font-medium text-gray-900">{pet.name}</h3>
-                                                    <p className="text-xs text-gray-400 mb-2">{pet.type}</p>
-                                                    {pet.instagram && (
-                                                        <a
-                                                            href={pet.instagram}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="inline-flex items-center gap-1 px-2.5 py-1 bg-pink-50/80 hover:bg-pink-100/80 text-pink-500 rounded-lg text-xs font-medium transition-colors"
-                                                            aria-label={`${pet.name} Instagram`}
-                                                        >
-                                                            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                                                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                                                            </svg>
-                                                            IG
-                                                        </a>
-                                                    )}
+                                                <div className="px-4 pb-5 text-center">
+                                                    {/* Emoji */}
+                                                    <div className="text-xl mb-1">{pet.emoji}</div>
+
+                                                    {/* Name */}
+                                                    <h3 className="font-semibold text-gray-800">{pet.name}</h3>
+                                                    <p className="text-xs text-rose-400 mb-2">{pet.nameEn}</p>
+
+                                                    {/* Type */}
+                                                    <p className="text-xs text-gray-400">{pet.type}</p>
                                                 </div>
                                             </div>
                                         ))

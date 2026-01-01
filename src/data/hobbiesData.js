@@ -55,8 +55,8 @@ export const hobbies = [
         description: "Life is better with furry companions.",
         isPetSection: true,
         pets: [
-            { id: 1, name: "劉漾漾", nameEn: "YangYang", type: "豆柴 Mame Shiba", emoji: "🐕", src: "/images/hobbies/pets/yangyang.jpg", instagram: "https://www.instagram.com/liuliangliang_yangyang" },
-            { id: 2, name: "劉亮亮", nameEn: "LiangLiang", type: "長毛豆柴 Long-haired Mame Shiba", emoji: "🐕", src: "/images/hobbies/pets/liangliang.jpg", instagram: "https://www.instagram.com/liuliangliang_yangyang" },
+            { id: 1, name: "劉漾漾", nameEn: "YoungYoung", type: "豆柴 Mame Shiba", emoji: "🐕", src: "/images/hobbies/pets/yangyang.jpg", instagram: "https://www.instagram.com/liuliangliang_yangyang" },
+            { id: 2, name: "劉亮亮", nameEn: "BlingBling", type: "長毛豆柴 Long-haired Mame Shiba", emoji: "🐕", src: "/images/hobbies/pets/liangliang.jpg", instagram: "https://www.instagram.com/liuliangliang_yangyang" },
             { id: 3, name: "灰搭", nameEn: "HuiDa", type: "暹羅貓 Siamese Cat", emoji: "🐱", src: "/images/hobbies/pets/huida.jpg" },
         ],
         gallery: [],
@@ -104,7 +104,7 @@ export const scholarships = [
         years: ["2024"],
         description: "獲選國科會博士班研究獎學金，支持博士班研究計畫。",
         icon: "trophy",
-        url: "https://www.nstc.gov.tw",
+        url: "https://www.nstc.gov.tw/sci/ch/detail/13b9f964-9623-4681-b53c-833c3e136e97",
     },
     {
         id: 2,
@@ -152,7 +152,8 @@ export const brandVentures = [
         logo: "/images/brands/bonbunny.jpg",
         status: "Growing",
         social: {
-            instagram: "https://instagram.com/bonbunny",
+            instagram: "https://www.instagram.com/bonbunny_pastry?igsh=dW1vd2V2MzZ1dXE%3D&utm_source=qr",
+            facebook: "https://www.facebook.com/profile.php?id=61581678515752",
         },
     },
     {
@@ -164,10 +165,7 @@ export const brandVentures = [
         url: "https://muse-classic.com",
         logo: "/images/brands/muse_classic.jpg",
         status: "Active",
-        social: {
-            instagram: "https://instagram.com/muse_classic",
-            facebook: "https://facebook.com/museclassic",
-        },
+        social: {},
     },
     {
         id: 4,
@@ -178,9 +176,7 @@ export const brandVentures = [
         url: "https://lotus-peanut.com",
         logo: "/images/brands/lotus_peanut.jpg",
         status: "Active",
-        social: {
-            facebook: "https://facebook.com/lotuspeanut",
-        },
+        social: {},
     },
     {
         id: 5,
