@@ -167,12 +167,21 @@ export default function BeyondPage() {
                                 {/* Activity Content */}
                                 <div className="p-5">
                                     <div className="flex items-center justify-between mb-2">
-                                        <h3 className="font-medium text-gray-900">{activity.title}</h3>
-                                        <span className="text-xs text-gray-400">{activity.date}</span>
+                                        <h3 className="font-medium text-gray-900 text-sm">{activity.title}</h3>
+                                        <span className="text-xs text-gray-400 flex-shrink-0 ml-2">{activity.date}</span>
                                     </div>
-                                    <p className="text-sm text-gray-500 leading-relaxed">
+                                    <p className="text-sm text-gray-500 leading-relaxed mb-3">
                                         {activity.description}
                                     </p>
+                                    {activity.tags && (
+                                        <div className="flex flex-wrap gap-1.5">
+                                            {activity.tags.map((tag, i) => (
+                                                <span key={i} className="text-xs px-2 py-0.5 bg-rose-50/80 text-rose-400 rounded-md">
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         ))}
