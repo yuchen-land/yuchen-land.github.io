@@ -36,6 +36,7 @@ export default function ProjectCard({ project }) {
             {project.type === "frontend" && "Frontend"}
             {project.type === "backend" && "Backend"}
             {project.type === "fullstack" && "Full-stack"}
+            {project.type === "firmware" && "Firmware"}
           </div>
         )}
 

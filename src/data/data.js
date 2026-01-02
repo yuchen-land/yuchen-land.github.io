@@ -301,7 +301,7 @@ export const projects = [
     ], github: "https://fir-mandarin-dc1.notion.site/MOXA-f7348ef5700d4f339ce71741b1b0dcea",
     image: `/images/projects/linux_serial_port.jpg`,
     tags: ["Python", "Pyserial", "Linux", "UML Plant Diagram", "Arm", "x86", "Embedded"],
-    type: "Embedded",
+    type: "firmware",
     featured: false,
   },
   {
@@ -433,12 +433,18 @@ export const tagCategories = {
     name: "Tools & Platforms",
     icon: "🛠️",
     color: "from-green-400 to-emerald-500",
-    tags: ["Git", "Docker", "Linux", "Figma", "Unity", "Autodesk 3ds Max", "UML Plant Diagram", "Pyserial", "Arduino IDE", "Arm", "x86", "uv", "Vercel", "Metadata API (SEO)"],
+    tags: ["Git", "Docker", "Linux", "Figma", "Unity", "Autodesk 3ds Max", "UML Plant Diagram", "uv", "Vercel", "Metadata API (SEO)"],
+  },
+  firmware: {
+    name: "Firmware & Embedded",
+    icon: "🔌",
+    color: "from-teal-400 to-cyan-500",
+    tags: ["Arduino IDE", "Pyserial", "Arm", "x86", "Assembly Language", "Firmware", "Embedded"],
   },
   specialization: {
     name: "Specialization",
     icon: "⭐",
     color: "from-rose-400 to-pink-500",
-    tags: ["Founder", "Team Leader", "Assembly Language", "Firmware", "IPv6", "Segment Routing", "SDN", "Path Selection", "Network Resilience", "APNOMS 2025", "Embedded"],
+    tags: ["Founder", "Team Leader", "IPv6", "Segment Routing", "SDN", "Path Selection", "Network Resilience", "APNOMS 2025"],
   },
 };

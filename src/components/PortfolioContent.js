@@ -13,6 +13,7 @@ export default function PortfolioContent() {
     backend: true,
     languages: true,
     tools: false,
+    firmware: false,
     specialization: false,
   });
 
