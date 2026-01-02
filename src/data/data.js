@@ -186,7 +186,6 @@ export const skills = {
     "Unity",
   ],
   aiTools: [
-    "GitHub Copilot",
     "Claude / Anthropic API",
     "Gemini Pro",
   ],
