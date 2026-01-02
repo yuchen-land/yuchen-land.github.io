@@ -41,6 +41,29 @@ export const metadata = {
     ],
     apple: "/icon.png",
   },
+  metadataBase: new URL("https://yuchen-land.github.io"),
+  openGraph: {
+    title: "Yu-Chen(Cindy), Liu - Software Engineer",
+    description: "Welcome to my professional portfolio showcasing my work and expertise",
+    url: "https://yuchen-land.github.io",
+    siteName: "Yu-Chen Liu Portfolio",
+    images: [
+      {
+        url: "/images/Cindy.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Yu-Chen Liu - Software Engineer",
+      },
+    ],
+    locale: "zh_TW",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Yu-Chen(Cindy), Liu - Software Engineer",
+    description: "Welcome to my professional portfolio showcasing my work and expertise",
+    images: ["/images/Cindy.jpg"],
+  },
 };
 
 export default function RootLayout({ children }) {
