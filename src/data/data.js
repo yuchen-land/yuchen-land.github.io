@@ -150,8 +150,8 @@ export const skills = {
     "C",
     "C++",
     "Python",
-    "C#", 
-    "JavaScript", 
+    "C#",
+    "JavaScript",
     "TypeScript",
   ],
   frontend: [
@@ -164,10 +164,10 @@ export const skills = {
   backend: [
     "Python",
     "Node.js",
-    "Express.js", 
+    "Express.js",
     "RESTful API",
-    "FastAPI", 
-    "PostgreSQL", 
+    "FastAPI",
+    "PostgreSQL",
     "Supabase"
   ],
 
@@ -423,6 +423,12 @@ export const tagCategories = {
     color: "from-purple-400 to-pink-500",
     tags: ["Node.js", "Express.js", "FastAPI", "RESTful API Design", "DevOps", "Supabase", "PostgreSQL"],
   },
+  firmware: {
+    name: "Firmware & Embedded",
+    icon: "🔌",
+    color: "from-teal-400 to-cyan-500",
+    tags: ["Arduino IDE", "Pyserial", "Arm", "x86", "Assembly Language", "Firmware", "Embedded"],
+  },
   languages: {
     name: "Programming Languages",
     icon: "💻",
@@ -434,12 +440,6 @@ export const tagCategories = {
     icon: "🛠️",
     color: "from-green-400 to-emerald-500",
     tags: ["Git", "Docker", "Linux", "Figma", "Unity", "Autodesk 3ds Max", "UML Plant Diagram", "uv", "Vercel", "Metadata API (SEO)"],
-  },
-  firmware: {
-    name: "Firmware & Embedded",
-    icon: "🔌",
-    color: "from-teal-400 to-cyan-500",
-    tags: ["Arduino IDE", "Pyserial", "Arm", "x86", "Assembly Language", "Firmware", "Embedded"],
   },
   specialization: {
     name: "Specialization",
