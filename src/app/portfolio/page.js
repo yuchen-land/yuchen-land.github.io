@@ -13,7 +13,7 @@ export default function PortfolioPage() {
       <Navbar />
 
       <div className="relative z-10 min-h-screen py-16 px-4 pt-32 md:pt-40">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <PortfolioContent />
         </div>
       </div>

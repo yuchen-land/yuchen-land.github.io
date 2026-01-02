@@ -158,7 +158,7 @@ export default function PortfolioContent() {
               {filteredFeatured.length + (thesisMatchesTag ? 1 : 0)} highlighted project{filteredFeatured.length + (thesisMatchesTag ? 1 : 0) !== 1 ? "s" : ""}
             </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-8 items-stretch">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
             {filteredFeatured.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
@@ -178,7 +178,7 @@ export default function PortfolioContent() {
               {filteredOther.length} additional project{filteredOther.length !== 1 ? "s" : ""}
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
             {filteredOther.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
