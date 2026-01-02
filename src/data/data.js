@@ -249,7 +249,7 @@ export const activities = [
     organization: "Open HCI Workshop",
     role: "Technical Team",
     activity: "Human-Computer Interaction Workshop",
-    period: "2022",
+    period: "2021",
   },
 ];
 
@@ -301,7 +301,7 @@ export const projects = [
     ], github: "https://fir-mandarin-dc1.notion.site/MOXA-f7348ef5700d4f339ce71741b1b0dcea",
     image: `/images/projects/linux_serial_port.jpg`,
     tags: ["Python", "Pyserial", "Linux", "UML Plant Diagram", "Arm", "x86", "Embedded"],
-    type: "backend",
+    type: "Embedded",
     featured: false,
   },
   {
