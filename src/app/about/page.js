@@ -160,6 +160,7 @@ export default function AboutPage() {
                     {category === "database" && "Database & Storage"}
                     {category === "tools" && "Development Tools"}
                     {category === "design" && "Design & Multimedia"}
+                    {category === "aiTools" && "AI-Driven Tools"}
                   </h3>
                   <div className="flex flex-wrap gap-1.5">
                     {items.map((skill) => (

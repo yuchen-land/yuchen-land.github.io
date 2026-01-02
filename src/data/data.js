@@ -178,6 +178,11 @@ export const skills = {
     "Autodesk 3ds Max",
     "Unity",
   ],
+  aiTools: [
+    "GitHub Copilot",
+    "Claude / Anthropic API",
+    "Gemini Pro",
+  ],
 };
 
 // Publications
