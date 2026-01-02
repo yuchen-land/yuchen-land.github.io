@@ -150,29 +150,36 @@ export const skills = {
     "C",
     "C++",
     "Python",
+    "C#", 
+    "JavaScript", 
+    "TypeScript",
   ],
   frontend: [
     "React",
     "Next.js",
-    "TypeScript",
-    "JavaScript",
     "Tailwind CSS",
     "HTML/CSS",
+    "Figma",
   ],
   backend: [
-    "Node.js",
     "Python",
+    "Node.js",
+    "Express.js", 
     "RESTful API",
+    "FastAPI", 
+    "PostgreSQL", 
+    "Supabase"
   ],
 
   tools: [
     "Git",
     "Docker",
     "Linux",
+    "DevOps",
     "Arduino IDE",
+    "GitHub Copilot"
   ],
   design: [
-    "Figma",
     "Photoshop",
     "Illustrator",
     "Autodesk 3ds Max",
