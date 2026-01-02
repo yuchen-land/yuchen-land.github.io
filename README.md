@@ -39,10 +39,10 @@ Beyond coding, I'm also a pâtissier - I founded [BonBunny Pastry Studio](https:
 
 ## Tech Stack
 
-**Languages**: C, C++, Python, JavaScript, TypeScript
-**Frontend**: React, Next.js, Tailwind CSS
-**Backend**: Node.js, Express.js, FastAPI, PostgreSQL
-**Tools**: Git, Docker, Linux, Figma
+- **Languages**: C, C++, Python, JavaScript, TypeScript
+- **Frontend**: React, Next.js, Tailwind CSS
+- **Backend**: Node.js, Express.js, FastAPI, PostgreSQL
+- **Tools**: Git, Docker, Linux, Figma
 
 ## Connect with Me
 
