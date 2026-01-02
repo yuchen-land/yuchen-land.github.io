@@ -1,8 +1,11 @@
 import "./globals.css";
+import { Suspense } from "react";
 import { Nunito } from "next/font/google";
 import { Caveat } from "next/font/google";
 import { Comfortaa } from "next/font/google";
 import { Outfit } from "next/font/google";
+import BackToTop from "@/components/BackToTop";
+import TopProgressBar from "@/components/TopProgressBar";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -73,7 +76,11 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=optional" />
       </head>
       <body className={`${nunito.className} ${caveat.variable} ${comfortaa.variable} ${outfit.variable}`} suppressHydrationWarning>
+        <Suspense fallback={null}>
+          <TopProgressBar />
+        </Suspense>
         {children}
+        <BackToTop />
       </body>
     </html>
   );

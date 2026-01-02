@@ -61,7 +61,7 @@ export default function PortfolioContent() {
         <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-4">
           Portfolio
         </p>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 tracking-tight mb-6">
+        <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight mb-4">
           Selected Works
         </h1>
         <p className="text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">

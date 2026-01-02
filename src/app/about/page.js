@@ -18,7 +18,7 @@ export default function AboutPage() {
             <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-4">
               About
             </p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 tracking-tight mb-6">
+            <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight mb-4">
               Yu-Chen (Cindy) Liu
             </h1>
             <p className="text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">
