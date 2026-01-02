@@ -28,7 +28,12 @@ export default function AcademicCard({ thesis }) {
           </div>
         )}
 
-        {/* Thesis Badge */}
+        {/* Type Badge - Top Left */}
+        <div className="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-xs font-medium shadow-sm bg-white/90 text-gray-600 backdrop-blur-sm">
+          Thesis
+        </div>
+
+        {/* Thesis Badge - Top Right */}
         <div className="absolute top-3 right-3 w-6 h-6 bg-rose-400 rounded-full flex items-center justify-center shadow-sm">
           <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20">
             <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
@@ -51,18 +56,6 @@ export default function AcademicCard({ thesis }) {
                 {thesis.year}
               </span>
             )}
-          </div>
-
-          {/* Academic Info - Compact */}
-          <div className="flex gap-2 mb-3 text-xs">
-            <div className="bg-rose-50/60 rounded-lg px-2.5 py-1.5 border border-rose-100/50">
-              <span className="text-gray-400">Advisor:</span>
-              <span className="text-gray-700 font-medium ml-1">{thesis.advisor.name.split(',')[0]}</span>
-            </div>
-            <div className="bg-rose-50/60 rounded-lg px-2.5 py-1.5 border border-rose-100/50">
-              <span className="text-gray-400">@</span>
-              <span className="text-gray-700 font-medium ml-1">{thesis.institution.split(' ').slice(-1)[0]}</span>
-            </div>
           </div>
 
           {/* Research Highlights with expand/collapse */}
