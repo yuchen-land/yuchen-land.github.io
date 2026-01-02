@@ -124,7 +124,7 @@ export default function ProjectCard({ project }) {
 
         {/* Tech Tags - Clean & Minimal */}
         <div className="flex flex-wrap gap-1 mb-4">
-          {project.tags.slice(0, 4).map((tag) => (
+          {project.tags.map((tag) => (
             <span
               key={tag}
               className="text-rose-400 text-[11px] px-2 py-0.5 bg-rose-50/80 rounded-md"
@@ -132,11 +132,6 @@ export default function ProjectCard({ project }) {
               {tag}
             </span>
           ))}
-          {project.tags.length > 4 && (
-            <span className="text-gray-400 text-[11px] px-2 py-0.5">
-              +{project.tags.length - 4}
-            </span>
-          )}
         </div>
 
         {/* Action Buttons - Compact Style */}

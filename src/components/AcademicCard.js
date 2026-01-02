@@ -99,7 +99,7 @@ export default function AcademicCard({ thesis }) {
 
           {/* Tech Tags - Compact */}
           <div className="flex flex-wrap gap-1 mb-4">
-            {thesis.tags.slice(0, 4).map((tag) => (
+            {thesis.tags.map((tag) => (
               <span
                 key={tag}
                 className="text-rose-400 text-[11px] px-2 py-0.5 bg-rose-50/80 rounded-md"
@@ -107,11 +107,6 @@ export default function AcademicCard({ thesis }) {
                 {tag}
               </span>
             ))}
-            {thesis.tags.length > 4 && (
-              <span className="text-gray-400 text-[11px] px-2 py-0.5">
-                +{thesis.tags.length - 4}
-              </span>
-            )}
           </div>
         </div>
 
