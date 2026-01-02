@@ -12,9 +12,9 @@ export default function PortfolioContent() {
     frontend: true,
     backend: true,
     languages: true,
-    tools: false,
-    firmware: false,
-    specialization: false,
+    tools: true,
+    firmware: true,
+    specialization: true,
   });
 
   const featuredProjects = projects.filter((p) => p.featured);
