@@ -164,7 +164,7 @@ export const brandVentures = [
         description: "Korean fashion e-commerce platform focusing on curated women's clothing and accessories.",
         url: "https://muse-classic.vercel.app/",
         logo: "/images/brands/muse_classic.jpg",
-        status: "Active",
+        status: "Growing",
         social: {},
     },
     {
@@ -175,7 +175,7 @@ export const brandVentures = [
         description: "Traditional Taiwanese peanut candy brand with modern packaging and online presence.",
         url: "https://lotus-peanut-candy.vercel.app",
         logo: "/images/brands/lotus_peanut.jpg",
-        status: "Active",
+        status: "Growing",
         social: {},
     },
     {
@@ -186,7 +186,7 @@ export const brandVentures = [
         description: "Creating educational games and content to teach coding and technology.",
         url: null,
         logo: "/images/brands/tech_blog.jpg",
-        status: "Growing",
+        // status: "Growing",
         social: {},
     },
 ];
