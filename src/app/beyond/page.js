@@ -66,6 +66,117 @@ function ImageWithSkeleton({ src, alt, fill = true, className = "", onError }) {
     );
 }
 
+// Horizontal Scrollable Gallery Component
+function HorizontalGallery({ gallery, onImageClick }) {
+    const scrollRef = useRef(null);
+    const [showLeftArrow, setShowLeftArrow] = useState(false);
+    const [showRightArrow, setShowRightArrow] = useState(false);
+
+    const checkScrollPosition = useCallback(() => {
+        if (scrollRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+            setShowLeftArrow(scrollLeft > 0);
+            setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
+        }
+    }, []);
+
+    useEffect(() => {
+        checkScrollPosition();
+        const scrollContainer = scrollRef.current;
+        if (scrollContainer) {
+            scrollContainer.addEventListener('scroll', checkScrollPosition);
+            window.addEventListener('resize', checkScrollPosition);
+        }
+        return () => {
+            if (scrollContainer) {
+                scrollContainer.removeEventListener('scroll', checkScrollPosition);
+            }
+            window.removeEventListener('resize', checkScrollPosition);
+        };
+    }, [checkScrollPosition]);
+
+    const scroll = (direction) => {
+        if (scrollRef.current) {
+            const scrollAmount = scrollRef.current.clientWidth * 0.8;
+            scrollRef.current.scrollBy({
+                left: direction === 'left' ? -scrollAmount : scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    return (
+        <div className="relative group/gallery">
+            {/* Left Arrow */}
+            {showLeftArrow && (
+                <button
+                    onClick={() => scroll('left')}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-white/60 text-gray-600 hover:text-rose-500 hover:bg-white transition-all duration-300 -translate-x-1/2 opacity-0 group-hover/gallery:opacity-100"
+                    aria-label="Scroll left"
+                >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+            )}
+
+            {/* Right Arrow */}
+            {showRightArrow && (
+                <button
+                    onClick={() => scroll('right')}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-white/60 text-gray-600 hover:text-rose-500 hover:bg-white transition-all duration-300 translate-x-1/2 opacity-0 group-hover/gallery:opacity-100"
+                    aria-label="Scroll right"
+                >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            )}
+
+            {/* Scrollable Container */}
+            <div
+                ref={scrollRef}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-2"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+                {gallery.map((image) => (
+                    <div
+                        key={image.id}
+                        onClick={() => onImageClick(image, gallery)}
+                        className="group relative flex-shrink-0 w-48 h-48 md:w-56 md:h-56 rounded-xl overflow-hidden backdrop-blur-sm bg-white/50 border border-white/60 shadow-sm cursor-pointer hover:shadow-md transition-all duration-300"
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`View ${image.alt || 'image'} in fullscreen`}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                onImageClick(image, gallery);
+                            }
+                        }}
+                    >
+                        <ImageWithSkeleton
+                            src={image.src}
+                            alt={image.alt || ''}
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        {/* Hover Overlay */}
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                            <svg
+                                className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                            </svg>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
 export default function BeyondPage() {
     const [lightboxImage, setLightboxImage] = useState(null);
     const [currentGallery, setCurrentGallery] = useState([]);
@@ -429,43 +540,12 @@ export default function BeyondPage() {
                                 </div>
                             )}
 
-                            {/* Gallery Grid */}
+                            {/* Gallery */}
                             {hobby.gallery && hobby.gallery.length > 0 && (
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                    {hobby.gallery.map((image) => (
-                                        <div
-                                            key={image.id}
-                                            onClick={() => openLightbox(image, hobby.gallery)}
-                                            className="group relative aspect-square rounded-xl overflow-hidden backdrop-blur-sm bg-white/50 border border-white/60 shadow-sm cursor-pointer hover:shadow-md transition-all duration-300"
-                                            role="button"
-                                            tabIndex={0}
-                                            aria-label={`View ${image.alt || 'image'} in fullscreen`}
-                                            onKeyDown={(e) => {
-                                                if (e.key === 'Enter' || e.key === ' ') {
-                                                    e.preventDefault();
-                                                    openLightbox(image, hobby.gallery);
-                                                }
-                                            }}
-                                        >
-                                            <ImageWithSkeleton
-                                                src={image.src}
-                                                alt={image.alt || ''}
-                                                className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                            />
-                                            {/* Hover Overlay */}
-                                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-                                                <svg
-                                                    className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
+                                <HorizontalGallery
+                                    gallery={hobby.gallery}
+                                    onImageClick={openLightbox}
+                                />
                             )}
 
                             {/* Empty Gallery State */}
