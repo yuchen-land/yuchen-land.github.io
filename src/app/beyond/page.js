@@ -67,14 +67,17 @@ function ImageWithSkeleton({ src, alt, fill = true, className = "", onError }) {
 }
 
 // Horizontal Scroll Container Component
-function HorizontalScrollContainer({ children, className = "" }) {
+function HorizontalScrollContainer({ children, className = "", mobileArrowsOnly = false }) {
     const scrollRef = useRef(null);
     const [showLeftArrow, setShowLeftArrow] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(false);
+    const [hasOverflow, setHasOverflow] = useState(false);
 
     const checkScrollPosition = useCallback(() => {
         if (scrollRef.current) {
             const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+            const isOverflowing = scrollWidth > clientWidth + 10;
+            setHasOverflow(isOverflowing);
             setShowLeftArrow(scrollLeft > 0);
             setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
         }
@@ -111,7 +114,7 @@ function HorizontalScrollContainer({ children, className = "" }) {
             {showLeftArrow && (
                 <button
                     onClick={() => scroll('left')}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-white/60 text-gray-600 hover:text-rose-500 hover:bg-white transition-all duration-300 -translate-x-1/2 opacity-0 group-hover/scroll:opacity-100"
+                    className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-white/60 text-gray-600 hover:text-rose-500 hover:bg-white transition-all duration-300 -translate-x-1/2 opacity-0 group-hover/scroll:opacity-100 ${mobileArrowsOnly ? 'md:hidden' : ''}`}
                     aria-label="Scroll left"
                 >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -124,7 +127,7 @@ function HorizontalScrollContainer({ children, className = "" }) {
             {showRightArrow && (
                 <button
                     onClick={() => scroll('right')}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-white/60 text-gray-600 hover:text-rose-500 hover:bg-white transition-all duration-300 translate-x-1/2 opacity-0 group-hover/scroll:opacity-100"
+                    className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-white/60 text-gray-600 hover:text-rose-500 hover:bg-white transition-all duration-300 translate-x-1/2 opacity-0 group-hover/scroll:opacity-100 ${mobileArrowsOnly ? 'md:hidden' : ''}`}
                     aria-label="Scroll right"
                 >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,7 +139,7 @@ function HorizontalScrollContainer({ children, className = "" }) {
             {/* Scrollable Container */}
             <div
                 ref={scrollRef}
-                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-2"
+                className={`flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-2 ${!hasOverflow ? 'justify-center' : ''}`}
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
                 {children}
@@ -150,10 +153,13 @@ function HorizontalGallery({ gallery, onImageClick }) {
     const scrollRef = useRef(null);
     const [showLeftArrow, setShowLeftArrow] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(false);
+    const [hasOverflow, setHasOverflow] = useState(false);
 
     const checkScrollPosition = useCallback(() => {
         if (scrollRef.current) {
             const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+            const isOverflowing = scrollWidth > clientWidth + 10;
+            setHasOverflow(isOverflowing);
             setShowLeftArrow(scrollLeft > 0);
             setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
         }
@@ -215,7 +221,7 @@ function HorizontalGallery({ gallery, onImageClick }) {
             {/* Scrollable Container */}
             <div
                 ref={scrollRef}
-                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-2"
+                className={`flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-2 ${!hasOverflow ? 'justify-center' : ''}`}
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
                 {gallery.map((image) => (
@@ -370,14 +376,14 @@ export default function BeyondPage() {
                         Founder & Brand Ventures
                     </h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {brandVentures.length === 0 ? (
-                            <EmptyState title="No ventures yet" description="Brand ventures will appear here." />
-                        ) : (
-                            brandVentures.map((brand) => (
+                    {brandVentures.length === 0 ? (
+                        <EmptyState title="No ventures yet" description="Brand ventures will appear here." />
+                    ) : (
+                        <HorizontalScrollContainer>
+                            {brandVentures.map((brand) => (
                                 <div
                                     key={brand.id}
-                                    className="group flex flex-col backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                                    className="group flex-shrink-0 w-72 flex flex-col backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
                                 >
                                     {/* Brand Logo */}
                                     <div className="relative h-40 bg-gradient-to-br from-rose-50 to-pink-50 overflow-hidden">
@@ -458,9 +464,9 @@ export default function BeyondPage() {
                                         </div>
                                     </div>
                                 </div>
-                            ))
-                        )}
-                    </div>
+                            ))}
+                        </HorizontalScrollContainer>
+                    )}
                 </section>
 
                 {/* Activities & Events Section */}
@@ -472,7 +478,7 @@ export default function BeyondPage() {
                     {hobbyActivities.length === 0 ? (
                         <EmptyState title="No activities yet" description="Activities and events will appear here." />
                     ) : (
-                        <HorizontalScrollContainer>
+                        <HorizontalScrollContainer mobileArrowsOnly>
                             {hobbyActivities.map((activity) => (
                                 <div
                                     key={activity.id}
