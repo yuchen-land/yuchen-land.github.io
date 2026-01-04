@@ -585,7 +585,7 @@ export default function BeyondPage() {
                                 {hobby.description}
                             </p>
 
-                            {/* Pet Profile Cards - Clean Cute Design */}
+                            {/* Pet Profile Cards - Cute Design */}
                             {hobby.isPetSection && hobby.pets && (
                                 hobby.pets.length === 0 ? (
                                     <EmptyState title="No pets yet" description="Pet profiles will appear here." />
@@ -594,11 +594,11 @@ export default function BeyondPage() {
                                         {hobby.pets.map((pet) => (
                                             <div
                                                 key={pet.id}
-                                                className="group flex-shrink-0 w-56 backdrop-blur-sm bg-white/70 border border-pink-100/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                                                className="group flex-shrink-0 w-52 backdrop-blur-sm bg-white/80 border border-rose-100/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
                                             >
-                                                {/* Pet Photo - Rounded */}
-                                                <div className="pt-6 pb-3 flex justify-center bg-gradient-to-b from-pink-50/50 to-transparent">
-                                                    <div className="relative w-28 h-28 rounded-full overflow-hidden ring-3 ring-white shadow-md">
+                                                {/* Pet Photo */}
+                                                <div className="pt-6 pb-3 flex justify-center">
+                                                    <div className="relative w-28 h-28 rounded-full overflow-hidden ring-2 ring-rose-100 shadow-sm">
                                                         <ImageWithSkeleton
                                                             src={pet.src}
                                                             alt={`${pet.name} (${pet.nameEn}) - ${pet.type}`}
@@ -608,16 +608,12 @@ export default function BeyondPage() {
                                                 </div>
 
                                                 {/* Pet Info */}
-                                                <div className="px-4 pb-5 text-center">
-                                                    {/* Emoji */}
-                                                    <div className="text-xl mb-1">{pet.emoji}</div>
-
-                                                    {/* Name */}
-                                                    <h3 className="font-semibold text-gray-800">{pet.name}</h3>
-                                                    <p className="text-xs text-rose-400 mb-2">{pet.nameEn}</p>
-
-                                                    {/* Type */}
-                                                    <p className="text-xs text-gray-400">{pet.type}</p>
+                                                <div className="px-5 pb-5 text-center">
+                                                    <h3 className="font-semibold text-gray-800 text-base mb-0.5">
+                                                        {pet.name} <span className={pet.gender === '♀' ? 'text-pink-400' : 'text-blue-400'}>{pet.gender}</span>
+                                                    </h3>
+                                                    <p className="text-sm text-gray-500 mb-2">{pet.nameEn}</p>
+                                                    <p className="text-xs text-gray-500">{pet.type}</p>
                                                 </div>
                                             </div>
                                         ))}

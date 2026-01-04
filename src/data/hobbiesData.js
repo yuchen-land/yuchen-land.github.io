@@ -17,7 +17,7 @@ export const hobbies = [
         id: "pastry",
         title: "Pastry Making",
         icon: "🍰",
-        description: "As a certified pâtissier, I find joy in crafting beautiful desserts. From delicate macarons to elegant layer cakes, baking is where art meets science.",
+        description: "A passionate baker bridging West and East. From meticulous Western artistry to timeless Chinese heritage, I craft joy in every bite.",
         gallery: [
             { id: 1, src: "/images/hobbies/pastry/pastry_1.jpg" },
             { id: 2, src: "/images/hobbies/pastry/pastry_2.jpg" },
@@ -61,9 +61,9 @@ export const hobbies = [
         description: "Life is better with furry companions.",
         isPetSection: true,
         pets: [
-            { id: 1, name: "劉漾漾", nameEn: "YoungYoung", type: "豆柴 Mame Shiba", emoji: "🐕", src: "/images/hobbies/pets/yangyang.JPG", instagram: "https://www.instagram.com/liuliangliang_yangyang" },
-            { id: 2, name: "劉亮亮", nameEn: "BlingBling", type: "長毛豆柴 Long-haired Mame Shiba", emoji: "🐕", src: "/images/hobbies/pets/liangliang.JPG", instagram: "https://www.instagram.com/liuliangliang_yangyang" },
-            { id: 3, name: "灰搭", nameEn: "HuiDa", type: "暹羅貓 Siamese Cat", emoji: "🐱", src: "/images/hobbies/pets/huida.JPG" },
+            { id: 1, name: "劉漾漾", nameEn: "YoungYoung", type: "豆柴 Mame Shiba", gender: "♀", src: "/images/hobbies/pets/yangyang.JPG", instagram: "https://www.instagram.com/liuliangliang_yangyang" },
+            { id: 2, name: "劉亮亮", nameEn: "BlingBling", type: "長毛豆柴 Long-haired Mame Shiba", gender: "♀", src: "/images/hobbies/pets/liangliang.JPG", instagram: "https://www.instagram.com/liuliangliang_yangyang" },
+            { id: 3, name: "灰搭", nameEn: "HuiDa", type: "暹羅貓 Siamese Cat", gender: "♂", src: "/images/hobbies/pets/huida.JPG" },
         ],
         gallery: [],
     },

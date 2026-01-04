@@ -1,6 +1,6 @@
 # Hi, I'm Cindy! (Yu-Chen Liu)
 
-**Software Engineer & Pâtissier** based in Taipei, Taiwan.
+**Software Engineer & Baking Enthusiast** based in Taipei, Taiwan.
 
 Welcome to my personal website repository! This is where I showcase my professional journey, projects, and the things I'm passionate about.
 
@@ -12,7 +12,7 @@ Welcome to my personal website repository! This is where I showcase my professio
 
 I'm a software engineer at CyberLink, where I develop core features for MyEdit image, audio, and video projects. My work focuses on delivering professional performance with smooth user experiences using React.
 
-Beyond coding, I'm also a pâtissier - I founded [BonBunny Pastry Studio](https://bonbunny.vercel.app/), combining my love for technology and artisanal baking.
+Beyond coding, I'm also a baking enthusiast - I founded [BonBunny Pastry Studio](https://bonbunny.vercel.app/), combining my love for technology and home baking.
 
 ## Education
 
