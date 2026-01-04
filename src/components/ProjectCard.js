@@ -10,6 +10,7 @@ export default function ProjectCard({ project }) {
   const hasDocumentation = doc !== undefined;
   const projectSlug = doc?.slug;
   const [imgError, setImgError] = useState(false);
+  const [imgLoading, setImgLoading] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Show only first bullet point by default
@@ -19,14 +20,28 @@ export default function ProjectCard({ project }) {
     <div className="bg-white/60 backdrop-blur-sm rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-white/60 group flex flex-col h-full">
       {/* Project Image */}
       <div className="relative h-40 bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100 overflow-hidden flex-shrink-0">
+        {/* Loading Skeleton */}
+        {imgLoading && !imgError && (
+          <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-rose-100 to-pink-100">
+            <div className="w-full h-full flex items-center justify-center">
+              <svg className="w-10 h-10 text-rose-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+              </svg>
+            </div>
+          </div>
+        )}
         {!imgError ? (
           <Image
             src={project.image}
             alt={project.title}
             width={400}
             height={224}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-            onError={() => setImgError(true)}
+            className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-110 ${imgLoading ? 'opacity-0' : 'opacity-100'}`}
+            onLoad={() => setImgLoading(false)}
+            onError={() => {
+              setImgError(true);
+              setImgLoading(false);
+            }}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-pink-400 to-rose-500 text-white text-5xl font-bold">
