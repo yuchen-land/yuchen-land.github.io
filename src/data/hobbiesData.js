@@ -1,17 +1,18 @@
 // Hobbies Data - Gallery sections for creative hobbies
 export const hobbies = [
-    // {
-    //     id: "art",
-    //     title: "Art & Illustration",
-    //     icon: "🎨",
-    //     description: "Drawing and digital illustration have been my creative outlet since childhood. I enjoy exploring different styles from character design to landscape paintings.",
-    //     gallery: [
-    //         { id: 1, src: "/images/hobbies/art/art_1.jpg", alt: "Character illustration with vibrant colors" },
-    //         { id: 2, src: "/images/hobbies/art/art_2.jpg", alt: "Digital landscape painting" },
-    //         { id: 3, src: "/images/hobbies/art/art_3.jpg", alt: "Creative artwork piece" },
-    //         { id: 4, src: "/images/hobbies/art/art_4.jpg", alt: "Artistic illustration project" },
-    //     ],
-    // },
+    {
+        id: "art",
+        title: "Art & Illustration",
+        icon: "🎨",
+        description: "Oil painting has been my creative outlet since childhood. I enjoy exploring different styles from character design to landscape paintings.",
+        gallery: [
+            { id: 1, src: "/images/hobbies/art/art_1.jpg" },
+            { id: 2, src: "/images/hobbies/art/art_2.jpg" },
+            { id: 3, src: "/images/hobbies/art/art_3.jpg" },
+            { id: 4, src: "/images/hobbies/art/art_4.jpg" },
+            { id: 5, src: "/images/hobbies/art/art_5.jpg" }
+        ],
+    },
     // {
     //     id: "pastry",
     //     title: "Pastry Making",
