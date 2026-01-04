@@ -66,6 +66,85 @@ function ImageWithSkeleton({ src, alt, fill = true, className = "", onError }) {
     );
 }
 
+// Horizontal Scroll Container Component
+function HorizontalScrollContainer({ children, className = "" }) {
+    const scrollRef = useRef(null);
+    const [showLeftArrow, setShowLeftArrow] = useState(false);
+    const [showRightArrow, setShowRightArrow] = useState(false);
+
+    const checkScrollPosition = useCallback(() => {
+        if (scrollRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+            setShowLeftArrow(scrollLeft > 0);
+            setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
+        }
+    }, []);
+
+    useEffect(() => {
+        checkScrollPosition();
+        const scrollContainer = scrollRef.current;
+        if (scrollContainer) {
+            scrollContainer.addEventListener('scroll', checkScrollPosition);
+            window.addEventListener('resize', checkScrollPosition);
+        }
+        return () => {
+            if (scrollContainer) {
+                scrollContainer.removeEventListener('scroll', checkScrollPosition);
+            }
+            window.removeEventListener('resize', checkScrollPosition);
+        };
+    }, [checkScrollPosition]);
+
+    const scroll = (direction) => {
+        if (scrollRef.current) {
+            const scrollAmount = scrollRef.current.clientWidth * 0.8;
+            scrollRef.current.scrollBy({
+                left: direction === 'left' ? -scrollAmount : scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    return (
+        <div className={`relative group/scroll ${className}`}>
+            {/* Left Arrow */}
+            {showLeftArrow && (
+                <button
+                    onClick={() => scroll('left')}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-white/60 text-gray-600 hover:text-rose-500 hover:bg-white transition-all duration-300 -translate-x-1/2 opacity-0 group-hover/scroll:opacity-100"
+                    aria-label="Scroll left"
+                >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+            )}
+
+            {/* Right Arrow */}
+            {showRightArrow && (
+                <button
+                    onClick={() => scroll('right')}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-white/60 text-gray-600 hover:text-rose-500 hover:bg-white transition-all duration-300 translate-x-1/2 opacity-0 group-hover/scroll:opacity-100"
+                    aria-label="Scroll right"
+                >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            )}
+
+            {/* Scrollable Container */}
+            <div
+                ref={scrollRef}
+                className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-2"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+                {children}
+            </div>
+        </div>
+    );
+}
+
 // Horizontal Scrollable Gallery Component
 function HorizontalGallery({ gallery, onImageClick }) {
     const scrollRef = useRef(null);
@@ -443,14 +522,14 @@ export default function BeyondPage() {
                         Scholarships & Awards
                     </h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {scholarships.length === 0 ? (
-                            <EmptyState title="No scholarships yet" description="Scholarships and awards will appear here." />
-                        ) : (
-                            scholarships.map((scholarship) => (
+                    {scholarships.length === 0 ? (
+                        <EmptyState title="No scholarships yet" description="Scholarships and awards will appear here." />
+                    ) : (
+                        <HorizontalScrollContainer>
+                            {scholarships.map((scholarship) => (
                                 <div
                                     key={scholarship.id}
-                                    className="group backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300"
+                                    className="group flex-shrink-0 w-72 backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300"
                                 >
                                     {/* Year Badges */}
                                     <div className="flex gap-1.5 mb-3">
@@ -481,9 +560,9 @@ export default function BeyondPage() {
                                     <p className="text-xs text-gray-400 mb-2">{scholarship.nameEn}</p>
                                     <p className="text-xs text-gray-500 leading-relaxed">{scholarship.organization}</p>
                                 </div>
-                            ))
-                        )}
-                    </div>
+                            ))}
+                        </HorizontalScrollContainer>
+                    )}
                 </section>
 
                 {/* Hobbies Sections */}
