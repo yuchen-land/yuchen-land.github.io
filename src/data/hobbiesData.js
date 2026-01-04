@@ -13,18 +13,23 @@ export const hobbies = [
             { id: 5, src: "/images/hobbies/art/art_5.jpg" }
         ],
     },
-    // {
-    //     id: "pastry",
-    //     title: "Pastry Making",
-    //     icon: "🍰",
-    //     description: "As a certified pâtissier, I find joy in crafting beautiful desserts. From delicate macarons to elegant layer cakes, baking is where art meets science.",
-    //     gallery: [
-    //         { id: 1, src: "/images/hobbies/pastry/pastry_1.jpg", alt: "Handcrafted artisanal dessert" },
-    //         { id: 2, src: "/images/hobbies/pastry/pastry_2.jpg", alt: "Elegant layered cake creation" },
-    //         { id: 3, src: "/images/hobbies/pastry/pastry_3.jpg", alt: "Delicate French pastry" },
-    //         { id: 4, src: "/images/hobbies/pastry/pastry_4.jpg", alt: "Beautiful patisserie work" },
-    //     ],
-    // },
+    {
+        id: "pastry",
+        title: "Pastry Making",
+        icon: "🍰",
+        description: "As a certified pâtissier, I find joy in crafting beautiful desserts. From delicate macarons to elegant layer cakes, baking is where art meets science.",
+        gallery: [
+            { id: 1, src: "/images/hobbies/pastry/pastry_1.jpg" },
+            { id: 2, src: "/images/hobbies/pastry/pastry_2.jpg" },
+            { id: 3, src: "/images/hobbies/pastry/pastry_3.jpg" },
+            { id: 4, src: "/images/hobbies/pastry/pastry_4.jpg" },
+            { id: 5, src: "/images/hobbies/pastry/pastry_5.jpg" },
+            { id: 6, src: "/images/hobbies/pastry/pastry_6.jpg" },
+            { id: 7, src: "/images/hobbies/pastry/pastry_7.jpg" },
+            { id: 8, src: "/images/hobbies/pastry/pastry_8.jpg" },
+            { id: 9, src: "/images/hobbies/pastry/pastry_9.jpg" },
+        ],
+    },
     // {
     //     id: "photography",
     //     title: "Photography",
