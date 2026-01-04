@@ -439,7 +439,7 @@ export default function BeyondPage() {
                                             className="group relative aspect-square rounded-xl overflow-hidden backdrop-blur-sm bg-white/50 border border-white/60 shadow-sm cursor-pointer hover:shadow-md transition-all duration-300"
                                             role="button"
                                             tabIndex={0}
-                                            aria-label={`View ${image.alt} in fullscreen`}
+                                            aria-label={`View ${image.alt || 'image'} in fullscreen`}
                                             onKeyDown={(e) => {
                                                 if (e.key === 'Enter' || e.key === ' ') {
                                                     e.preventDefault();
@@ -449,7 +449,7 @@ export default function BeyondPage() {
                                         >
                                             <ImageWithSkeleton
                                                 src={image.src}
-                                                alt={image.alt}
+                                                alt={image.alt || ''}
                                                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                                             />
                                             {/* Hover Overlay */}
@@ -553,7 +553,7 @@ export default function BeyondPage() {
                         <div className="relative w-full aspect-square md:aspect-video rounded-xl overflow-hidden bg-black/50">
                             <ImageWithSkeleton
                                 src={lightboxImage.src}
-                                alt={lightboxImage.alt}
+                                alt={lightboxImage.alt || ''}
                                 className="object-contain"
                             />
                         </div>
