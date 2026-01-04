@@ -469,14 +469,14 @@ export default function BeyondPage() {
                         Activities & Events
                     </h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {hobbyActivities.length === 0 ? (
-                            <EmptyState title="No activities yet" description="Activities and events will appear here." />
-                        ) : (
-                            hobbyActivities.map((activity) => (
+                    {hobbyActivities.length === 0 ? (
+                        <EmptyState title="No activities yet" description="Activities and events will appear here." />
+                    ) : (
+                        <HorizontalScrollContainer>
+                            {hobbyActivities.map((activity) => (
                                 <div
                                     key={activity.id}
-                                    className="group backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                                    className="group flex-shrink-0 w-80 backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
                                 >
                                     {/* Activity Image */}
                                     <div className="relative h-40 bg-gradient-to-br from-rose-50 to-pink-50 overflow-hidden">
@@ -511,9 +511,9 @@ export default function BeyondPage() {
                                         )}
                                     </div>
                                 </div>
-                            ))
-                        )}
-                    </div>
+                            ))}
+                        </HorizontalScrollContainer>
+                    )}
                 </section>
 
                 {/* Scholarships Section */}
@@ -581,14 +581,14 @@ export default function BeyondPage() {
 
                             {/* Pet Profile Cards - Clean Cute Design */}
                             {hobby.isPetSection && hobby.pets && (
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                                    {hobby.pets.length === 0 ? (
-                                        <EmptyState title="No pets yet" description="Pet profiles will appear here." />
-                                    ) : (
-                                        hobby.pets.map((pet) => (
+                                hobby.pets.length === 0 ? (
+                                    <EmptyState title="No pets yet" description="Pet profiles will appear here." />
+                                ) : (
+                                    <HorizontalScrollContainer>
+                                        {hobby.pets.map((pet) => (
                                             <div
                                                 key={pet.id}
-                                                className="group backdrop-blur-sm bg-white/70 border border-pink-100/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                                                className="group flex-shrink-0 w-56 backdrop-blur-sm bg-white/70 border border-pink-100/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
                                             >
                                                 {/* Pet Photo - Rounded */}
                                                 <div className="pt-6 pb-3 flex justify-center bg-gradient-to-b from-pink-50/50 to-transparent">
@@ -614,9 +614,9 @@ export default function BeyondPage() {
                                                     <p className="text-xs text-gray-400">{pet.type}</p>
                                                 </div>
                                             </div>
-                                        ))
-                                    )}
-                                </div>
+                                        ))}
+                                    </HorizontalScrollContainer>
+                                )
                             )}
 
                             {/* Gallery */}
