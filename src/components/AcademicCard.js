@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 
 export default function AcademicCard({ thesis }) {
   const [imgError, setImgError] = useState(false);
@@ -26,7 +26,7 @@ export default function AcademicCard({ thesis }) {
           </div>
         )}
         {thesis.image && !imgError ? (
-          <Image
+          <ExportedImage
             src={thesis.image}
             alt={thesis.title}
             fill

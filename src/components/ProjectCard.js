@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import Link from "next/link";
 import { projectDocumentation } from "@/data/data";
 
@@ -31,7 +31,7 @@ export default function ProjectCard({ project }) {
           </div>
         )}
         {!imgError ? (
-          <Image
+          <ExportedImage
             src={project.image}
             alt={project.title}
             width={400}

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import Navbar from "@/components/Navbar";
 import TypewriterText from "@/components/TypewriterText";
 import {
@@ -28,7 +28,7 @@ function ImageWithSkeleton({ src, alt, width, height, className = "", onError })
         </div>
       )}
       {!hasError && (
-        <Image
+        <ExportedImage
           src={src}
           alt={alt}
           width={width}
@@ -74,7 +74,7 @@ export default function Home() {
             <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden bg-white p-0.5 group-hover:scale-105 transition-all duration-300 shadow-[0_4px_24px_rgba(251,207,232,0.35)]">
               <div className="w-full h-full rounded-full overflow-hidden bg-white">
                 {!imgError ? (
-                  <Image
+                  <ExportedImage
                     src={personalInfo.avatar}
                     alt={personalInfo.name}
                     width={144}

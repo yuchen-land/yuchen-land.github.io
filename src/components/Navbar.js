@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -78,7 +78,7 @@ export default function Navbar() {
                 isScrolled ? "w-5 h-5" : "w-6 h-6"
               }`}
             >
-              <Image
+              <ExportedImage
                 src="/icon.png"
                 alt="Logo"
                 fill

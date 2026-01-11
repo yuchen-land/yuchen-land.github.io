@@ -1,7 +1,7 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import { hobbies, hobbyActivities, scholarships, brandVentures } from "@/data/hobbiesData";
 import { useState, useEffect, useCallback, useRef } from "react";
 
@@ -42,7 +42,7 @@ function ImageWithSkeleton({ src, alt, fill = true, className = "", onError }) {
         <>
             {isLoading && !hasError && <ImageSkeleton className="absolute inset-0" />}
             {!hasError && (
-                <Image
+                <ExportedImage
                     src={src}
                     alt={alt}
                     fill={fill}
@@ -392,13 +392,7 @@ export default function BeyondPage() {
                                             alt={`${brand.name} - ${brand.type} brand logo`}
                                             className="object-cover group-hover:scale-105 transition-transform duration-500"
                                         />
-                                        {/* Status Badge */}
-                                        <div className={`absolute top-3 left-3 px-2.5 py-1 backdrop-blur-sm rounded-lg text-xs font-medium ${brand.status === 'Active'
-                                            ? 'bg-emerald-50/90 text-emerald-600'
-                                            : 'bg-amber-50/90 text-amber-600'
-                                            }`}>
-                                            {brand.status}
-                                        </div>
+
                                         {/* Type Badge */}
                                         <div className="absolute top-3 right-3 px-2.5 py-1 bg-rose-50/90 backdrop-blur-sm rounded-lg text-xs font-medium text-rose-500">
                                             {brand.type}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Image with loading skeleton
@@ -21,7 +21,7 @@ function ImageWithSkeleton({ src, alt, className = "", sizes, priority = false, 
         </div>
       )}
       {!hasError && (
-        <Image
+        <ExportedImage
           src={src}
           alt={alt}
           fill={fill}

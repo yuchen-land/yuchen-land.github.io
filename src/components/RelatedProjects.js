@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
+import ExportedImage from "next-image-export-optimizer";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { projects, projectDocumentation } from "@/data/data";
@@ -23,7 +23,7 @@ function ImageWithSkeleton({ src, alt, className = "" }) {
         </div>
       )}
       {!hasError && (
-        <Image
+        <ExportedImage
           src={src}
           alt={alt}
           fill
