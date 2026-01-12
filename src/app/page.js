@@ -112,9 +112,6 @@ export default function Home() {
                 <TypewriterText
                   texts={[
                     "Software Engineer",
-                    "Frontend Developer",
-                    "Full-Stack Developer",
-                    "UI/UX Enthusiast",
                     "Pâtissier"
                   ]}
                   typingSpeed={80}
