@@ -8,6 +8,7 @@ import {
   personalInfo,
   internalLinks,
   projects,
+  thesis,
 } from "@/data/data";
 import { useState } from "react";
 
@@ -192,9 +193,25 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-            {projects
-              .filter((project) => project.featured)
-              .map((project) => (
+            {(() => {
+              const thesisFeatured = {
+                id: "thesis-srv6-demo",
+                title: "SRv6 PROA Dashboard — SDN Adaptive Path Selection",
+                description: [
+                  "Interactive routing visualization for my Master's thesis: real-time SDN/SRv6 topology, adaptive path selection (PROA), and SRH segment inspection — built front-end-first to bridge networking research and UI engineering.",
+                ],
+                image: thesis.image,
+                tags: ["SRv6", "SDN", "IPv6", "Visualization", "Frontend"],
+                type: "research",
+                demo: "/srv6_proa_demo.html",
+                featured: true,
+              };
+              const featuredList = projects.filter(
+                (project) => project.featured && project.id !== 2,
+              );
+              const myEditIdx = featuredList.findIndex((p) => p.id === 1);
+              featuredList.splice(myEditIdx + 1, 0, thesisFeatured);
+              return featuredList.map((project) => (
                 <div
                   key={project.id}
                   className="group backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full"
@@ -271,7 +288,8 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              ))}
+              ));
+            })()}
           </div>
 
           {/* View All Projects Button */}

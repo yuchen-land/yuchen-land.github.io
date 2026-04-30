@@ -234,6 +234,7 @@ export const thesis = {
   links: {
     advisor: "https://www.itlab.ee.ncku.edu.tw/pwtsai/index.html",
     conference: "https://apnoms.org/2025/",
+    demo: "/srv6_proa_demo.html",
   },
 };
 

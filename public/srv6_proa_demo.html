@@ -1,0 +1,2250 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Network SRE Dashboard ⋅ SRv6 PROA</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --bg: #f5f5f7;
+        --bg-2: #ebebef;
+        --card: #ffffff;
+        --border: rgba(0, 0, 0, 0.08);
+        --border-strong: rgba(0, 0, 0, 0.14);
+        --text: #1d1d1f;
+        --text-2: #6e6e73;
+        --text-3: #86868b;
+        --accent: #0071e3;
+        --accent-hover: #0077ed;
+        --accent-soft: rgba(0, 113, 227, 0.08);
+        --success: #30a46c;
+        --success-soft: rgba(48, 164, 108, 0.08);
+        --warn: #c08400;
+        --warn-soft: rgba(255, 149, 0, 0.1);
+        --danger: #d70015;
+        --danger-soft: rgba(215, 0, 21, 0.08);
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+      }
+      html, body {
+        background: var(--bg); color: var(--text);
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+          "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+        font-size: 14.5px; line-height: 1.5; letter-spacing: -0.005em;
+      }
+
+      .app { max-width: 1500px; margin: 0 auto; padding: 22px 24px 32px; }
+
+      /* ===== Header ===== */
+      header { padding: 4px 4px 14px; }
+      .header-top {
+        display: flex; align-items: flex-start; justify-content: space-between;
+        gap: 16px; flex-wrap: wrap;
+      }
+      header h1 {
+        font-size: 21px; font-weight: 600; letter-spacing: -0.02em;
+        color: var(--text); display: flex; align-items: center; gap: 10px;
+      }
+      .subtitle { font-size: 13.5px; color: var(--text-2); margin-top: 4px; }
+      .status-badge {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 7px 14px; background: var(--card);
+        border: 1px solid var(--border); border-radius: 999px;
+        font-size: 13px; color: var(--text-2); font-weight: 500; white-space: nowrap;
+      }
+      .status-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); }
+      .header-right { display: inline-flex; align-items: center; gap: 8px; }
+
+      /* ===== Toolbar ===== */
+      .toolbar {
+        display: grid;
+        grid-template-columns: auto auto 1fr;
+        gap: 14px; align-items: center;
+        padding: 12px 16px; background: var(--card);
+        border: 1px solid var(--border); border-radius: 14px;
+        box-shadow: var(--shadow-sm); margin-top: 14px;
+      }
+      .field-group { display: flex; flex-direction: column; gap: 4px; }
+      .field-label {
+        font-size: 10.5px; color: var(--text-3); font-weight: 600;
+        text-transform: uppercase; letter-spacing: 0.06em;
+        display: inline-flex; align-items: center; gap: 6px;
+      }
+
+      .segmented {
+        display: inline-flex; background: var(--bg-2);
+        border-radius: 10px; padding: 3px; gap: 2px;
+      }
+      .segmented .seg {
+        padding: 6px 14px; font-size: 12.5px; font-weight: 500;
+        border-radius: 7px; cursor: pointer;
+        color: var(--text-2);
+        transition: all 0.18s ease;
+        background: transparent; border: none;
+        font-family: inherit; position: relative;
+      }
+      .segmented .seg:hover:not(.active):not(:disabled) { color: var(--text); }
+      .segmented .seg.active {
+        background: var(--card); color: var(--text);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04);
+      }
+      .segmented .seg:disabled { opacity: 0.4; cursor: not-allowed; }
+      .segmented .seg .cache-dot {
+        position: absolute; top: 4px; right: 4px;
+        width: 6px; height: 6px; border-radius: 50%;
+        background: var(--success);
+        opacity: 0; transition: opacity 0.2s ease;
+      }
+      .segmented .seg.cached .cache-dot { opacity: 1; }
+
+      .kpi-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .kpi { background: var(--bg-2); border-radius: 10px; padding: 8px 12px; }
+      .kpi-label {
+        font-size: 10.5px; color: var(--text-3);
+        font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+        display: inline-flex; align-items: center; gap: 6px;
+      }
+      .kpi-value {
+        font-size: 19px; font-weight: 600; color: var(--text);
+        margin-top: 2px; letter-spacing: -0.02em;
+        font-variant-numeric: tabular-nums;
+      }
+      .kpi-value.good { color: var(--success); }
+      .kpi-value.warn { color: var(--warn); }
+      .kpi-value.bad { color: var(--danger); }
+      .kpi-value .unit { font-size: 12px; color: var(--text-3); font-weight: 500; margin-left: 2px; }
+
+      /* ===== Action bar ===== */
+      .controls {
+        display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+        padding: 12px 16px; background: var(--card);
+        border: 1px solid var(--border); border-radius: 14px;
+        box-shadow: var(--shadow-sm); margin-top: 12px;
+      }
+      .btn {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 8px 16px; background: var(--card);
+        border: 1px solid var(--border-strong);
+        color: var(--text); border-radius: 8px; cursor: pointer;
+        font-size: 13.5px; font-family: inherit; font-weight: 500;
+        transition: all 0.15s ease; letter-spacing: -0.005em;
+      }
+      .btn:hover:not(:disabled) { background: #fafafa; border-color: rgba(0,0,0,0.2); }
+      .btn:active:not(:disabled) { background: #f0f0f2; }
+      .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+      .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+      .btn.primary:hover:not(:disabled) { background: var(--accent-hover); border-color: var(--accent-hover); }
+      .btn.danger { background: #fff; border-color: rgba(215,0,21,0.3); color: var(--danger); }
+      .btn.danger:hover:not(:disabled) { background: var(--danger-soft); }
+      .btn.warn { background: #fff; border-color: rgba(192,132,0,0.3); color: var(--warn); }
+      .btn.warn:hover:not(:disabled) { background: var(--warn-soft); }
+      .btn.success { background: #fff; border-color: rgba(48,164,108,0.35); color: var(--success); }
+      .btn.success:hover:not(:disabled) { background: var(--success-soft); }
+
+      /* ===== Main grid ===== */
+      main { display: grid; grid-template-columns: 1.65fr 1fr; gap: 16px; margin-top: 14px; }
+      @media (max-width: 1100px) { main { grid-template-columns: 1fr; } }
+
+      .panel {
+        background: var(--card); border: 1px solid var(--border);
+        border-radius: 14px; box-shadow: var(--shadow-sm);
+        padding: 16px 18px;
+      }
+      .panel-title {
+        display: flex; align-items: center; gap: 8px;
+        font-size: 11.5px; font-weight: 600; color: var(--text-3);
+        text-transform: uppercase; letter-spacing: 0.06em;
+        margin-bottom: 4px;
+      }
+      .panel-title .live-dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: var(--success); opacity: 0;
+        transition: opacity 0.3s ease; margin-left: auto;
+      }
+      .panel.live .panel-title .live-dot {
+        opacity: 1; animation: livePulse 1.6s ease-in-out infinite;
+      }
+      @keyframes livePulse {
+        0%,100% { box-shadow: 0 0 0 0 rgba(48,164,108,0.55); }
+        50% { box-shadow: 0 0 0 5px rgba(48,164,108,0); }
+      }
+      .panel.live { border-color: rgba(48,164,108,0.35); animation: panelHighlight 0.7s ease-out; }
+      @keyframes panelHighlight {
+        0% { box-shadow: 0 0 0 4px rgba(48,164,108,0.18); }
+        100% { box-shadow: var(--shadow-sm); }
+      }
+      .panel-subtitle { font-size: 12.5px; color: var(--text-2); margin-bottom: 12px; line-height: 1.5; }
+
+      #topology-panel { padding: 14px 16px 12px; }
+      #topology-svg { width: 100%; height: auto; display: block; }
+
+      .right-col { display: flex; flex-direction: column; gap: 16px; }
+
+      /* SRH */
+      .srh {
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 13px; background: var(--bg);
+        border: 1px solid var(--border); border-radius: 10px;
+        padding: 10px 14px;
+      }
+      .srh .field {
+        display: flex; justify-content: space-between;
+        padding: 5px 0; border-bottom: 1px solid var(--border);
+      }
+      .srh .field:last-child { border-bottom: none; }
+      .srh .label { color: var(--text-3); }
+      .srh .val { color: var(--text); font-weight: 500; }
+      .srh .val.flash { animation: flash 0.6s ease-out; }
+      @keyframes flash {
+        0% { color: var(--accent); background: var(--accent-soft); }
+        100% { color: var(--text); background: transparent; }
+      }
+      .segment-list {
+        margin-top: 8px; border: 1px solid var(--border);
+        border-radius: 10px; overflow: hidden; min-height: 36px;
+      }
+      .segment-item {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 8px 12px; font-size: 12.5px;
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        background: #fff; border-bottom: 1px solid var(--border);
+        transition: all 0.25s ease;
+      }
+      .segment-item:last-child { border-bottom: none; }
+      .segment-item.active {
+        background: var(--accent-soft); color: var(--accent);
+        box-shadow: inset 2px 0 0 var(--accent);
+      }
+      .segment-item.active::after {
+        content: "active"; color: var(--accent); font-size: 10px;
+        margin-left: 8px; background: rgba(0,113,227,0.1);
+        padding: 1px 6px; border-radius: 4px; font-weight: 500;
+      }
+      .segment-item.done { opacity: 0.45; text-decoration: line-through; color: var(--text-3); }
+      .segment-item .idx { color: var(--text-3); font-size: 11px; margin-right: 8px; }
+      .empty-segments { padding: 10px; text-align: center; color: var(--text-3); font-size: 12.5px; background: #fff; }
+
+      /* Console */
+      .console-step {
+        margin: 8px 0; padding: 12px 14px; background: var(--bg);
+        border: 1px solid var(--border); border-left: 3px solid var(--border-strong);
+        border-radius: 8px; font-size: 13px; opacity: 0.55;
+        transition: all 0.3s ease;
+      }
+      .console-step.active { opacity: 1; border-left-color: var(--accent); background: #fff; }
+      .console-step .step-title {
+        display: flex; align-items: center; gap: 8px;
+        color: var(--text); font-weight: 600; margin-bottom: 8px; font-size: 13px;
+      }
+      .console-step .step-num {
+        width: 19px; height: 19px; border-radius: 50%;
+        background: var(--accent-soft); color: var(--accent);
+        display: inline-flex; align-items: center; justify-content: center;
+        font-size: 11px; font-weight: 600;
+      }
+      .console-step.active .step-num { background: var(--accent); color: #fff; }
+
+      .candidate {
+        display: grid; grid-template-columns: 1fr auto auto;
+        gap: 10px; align-items: center; padding: 7px 10px;
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 12px; background: #fff;
+        border: 1px solid var(--border); border-radius: 6px;
+        margin-top: 6px; transition: all 0.3s ease;
+        animation: slideIn 0.3s ease;
+      }
+      @keyframes slideIn { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+      .candidate.chosen {
+        background: var(--success-soft); border-color: rgba(48,164,108,0.4); color: var(--success);
+      }
+      .candidate .cost { color: var(--warn); font-weight: 500; }
+      .candidate .prob { color: var(--accent); font-weight: 500; }
+      .candidate.chosen .cost, .candidate.chosen .prob { color: var(--success); }
+
+      .formula {
+        font-family: "Cambria Math", "Times New Roman", serif;
+        font-style: italic; font-size: 15px; color: var(--text);
+        text-align: center; background: #fff; padding: 10px;
+        border-radius: 6px; margin: 8px 0 4px; border: 1px solid var(--border);
+      }
+      .formula sub { font-size: 11px; }
+
+      .random-roll {
+        display: flex; align-items: center; gap: 10px;
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 12.5px; margin-top: 14px;
+      }
+      .random-bar {
+        flex: 1; height: 18px; background: var(--bg);
+        border: 1px solid var(--border); border-radius: 6px;
+        position: relative; overflow: visible;
+      }
+      .cum-segment {
+        position: absolute; top: 0; bottom: 0;
+        border-right: 1px solid rgba(0,0,0,0.1);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 10px; color: var(--text-2); font-weight: 500;
+      }
+      .random-pointer { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--text); }
+      .random-pointer::before {
+        content: "▼"; position: absolute; top: -10px; left: 50%;
+        transform: translateX(-50%); color: var(--text); font-size: 9px;
+      }
+
+      .progress-block {
+        margin-top: 8px; padding: 12px 14px; background: #fff;
+        border: 1px solid var(--border); border-radius: 8px;
+      }
+      .progress-block .pb-title {
+        font-size: 12.5px; font-weight: 500; color: var(--text);
+        display: flex; justify-content: space-between; margin-bottom: 8px;
+      }
+      .progress-block .pb-title .pb-eta {
+        color: var(--text-3); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-weight: 500;
+      }
+      .progress-bar-outer { height: 8px; background: var(--bg-2); border-radius: 4px; overflow: hidden; }
+      .progress-bar-inner {
+        height: 100%; background: var(--accent); border-radius: 4px;
+        width: 0%; transition: width 0.25s linear;
+      }
+      .progress-bar-inner.warn { background: var(--warn); }
+      .progress-block .pb-status {
+        margin-top: 8px; font-size: 11.5px; color: var(--text-2);
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        line-height: 1.5; max-height: 60px; overflow: hidden;
+      }
+      .progress-block .pb-status .ok { color: var(--success); }
+      .progress-block .pb-status .err { color: var(--danger); }
+
+      /* Log */
+      .log {
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 12.5px; height: 178px; overflow-y: auto;
+        background: var(--bg); border: 1px solid var(--border);
+        border-radius: 10px; padding: 10px 12px;
+      }
+      .log::-webkit-scrollbar { width: 6px; }
+      .log::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 3px; }
+      .log-line { padding: 2px 0; color: var(--text); animation: fadeIn 0.3s ease; line-height: 1.55; }
+      .log-line .ts { color: var(--text-3); margin-right: 6px; }
+      .log-line.info .tag { color: var(--accent); }
+      .log-line.warn .tag { color: var(--warn); }
+      .log-line.err .tag { color: var(--danger); }
+      .log-line.ok .tag { color: var(--success); }
+      .log-line .tag { font-weight: 600; margin-right: 6px; }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+      /* Toast */
+      .toast {
+        position: fixed; top: 24px; right: 24px;
+        max-width: 380px; padding: 14px 18px;
+        background: var(--card); border: 1px solid var(--border);
+        border-radius: 12px; font-size: 13.5px; color: var(--text);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+        transform: translateX(440px); transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 100;
+      }
+      .toast.show { transform: translateX(0); }
+      .toast .toast-title {
+        font-weight: 600; color: var(--success); margin-bottom: 5px;
+        font-size: 14px; display: flex; align-items: center; gap: 6px;
+      }
+      .toast .toast-title::before {
+        content: "✓"; width: 18px; height: 18px; border-radius: 50%;
+        background: var(--success); color: #fff;
+        display: inline-flex; align-items: center; justify-content: center;
+        font-size: 11px; font-weight: 700;
+      }
+      .toast .toast-body { color: var(--text-2); font-size: 13px; line-height: 1.55; white-space: pre-line; }
+
+      /* Guide bobble */
+      .guide {
+        position: fixed; left: 0; top: 0;
+        pointer-events: none; opacity: 0;
+        transform: translate(-50%, -100%);
+        transition: opacity 0.3s ease, left 0.4s cubic-bezier(0.4,0,0.2,1), top 0.4s cubic-bezier(0.4,0,0.2,1);
+        z-index: 200;
+      }
+      .guide.show { opacity: 1; }
+      .guide-inner {
+        position: relative; background: #1d1d1f; color: #fff;
+        padding: 8px 14px; border-radius: 10px;
+        font-size: 13px; font-weight: 500; letter-spacing: -0.005em;
+        white-space: nowrap;
+        box-shadow: 0 10px 24px rgba(0,0,0,0.18), 0 2px 6px rgba(0,0,0,0.08);
+        margin-bottom: 9px; animation: bobble 2.2s ease-in-out infinite;
+      }
+      .guide-inner::after {
+        content: ""; position: absolute; bottom: -4px;
+        left: 50%; transform: translateX(-50%) rotate(45deg);
+        width: 10px; height: 10px; background: #1d1d1f;
+      }
+      .guide-inner .arrow { display: inline-block; margin-left: 6px; opacity: 0.7; }
+      @keyframes bobble { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+      /* SVG */
+      .link-base {
+        stroke: #d2d2d7; stroke-width: 1.6; fill: none;
+        transition: stroke 0.35s ease, stroke-width 0.35s ease;
+      }
+      .link-active { stroke: var(--accent) !important; stroke-width: 2.6 !important; }
+      .link-broken { stroke: var(--danger) !important; stroke-width: 2.4 !important; stroke-dasharray: 6 4; }
+      .link-recovery { stroke: var(--success) !important; stroke-width: 2.8 !important; }
+      .link-preview { stroke: var(--success) !important; stroke-width: 3 !important; animation: previewBlink 0.55s ease-in-out 4; }
+      .link-clickable { cursor: pointer; }
+      .link-clickable:hover { stroke: var(--danger) !important; stroke-width: 3 !important; }
+      @keyframes previewBlink { 0%,100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+      .link-weight {
+        fill: var(--text-3);
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 11px; text-anchor: middle;
+        user-select: none; pointer-events: none;
+      }
+      .node-circle {
+        fill: #ffffff; stroke: #d2d2d7; stroke-width: 1.5;
+        transition: all 0.25s ease;
+      }
+      .node-circle.host { fill: #fafafa; stroke: #c7c7cc; }
+      .node-circle.controller { fill: #ffffff; stroke: var(--accent); stroke-width: 1.6; }
+      .node-circle.active { stroke: var(--accent); stroke-width: 2.2; fill: #f0f7ff; }
+      .node-circle.scanning { stroke: var(--warn); fill: #fff8eb; }
+      .node-label {
+        fill: var(--text); font-family: inherit;
+        font-size: 13px; font-weight: 600; text-anchor: middle;
+        user-select: none; pointer-events: none; letter-spacing: -0.01em;
+      }
+      .node-sublabel {
+        fill: var(--text-3);
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        font-size: 10.5px; text-anchor: middle;
+        user-select: none; pointer-events: none;
+      }
+      #packet { pointer-events: none; }
+      #packet.hidden { opacity: 0; }
+      #packet circle.outer { fill: rgba(0,113,227,0.16); transition: fill 0.3s, r 0.3s; }
+      #packet circle.inner { fill: var(--accent); transition: fill 0.3s, r 0.3s; filter: drop-shadow(0 1px 3px rgba(0,113,227,0.35)); }
+      #packet.lost circle.outer { fill: rgba(215,0,21,0.16); }
+      #packet.lost circle.inner { fill: var(--danger); filter: drop-shadow(0 1px 3px rgba(215,0,21,0.35)); }
+      #packet text {
+        fill: #ffffff; font-size: 10px; font-weight: 700; text-anchor: middle;
+        font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; pointer-events: none;
+      }
+      .failure-x { fill: var(--danger); font-size: 22px; font-weight: 700; text-anchor: middle; pointer-events: none; }
+      .alert-signal {
+        fill: none; stroke: var(--danger); stroke-width: 1.6;
+        stroke-dasharray: 5 4; opacity: 0;
+      }
+      .control-link {
+        stroke: rgba(0,113,227,0.18); stroke-width: 1;
+        stroke-dasharray: 2 4; fill: none; pointer-events: none;
+      }
+      .legend {
+        display: flex; gap: 18px; flex-wrap: wrap;
+        font-size: 12px; color: var(--text-2);
+        margin-top: 6px; padding: 8px 4px 0;
+      }
+      .legend span { display: inline-flex; align-items: center; gap: 6px; }
+      .legend i { display: inline-block; width: 14px; height: 2.5px; border-radius: 2px; }
+
+      /* ===== Icons ===== */
+      .ic {
+        width: 16px; height: 16px;
+        stroke: currentColor; fill: none;
+        stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+        flex-shrink: 0;
+      }
+      .ic.sm { width: 13px; height: 13px; stroke-width: 2; }
+      .ic.md { width: 15px; height: 15px; }
+      .ic.lg { width: 22px; height: 22px; }
+      .ic.fill { fill: currentColor; stroke: none; }
+      .ic.brand { color: var(--accent); }
+
+      /* ===== Welcome ===== */
+      .welcome-overlay {
+        position: fixed; inset: 0;
+        background: rgba(245, 245, 247, 0.78);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        display: flex; align-items: center; justify-content: center;
+        z-index: 1000; opacity: 0; pointer-events: none;
+        transition: opacity 0.35s ease;
+      }
+      .welcome-overlay.show { opacity: 1; pointer-events: auto; }
+      .welcome-card {
+        background: var(--card); border: 1px solid var(--border);
+        border-radius: 20px; padding: 32px 36px 28px;
+        max-width: 460px; width: 92%;
+        box-shadow: 0 24px 64px rgba(0,0,0,0.12), 0 6px 18px rgba(0,0,0,0.05);
+        transform: translateY(12px) scale(0.97);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .welcome-overlay.show .welcome-card { transform: translateY(0) scale(1); }
+      .welcome-icon {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 52px; height: 52px; border-radius: 14px;
+        background: var(--accent-soft); color: var(--accent);
+        margin-bottom: 14px;
+      }
+      .welcome-card h2 {
+        font-size: 20px; font-weight: 600; letter-spacing: -0.02em;
+        color: var(--text); margin-bottom: 6px;
+      }
+      .welcome-card .lead {
+        font-size: 14px; color: var(--text-2); line-height: 1.6; margin-bottom: 18px;
+      }
+      .welcome-card .lead b { color: var(--text); font-weight: 600; }
+      .welcome-card ol { list-style: none; padding: 0; margin: 0 0 22px; counter-reset: wstep; }
+      .welcome-card ol li {
+        position: relative; padding: 7px 0 7px 34px;
+        font-size: 13.5px; color: var(--text-2); line-height: 1.5;
+        counter-increment: wstep;
+      }
+      .welcome-card ol li::before {
+        content: counter(wstep);
+        position: absolute; left: 0; top: 7px;
+        width: 22px; height: 22px; border-radius: 50%;
+        background: var(--accent-soft); color: var(--accent);
+        font-size: 11.5px; font-weight: 600;
+        display: flex; align-items: center; justify-content: center;
+        font-variant-numeric: tabular-nums;
+      }
+      .welcome-card .actions { display: flex; gap: 8px; justify-content: flex-end; }
+      .welcome-author { font-size: 12px; color: var(--text-3); margin-top: 14px; text-align: center; }
+      .welcome-author a {
+        color: var(--text-2); text-decoration: none; font-weight: 500;
+        border-bottom: 1px solid transparent;
+        transition: color 0.15s, border-color 0.15s;
+      }
+      .welcome-author a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+      .icon-btn {
+        width: 30px; height: 30px;
+        display: inline-flex; align-items: center; justify-content: center;
+        background: var(--card); border: 1px solid var(--border);
+        border-radius: 50%; cursor: pointer; color: var(--text-2);
+        transition: all 0.15s ease; padding: 0; font-family: inherit;
+      }
+      .icon-btn:hover { background: #fafafa; color: var(--text); border-color: rgba(0,0,0,0.18); }
+      .lang-btn {
+        background: var(--card); border: 1px solid var(--border);
+        border-radius: 999px; padding: 5px 12px;
+        font-size: 12.5px; font-weight: 500; color: var(--text-2);
+        cursor: pointer; font-family: inherit;
+        display: inline-flex; align-items: center; gap: 6px;
+        transition: all 0.15s ease;
+      }
+      .lang-btn:hover { background: #fafafa; color: var(--text); }
+
+      /* ===== Comparison Table ===== */
+      .compare-section { margin-top: 16px; }
+      .cmp-table-wrap {
+        overflow: hidden; border: 1px solid var(--border); border-radius: 10px;
+      }
+      .cmp-table {
+        width: 100%; border-collapse: collapse;
+        font-size: 13px; font-variant-numeric: tabular-nums;
+      }
+      .cmp-table thead th {
+        text-align: left; padding: 12px 14px;
+        font-weight: 600; color: var(--text-3);
+        font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+        background: var(--bg); border-bottom: 1px solid var(--border);
+      }
+      .cmp-table thead th.num { text-align: right; }
+      .cmp-table tbody tr.topo-row td {
+        padding: 12px 14px; cursor: pointer;
+        font-weight: 600; color: var(--text);
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s ease;
+        user-select: none;
+      }
+      .cmp-table tbody tr.topo-row:hover td { background: var(--accent-soft); }
+      .cmp-table tbody tr.topo-row td .chev {
+        display: inline-block; transition: transform 0.25s ease;
+        margin-right: 8px; color: var(--text-3);
+      }
+      .cmp-table tbody tr.topo-row.expanded td .chev { transform: rotate(90deg); color: var(--accent); }
+      .cmp-table tbody tr.topo-row.expanded td { background: var(--card); color: var(--accent); }
+      .cmp-table tbody tr.algo-row td {
+        padding: 10px 14px; border-bottom: 1px solid var(--border);
+        color: var(--text-2);
+      }
+      .cmp-table tbody tr.algo-row td.num { text-align: right; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+      .cmp-table tbody tr.algo-row td.algo-name { color: var(--text); font-weight: 500; }
+      .cmp-table tbody tr.algo-row.is-proa td {
+        background: rgba(48, 164, 108, 0.06);
+        color: var(--text);
+      }
+      .cmp-table tbody tr.algo-row.is-proa td.algo-name { color: var(--success); font-weight: 600; }
+      .cmp-table tbody tr.algo-row.is-proa td.num { color: var(--success); font-weight: 500; }
+      .cmp-table tbody tr.algo-row.is-proa td.algo-name::after {
+        content: "★"; color: var(--success); margin-left: 6px; font-size: 11px;
+      }
+      .cmp-table tbody tr.algo-row.hidden { display: none; }
+      .cmp-table tbody tr.topo-row[data-topo-key="topo1"] td:first-child::before { content: ""; }
+      .cmp-section-hint {
+        font-size: 12.5px; color: var(--text-3); margin-bottom: 10px;
+      }
+
+      /* ===== Footer ===== */
+      .site-footer {
+        margin-top: 28px; padding: 18px 4px 4px;
+        border-top: 1px solid var(--border);
+        display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+        font-size: 12.5px; color: var(--text-3);
+      }
+      .site-footer a.author-link {
+        display: inline-flex; align-items: center; gap: 6px;
+        color: var(--text-2); text-decoration: none; font-weight: 500;
+        padding: 4px 10px; border-radius: 999px;
+        border: 1px solid var(--border); background: var(--card);
+        transition: all 0.15s ease;
+      }
+      .site-footer a.author-link:hover {
+        color: var(--accent); border-color: rgba(0,113,227,0.3); background: var(--accent-soft);
+      }
+      .site-footer .dot-sep { color: var(--border-strong); }
+    </style>
+  </head>
+
+  <body>
+    <div class="app">
+      <header>
+        <div class="header-top">
+          <div>
+            <h1>
+              <svg class="ic lg brand" viewBox="0 0 24 24">
+                <circle cx="5" cy="5" r="2.2"/>
+                <circle cx="19" cy="5" r="2.2"/>
+                <circle cx="5" cy="19" r="2.2"/>
+                <circle cx="19" cy="19" r="2.2"/>
+                <circle cx="12" cy="12" r="2.2"/>
+                <path d="M6.5 6.5l4 4M17.5 6.5l-4 4M6.5 17.5l4-4M17.5 17.5l-4-4"/>
+              </svg>
+              <span data-i18n="header.title">Network SRE 儀表板</span>
+            </h1>
+            <div class="subtitle" data-i18n="header.subtitle">
+              SDN-based SRv6 適應性路徑選擇 ⋅ PROA 與傳統演算法對照
+            </div>
+          </div>
+          <div class="header-right">
+            <button class="lang-btn" id="btn-lang" data-i18n-title="header.lang_title">
+              <svg class="ic sm" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M3 12h18M12 3a13 13 0 0 1 0 18 13 13 0 0 1 0-18z"/>
+              </svg>
+              <span id="lang-label">EN</span>
+            </button>
+            <button class="icon-btn" id="btn-help" data-i18n-title="header.help_title" title="操作說明">
+              <svg class="ic" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-0.8 0.4-1 1.2-1 2.2"/>
+                <circle cx="12" cy="17" r="0.6" fill="currentColor"/>
+              </svg>
+            </button>
+            <div class="status-badge"><span class="dot"></span><span id="phase-label" data-i18n="phase.idle">系統就緒</span></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="toolbar">
+        <div class="field-group">
+          <span class="field-label">
+            <svg class="ic sm" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M3 12h18M12 3a13 13 0 0 1 0 18 13 13 0 0 1 0-18z"/>
+            </svg>
+            <span data-i18n="toolbar.topology">拓樸 Topology</span>
+          </span>
+          <div class="segmented" id="topo-seg">
+            <button class="seg active" data-topo="twaren">TWAREN</button>
+            <button class="seg" data-topo="internet2">Internet2</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <span class="field-label">
+            <svg class="ic sm" viewBox="0 0 24 24">
+              <path d="M5 4h3a3 3 0 0 1 3 3v10a3 3 0 0 0 3 3h3"/>
+              <path d="M5 12h10"/>
+            </svg>
+            <span data-i18n="toolbar.algorithm">恢復演算法 Algorithm</span>
+          </span>
+          <div class="segmented" id="algo-seg">
+            <button class="seg active" data-algo="proa">PROA<span class="cache-dot"></span></button>
+            <button class="seg" data-algo="dijkstra">Dijkstra<span class="cache-dot"></span></button>
+            <button class="seg" data-algo="ospf">OSPFv3<span class="cache-dot"></span></button>
+            <button class="seg" data-algo="random">Random<span class="cache-dot"></span></button>
+          </div>
+        </div>
+
+        <div class="kpi-strip">
+          <div class="kpi">
+            <div class="kpi-label">
+              <svg class="ic sm" viewBox="0 0 24 24">
+                <rect x="6" y="6" width="12" height="12" rx="1.5"/>
+                <rect x="9.5" y="9.5" width="5" height="5"/>
+                <path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/>
+              </svg>
+              <span data-i18n="kpi.cpu">CPU</span>
+            </div>
+            <div class="kpi-value good"><span id="kpi-cpu">2.1</span><span class="unit">%</span></div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">
+              <svg class="ic sm" viewBox="0 0 24 24">
+                <circle cx="12" cy="13" r="8"/>
+                <path d="M12 9v4l2.5 2M9 2h6"/>
+              </svg>
+              <span data-i18n="kpi.rt">恢復時間</span>
+            </div>
+            <div class="kpi-value"><span id="kpi-rt">—</span><span class="unit">s</span></div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">
+              <svg class="ic sm" viewBox="0 0 24 24">
+                <path d="M19 5L5 19"/>
+                <circle cx="7.5" cy="7.5" r="2.5"/>
+                <circle cx="16.5" cy="16.5" r="2.5"/>
+              </svg>
+              <span data-i18n="kpi.loss">封包遺失</span>
+            </div>
+            <div class="kpi-value"><span id="kpi-loss">—</span><span class="unit">%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="btn-start" class="btn primary">
+          <svg class="ic fill" viewBox="0 0 24 24"><path d="M7 4.5l13 7.5L7 19.5z"/></svg>
+          <span data-i18n="btn.start">開始傳輸</span>
+        </button>
+        <button id="btn-fail" class="btn danger" disabled>
+          <svg class="ic" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 10-12h-7z"/></svg>
+          <span data-i18n="btn.fail">鏈路斷線</span>
+        </button>
+        <button id="btn-recover" class="btn warn" disabled>
+          <svg class="ic" viewBox="0 0 24 24">
+            <path d="M3 12a9 9 0 0 1 15.5-6.3M21 12a9 9 0 0 1-15.5 6.3"/>
+            <polyline points="14 4 19 5 20 10"/>
+            <polyline points="10 20 5 19 4 14"/>
+          </svg>
+          <span data-i18n="btn.recover">執行演算法</span>
+        </button>
+        <button id="btn-resume" class="btn success" disabled>
+          <svg class="ic" viewBox="0 0 24 24"><polyline points="5 12 10 17 19 6"/></svg>
+          <span data-i18n="btn.resume">套用備援</span>
+        </button>
+        <span style="flex:1"></span>
+        <button id="btn-reset" class="btn">
+          <svg class="ic" viewBox="0 0 24 24">
+            <path d="M3 12a9 9 0 1 0 3-6.7"/>
+            <polyline points="3 4 3 9 8 9"/>
+          </svg>
+          <span data-i18n="btn.reset">重設</span>
+        </button>
+      </div>
+
+      <main>
+        <section class="panel" id="topology-panel">
+          <div class="panel-title">
+            <svg class="ic sm" viewBox="0 0 24 24">
+              <circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="12" cy="18" r="2"/>
+              <path d="M7.5 7.5l3 9M16.5 7.5l-3 9M8 6h8"/>
+            </svg>
+            <span data-i18n="panel.topology">網路拓樸</span>
+          </div>
+          <svg id="topology-svg" viewBox="0 0 880 600" preserveAspectRatio="xMidYMid meet"></svg>
+          <div class="legend">
+            <span><i style="background:#0071e3"></i><span data-i18n="legend.primary">主路徑</span></span>
+            <span><i style="background:#d70015"></i><span data-i18n="legend.failure">故障</span></span>
+            <span><i style="background:#30a46c"></i><span data-i18n="legend.backup">備援</span></span>
+            <span style="color:var(--text-3)" data-i18n="legend.hint">階段 1 後可直接點選主路徑上的鏈路指定斷點</span>
+          </div>
+        </section>
+
+        <div class="right-col">
+          <section class="panel" id="panel-srh">
+            <div class="panel-title">
+              <svg class="ic sm" viewBox="0 0 24 24">
+                <path d="M12 2L21 7v10l-9 5-9-5V7z"/>
+                <path d="M3 7l9 5 9-5M12 12v10"/>
+              </svg>
+              <span data-i18n="panel.srh">SRv6 封包</span>
+              <span class="live-dot"></span>
+            </div>
+            <div class="srh">
+              <div class="field"><span class="label" data-i18n="srh.da">IPv6 DA</span><span class="val" id="srh-da">—</span></div>
+              <div class="field"><span class="label" data-i18n="srh.sl">Segments Left</span><span class="val" id="srh-sl">—</span></div>
+              <div class="field"><span class="label" data-i18n="srh.current">當前節點</span><span class="val" id="current-node">—</span></div>
+            </div>
+            <div class="segment-list" id="segment-list">
+              <div class="empty-segments" data-i18n="srh.empty">尚未產生 SRH</div>
+            </div>
+          </section>
+
+          <section class="panel" id="panel-console">
+            <div class="panel-title">
+              <svg class="ic sm" viewBox="0 0 24 24">
+                <rect x="4" y="4" width="16" height="16" rx="2"/>
+                <path d="M8 9h8M8 13h5M8 17h8"/>
+              </svg>
+              <span id="console-title" data-i18n="panel.console">恢復演算法</span>
+              <span class="live-dot"></span>
+            </div>
+            <div id="console-body">
+              <div class="console-step" id="console-idle">
+                <div class="step-title" style="color:var(--text-3); font-weight:500;" data-i18n="console.idle_title">等待故障事件</div>
+                <div style="font-size:12px; color:var(--text-3);" data-i18n="console.idle_desc">
+                  發生故障時，目前選定的演算法會在此展開計算過程。
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel" id="panel-log">
+            <div class="panel-title">
+              <svg class="ic sm" viewBox="0 0 24 24">
+                <path d="M5 6h14M5 12h14M5 18h10"/>
+                <circle cx="3" cy="6" r="0.6" fill="currentColor"/>
+                <circle cx="3" cy="12" r="0.6" fill="currentColor"/>
+                <circle cx="3" cy="18" r="0.6" fill="currentColor"/>
+              </svg>
+              <span data-i18n="panel.log">事件日誌</span>
+              <span class="live-dot"></span>
+            </div>
+            <div class="log" id="log"></div>
+          </section>
+        </div>
+      </main>
+
+      <section class="compare-section">
+        <div class="panel">
+          <div class="panel-title">
+            <svg class="ic sm" viewBox="0 0 24 24">
+              <rect x="3" y="11" width="4" height="9"/>
+              <rect x="10" y="6" width="4" height="14"/>
+              <rect x="17" y="3" width="4" height="17"/>
+            </svg>
+            <span data-i18n="compare.title">全域效能綜合分析</span>
+          </div>
+          <div class="cmp-section-hint" data-i18n="compare.hint">
+            點擊母列展開該拓樸下 4 種演算法的論文實測極限數據（PROA 為強調列）。
+          </div>
+          <div class="cmp-table-wrap">
+            <table class="cmp-table">
+              <thead>
+                <tr>
+                  <th data-i18n="compare.col_algo">演算法</th>
+                  <th class="num" data-i18n="compare.col_rt">恢復時間</th>
+                  <th class="num" data-i18n="compare.col_cpu">最大 CPU</th>
+                  <th class="num" data-i18n="compare.col_udp">UDP loss</th>
+                  <th class="num" data-i18n="compare.col_tcp">TCP loss</th>
+                </tr>
+              </thead>
+              <tbody id="cmp-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <span data-i18n="footer.by">由</span>
+        <a class="author-link" href="https://yuchen-land.github.io/" target="_blank" rel="noopener noreferrer">
+          <svg class="ic sm" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+          </svg>
+          劉宇蓁 ⋅ Yu-Chen Liu
+          <svg class="ic sm" viewBox="0 0 24 24" style="opacity:0.6">
+            <path d="M14 4h6v6"/><path d="M10 14L20 4"/>
+            <path d="M19 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h6"/>
+          </svg>
+        </a>
+        <span data-i18n="footer.maker">製作</span>
+        <span class="dot-sep">·</span>
+        <span data-i18n="footer.paper">論文：基於軟體定義網路之 SRv6 適應性路徑選擇方法 ⋅ NCU 2024</span>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast">
+      <div class="toast-title" data-i18n="toast.title">流量已成功恢復</div>
+      <div class="toast-body" id="toast-body"></div>
+    </div>
+
+    <div class="welcome-overlay" id="welcome">
+      <div class="welcome-card">
+        <div class="welcome-icon">
+          <svg class="ic lg" viewBox="0 0 24 24">
+            <circle cx="5" cy="5" r="2.2"/><circle cx="19" cy="5" r="2.2"/>
+            <circle cx="5" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/>
+            <circle cx="12" cy="12" r="2.2"/>
+            <path d="M6.5 6.5l4 4M17.5 6.5l-4 4M6.5 17.5l4-4M17.5 17.5l-4-4"/>
+          </svg>
+        </div>
+        <h2 data-i18n="welcome.title">SRv6 PROA 互動模擬</h2>
+        <p class="lead" data-i18n-html="welcome.lead">
+          這個儀表板模擬網路在發生<b>故障</b>時，<b>PROA</b> 與傳統演算法 (Dijkstra / OSPF / Random) 各自要花多久才能把流量重新接回 — 跟著步驟看右側的 KPI 變化即可。
+        </p>
+        <ol>
+          <li data-i18n-html="welcome.step1">點「<b>開始傳輸</b>」啟動 SRv6 封包，看封包沿主路徑前進</li>
+          <li data-i18n-html="welcome.step2">點「<b>鏈路斷線</b>」（或直接點拓樸圖上的鏈路）模擬故障</li>
+          <li data-i18n-html="welcome.step3">點「<b>執行演算法</b>」看路徑如何被重新規劃</li>
+          <li data-i18n-html="welcome.step4">跑完後上方<b>切換演算法</b>再跑一次，比較 KPI 差距</li>
+        </ol>
+        <div class="actions">
+          <button class="btn primary" id="btn-welcome-ok" data-i18n="welcome.cta">開始體驗</button>
+        </div>
+        <div class="welcome-author">
+          <span data-i18n="welcome.by">by</span>
+          <a href="https://yuchen-land.github.io/" target="_blank" rel="noopener noreferrer">劉宇蓁 ⋅ Yu-Chen Liu</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide" id="guide">
+      <div class="guide-inner"><span id="guide-text">點這裡開始</span><span class="arrow">↓</span></div>
+    </div>
+
+    <script>
+      // ========== I18N ==========
+      const I18N = {
+        zh: {
+          "header.title": "Network SRE 儀表板",
+          "header.subtitle": "SDN-based SRv6 適應性路徑選擇 ⋅ PROA 與傳統演算法對照",
+          "header.help_title": "操作說明",
+          "header.lang_title": "切換語言 / Switch language",
+          "toolbar.topology": "拓樸 Topology",
+          "toolbar.algorithm": "恢復演算法 Algorithm",
+          "kpi.cpu": "CPU",
+          "kpi.rt": "恢復時間",
+          "kpi.loss": "封包遺失",
+          "btn.start": "開始傳輸",
+          "btn.fail": "鏈路斷線",
+          "btn.recover": "執行演算法",
+          "btn.resume": "套用備援",
+          "btn.reset": "重設",
+          "panel.topology": "網路拓樸",
+          "panel.srh": "SRv6 封包",
+          "panel.console": "恢復演算法",
+          "panel.log": "事件日誌",
+          "legend.primary": "主路徑",
+          "legend.failure": "故障",
+          "legend.backup": "備援",
+          "legend.hint": "階段 1 後可直接點選主路徑上的鏈路指定斷點",
+          "srh.da": "IPv6 DA",
+          "srh.sl": "Segments Left",
+          "srh.current": "當前節點",
+          "srh.empty": "尚未產生 SRH",
+          "console.idle_title": "等待故障事件",
+          "console.idle_desc": "發生故障時，目前選定的演算法會在此展開計算過程。",
+          "phase.idle": "系統就緒",
+          "phase.normal": "階段 1 ⋅ 正常 SRv6 轉送",
+          "phase.normal_done": "階段 1 完成 ⋅ 點按鈕或鏈路觸發故障",
+          "phase.failed": "階段 2 ⋅ 偵測到鏈路故障",
+          "phase.failed_done": "階段 2 完成 ⋅ 等待恢復演算法",
+          "phase.computing": "階段 3 ⋅ {0} 計算中",
+          "phase.computing_done": "階段 3 完成 ⋅ 已產生新 SID 列表",
+          "phase.recovering": "階段 4 ⋅ 切換至備援路徑",
+          "phase.done": "階段 4 完成 ⋅ 流量已恢復",
+          "phase.cached": "已快取 ⋅ {0} 的執行結果",
+          "toast.title": "流量已成功恢復",
+          "compare.title": "全域效能綜合分析",
+          "compare.hint": "點擊母列展開該拓樸下 4 種演算法的論文實測極限數據（PROA 為強調列）。",
+          "compare.col_algo": "演算法",
+          "compare.col_rt": "恢復時間",
+          "compare.col_cpu": "最大 CPU",
+          "compare.col_udp": "UDP loss",
+          "compare.col_tcp": "TCP loss",
+          "compare.topo1": "Topology 1 ⋅ TWAREN 台灣學術網路",
+          "compare.topo2": "Topology 2 ⋅ Internet2 美國學術網路",
+          "footer.by": "由",
+          "footer.maker": "製作",
+          "footer.paper": "論文：基於軟體定義網路之 SRv6 適應性路徑選擇方法 ⋅ NCU 2024",
+          "welcome.title": "SRv6 PROA 互動模擬",
+          "welcome.lead": "這個儀表板模擬網路在發生<b>故障</b>時，<b>PROA</b> 與傳統演算法 (Dijkstra / OSPF / Random) 各自要花多久才能把流量重新接回 — 跟著步驟看右側的 KPI 變化即可。",
+          "welcome.step1": "點「<b>開始傳輸</b>」啟動 SRv6 封包，看封包沿主路徑前進",
+          "welcome.step2": "點「<b>鏈路斷線</b>」（或直接點拓樸圖上的鏈路）模擬故障",
+          "welcome.step3": "點「<b>執行演算法</b>」看路徑如何被重新規劃",
+          "welcome.step4": "跑完後上方<b>切換演算法</b>再跑一次，比較 KPI 差距",
+          "welcome.cta": "開始體驗",
+          "welcome.by": "by",
+          "guide.start": "從這裡開始",
+          "guide.fail": "點按鈕或直接點主路徑上的鏈路",
+          "guide.recover": "用 {0} 重新規劃路徑",
+          "guide.resume": "切換至選定路徑",
+          "guide.compare": "換成 {0} 再跑一次比較看看",
+          "guide.reset": "完成 — 點此重新開始",
+        },
+        en: {
+          "header.title": "Network SRE Dashboard",
+          "header.subtitle": "SDN-based SRv6 Adaptive Path Selection ⋅ PROA vs Legacy Algorithms",
+          "header.help_title": "How to use",
+          "header.lang_title": "Switch language / 切換語言",
+          "toolbar.topology": "Topology",
+          "toolbar.algorithm": "Recovery Algorithm",
+          "kpi.cpu": "CPU",
+          "kpi.rt": "Recovery Time",
+          "kpi.loss": "Packet Loss",
+          "btn.start": "Start Traffic",
+          "btn.fail": "Break Link",
+          "btn.recover": "Run Algorithm",
+          "btn.resume": "Apply Backup",
+          "btn.reset": "Reset",
+          "panel.topology": "Network Topology",
+          "panel.srh": "SRv6 Packet",
+          "panel.console": "Recovery Algorithm",
+          "panel.log": "Event Log",
+          "legend.primary": "Primary",
+          "legend.failure": "Failed",
+          "legend.backup": "Backup",
+          "legend.hint": "After stage 1, click any link on the primary path to break it.",
+          "srh.da": "IPv6 DA",
+          "srh.sl": "Segments Left",
+          "srh.current": "Current Hop",
+          "srh.empty": "SRH not yet produced",
+          "console.idle_title": "Awaiting failure event",
+          "console.idle_desc": "When a failure occurs, the selected algorithm will run here.",
+          "phase.idle": "Ready",
+          "phase.normal": "Stage 1 ⋅ Normal SRv6 forwarding",
+          "phase.normal_done": "Stage 1 done ⋅ Click a link or the Break button",
+          "phase.failed": "Stage 2 ⋅ Link failure detected",
+          "phase.failed_done": "Stage 2 done ⋅ Awaiting recovery algorithm",
+          "phase.computing": "Stage 3 ⋅ {0} is computing",
+          "phase.computing_done": "Stage 3 done ⋅ New SID list ready",
+          "phase.recovering": "Stage 4 ⋅ Switching to backup",
+          "phase.done": "Stage 4 done ⋅ Traffic restored",
+          "phase.cached": "Cached ⋅ {0} result",
+          "toast.title": "Traffic recovered",
+          "compare.title": "Cross-topology Comparison",
+          "compare.hint": "Click a topology row to expand the four algorithms' published benchmarks (PROA highlighted).",
+          "compare.col_algo": "Algorithm",
+          "compare.col_rt": "Recovery Time",
+          "compare.col_cpu": "Peak CPU",
+          "compare.col_udp": "UDP Loss",
+          "compare.col_tcp": "TCP Loss",
+          "compare.topo1": "Topology 1 ⋅ TWAREN (Taiwan Academic Net)",
+          "compare.topo2": "Topology 2 ⋅ Internet2 (US Academic Backbone)",
+          "footer.by": "Built by",
+          "footer.maker": "",
+          "footer.paper": "Paper: SDN-based SRv6 Adaptive Path Selection ⋅ NCU 2024",
+          "welcome.title": "SRv6 PROA Interactive Demo",
+          "welcome.lead": "This dashboard simulates a network <b>failure</b> and shows how <b>PROA</b> compares to legacy algorithms (Dijkstra / OSPF / Random) — watch the KPIs on the right as you follow the steps.",
+          "welcome.step1": "Click <b>Start Traffic</b> to send an SRv6 packet along the primary path",
+          "welcome.step2": "Click <b>Break Link</b> (or any link on the path) to trigger failure",
+          "welcome.step3": "Click <b>Run Algorithm</b> to watch the path get re-planned",
+          "welcome.step4": "Then <b>switch algorithm</b> at the top and run again to compare KPIs",
+          "welcome.cta": "Get started",
+          "welcome.by": "by",
+          "guide.start": "Start here",
+          "guide.fail": "Click the button or any primary link",
+          "guide.recover": "Run {0} to plan a backup",
+          "guide.resume": "Apply the chosen path",
+          "guide.compare": "Switch to {0} and run again",
+          "guide.reset": "Done — click to restart",
+        },
+      };
+
+      let currentLang = "zh";
+      function T(key, ...args) {
+        const tmpl = (I18N[currentLang] && I18N[currentLang][key]) || I18N.zh[key] || key;
+        if (!args.length) return tmpl;
+        return tmpl.replace(/\{(\d+)\}/g, (_, i) => args[i] ?? "");
+      }
+      function applyLang(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang === "zh" ? "zh-TW" : "en";
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.dataset.i18n; const v = T(key);
+          if (v) el.textContent = v;
+        });
+        document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+          const key = el.dataset.i18nHtml; const v = T(key);
+          if (v) el.innerHTML = v;
+        });
+        document.querySelectorAll("[data-i18n-title]").forEach((el) => {
+          const key = el.dataset.i18nTitle; const v = T(key);
+          if (v) el.title = v;
+        });
+        // Lang toggle label shows the *other* language to switch to
+        $("lang-label").textContent = lang === "zh" ? "EN" : "中";
+        document.title = lang === "zh" ? "Network SRE 儀表板 ⋅ SRv6 PROA" : "Network SRE Dashboard ⋅ SRv6 PROA";
+        renderCompareTable();
+        // Re-render console idle if currently shown
+        if ($("console-idle")) renderConsoleIdle();
+        // Re-render dynamic strings (log lines, bobble, phase label, toast etc.)
+        refreshI18nDom();
+      }
+      function LM(zh, en) { return currentLang === "en" ? en : zh; }
+
+      // ========== Live i18n binding (for log / bubble / phase / toast) ==========
+      // LB → returns {zh, en}; GB → resolves an i18n key+args into {zh, en}
+      function LB(zh, en) { return { zh, en }; }
+      function GB(key, ...args) {
+        const fmt = (tmpl) => String(tmpl).replace(/\{(\d+)\}/g, (_, i) => args[i] ?? "");
+        const zh = fmt(I18N.zh[key] ?? key);
+        const en = fmt(I18N.en[key] ?? I18N.zh[key] ?? key);
+        return { zh, en };
+      }
+      // Set element text from string OR {zh, en}; stores both langs as data attrs
+      function setI18nText(el, t) {
+        if (!el) return;
+        // Once we set dynamic content, drop any static data-i18n binding
+        el.removeAttribute("data-i18n");
+        if (t && typeof t === "object" && (t.zh !== undefined || t.en !== undefined)) {
+          el.setAttribute("data-zh", t.zh ?? t.en ?? "");
+          el.setAttribute("data-en", t.en ?? t.zh ?? "");
+          el.textContent = currentLang === "en" ? (t.en ?? t.zh ?? "") : (t.zh ?? t.en ?? "");
+        } else {
+          el.removeAttribute("data-zh");
+          el.removeAttribute("data-en");
+          el.textContent = String(t ?? "");
+        }
+      }
+      function refreshI18nDom() {
+        document.querySelectorAll("[data-zh], [data-en]").forEach((el) => {
+          const z = el.getAttribute("data-zh");
+          const e = el.getAttribute("data-en");
+          el.textContent = currentLang === "en" ? (e ?? z ?? "") : (z ?? e ?? "");
+        });
+      }
+
+      // ========== Topologies ==========
+      const TOPOLOGIES = {
+        twaren: {
+          label: "TWAREN",
+          nodes: {
+            controller: { x: 440, y: 38, label: "SDN Controller", sub: "PROA Engine", type: "controller" },
+            hostA: { x: 50, y: 400, label: "Host A", sub: "fd00:0:11::2", type: "host" },
+            r1: { x: 145, y: 400, label: "R1", sub: "fcff:1::1", type: "router" },
+            r2: { x: 270, y: 270, label: "R2", sub: "fcff:2::1", type: "router" },
+            r3: { x: 420, y: 185, label: "R3", sub: "fcff:3::1", type: "router" },
+            r4: { x: 420, y: 400, label: "R4", sub: "fcff:4::1", type: "router" },
+            r5: { x: 580, y: 235, label: "R5", sub: "fcff:5::1", type: "router" },
+            r6: { x: 720, y: 380, label: "R6", sub: "fcff:6::1", type: "router" },
+            hostB: { x: 825, y: 400, label: "Host B", sub: "fd00:0:51::2", type: "host" },
+            r7: { x: 270, y: 530, label: "R7", sub: "fcff:7::1", type: "router" },
+            r8: { x: 580, y: 500, label: "R8", sub: "fcff:8::1", type: "router" },
+          },
+          links: [
+            { id: "l_hA_r1", a: "hostA", b: "r1", w: 0, hideWeight: true },
+            { id: "l_r1_r2", a: "r1", b: "r2", w: 2 },
+            { id: "l_r1_r7", a: "r1", b: "r7", w: 3 },
+            { id: "l_r2_r3", a: "r2", b: "r3", w: 2 },
+            { id: "l_r2_r4", a: "r2", b: "r4", w: 3 },
+            { id: "l_r3_r4", a: "r3", b: "r4", w: 4 },
+            { id: "l_r3_r5", a: "r3", b: "r5", w: 3 },
+            { id: "l_r4_r5", a: "r4", b: "r5", w: 3 },
+            { id: "l_r4_r8", a: "r4", b: "r8", w: 4 },
+            { id: "l_r5_r6", a: "r5", b: "r6", w: 5 },
+            { id: "l_r7_r8", a: "r7", b: "r8", w: 3 },
+            { id: "l_r8_r6", a: "r8", b: "r6", w: 5 },
+            { id: "l_r6_hB", a: "r6", b: "hostB", w: 0, hideWeight: true },
+          ],
+          primary: ["r1", "r2", "r3", "r5", "r6"],
+          ingress: "r1", egress: "r6",
+        },
+        internet2: {
+          label: "Internet2",
+          nodes: {
+            controller: { x: 440, y: 38, label: "SDN Controller", sub: "PROA Engine", type: "controller" },
+            hostA: { x: 50, y: 380, label: "Host A", sub: "fd00:0:11::2", type: "host" },
+            r1: { x: 150, y: 380, label: "LA", sub: "fcff:1::1", type: "router" },
+            r2: { x: 290, y: 240, label: "DEN", sub: "fcff:2::1", type: "router" },
+            r3: { x: 290, y: 510, label: "HOU", sub: "fcff:3::1", type: "router" },
+            r4: { x: 450, y: 180, label: "CHI", sub: "fcff:4::1", type: "router" },
+            r5: { x: 450, y: 400, label: "STL", sub: "fcff:5::1", type: "router" },
+            r6: { x: 620, y: 200, label: "NY", sub: "fcff:6::1", type: "router" },
+            r7: { x: 620, y: 410, label: "WDC", sub: "fcff:7::1", type: "router" },
+            hostB: { x: 760, y: 380, label: "Host B", sub: "fd00:0:51::2", type: "host" },
+          },
+          links: [
+            { id: "l_hA_r1", a: "hostA", b: "r1", w: 0, hideWeight: true },
+            { id: "l_r1_r2", a: "r1", b: "r2", w: 3 },
+            { id: "l_r1_r3", a: "r1", b: "r3", w: 2 },
+            { id: "l_r2_r3", a: "r2", b: "r3", w: 3 },
+            { id: "l_r2_r4", a: "r2", b: "r4", w: 2 },
+            { id: "l_r3_r5", a: "r3", b: "r5", w: 4 },
+            { id: "l_r4_r5", a: "r4", b: "r5", w: 3 },
+            { id: "l_r4_r6", a: "r4", b: "r6", w: 3 },
+            { id: "l_r5_r6", a: "r5", b: "r6", w: 3 },
+            { id: "l_r5_r7", a: "r5", b: "r7", w: 2 },
+            { id: "l_r6_r7", a: "r6", b: "r7", w: 2 },
+            { id: "l_r7_hB", a: "r7", b: "hostB", w: 0, hideWeight: true },
+          ],
+          primary: ["r1", "r2", "r4", "r6", "r7"],
+          ingress: "r1", egress: "r7",
+        },
+      };
+
+      // ========== Algorithms ==========
+      const ALGORITHMS = {
+        proa:     { name: "PROA",        recoveryRange: [1.5, 2.8], cpuPeak: 3.5, pktLossUdp: 0.06 },
+        dijkstra: { name: "Dijkstra",    recoveryRange: [10, 12],   cpuPeak: 8.5, pktLossUdp: 0.43 },
+        ospf:     { name: "OSPFv3",      recoveryRange: [4.5, 5.5], cpuPeak: 5.8, pktLossUdp: 0.11 },
+        random:   { name: "Random Path", recoveryRange: [3, 5],     cpuPeak: 7.0, pktLossUdp: 0.46 },
+      };
+
+      // ========== Comparison data (paper benchmarks) ==========
+      const COMPARE = [
+        {
+          key: "topo1", labelKey: "compare.topo1",
+          rows: [
+            { algo: "PROA",        rt: "1–3s",  cpu: "3%",  udp: "0.05%", tcp: "0.010%", proa: true },
+            { algo: "OSPF",        rt: "~7s",   cpu: "4%",  udp: "0.10%", tcp: "0.020%" },
+            { algo: "Dijkstra",    rt: "~12s",  cpu: "8%",  udp: "0.43%", tcp: "0.130%" },
+            { algo: "Random Path", rt: "~18s",  cpu: "10%", udp: "0.45%", tcp: "0.135%" },
+          ],
+        },
+        {
+          key: "topo2", labelKey: "compare.topo2",
+          rows: [
+            { algo: "PROA",        rt: "1–3s",  cpu: "4%",  udp: "0.07%", tcp: "0.014%", proa: true },
+            { algo: "OSPF",        rt: "~8s",   cpu: "5%",  udp: "0.12%", tcp: "0.024%" },
+            { algo: "Dijkstra",    rt: "~10s",  cpu: "9%",  udp: "0.44%", tcp: "0.140%" },
+            { algo: "Random Path", rt: "~20s",  cpu: "12%", udp: "0.47%", tcp: "0.141%" },
+          ],
+        },
+      ];
+
+      // ========== State ==========
+      let currentTopo = "twaren";
+      let currentAlgo = "proa";
+      let hasRunOnce = false;
+
+      // simCache[topo][algo] = snapshot
+      const simCache = {};
+      function getCachedRun(topo, algo) { return simCache[topo]?.[algo]; }
+      function saveCachedRun(topo, algo, snap) { (simCache[topo] = simCache[topo] || {})[algo] = snap; }
+      function clearAllCache() { for (const k of Object.keys(simCache)) delete simCache[k]; updateCacheBadges(); }
+      function updateCacheBadges() {
+        document.querySelectorAll("#algo-seg .seg").forEach((b) => {
+          b.classList.toggle("cached", !!getCachedRun(currentTopo, b.dataset.algo));
+        });
+      }
+
+      let state = {
+        phase: "idle", segments: [], sl: 0, current: null,
+        primaryAvailable: true, chosenAlt: null,
+        brokenLinkId: null, breakFromNode: null,
+      };
+
+      const SVG_NS = "http://www.w3.org/2000/svg";
+      const svg = document.getElementById("topology-svg");
+      const $ = (id) => document.getElementById(id);
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+      function nodes() { return TOPOLOGIES[currentTopo].nodes; }
+      function links() { return TOPOLOGIES[currentTopo].links; }
+      function primary() { return TOPOLOGIES[currentTopo].primary; }
+      function egress() { return TOPOLOGIES[currentTopo].egress; }
+
+      function el(tag, attrs = {}, text) {
+        const e = document.createElementNS(SVG_NS, tag);
+        for (const k in attrs) e.setAttribute(k, attrs[k]);
+        if (text != null) e.textContent = text;
+        return e;
+      }
+
+      let linkElements = {};
+      let pkt, pktText, failureMark, alertSignal;
+
+      function buildTopology() {
+        while (svg.firstChild) svg.removeChild(svg.firstChild);
+        linkElements = {};
+        const N = nodes(), L = links();
+        Object.keys(N).forEach((id) => {
+          if (N[id].type !== "router") return;
+          const a = N.controller, b = N[id];
+          svg.appendChild(el("line", { x1: a.x, y1: a.y, x2: b.x, y2: b.y, class: "control-link" }));
+        });
+        L.forEach((lk) => {
+          const a = N[lk.a], b = N[lk.b];
+          const ln = el("line", { id: lk.id, x1: a.x, y1: a.y, x2: b.x, y2: b.y, class: "link-base" });
+          ln.dataset.linkId = lk.id;
+          ln.addEventListener("click", () => onLinkClick(lk.id));
+          svg.appendChild(ln);
+          linkElements[lk.id] = ln;
+          if (!lk.hideWeight) {
+            const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2 - 6;
+            svg.appendChild(el("text", { x: mx, y: my, class: "link-weight" }, `${lk.w}`));
+          }
+        });
+        Object.entries(N).forEach(([id, n]) => drawNode(id, n));
+        failureMark = el("text", { id: "failure-x", class: "failure-x", x: 0, y: 0, opacity: 0 }, "✕");
+        svg.appendChild(failureMark);
+        alertSignal = el("path", { id: "alert-signal", class: "alert-signal", d: "" });
+        svg.appendChild(alertSignal);
+        pkt = el("g", { id: "packet", class: "hidden" });
+        pkt.appendChild(el("circle", { cx: 0, cy: 0, r: 18, class: "outer" }));
+        pkt.appendChild(el("circle", { cx: 0, cy: 0, r: 11, class: "inner" }));
+        pkt.appendChild(el("text", { x: 0, y: 3, id: "pkt-text" }, ""));
+        svg.appendChild(pkt);
+        pktText = pkt.querySelector("text");
+      }
+      function drawNode(id, n) {
+        const g = el("g", { id: "node-" + id, transform: `translate(${n.x},${n.y})` });
+        if (n.type === "controller") {
+          g.appendChild(el("rect", { x: -82, y: -22, width: 164, height: 44, rx: 10, class: "node-circle controller" }));
+          g.appendChild(el("text", { y: -2, class: "node-label", fill: "var(--accent)" }, n.label));
+          g.appendChild(el("text", { y: 13, class: "node-sublabel" }, n.sub));
+        } else if (n.type === "host") {
+          g.appendChild(el("rect", { x: -22, y: -16, width: 44, height: 32, rx: 6, class: "node-circle host" }));
+          g.appendChild(el("text", { y: 3, class: "node-label" }, n.label));
+          g.appendChild(el("text", { y: 30, class: "node-sublabel" }, n.sub));
+        } else {
+          g.appendChild(el("circle", { r: 22, class: "node-circle" }));
+          g.appendChild(el("text", { y: 4, class: "node-label" }, n.label));
+          g.appendChild(el("text", { y: 38, class: "node-sublabel" }, n.sub));
+        }
+        svg.appendChild(g);
+      }
+
+      function setPacketPosImmediate(nodeId) {
+        const n = nodes()[nodeId];
+        pkt.style.transition = "none";
+        pkt.style.transform = `translate(${n.x}px, ${n.y - 36}px)`;
+        void pkt.getBoundingClientRect();
+      }
+      async function moveTo(nodeId, dur = 900) {
+        const n = nodes()[nodeId];
+        pkt.style.transition = `transform ${dur}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+        pkt.style.transform = `translate(${n.x}px, ${n.y - 36}px)`;
+        await sleep(dur);
+      }
+      function showPacket() { pkt.classList.remove("hidden"); }
+      function hidePacket() { pkt.classList.add("hidden"); }
+      function setPacketLost(b) { pkt.classList.toggle("lost", !!b); }
+      function setPacketLabel(s) { pktText.textContent = s; }
+
+      function logMsg(msg, level = "info") {
+        const line = document.createElement("div");
+        line.className = "log-line " + level;
+        const ts = new Date().toLocaleTimeString(currentLang === "en" ? "en-US" : "zh-TW", { hour12: false });
+        const tag = { info: "[INFO]", warn: "[WARN]", err: "[FAIL]", ok: "[ OK ]" }[level] || "[—]";
+        const tsSpan = document.createElement("span"); tsSpan.className = "ts"; tsSpan.textContent = ts;
+        const tagSpan = document.createElement("span"); tagSpan.className = "tag"; tagSpan.textContent = tag;
+        const msgSpan = document.createElement("span"); msgSpan.className = "msg";
+        setI18nText(msgSpan, msg);
+        line.appendChild(tsSpan); line.appendChild(tagSpan); line.appendChild(msgSpan);
+        $("log").appendChild(line);
+        $("log").scrollTop = $("log").scrollHeight;
+      }
+      function setPhaseLabel(t) { setI18nText($("phase-label"), t); }
+
+      function findLinkId(a, b) {
+        for (const L of links())
+          if ((L.a === a && L.b === b) || (L.a === b && L.b === a)) return L.id;
+        return null;
+      }
+      function getLink(id) { return links().find((l) => l.id === id); }
+      function nodeLabel(id) { return nodes()[id]?.label ?? id; }
+      function highlightLink(linkId, cls) {
+        const ln = linkElements[linkId]; if (!ln) return;
+        ln.classList.remove("link-active", "link-broken", "link-recovery", "link-preview");
+        if (cls) ln.classList.add(cls);
+      }
+      function highlightPath(hops, cls) {
+        for (let i = 0; i < hops.length - 1; i++) highlightLink(findLinkId(hops[i], hops[i + 1]), cls);
+      }
+      function highlightNode(id, on, cls = "active") {
+        const grp = document.getElementById("node-" + id); if (!grp) return;
+        const c = grp.querySelector(".node-circle");
+        if (on) c.classList.add(cls); else c.classList.remove(cls);
+      }
+      function clearAllNodeHighlights() {
+        Object.keys(nodes()).forEach((id) => {
+          highlightNode(id, false, "active"); highlightNode(id, false, "scanning");
+        });
+      }
+      function setLinkHover(enabled) {
+        Object.entries(linkElements).forEach(([id, ln]) => {
+          const lk = getLink(id);
+          if (!lk || lk.hideWeight) { ln.classList.remove("link-clickable"); return; }
+          if (enabled && ln.classList.contains("link-active")) ln.classList.add("link-clickable");
+          else ln.classList.remove("link-clickable");
+        });
+      }
+      function onLinkClick(linkId) {
+        if (state.phase !== "normal") return;
+        const lk = getLink(linkId); if (!lk || lk.hideWeight) return;
+        const ln = linkElements[linkId];
+        if (!ln.classList.contains("link-active")) return;
+        triggerBreak(linkId);
+      }
+
+      function buildGraph(excludeLink = null) {
+        const g = {};
+        links().forEach((L) => {
+          if (L.id === excludeLink) return;
+          if (!g[L.a]) g[L.a] = []; if (!g[L.b]) g[L.b] = [];
+          g[L.a].push({ to: L.b, w: L.w, id: L.id });
+          g[L.b].push({ to: L.a, w: L.w, id: L.id });
+        });
+        return g;
+      }
+      function findPaths(start, end, excludeLink, maxHops = 6, maxPaths = 12) {
+        const g = buildGraph(excludeLink); const out = [];
+        function dfs(node, path, cost, visited) {
+          if (path.length > maxHops) return;
+          if (node === end) { out.push({ hops: [...path], cost }); return; }
+          if (!g[node]) return;
+          for (const e of g[node]) {
+            if (visited.has(e.to)) continue;
+            visited.add(e.to);
+            dfs(e.to, [...path, e.to], cost + e.w, visited);
+            visited.delete(e.to);
+          }
+        }
+        dfs(start, [start], 0, new Set([start]));
+        return out.sort((a, b) => a.cost - b.cost).slice(0, maxPaths);
+      }
+      function dijkstraPath(start, end, excludeLink) {
+        const g = buildGraph(excludeLink);
+        const dist = {}, prev = {}, visited = new Set();
+        Object.keys(g).forEach((k) => (dist[k] = Infinity));
+        dist[start] = 0;
+        while (true) {
+          let u = null, best = Infinity;
+          for (const k in dist) { if (!visited.has(k) && dist[k] < best) { best = dist[k]; u = k; } }
+          if (u === null) break;
+          if (u === end) break;
+          visited.add(u);
+          for (const e of g[u] || []) {
+            const alt = dist[u] + e.w;
+            if (alt < (dist[e.to] ?? Infinity)) { dist[e.to] = alt; prev[e.to] = u; }
+          }
+        }
+        const path = []; let cur = end;
+        while (cur !== undefined) { path.unshift(cur); cur = prev[cur]; }
+        if (path[0] !== start) return null;
+        return { hops: path, cost: dist[end] };
+      }
+
+      function renderSegmentList() {
+        const box = $("segment-list"); box.innerHTML = "";
+        if (!state.segments.length) {
+          box.innerHTML = `<div class="empty-segments">${T("srh.empty")}</div>`;
+          return;
+        }
+        const segs = state.segments;
+        segs.forEach((s, idx) => {
+          const item = document.createElement("div");
+          item.className = "segment-item";
+          item.innerHTML = `<span><span class="idx">SID[${segs.length - 1 - idx}]</span>${nodeLabel(s)} <span style="color:var(--text-3)">${nodes()[s].sub}</span></span>`;
+          box.appendChild(item);
+        });
+        updateSegmentHighlight();
+      }
+      function updateSegmentHighlight() {
+        const items = $("segment-list").querySelectorAll(".segment-item");
+        const activeIdx = state.segments.length - state.sl;
+        items.forEach((it, i) => {
+          it.classList.remove("active", "done");
+          if (i < activeIdx) it.classList.add("done");
+          else if (i === activeIdx) it.classList.add("active");
+        });
+      }
+      function flash(elm) { elm.classList.remove("flash"); void elm.offsetWidth; elm.classList.add("flash"); }
+      function updateSrhView() {
+        $("srh-sl").textContent = state.sl;
+        if (state.sl > 0) {
+          const seg = state.segments[state.segments.length - state.sl];
+          $("srh-da").textContent = nodeLabel(seg);
+        } else {
+          $("srh-da").textContent = nodeLabel("hostB") + " (final)";
+        }
+        $("current-node").textContent = state.current ? nodeLabel(state.current) : "—";
+        flash($("srh-sl")); flash($("srh-da"));
+        updateSegmentHighlight();
+      }
+
+      function setActivePanel(panelId) {
+        ["panel-srh", "panel-console", "panel-log"].forEach((id) => {
+          const p = $(id); if (!p) return;
+          if (id === panelId) { p.classList.remove("live"); void p.offsetWidth; p.classList.add("live"); }
+          else p.classList.remove("live");
+        });
+      }
+
+      let _guideTarget = null;
+      function showGuide(targetBtnId, text) {
+        const btn = $(targetBtnId);
+        if (!btn || btn.disabled) { hideGuide(); return; }
+        setI18nText($("guide-text"), text);
+        _guideTarget = targetBtnId;
+        positionGuide();
+        $("guide").classList.add("show");
+      }
+      function hideGuide() { _guideTarget = null; $("guide").classList.remove("show"); }
+      function positionGuide() {
+        if (!_guideTarget) return;
+        const btn = $(_guideTarget); if (!btn) return;
+        const r = btn.getBoundingClientRect();
+        $("guide").style.left = r.left + r.width / 2 + "px";
+        $("guide").style.top = r.top - 6 + "px";
+      }
+      window.addEventListener("resize", positionGuide);
+      window.addEventListener("scroll", positionGuide, { passive: true });
+
+      function setKpi(id, val, cls) {
+        const e = $(id); e.textContent = val;
+        const wrap = e.parentElement;
+        wrap.classList.remove("good", "warn", "bad");
+        if (cls) wrap.classList.add(cls);
+      }
+      function resetKpis() {
+        setKpi("kpi-cpu", "2.1", "good");
+        setKpi("kpi-rt", "—", null);
+        setKpi("kpi-loss", "—", null);
+      }
+      function setAlgoSummary() { $("console-title").textContent = T("panel.console"); }
+
+      async function rampCpu(targetPct, durMs) {
+        const start = parseFloat($("kpi-cpu").textContent) || 2.1;
+        const steps = Math.max(8, Math.floor(durMs / 80));
+        for (let i = 1; i <= steps; i++) {
+          const t = i / steps;
+          const v = start + (targetPct - start) * t + (Math.random() - 0.5) * 0.5;
+          const cls = v > 6 ? "bad" : v > 4 ? "warn" : "good";
+          setKpi("kpi-cpu", v.toFixed(1), cls);
+          await sleep(durMs / steps);
+        }
+      }
+      async function fadeCpuBack(durMs = 800) {
+        const start = parseFloat($("kpi-cpu").textContent) || 4;
+        const steps = 10;
+        for (let i = 1; i <= steps; i++) {
+          const t = i / steps;
+          const v = start + (2.1 - start) * t;
+          const cls = v > 6 ? "bad" : v > 4 ? "warn" : "good";
+          setKpi("kpi-cpu", v.toFixed(1), cls);
+          await sleep(durMs / steps);
+        }
+      }
+
+      // ========== Snapshot / Cache ==========
+      function buildSnapshot() {
+        const wrap = (id) => $(id).parentElement.className.replace("kpi-value ", "").trim();
+        return {
+          chosenAlt: state.chosenAlt ? { ...state.chosenAlt, hops: [...state.chosenAlt.hops] } : null,
+          brokenLinkId: state.brokenLinkId,
+          breakFromNode: state.breakFromNode,
+          segments: [...state.segments],
+          sl: state.sl,
+          currentNode: state.current,
+          kpiCpu: $("kpi-cpu").textContent,
+          kpiCpuClass: wrap("kpi-cpu"),
+          kpiRt: $("kpi-rt").textContent,
+          kpiRtClass: wrap("kpi-rt"),
+          kpiLoss: $("kpi-loss").textContent,
+          kpiLossClass: wrap("kpi-loss"),
+          consoleHtml: $("console-body").innerHTML,
+          consoleTitle: $("console-title").textContent,
+          logHtml: $("log").innerHTML,
+        };
+      }
+      function applySnapshot(snap) {
+        state.chosenAlt = snap.chosenAlt;
+        state.brokenLinkId = snap.brokenLinkId;
+        state.breakFromNode = snap.breakFromNode;
+        state.segments = [...snap.segments];
+        state.sl = snap.sl;
+        state.current = snap.currentNode;
+
+        // Reset link styles
+        Object.values(linkElements).forEach((ln) =>
+          ln.classList.remove("link-active", "link-broken", "link-recovery", "link-preview", "link-clickable", "scanning"),
+        );
+        clearAllNodeHighlights();
+
+        // Re-mark broken + recovery + edge links
+        if (snap.brokenLinkId) highlightLink(snap.brokenLinkId, "link-broken");
+        highlightLink("l_hA_r1", "link-active");
+        if (snap.chosenAlt) {
+          highlightPath(snap.chosenAlt.hops, "link-recovery");
+          highlightLink(findLinkId(egress(), "hostB"), "link-recovery");
+        }
+
+        // Failure mark visible
+        if (snap.brokenLinkId) {
+          const lk = getLink(snap.brokenLinkId);
+          if (lk) {
+            const a = nodes()[lk.a], b = nodes()[lk.b];
+            failureMark.setAttribute("x", (a.x + b.x) / 2);
+            failureMark.setAttribute("y", (a.y + b.y) / 2 + 6);
+            failureMark.setAttribute("opacity", 1);
+          }
+        }
+
+        // Packet at hostB
+        setPacketPosImmediate("hostB");
+        showPacket();
+        setPacketLost(false);
+        setPacketLabel(`SL ${snap.sl}`);
+        highlightNode("hostB", true);
+
+        // SRH
+        renderSegmentList();
+        updateSrhView();
+
+        // KPIs
+        setKpi("kpi-cpu", snap.kpiCpu, snap.kpiCpuClass || null);
+        setKpi("kpi-rt", snap.kpiRt, snap.kpiRtClass || null);
+        setKpi("kpi-loss", snap.kpiLoss, snap.kpiLossClass || null);
+
+        // Console
+        $("console-title").textContent = snap.consoleTitle;
+        $("console-body").innerHTML = snap.consoleHtml;
+
+        // Log
+        $("log").innerHTML = snap.logHtml;
+
+        state.phase = "done";
+        setPhaseLabel(GB("phase.cached", ALGORITHMS[currentAlgo].name));
+        $("btn-start").disabled = true;
+        $("btn-fail").disabled = true;
+        $("btn-recover").disabled = true;
+        $("btn-resume").disabled = true;
+        setActivePanel("panel-console");
+        showGuide("btn-reset", GB("guide.reset"));
+      }
+
+      // ========== Phases ==========
+      function reset() {
+        state = {
+          phase: "idle", segments: [], sl: 0, current: null,
+          primaryAvailable: true, chosenAlt: null,
+          brokenLinkId: null, breakFromNode: null,
+        };
+        setPhaseLabel(GB("phase.idle"));
+        hidePacket(); setPacketLost(false); setPacketLabel("");
+        Object.values(linkElements).forEach((ln) =>
+          ln.classList.remove("link-active", "link-broken", "link-recovery", "link-preview", "link-clickable", "scanning"),
+        );
+        if (failureMark) failureMark.setAttribute("opacity", 0);
+        if (alertSignal) alertSignal.style.opacity = 0;
+        clearAllNodeHighlights();
+        $("srh-sl").textContent = "—";
+        $("srh-da").textContent = "—";
+        $("current-node").textContent = "—";
+        renderSegmentList();
+        renderConsoleIdle();
+        $("log").innerHTML = "";
+        logMsg(LB(`已載入 ${TOPOLOGIES[currentTopo].label} 拓樸；目前演算法 ${ALGORITHMS[currentAlgo].name}。`,
+                  `Loaded topology ${TOPOLOGIES[currentTopo].label}; current algorithm ${ALGORITHMS[currentAlgo].name}.`));
+        $("btn-start").disabled = false;
+        $("btn-fail").disabled = true;
+        $("btn-recover").disabled = true;
+        $("btn-resume").disabled = true;
+        hideToast();
+        setActivePanel(null);
+        resetKpis();
+        setAlgoSummary();
+        setTimeout(() => showGuide("btn-start", GB("guide.start")), 80);
+      }
+
+      function renderConsoleIdle() {
+        $("console-body").innerHTML =
+          `<div class="console-step" id="console-idle">
+            <div class="step-title" style="color:var(--text-3); font-weight:500;">${T("console.idle_title")}</div>
+            <div style="font-size:12px; color:var(--text-3);">${T("console.idle_desc")}</div>
+          </div>`;
+      }
+
+      async function phaseNormal() {
+        if (state.phase !== "idle") return;
+        state.phase = "normal";
+        setPhaseLabel(GB("phase.normal"));
+        $("btn-start").disabled = true;
+        hideGuide();
+        setActivePanel("panel-srh");
+
+        logMsg(LB("Host A 啟動 SRv6 影音串流，目的 Host B。", "Host A starts an SRv6 stream to Host B."));
+        const P = primary();
+        state.segments = P.slice(1);
+        state.sl = state.segments.length;
+        state.current = P[0];
+        renderSegmentList();
+        updateSrhView();
+        highlightPath(P, "link-active");
+        setPacketPosImmediate("hostA");
+        showPacket();
+        setPacketLabel(`SL ${state.sl}`);
+        await sleep(420);
+        await moveTo(P[0], 800);
+        highlightNode(P[0], true);
+        logMsg(LB(`Ingress ${nodeLabel(P[0])} 推入 SRH：[${state.segments.map(nodeLabel).join(", ")}]，SL=${state.sl}`,
+                  `Ingress ${nodeLabel(P[0])} pushes SRH: [${state.segments.map(nodeLabel).join(", ")}], SL=${state.sl}`), "info");
+        await sleep(500);
+        for (let i = 1; i < P.length; i++) {
+          const hop = P[i];
+          await moveTo(hop, 850);
+          highlightNode(P[i - 1], false); highlightNode(hop, true);
+          state.current = hop; state.sl -= 1;
+          setPacketLabel(`SL ${state.sl}`); updateSrhView();
+          if (state.sl > 0)
+            logMsg(LB(`${nodeLabel(hop)} 端點處理：SL−−，DA ← ${nodeLabel(state.segments[state.segments.length - state.sl])}`,
+                      `${nodeLabel(hop)} endpoint: SL−−, DA ← ${nodeLabel(state.segments[state.segments.length - state.sl])}`), "ok");
+          else
+            logMsg(LB(`${nodeLabel(hop)} 為最終 SID，SL=0 → 移除 SRH`,
+                      `${nodeLabel(hop)} is final SID, SL=0 → strip SRH`), "ok");
+          await sleep(450);
+        }
+        await moveTo("hostB", 700);
+        highlightNode(P[P.length - 1], false); highlightNode("hostB", true);
+        logMsg(LB("Host B 收到封包 ✓ 主路徑完成。", "Host B received packet ✓ primary path OK."), "ok");
+        setPhaseLabel(GB("phase.normal_done"));
+        $("btn-fail").disabled = false;
+        setLinkHover(true);
+        showGuide("btn-fail", GB("guide.fail"));
+      }
+
+      function pickDefaultBreakLink() {
+        const P = primary();
+        const mid = Math.max(1, Math.floor((P.length - 1) / 2));
+        return findLinkId(P[mid], P[mid + 1]);
+      }
+      async function phaseFailure() { await triggerBreak(pickDefaultBreakLink()); }
+
+      async function triggerBreak(linkId) {
+        if (state.phase !== "normal") return;
+        state.phase = "failed"; state.brokenLinkId = linkId;
+        setPhaseLabel(GB("phase.failed"));
+        $("btn-fail").disabled = true;
+        setLinkHover(false);
+        hideGuide();
+        setActivePanel("panel-log");
+        logMsg(LB("Host A 發送下一筆 SRv6 封包 …", "Host A sends next SRv6 packet…"));
+        hidePacket(); await sleep(280);
+
+        const P = primary();
+        state.segments = P.slice(1); state.sl = state.segments.length; state.current = P[0];
+        renderSegmentList(); updateSrhView();
+        highlightPath(P, "link-active"); clearAllNodeHighlights();
+        setPacketPosImmediate("hostA"); showPacket();
+        setPacketLabel(`SL ${state.sl}`); await sleep(180);
+
+        const lk = getLink(linkId);
+        let breakIndex = -1;
+        for (let i = 0; i < P.length - 1; i++) {
+          if ((P[i] === lk.a && P[i + 1] === lk.b) || (P[i] === lk.b && P[i + 1] === lk.a)) { breakIndex = i; break; }
+        }
+        if (breakIndex < 0) breakIndex = 1;
+
+        for (let i = 0; i <= breakIndex; i++) {
+          await moveTo(P[i], 700);
+          if (i > 0) highlightNode(P[i - 1], false);
+          highlightNode(P[i], true);
+          state.current = P[i];
+          if (i > 0 && state.sl > 0) {
+            const isEndpoint = state.segments.includes(P[i]);
+            if (isEndpoint) { state.sl -= 1; setPacketLabel(`SL ${state.sl}`); updateSrhView(); }
+          }
+          await sleep(180);
+        }
+
+        const fromNode = P[breakIndex]; state.breakFromNode = fromNode;
+        highlightLink(linkId, "link-broken");
+        const a = nodes()[lk.a], b = nodes()[lk.b];
+        failureMark.setAttribute("x", (a.x + b.x) / 2);
+        failureMark.setAttribute("y", (a.y + b.y) / 2 + 6);
+        failureMark.setAttribute("opacity", 1);
+        logMsg(LB(`應用層告警：${nodeLabel(lk.a)} ↔ ${nodeLabel(lk.b)} 鏈路中斷。`,
+                  `App layer alert: link ${nodeLabel(lk.a)} ↔ ${nodeLabel(lk.b)} is down.`), "err");
+
+        await sleep(600);
+        setPacketLost(true); setPacketLabel("LOSS");
+        logMsg(LB(`封包卡在 ${nodeLabel(fromNode)}：SRH 下一跳不可達。`,
+                  `Packet stuck at ${nodeLabel(fromNode)}: next SRH hop unreachable.`), "err");
+        await sleep(700);
+
+        const ctrl = nodes().controller, fa = nodes()[fromNode];
+        alertSignal.setAttribute("d", `M ${fa.x} ${fa.y} Q ${(fa.x + ctrl.x) / 2} ${(fa.y + ctrl.y) / 2 - 60} ${ctrl.x} ${ctrl.y}`);
+        alertSignal.style.opacity = 1;
+        try { alertSignal.animate([{ strokeDashoffset: 80 }, { strokeDashoffset: 0 }], { duration: 900, iterations: 2 }); } catch (e) {}
+        logMsg(LB("告警送至 SDN Controller。", "Alert delivered to SDN Controller."), "warn");
+        await sleep(1500);
+        alertSignal.style.opacity = 0;
+
+        state.primaryAvailable = false;
+        setPhaseLabel(GB("phase.failed_done"));
+        $("btn-recover").disabled = false;
+        showGuide("btn-recover", GB("guide.recover", ALGORITHMS[currentAlgo].name));
+      }
+
+      async function phaseRecover() {
+        if (state.phase !== "failed") return;
+        state.phase = "computing";
+        setPhaseLabel(GB("phase.computing", ALGORITHMS[currentAlgo].name));
+        $("btn-recover").disabled = true; hideGuide();
+        setActivePanel("panel-console");
+        if (currentAlgo === "proa") await runPROA();
+        else if (currentAlgo === "dijkstra") await runDijkstra();
+        else if (currentAlgo === "ospf") await runOSPF();
+        else if (currentAlgo === "random") await runRandom();
+        setPhaseLabel(GB("phase.computing_done"));
+        $("btn-resume").disabled = false;
+        showGuide("btn-resume", GB("guide.resume"));
+      }
+
+      async function runPROA() {
+        $("console-body").innerHTML =
+          `<div class="console-step active"><div class="step-title"><span class="step-num">1</span>${LM("路徑探查 Path Discovery","Path Discovery")}</div>
+            <div style="font-size:12px; color:var(--text-2); margin-bottom:4px;">${LM("從故障點","From break")} <b>${nodeLabel(state.breakFromNode)}</b> ${LM("至","to")} <b>${nodeLabel(egress())}</b>, C<sub>i</sub> = Σw(e)</div>
+            <div id="cands"></div></div>
+          <div class="console-step active"><div class="step-title"><span class="step-num">2</span>${LM("機率計算 Probability","Probability")}</div>
+            <div class="formula">P<sub>i</sub> = (1 / C<sub>i</sub>) ÷ Σ<sub>j</sub> (1 / C<sub>j</sub>)</div>
+            <div id="probs"></div></div>
+          <div class="console-step active"><div class="step-title"><span class="step-num">3</span>${LM("累積機率 + 隨機選取","Cumulative + Random")}</div>
+            <div class="random-roll"><span style="color:var(--text-3)">r =</span><span id="rval" style="color:var(--text); min-width:54px; font-weight:600;">—</span><div class="random-bar" id="rbar"></div></div>
+            <div style="margin-top:12px; font-size:13px; color:var(--text-2);">${LM("選定備援路徑","Chosen path")}：<span id="cpath" style="color:var(--success); font-weight:600; font-family:ui-monospace,Menlo,monospace;">—</span></div></div>`;
+
+        rampCpu(ALGORITHMS.proa.cpuPeak, 1500);
+        const allPaths = findPaths(state.breakFromNode, egress(), state.brokenLinkId);
+        const cands = allPaths.slice(0, 3);
+        if (!cands.length) { logMsg(LB("找不到備援路徑。","No backup path."), "err"); return; }
+        const inv = cands.map((c) => 1 / c.cost);
+        const sumInv = inv.reduce((s, v) => s + v, 0);
+        cands.forEach((c, i) => (c.p = inv[i] / sumInv));
+        let acc = 0; cands.forEach((c) => { acc += c.p; c.cum = acc; });
+
+        for (let i = 0; i < cands.length; i++) {
+          const c = cands[i];
+          const row = document.createElement("div"); row.className = "candidate";
+          row.innerHTML = `<span>${c.hops.map(nodeLabel).join(" → ")}</span><span class="cost">C${i + 1}=${c.cost}</span><span style="color:var(--text-3)">—</span>`;
+          $("cands").appendChild(row);
+          logMsg(LB(`候選 ${i + 1}: ${c.hops.map(nodeLabel).join(" → ")}  Σw = ${c.cost}`,
+                    `Candidate ${i + 1}: ${c.hops.map(nodeLabel).join(" → ")}  Σw = ${c.cost}`));
+          await sleep(550);
+        }
+        await sleep(300);
+        for (let i = 0; i < cands.length; i++) {
+          const c = cands[i];
+          const row = document.createElement("div"); row.className = "candidate";
+          row.innerHTML = `<span>${c.hops.map(nodeLabel).join("→")}</span><span class="cost">1/C=${(1 / c.cost).toFixed(4)}</span><span class="prob">P=${(c.p * 100).toFixed(1)}%</span>`;
+          $("probs").appendChild(row);
+          logMsg(`P${i + 1} = ${(c.p * 100).toFixed(1)}%`);
+          await sleep(500);
+        }
+        await sleep(250);
+        const bar = $("rbar");
+        const colors = ["rgba(0,113,227,0.16)", "rgba(88,86,214,0.16)", "rgba(175,82,222,0.16)"];
+        let leftPct = 0;
+        cands.forEach((c, i) => {
+          const seg = document.createElement("div");
+          seg.className = "cum-segment";
+          seg.style.left = leftPct + "%"; seg.style.width = c.p * 100 + "%";
+          seg.style.background = colors[i % colors.length]; seg.textContent = `P${i + 1}`;
+          bar.appendChild(seg); leftPct += c.p * 100;
+        });
+        const ptr = document.createElement("div"); ptr.className = "random-pointer"; ptr.style.left = "0%"; bar.appendChild(ptr);
+        for (let k = 0; k < 8; k++) {
+          const pct = Math.random() * 100;
+          ptr.style.transition = "left 0.13s linear"; ptr.style.left = pct + "%";
+          $("rval").textContent = (pct / 100).toFixed(3);
+          await sleep(120);
+        }
+        const r = Math.random();
+        ptr.style.transition = "left 0.7s cubic-bezier(0.16, 1, 0.3, 1)";
+        ptr.style.left = r * 100 + "%";
+        $("rval").textContent = r.toFixed(3);
+        await sleep(700);
+
+        let chosenIdx = cands.findIndex((c) => r < c.cum);
+        if (chosenIdx < 0) chosenIdx = cands.length - 1;
+        state.chosenAlt = cands[chosenIdx];
+        $("cpath").textContent = state.chosenAlt.hops.map(nodeLabel).join(" → ");
+        $("cands").children[chosenIdx].classList.add("chosen");
+        $("probs").children[chosenIdx].classList.add("chosen");
+        logMsg(LB(`✓ 選定備援：${state.chosenAlt.hops.map(nodeLabel).join(" → ")} (C=${state.chosenAlt.cost})`,
+                  `✓ Chosen: ${state.chosenAlt.hops.map(nodeLabel).join(" → ")} (C=${state.chosenAlt.cost})`), "ok");
+        await sleep(150);
+        for (let i = 0; i < state.chosenAlt.hops.length - 1; i++)
+          highlightLink(findLinkId(state.chosenAlt.hops[i], state.chosenAlt.hops[i + 1]), "link-preview");
+        await sleep(2200);
+        for (let i = 0; i < state.chosenAlt.hops.length - 1; i++) {
+          const lid = findLinkId(state.chosenAlt.hops[i], state.chosenAlt.hops[i + 1]);
+          if (lid !== state.brokenLinkId) highlightLink(lid, null);
+        }
+        highlightLink(state.brokenLinkId, "link-broken");
+        const A = ALGORITHMS.proa;
+        const rt = (A.recoveryRange[0] + Math.random() * (A.recoveryRange[1] - A.recoveryRange[0])).toFixed(1);
+        setKpi("kpi-rt", rt, "good");
+        setKpi("kpi-loss", A.pktLossUdp.toFixed(2), "good");
+        await fadeCpuBack(800);
+      }
+
+      async function runProgressAlgo(algoKey, render, finalizePath, kpiCls) {
+        const A = ALGORITHMS[algoKey];
+        const totalMs = (A.recoveryRange[0] + Math.random() * (A.recoveryRange[1] - A.recoveryRange[0])) * 1000;
+        $("console-body").innerHTML = render(totalMs);
+        rampCpu(A.cpuPeak, totalMs);
+        await finalizePath(totalMs);
+        const path = dijkstraPath(state.breakFromNode, egress(), state.brokenLinkId);
+        if (!path) { logMsg(LB("找不到替代路徑。","No alternate path."), "err"); return; }
+        state.chosenAlt = path;
+        $("cpath").textContent = `${path.hops.map(nodeLabel).join(" → ")}  (C=${path.cost})`;
+        logMsg(LB(`${A.name} 完成 — ${path.hops.map(nodeLabel).join(" → ")} C=${path.cost}`,
+                  `${A.name} done — ${path.hops.map(nodeLabel).join(" → ")} C=${path.cost}`), "ok");
+        for (let i = 0; i < path.hops.length - 1; i++)
+          highlightLink(findLinkId(path.hops[i], path.hops[i + 1]), "link-preview");
+        await sleep(2200);
+        for (let i = 0; i < path.hops.length - 1; i++) {
+          const lid = findLinkId(path.hops[i], path.hops[i + 1]);
+          if (lid !== state.brokenLinkId) highlightLink(lid, null);
+        }
+        highlightLink(state.brokenLinkId, "link-broken");
+        setKpi("kpi-rt", (totalMs / 1000).toFixed(1), kpiCls);
+        setKpi("kpi-loss", A.pktLossUdp.toFixed(2), kpiCls);
+        await fadeCpuBack();
+      }
+
+      async function runDijkstra() {
+        await runProgressAlgo("dijkstra",
+          (totalMs) => `<div class="console-step active"><div class="step-title"><span class="step-num">D</span>Dijkstra SPF ${LM("重算","Recompute")}</div>
+            <div style="font-size:12px; color:var(--text-2); margin-bottom:8px;">${LM("從源節點重算到所有節點的最短路徑樹。","Recompute shortest path tree to all nodes.")}</div>
+            <div class="progress-block">
+              <div class="pb-title"><span id="pb-status-line">${LM("掃描節點","Scanning nodes")} …</span><span class="pb-eta" id="pb-eta">ETA ${(totalMs/1000).toFixed(1)}s</span></div>
+              <div class="progress-bar-outer"><div class="progress-bar-inner warn" id="pb-inner"></div></div>
+              <div class="pb-status" id="pb-log"></div>
+            </div>
+            <div style="margin-top:12px; font-size:13px; color:var(--text-2);">${LM("選定路徑","Path")}：<span id="cpath" style="color:var(--success); font-weight:600; font-family:ui-monospace,Menlo,monospace;">—</span></div></div>`,
+          async (totalMs) => {
+            const routerIds = Object.keys(nodes()).filter((id) => nodes()[id].type === "router");
+            const perNodeMs = totalMs / (routerIds.length + 1);
+            const start = performance.now();
+            for (let i = 0; i < routerIds.length; i++) {
+              const id = routerIds[i];
+              highlightNode(id, true, "scanning");
+              $("pb-status-line").textContent = LM(`掃描 ${nodeLabel(id)} 鄰居 …`, `Relax ${nodeLabel(id)} neighbors…`);
+              $("pb-eta").textContent = `ETA ${((totalMs - (performance.now() - start)) / 1000).toFixed(1)}s`;
+              $("pb-inner").style.width = (((i + 1) / routerIds.length) * 100) + "%";
+              $("pb-log").innerHTML += `<div>relax(${nodeLabel(id)}) → dist[]</div>`;
+              $("pb-log").scrollTop = 999;
+              await sleep(perNodeMs * 0.8);
+              highlightNode(id, false, "scanning");
+            }
+            $("pb-inner").style.width = "100%";
+            $("pb-status-line").innerHTML = `<span class="ok">${LM("SPF Tree 重建完成","SPF Tree built")}</span>`;
+            $("pb-eta").textContent = "done";
+          },
+          "bad");
+      }
+
+      async function runOSPF() {
+        await runProgressAlgo("ospf",
+          (totalMs) => `<div class="console-step active"><div class="step-title"><span class="step-num">O</span>OSPFv3 LSA Flooding</div>
+            <div style="font-size:12px; color:var(--text-2); margin-bottom:8px;">${LM("每個路由器將 LSA 廣播給鄰居至收斂。","Each router floods LSAs to its neighbors until convergence.")}</div>
+            <div class="progress-block">
+              <div class="pb-title"><span id="pb-status-line">flood LSA …</span><span class="pb-eta" id="pb-eta">ETA ${(totalMs/1000).toFixed(1)}s</span></div>
+              <div class="progress-bar-outer"><div class="progress-bar-inner warn" id="pb-inner"></div></div>
+              <div class="pb-status" id="pb-log"></div>
+            </div>
+            <div style="margin-top:12px; font-size:13px; color:var(--text-2);">${LM("收斂後路徑","Path after convergence")}：<span id="cpath" style="color:var(--success); font-weight:600; font-family:ui-monospace,Menlo,monospace;">—</span></div></div>`,
+          async (totalMs) => {
+            const visited = new Set([state.breakFromNode]);
+            const queue = [state.breakFromNode];
+            const g = buildGraph(state.brokenLinkId);
+            const start = performance.now(); let n = 0;
+            while (queue.length) {
+              const cur = queue.shift();
+              highlightNode(cur, true, "scanning");
+              $("pb-status-line").textContent = LM(`${nodeLabel(cur)} 廣播 LSA …`, `${nodeLabel(cur)} flooding LSA…`);
+              $("pb-eta").textContent = `ETA ${Math.max(0, ((totalMs - (performance.now() - start)) / 1000)).toFixed(1)}s`;
+              $("pb-inner").style.width = Math.min(100, (n / Object.keys(nodes()).length) * 100) + "%";
+              $("pb-log").innerHTML += `<div>${nodeLabel(cur)} → flood neighbors</div>`;
+              $("pb-log").scrollTop = 999;
+              for (const e of g[cur] || []) {
+                if (!visited.has(e.to) && nodes()[e.to]?.type === "router") {
+                  visited.add(e.to); queue.push(e.to);
+                }
+              }
+              n++;
+              await sleep(totalMs / 7);
+              highlightNode(cur, false, "scanning");
+            }
+            $("pb-inner").style.width = "100%";
+            $("pb-status-line").innerHTML = `<span class="ok">${LM("收斂完成","Converged")}</span>`;
+            $("pb-eta").textContent = "done";
+          },
+          "warn");
+      }
+
+      async function runRandom() {
+        const A = ALGORITHMS.random;
+        const totalMs = (A.recoveryRange[0] + Math.random() * (A.recoveryRange[1] - A.recoveryRange[0])) * 1000;
+        $("console-body").innerHTML =
+          `<div class="console-step active"><div class="step-title"><span class="step-num">R</span>Random Path</div>
+            <div style="font-size:12px; color:var(--text-2); margin-bottom:8px;">${LM("每跳等機率隨機選擇有效鄰居，可能繞遠。","Each hop picks a random neighbor — may detour.")}</div>
+            <div class="progress-block">
+              <div class="pb-title"><span id="pb-status-line">${LM("隨機跳數中","Random walking")} …</span><span class="pb-eta" id="pb-eta">ETA ${(totalMs/1000).toFixed(1)}s</span></div>
+              <div class="progress-bar-outer"><div class="progress-bar-inner warn" id="pb-inner"></div></div>
+              <div class="pb-status" id="pb-log"></div>
+            </div>
+            <div style="margin-top:12px; font-size:13px; color:var(--text-2);">${LM("隨機路徑","Random path")}：<span id="cpath" style="color:var(--success); font-weight:600; font-family:ui-monospace,Menlo,monospace;">—</span></div>
+          </div>`;
+        rampCpu(A.cpuPeak, totalMs);
+        const g = buildGraph(state.brokenLinkId);
+        const target = egress();
+        let cur = state.breakFromNode;
+        const path = [cur]; const visited = new Set([cur]);
+        let cost = 0; let step = 0;
+        const start = performance.now();
+        while (cur !== target && step < 12) {
+          const opts = (g[cur] || []).filter((e) => !visited.has(e.to));
+          if (opts.length === 0) break;
+          const pick = opts[Math.floor(Math.random() * opts.length)];
+          visited.add(pick.to); path.push(pick.to);
+          cost += pick.w; cur = pick.to; step++;
+          $("pb-status-line").textContent = LM(`${nodeLabel(path[path.length - 2])} → ${nodeLabel(pick.to)}`,
+                                                `${nodeLabel(path[path.length - 2])} → ${nodeLabel(pick.to)}`);
+          $("pb-eta").textContent = `ETA ${Math.max(0, ((totalMs - (performance.now() - start)) / 1000)).toFixed(1)}s`;
+          $("pb-inner").style.width = Math.min(100, (step / 6) * 100) + "%";
+          $("pb-log").innerHTML += `<div>hop → ${nodeLabel(pick.to)} (w=${pick.w})</div>`;
+          $("pb-log").scrollTop = 999;
+          await sleep(totalMs / 6);
+        }
+        $("pb-inner").style.width = "100%";
+        if (cur !== target) {
+          $("pb-status-line").innerHTML = `<span class="err">${LM("退回 Dijkstra","Fallback to Dijkstra")}</span>`;
+          state.chosenAlt = dijkstraPath(state.breakFromNode, target, state.brokenLinkId);
+        } else {
+          $("pb-status-line").innerHTML = `<span class="ok">${LM("已抵達","Reached")}</span>`;
+          state.chosenAlt = { hops: path, cost };
+        }
+        $("pb-eta").textContent = "done";
+        $("cpath").textContent = `${state.chosenAlt.hops.map(nodeLabel).join(" → ")}  (C=${state.chosenAlt.cost})`;
+        logMsg(LB(`Random 完成：${state.chosenAlt.hops.map(nodeLabel).join(" → ")}`,
+                  `Random done: ${state.chosenAlt.hops.map(nodeLabel).join(" → ")}`), "ok");
+        for (let i = 0; i < state.chosenAlt.hops.length - 1; i++)
+          highlightLink(findLinkId(state.chosenAlt.hops[i], state.chosenAlt.hops[i + 1]), "link-preview");
+        await sleep(2200);
+        for (let i = 0; i < state.chosenAlt.hops.length - 1; i++) {
+          const lid = findLinkId(state.chosenAlt.hops[i], state.chosenAlt.hops[i + 1]);
+          if (lid !== state.brokenLinkId) highlightLink(lid, null);
+        }
+        highlightLink(state.brokenLinkId, "link-broken");
+        setKpi("kpi-rt", (totalMs / 1000).toFixed(1), "warn");
+        setKpi("kpi-loss", A.pktLossUdp.toFixed(2), "bad");
+        await fadeCpuBack();
+      }
+
+      async function phaseResume() {
+        if (state.phase !== "computing") return;
+        state.phase = "recovering";
+        setPhaseLabel(GB("phase.recovering"));
+        $("btn-resume").disabled = true;
+        hideGuide();
+        setActivePanel("panel-srh");
+
+        const chosen = state.chosenAlt;
+        const newSegs = chosen.hops.slice(1);
+        logMsg(LB(`新 SID 列表 [${newSegs.map(nodeLabel).join(", ")}] 寫入 ${nodeLabel(state.breakFromNode)}`,
+                  `New SID list [${newSegs.map(nodeLabel).join(", ")}] installed at ${nodeLabel(state.breakFromNode)}`), "ok");
+        state.segments = newSegs; state.sl = newSegs.length;
+        renderSegmentList(); updateSrhView();
+
+        Object.values(linkElements).forEach((ln) => {
+          if (ln.id !== state.brokenLinkId) ln.classList.remove("link-active", "link-recovery");
+        });
+        highlightPath(chosen.hops, "link-recovery");
+        highlightLink("l_hA_r1", "link-active");
+        highlightLink(findLinkId(egress(), "hostB"), "link-recovery");
+
+        setPacketLost(false);
+        setPacketLabel(`SL ${state.sl}`);
+
+        for (let i = 1; i < chosen.hops.length; i++) {
+          const hop = chosen.hops[i];
+          await moveTo(hop, 800);
+          highlightNode(chosen.hops[i - 1], false);
+          highlightNode(hop, true);
+          state.current = hop;
+          if (state.sl > 0) state.sl -= 1;
+          setPacketLabel(`SL ${state.sl}`); updateSrhView();
+          logMsg(LB(`封包經備援抵達 ${nodeLabel(hop)}，SL=${state.sl}`,
+                    `Packet via backup at ${nodeLabel(hop)}, SL=${state.sl}`));
+          await sleep(220);
+        }
+        await moveTo("hostB", 700);
+        highlightNode(egress(), false); highlightNode("hostB", true);
+        logMsg(LB("✓ Host B 收到封包，傳輸恢復。", "✓ Host B received packet, traffic restored."), "ok");
+
+        const A = ALGORITHMS[currentAlgo];
+        setPhaseLabel(GB("phase.done"));
+
+        // Save snapshot to cache
+        saveCachedRun(currentTopo, currentAlgo, buildSnapshot());
+        updateCacheBadges();
+
+        if (!hasRunOnce) {
+          hasRunOnce = true;
+          const otherKey = currentAlgo === "proa" ? "dijkstra" : "proa";
+          const otherName = ALGORITHMS[otherKey].name;
+          showToast(LB(
+            `${A.name} 跑完了 — 恢復 ${$("kpi-rt").textContent}s、CPU peak ${$("kpi-cpu").textContent}%。\n試試切換到 ${otherName} 再跑一次。`,
+            `${A.name} done — recovery ${$("kpi-rt").textContent}s, CPU peak ${$("kpi-cpu").textContent}%.\nTry switching to ${otherName} and run again.`));
+          showGuide("algo-seg", GB("guide.compare", otherName));
+        } else {
+          showToast(LB(
+            `${A.name} 完成。已自動快取此次結果 — 切換 Tab 可瞬間切回上一次的數據。`,
+            `${A.name} done. Result cached — switch tabs to instantly recall it.`));
+          showGuide("btn-reset", GB("guide.reset"));
+        }
+        state.phase = "done";
+      }
+
+      function showToast(msg) {
+        setI18nText($("toast-body"), msg);
+        $("toast").classList.add("show");
+        setTimeout(() => $("toast").classList.remove("show"), 9000);
+      }
+      function hideToast() { $("toast").classList.remove("show"); }
+
+      // ========== Comparison table ==========
+      function renderCompareTable() {
+        const tbody = $("cmp-body");
+        tbody.innerHTML = "";
+        COMPARE.forEach((topo) => {
+          const trH = document.createElement("tr");
+          trH.className = "topo-row";
+          trH.dataset.topoKey = topo.key;
+          trH.innerHTML = `<td colspan="5"><span class="chev">▶</span>${T(topo.labelKey)}</td>`;
+          trH.addEventListener("click", () => {
+            trH.classList.toggle("expanded");
+            const expanded = trH.classList.contains("expanded");
+            trH.querySelector(".chev").textContent = expanded ? "▼" : "▶";
+            tbody.querySelectorAll(`tr.algo-row[data-topo-key="${topo.key}"]`).forEach((r) => {
+              r.classList.toggle("hidden", !expanded);
+            });
+          });
+          tbody.appendChild(trH);
+          topo.rows.forEach((r) => {
+            const tr = document.createElement("tr");
+            tr.className = "algo-row hidden" + (r.proa ? " is-proa" : "");
+            tr.dataset.topoKey = topo.key;
+            tr.innerHTML =
+              `<td class="algo-name">${r.algo}</td>
+               <td class="num">${r.rt}</td>
+               <td class="num">${r.cpu}</td>
+               <td class="num">${r.udp}</td>
+               <td class="num">${r.tcp}</td>`;
+            tbody.appendChild(tr);
+          });
+        });
+        // Auto-expand topology 1 by default
+        const firstTopo = tbody.querySelector(".topo-row");
+        if (firstTopo && !firstTopo.classList.contains("expanded")) firstTopo.click();
+      }
+
+      // ========== Selectors ==========
+      function attachSegmented(elemId, onChange) {
+        const grp = $(elemId);
+        grp.querySelectorAll(".seg").forEach((b) => {
+          b.addEventListener("click", () => {
+            if (b.classList.contains("active")) return;
+            grp.querySelectorAll(".seg").forEach((x) => x.classList.remove("active"));
+            b.classList.add("active");
+            onChange(b.dataset);
+          });
+        });
+      }
+
+      attachSegmented("topo-seg", (data) => {
+        if (data.topo === currentTopo) return;
+        if (state.phase === "computing" || state.phase === "recovering") {
+          logMsg(LB("計算中，請稍後再切換拓樸。","Computing — wait before switching topology."), "warn");
+          $("topo-seg").querySelectorAll(".seg").forEach((b) =>
+            b.classList.toggle("active", b.dataset.topo === currentTopo));
+          return;
+        }
+        currentTopo = data.topo;
+        buildTopology();
+        reset();
+        updateCacheBadges();
+      });
+
+      attachSegmented("algo-seg", (data) => {
+        if (data.algo === currentAlgo) return;
+        if (state.phase === "computing" || state.phase === "recovering") {
+          logMsg(LB("計算中，請等動畫結束再切換。","Computing — wait before switching algorithm."), "warn");
+          $("algo-seg").querySelectorAll(".seg").forEach((b) =>
+            b.classList.toggle("active", b.dataset.algo === currentAlgo));
+          return;
+        }
+
+        currentAlgo = data.algo;
+
+        // 1) If a cached run exists for current topo+algo → instantly render it
+        const cached = getCachedRun(currentTopo, currentAlgo);
+        if (cached) {
+          applySnapshot(cached);
+          logMsg(LB(`已切換到 ${ALGORITHMS[currentAlgo].name}（從快取載入）。`,
+                    `Switched to ${ALGORITHMS[currentAlgo].name} (loaded from cache).`), "info");
+          return;
+        }
+
+        // 2) No cache — if previously done, reset for clean comparison run
+        if (state.phase === "done") {
+          reset();
+          return;
+        }
+
+        // 3) Mid-flow (idle/normal/failed) — just record the choice
+        if (state.phase === "normal" || state.phase === "failed") {
+          logMsg(LB(`已切換到 ${ALGORITHMS[currentAlgo].name}（套用於下一次恢復）。`,
+                    `Switched to ${ALGORITHMS[currentAlgo].name} (will apply at next recovery).`));
+        } else {
+          logMsg(LB(`已切換到 ${ALGORITHMS[currentAlgo].name}。`,
+                    `Switched to ${ALGORITHMS[currentAlgo].name}.`));
+          setAlgoSummary();
+        }
+      });
+
+      // ========== Wire buttons ==========
+      $("btn-start").addEventListener("click", () => phaseNormal().catch(console.error));
+      $("btn-fail").addEventListener("click", () => phaseFailure().catch(console.error));
+      $("btn-recover").addEventListener("click", () => phaseRecover().catch(console.error));
+      $("btn-resume").addEventListener("click", () => phaseResume().catch(console.error));
+      $("btn-reset").addEventListener("click", () => {
+        clearAllCache();
+        hasRunOnce = false;
+        reset();
+      });
+
+      $("btn-lang").addEventListener("click", () => {
+        applyLang(currentLang === "zh" ? "en" : "zh");
+      });
+
+      // ========== Welcome ==========
+      const WELCOME_KEY = "srv6_welcome_seen_v2";
+      function shouldShowWelcome() {
+        try { return !localStorage.getItem(WELCOME_KEY); } catch (e) { return true; }
+      }
+      function showWelcome() { $("welcome").classList.add("show"); hideGuide(); }
+      function closeWelcome() {
+        $("welcome").classList.remove("show");
+        try { localStorage.setItem(WELCOME_KEY, "1"); } catch (e) {}
+        setTimeout(() => { if (state.phase === "idle") showGuide("btn-start", GB("guide.start")); }, 200);
+      }
+      $("btn-welcome-ok").addEventListener("click", closeWelcome);
+      $("welcome").addEventListener("click", (e) => { if (e.target === $("welcome")) closeWelcome(); });
+      $("btn-help").addEventListener("click", showWelcome);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && $("welcome").classList.contains("show")) closeWelcome();
+      });
+
+      // ========== Boot ==========
+      applyLang("zh");
+      buildTopology();
+      reset();
+      renderCompareTable();
+      if (shouldShowWelcome()) setTimeout(showWelcome, 250);
+    </script>
+  </body>
+</html>

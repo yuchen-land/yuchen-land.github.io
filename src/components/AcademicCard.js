@@ -120,6 +120,19 @@ export default function AcademicCard({ thesis }) {
 
         {/* Action Buttons - Compact Style */}
         <div className="flex gap-2 pt-1">
+          {thesis.links.demo && (
+            <a
+              href={thesis.links.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/btn flex-1 h-8 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-lg text-xs font-medium hover:from-rose-600 hover:to-pink-600 transition-all duration-200 flex items-center justify-center gap-1.5 shadow-sm"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              <span>Live Demo</span>
+            </a>
+          )}
           {thesis.links.advisor && (
             <a
               href={thesis.links.advisor}
