@@ -203,7 +203,7 @@ export default function Home() {
                 image: thesis.image,
                 tags: ["SRv6", "SDN", "IPv6", "Visualization", "Frontend"],
                 type: "research",
-                demo: "/srv6_proa_demo.html",
+                demo: "/srv6-proa",
                 featured: true,
               };
               const featuredList = projects.filter(

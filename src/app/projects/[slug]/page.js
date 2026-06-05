@@ -6,15 +6,12 @@ import ImageCarousel from "@/components/ImageCarousel";
 import ScrollProgress from "@/components/ScrollProgress";
 import TableOfContents from "@/components/TableOfContents";
 import StarTimeline from "@/components/StarTimeline";
-import StatsHighlight from "@/components/StatsHighlight";
-import RelatedProjects from "@/components/RelatedProjects";
-import { findDocBySlug, findProjectBySlug } from "@/utils/projectHelpers";
+import { findDocBySlug } from "@/utils/projectHelpers";
 import { use } from "react";
 
 export default function ProjectDocPage({ params }) {
   const resolvedParams = use(params);
   const doc = findDocBySlug(resolvedParams.slug);
-  const project = findProjectBySlug(resolvedParams.slug);
 
   if (!doc) {
     return (
@@ -104,8 +101,8 @@ export default function ProjectDocPage({ params }) {
           </section>
         )}
 
-        {/* Stats Highlight */}
-        <StatsHighlight stats={doc.stats} />
+        {/* Stats Highlight — hidden for now */}
+        {/* <StatsHighlight stats={doc.stats} /> */}
 
         {/* STAR Timeline */}
         <StarTimeline star={doc.star} />
@@ -165,23 +162,7 @@ export default function ProjectDocPage({ params }) {
           </div>
         </section>
 
-        {/* Roles Section */}
-        <section id="roles" className="mb-20 animate-fade-in">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">
-            My Roles
-          </h2>
-
-          <div className="flex flex-wrap gap-2">
-            {doc.roles.map((role) => (
-              <span
-                key={role}
-                className="bg-white/70 border border-gray-200 text-gray-700 rounded-full px-4 py-2 text-sm font-medium shadow-sm"
-              >
-                {role}
-              </span>
-            ))}
-          </div>
-        </section>
+        {/* Roles Section — hidden for now */}
 
         {/* Links Section */}
         {doc.links && Object.keys(doc.links).length > 0 && (
@@ -214,11 +195,7 @@ export default function ProjectDocPage({ params }) {
           </section>
         )}
 
-        {/* Related Projects */}
-        <RelatedProjects
-          currentProjectSlug={resolvedParams.slug}
-          currentTags={project?.tags || []}
-        />
+        {/* Related Projects — hidden for now */}
 
         {/* CTA Section - Refined */}
         <section className="mb-20 animate-fade-in">

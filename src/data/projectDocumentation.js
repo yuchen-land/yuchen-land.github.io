@@ -100,8 +100,10 @@ export const projectDocumentation = {
     title: "Linux Serial Port Burning Test Tool",
     slug: "linux-serial-port",
     screenshots: [
-      { src: "/images/projects/linux_serial_port.jpg", alt: "Linux Serial Port Tool", caption: "Serial port testing interface" },
-      // Add more screenshots here
+      { src: "/images/projects/moxa_ui.png", alt: "Command-line interface", caption: "Figure 1 — Command-line interface for configuring ports and running tests" },
+      { src: "/images/projects/moxa_exec_arch.png", alt: "Execution architecture", caption: "Figure 2 — Execution architecture" },
+      { src: "/images/projects/moxa_software_arch.png", alt: "Software architecture", caption: "Figure 3 — Software architecture (modular design)" },
+      { src: "/images/projects/moxa_class_diagram.png", alt: "Class diagram", caption: "Figure 4 — Class diagram" },
     ],
     star: {
       situation: "During my internship at MOXA, the QA team needed an efficient tool to test serial port functionality on industrial PCs. Manual testing was time-consuming and prone to human error, especially when testing across different architectures (ARM, x86).",
@@ -121,23 +123,22 @@ export const projectDocumentation = {
     ],
     techStack: {
       programming: ["Python"],
-      libraries: ["Pyserial"],
-      platforms: ["Linux", "ARM", "x86"],
+      libraries: ["Pyserial", "argparse", "subprocess"],
+      platforms: ["Debian 11 Linux", "ARM", "x86"],
+      protocols: ["RS232", "RS485-2W", "RS422/RS485-4W"],
       tools: ["UML Plant Diagram"],
     },
     features: [
-      "Serial port communication control",
-      "Throughput testing capabilities",
-      "Data transmission verification",
-      "Multi-architecture support",
-      "Modular architecture",
-      "User-friendly interface",
-      "Comprehensive error reporting",
+      "Configurable command-line interface (role, port, baud rate, flow control, DPS, timeout, test duration)",
+      "Modular design split into three modules: Serial Port Control, Data Transfer, and External Command",
+      "Serial port control via the pyserial library",
+      "Sender/receiver roles with send-throughput measurement",
+      "External command integration (e.g. mx-uart-ctl) through subprocess",
+      "Supports RS232, RS485-2W and RS422/RS485-4W modes",
+      "Runs on x86 and ARM Debian 11 Linux; auto-exports results and throughput logs",
     ],
     roles: ["Software Engineer", "QA Engineer"],
-    links: {
-      documentation: "https://fir-mandarin-dc1.notion.site/MOXA-f7348ef5700d4f339ce71741b1b0dcea",
-    },
+    links: {},
   },
   4: {
     id: "lotus-peanut-candy",
