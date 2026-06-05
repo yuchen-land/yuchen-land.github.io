@@ -183,7 +183,7 @@ export default function ProjectCard({ project }) {
               <span>Demo</span>
             </a>
           )}
-          {hasDocumentation && projectSlug && (
+          {false && hasDocumentation && projectSlug && (
             <Link
               href={`/projects/${projectSlug}`}
               className="group/btn flex-1 h-8 bg-white/80 border border-gray-200/60 text-gray-600 rounded-lg text-xs font-medium hover:bg-gray-50 transition-all duration-200 flex items-center justify-center gap-1"

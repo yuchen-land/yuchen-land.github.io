@@ -168,8 +168,8 @@ export default function PortfolioContent() {
         </section>
       )}
 
-      {/* Other Projects */}
-      {filteredOther.length > 0 && (
+      {/* Other Projects — hidden */}
+      {false && filteredOther.length > 0 && (
         <section className="mb-24 animate-fade-in-up">
           <div className="mb-10">
             <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight">
