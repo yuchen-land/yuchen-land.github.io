@@ -17,8 +17,9 @@ export default function PortfolioContent() {
     specialization: true,
   });
 
-  const featuredProjects = projects.filter((p) => p.featured);
-  const otherProjects = projects.filter((p) => !p.featured);
+  const visibleProjects = projects.filter((p) => !p.hidden);
+  const featuredProjects = visibleProjects.filter((p) => p.featured);
+  const otherProjects = visibleProjects.filter((p) => !p.featured);
 
   // Filter projects based on selected tags only
   const filterByTags = (projectList) => {

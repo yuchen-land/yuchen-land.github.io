@@ -349,6 +349,7 @@ export const projects = [
     type: "fullstack",
     github: "https://github.com/yuchen-land/renting-system-front",
     featured: false,
+    hidden: true,
   },
   {
     id: 7,
@@ -391,6 +392,7 @@ export const projects = [
     type: "frontend",
     demo: "http://www.holly-world.com.tw/",
     featured: false,
+    hidden: true,
   },
   {
     id: 10,
@@ -406,6 +408,21 @@ export const projects = [
     tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
     type: "fullstack",
     demo: "https://holly-world-v2-0.vercel.app",
+    featured: true,
+  },
+  {
+    id: 11,
+    title: "MyEdit Business",
+    period: "2024 - Present",
+    description: [
+      "**Developed and implemented core features** for MyEdit Business, an AI-powered creative suite tailored for teams and commercial workflows.",
+      "**Prioritized a strong UI/UX focus** using React to deliver a professional, seamless experience for business users.",
+      "Collaborated cross-functionally across RD, SEO, PM, QA, and design teams to ship features and ensure precise delivery.",
+    ],
+    image: `/images/projects/myedit.jpg`,
+    tags: ["React", "Node.js", "Javascript"],
+    type: "frontend",
+    demo: "https://myedit.online/business",
     featured: true,
   },
 ];
