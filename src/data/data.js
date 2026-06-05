@@ -270,7 +270,7 @@ export const projects = [
       "Orchestrated cross-functional collaboration across RD, SEO, PM, QA, and design teams, which slashed team workload by 60% and guaranteed precise project delivery."
     ],
     image: `/images/projects/myedit.jpg`,
-    tags: ["React", "Node.js", "Javascript"],
+    tags: ["React", "Node.js", "JavaScript"],
     type: "frontend",
     demo: "https://myedit.online/en",
     featured: true,
@@ -421,7 +421,7 @@ export const projects = [
       "Orchestrated cross-functional collaboration across RD, SEO, PM, QA, and design teams to ensure precise feature delivery.",
     ],
     image: `/images/projects/myedit_biz.jpg`,
-    tags: ["React", "Node.js", "Javascript"],
+    tags: ["React", "Node.js", "JavaScript"],
     type: "frontend",
     demo: "https://myedit.online/business",
     featured: true,
@@ -434,7 +434,7 @@ export const tagCategories = {
     name: "Frontend",
     icon: "🎨",
     color: "from-blue-400 to-cyan-500",
-    tags: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "HTML", "CSS", "Framer Motion", "Radix UI"],
+    tags: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Framer Motion", "Radix UI"],
   },
   backend: {
     name: "Backend",
@@ -446,7 +446,7 @@ export const tagCategories = {
     name: "Firmware & Embedded",
     icon: "🔌",
     color: "from-teal-400 to-cyan-500",
-    tags: ["Arduino IDE", "Pyserial", "Arm", "x86", "Assembly Language", "Firmware", "Embedded"],
+    tags: ["Pyserial", "Arm", "x86", "Assembly Language", "Firmware", "Embedded"],
   },
   languages: {
     name: "Programming Languages",
@@ -458,12 +458,12 @@ export const tagCategories = {
     name: "Tools & Platforms",
     icon: "🛠️",
     color: "from-green-400 to-emerald-500",
-    tags: ["Git", "Docker", "Linux", "Figma", "Unity", "Autodesk 3ds Max", "UML Plant Diagram", "uv", "Vercel", "Metadata API (SEO)"],
+    tags: ["Linux", "Unity", "Autodesk 3ds Max", "UML Plant Diagram", "uv", "Vercel", "Metadata API (SEO)"],
   },
   specialization: {
     name: "Specialization",
     icon: "⭐",
     color: "from-rose-400 to-pink-500",
-    tags: ["Founder", "Team Leader", "IPv6", "Segment Routing", "SDN", "Path Selection", "Network Resilience", "APNOMS 2025"],
+    tags: ["Founder", "Team Leader", "IPv6", "Segment Routing", "SRv6", "SDN", "Path Selection", "Network Resilience", "APNOMS 2025"],
   },
 };
