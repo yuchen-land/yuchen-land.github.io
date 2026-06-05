@@ -419,7 +419,7 @@ export const projects = [
       "Integrated Google Analytics and multi-source data to optimize SEO and the business landing experience, improving marketing insight and reducing data discrepancies.",
       "Orchestrated cross-functional collaboration across RD, SEO, PM, QA, and design teams to ensure precise feature delivery.",
     ],
-    image: `/images/projects/myedit.jpg`,
+    image: `/images/projects/myedit_biz.jpg`,
     tags: ["React", "Node.js", "Javascript"],
     type: "frontend",
     demo: "https://myedit.online/business",
