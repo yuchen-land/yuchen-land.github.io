@@ -13,7 +13,7 @@ export default function Navbar() {
   const navLinks = [
     { href: "/about", label: "About" },
     { href: "/portfolio", label: "Portfolio" },
-    { href: "/beyond", label: "Beyond" },
+    // { href: "/beyond", label: "Beyond" }, // hidden for now
   ];
 
   useEffect(() => {

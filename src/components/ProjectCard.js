@@ -49,8 +49,8 @@ export default function ProjectCard({ project }) {
           </div>
         )}
 
-        {/* Type Badge - Top Left */}
-        {project.type && (
+        {/* Type Badge - Top Left — hidden for now */}
+        {false && project.type && (
           <div className="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-xs font-medium flex items-center gap-1 shadow-sm bg-white/90 text-gray-600 backdrop-blur-sm">
             {project.type === "frontend" && "Frontend"}
             {project.type === "backend" && "Backend"}

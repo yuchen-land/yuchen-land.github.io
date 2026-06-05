@@ -38,12 +38,12 @@ export const internalLinks = [
     icon: "briefcase",
     color: "from-violet-500 to-purple-600",
   },
-  {
-    name: "Beyond",
-    path: "/beyond",
-    icon: "sparkles",
-    color: "from-amber-500 to-orange-600",
-  },
+  // {
+  //   name: "Beyond",
+  //   path: "/beyond",
+  //   icon: "sparkles",
+  //   color: "from-amber-500 to-orange-600",
+  // }, // hidden for now
 ];
 
 // Education
