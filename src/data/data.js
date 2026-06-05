@@ -154,13 +154,6 @@ export const skills = {
     "JavaScript",
     "TypeScript",
   ],
-  frontend: [
-    "React",
-    "Next.js",
-    "Tailwind CSS",
-    "HTML/CSS",
-    "Figma",
-  ],
   backend: [
     "Python",
     "Node.js",
@@ -169,6 +162,13 @@ export const skills = {
     "FastAPI",
     "PostgreSQL",
     "Supabase"
+  ],
+  frontend: [
+    "React",
+    "Next.js",
+    "Tailwind CSS",
+    "HTML/CSS",
+    "Figma",
   ],
 
   tools: [
@@ -430,11 +430,11 @@ export const projects = [
 
 // Tag Categories
 export const tagCategories = {
-  frontend: {
-    name: "Frontend",
-    icon: "🎨",
-    color: "from-blue-400 to-cyan-500",
-    tags: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Framer Motion", "Radix UI"],
+  languages: {
+    name: "Programming Languages",
+    icon: "💻",
+    color: "from-orange-400 to-red-500",
+    tags: ["C", "C++", "Python", "C#"],
   },
   backend: {
     name: "Backend",
@@ -442,17 +442,17 @@ export const tagCategories = {
     color: "from-purple-400 to-pink-500",
     tags: ["Node.js", "Express.js", "FastAPI", "RESTful API Design", "DevOps", "Supabase", "PostgreSQL"],
   },
+  frontend: {
+    name: "Frontend",
+    icon: "🎨",
+    color: "from-blue-400 to-cyan-500",
+    tags: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Framer Motion", "Radix UI"],
+  },
   firmware: {
     name: "Firmware & Embedded",
     icon: "🔌",
     color: "from-teal-400 to-cyan-500",
     tags: ["Pyserial", "Arm", "x86", "Assembly Language", "Firmware", "Embedded"],
-  },
-  languages: {
-    name: "Programming Languages",
-    icon: "💻",
-    color: "from-orange-400 to-red-500",
-    tags: ["C", "C++", "Python", "C#"],
   },
   tools: {
     name: "Tools & Platforms",
