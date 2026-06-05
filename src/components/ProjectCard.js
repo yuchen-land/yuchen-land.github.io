@@ -37,6 +37,7 @@ export default function ProjectCard({ project }) {
             width={400}
             height={224}
             className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-110 ${imgLoading ? 'opacity-0' : 'opacity-100'}`}
+            style={project.imagePosition ? { objectPosition: project.imagePosition } : undefined}
             onLoad={() => setImgLoading(false)}
             onError={() => {
               setImgError(true);

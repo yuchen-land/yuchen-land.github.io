@@ -276,6 +276,23 @@ export const projects = [
     featured: true,
   },
   {
+    id: 10,
+    title: "Holly World V2.0 - E-commerce Platform",
+    period: "2025 - Present",
+    description: [
+      "Migrated platform to Next.js 13/React 19 (SSR/TanStack Query), **reducing First Contentful Paint (FCP) by  50%.**",
+      "Enforced end-to-end type safety and validation using **TypeScript** and **Zod**, reducing runtime errors by approximately 40%.",
+      "Maintained code quality via **Jest** for testing and **Husky** for pre-commit hooks.",
+      "Engineered custom **Node.js scripts** to automate product data validation and image synchronization, eliminating manual workflows and **boosting maintenance efficiency by 70%.**"
+    ],
+    image: "/images/projects/hollyworld2.png",
+    imagePosition: "center 40%",
+    tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
+    type: "fullstack",
+    demo: "https://holly-world-v2-0.vercel.app",
+    featured: false,
+  },
+  {
     id: 2,
     title: "BonBunny Pastry Studio - Modern Artisanal Pastry E-commerce Platform",
     period: "2025 - Present",
@@ -289,22 +306,6 @@ export const projects = [
     tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS", "DevOps"],
     type: "fullstack",
     demo: "https://bonbunny.vercel.app/",
-    featured: false,
-  },
-  {
-    id: 10,
-    title: "Holly World V2.0 - E-commerce Platform",
-    period: "2025 - Present",
-    description: [
-      "Migrated platform to Next.js 13/React 19 (SSR/TanStack Query), **reducing First Contentful Paint (FCP) by  50%.**",
-      "Enforced end-to-end type safety and validation using **TypeScript** and **Zod**, reducing runtime errors by approximately 40%.",
-      "Maintained code quality via **Jest** for testing and **Husky** for pre-commit hooks.",
-      "Engineered custom **Node.js scripts** to automate product data validation and image synchronization, eliminating manual workflows and **boosting maintenance efficiency by 70%.**"
-    ],
-    image: "/images/projects/hollyworld2.png",
-    tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
-    type: "fullstack",
-    demo: "https://holly-world-v2-0.vercel.app",
     featured: false,
   },
   {

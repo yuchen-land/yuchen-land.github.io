@@ -209,8 +209,10 @@ export default function Home() {
               const featuredList = projects.filter(
                 (project) => project.featured && project.id !== 2,
               );
-              const myEditIdx = featuredList.findIndex((p) => p.id === 1);
-              featuredList.splice(myEditIdx + 1, 0, thesisFeatured);
+              // Insert the thesis demo right after MyEdit Business (id 11),
+              // so the order is MyEdit → MyEdit Business → Thesis.
+              const afterIdx = featuredList.findIndex((p) => p.id === 11);
+              featuredList.splice(afterIdx + 1, 0, thesisFeatured);
               return featuredList.map((project) => (
                 <div
                   key={project.id}
