@@ -301,7 +301,7 @@ export const projects = [
       "Maintained code quality via **Jest** for testing and **Husky** for pre-commit hooks.",
       "Engineered custom **Node.js scripts** to automate product data validation and image synchronization, eliminating manual workflows and **boosting maintenance efficiency by 70%.**"
     ],
-    image: "/images/projects/hollyworld2.jpg",
+    image: "/images/projects/hollyworld2.png",
     tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
     type: "fullstack",
     demo: "https://holly-world-v2-0.vercel.app",
