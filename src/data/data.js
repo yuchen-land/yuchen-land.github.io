@@ -315,7 +315,7 @@ export const projects = [
     description: [
       "Developed a Python test tool with **pyserial** to control serial ports for throughput testing and data transmission accuracy verification.",
       "Implemented a **modular architecture**, optimized serial port testing efficiency, and **created a user-friendly interface for seamless procedures.**",
-    ], github: "https://fir-mandarin-dc1.notion.site/MOXA-f7348ef5700d4f339ce71741b1b0dcea",
+    ], github: "/MOXA_serial.html",
     image: `/images/projects/linux_serial_port.jpg`,
     tags: ["Python", "Pyserial", "Linux", "UML Plant Diagram", "Arm", "x86", "Embedded"],
     type: "firmware",
