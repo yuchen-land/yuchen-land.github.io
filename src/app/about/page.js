@@ -22,7 +22,7 @@ export default function AboutPage() {
               Yu-Chen (Cindy) Liu
             </h1>
             <p className="text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">
-              Software Engineer passionate about building products that simplify life
+              Software Engineer building AI-enabled products, networking systems, and cross-functional product delivery
             </p>
           </div>
 
@@ -30,7 +30,7 @@ export default function AboutPage() {
           <div className="mb-20 animate-fade-in-up">
             <div className="backdrop-blur-sm bg-white/50 border border-white/60 rounded-2xl p-8 md:p-10 shadow-sm">
               <p className="text-gray-700 text-base leading-relaxed mb-8">
-                A proactive and curious software engineer with a passion for building products that simplify life. I thrive in dynamic teams, enjoy turning complex ideas into reality, and am always ready to bring positive energy and fresh perspectives to every project.
+                Software Engineer with experience across AI-enabled products, networking systems, and cross-functional product delivery. My background spans Software-Defined Networking (SDN), product engineering, and business automation, with a proven track record of improving delivery speed and operational efficiency. I thrive in dynamic teams, enjoy turning complex ideas into reality, and bring positive energy and fresh perspectives to every project.
               </p>
               <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-100">
                 <div className="text-center">
@@ -98,7 +98,7 @@ export default function AboutPage() {
                                 >
                                   MyEdit
                                 </a>
-                                {parts[1]}
+                                {parts.slice(1).join("MyEdit")}
                               </span>
                             </li>
                           );
@@ -157,10 +157,12 @@ export default function AboutPage() {
                     {category === "frontend" && "Frontend Development"}
                     {category === "backend" && "Backend Development"}
                     {category === "programming" && "Programming Languages"}
+                    {category === "networking" && "Networking"}
+                    {category === "infrastructure" && "Infrastructure & DevOps"}
                     {category === "database" && "Database & Storage"}
                     {category === "tools" && "Development Tools"}
                     {category === "design" && "Design & Multimedia"}
-                    {category === "aiTools" && "AI-Driven Tools"}
+                    {category === "aiTools" && "AI-Assisted Development"}
                   </h3>
                   <div className="flex flex-wrap gap-1.5">
                     {items.map((skill) => (

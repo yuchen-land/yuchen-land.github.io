@@ -100,10 +100,11 @@ export const experience = [
     position: "Software Engineer",
     period: "10/2024 - Present",
     description: [
-      "Developed and implemented core features for MyEdit image, audio, video projects (e.g., Magic Designer, Podcast Studio, Video Editor, Homepage, SEO) with React, maintaining a strong UI/UX focus for professional performance and smooth user experience.",
-      "Integrated GA and multi-source data, reducing marketing analysis time by 86% and discrepancies by 96%, optimizing SEO.",
-      "Automated weekly report generation (n8n, GA, Sheets), boosting efficiency >97% (4h to 5min) and eliminating errors.",
-      "Orchestrated cross-functional collaboration (RD, SEO, PMs, QA, Designers), reducing team workload by 60% and ensuring precise project delivery."
+      "Owned end-to-end delivery of AI-powered creative tools and SEO-driven product features for MyEdit and MyEdit Business, serving large-scale customer-facing workflows.",
+      "Led cross-functional execution across Product, Design, SEO, QA, and Engineering teams, consistently delivering features on schedule while balancing technical constraints and business priorities.",
+      "Initiated and drove the development of an AI-assisted testing framework integrated into CI/CD pipelines, reducing project delivery timelines from 6 months to 1 month.",
+      "Built automated business intelligence pipelines by integrating Google Analytics and multiple external data sources, reducing reporting effort by 86% and improving data processing efficiency by 97%.",
+      "Played a key role in delivery planning, effort estimation, and risk assessment across multiple parallel projects, improving execution predictability and on-time delivery."
     ],
     type: "work",
     links: {
@@ -149,19 +150,11 @@ export const skills = {
   programming: [
     "C",
     "C++",
-    "Python",
     "C#",
-    "JavaScript",
     "TypeScript",
-  ],
-  backend: [
+    "JavaScript",
     "Python",
-    "Node.js",
-    "Express.js",
-    "RESTful API",
-    "FastAPI",
-    "PostgreSQL",
-    "Supabase"
+    "Go",
   ],
   frontend: [
     "React",
@@ -170,24 +163,40 @@ export const skills = {
     "HTML/CSS",
     "Figma",
   ],
-
-  tools: [
-    "Git",
+  backend: [
+    "Node.js",
+    "Express.js",
+    "FastAPI",
+    "RESTful API",
+    "PostgreSQL",
+    "Supabase",
+  ],
+  networking: [
+    "SDN",
+    "SRv6",
+    "IPv6",
+    "Edge Computing",
+  ],
+  infrastructure: [
     "Docker",
     "Linux",
-    "DevOps",
-    "Arduino IDE",
-    "GitHub Copilot"
+    "CI/CD",
+    "Kubernetes",
+    "Proxmox VE",
+    "Git",
+  ],
+  aiTools: [
+    "Claude Code",
+    "GitHub Copilot",
+    "Gemini",
+    "Codex",
+    "Context Engineering",
   ],
   design: [
     "Photoshop",
     "Illustrator",
     "Autodesk 3ds Max",
     "Unity",
-  ],
-  aiTools: [
-    "Claude / Anthropic API",
-    "Gemini Pro",
   ],
 };
 
