@@ -133,16 +133,6 @@ export const experience = [
     type: "work",
     highlights: ["Multi-access Edge Computing (MEC)", "5G/B5G/6G", "LEO Satellite Communication", "Thesis Writing"],
   },
-  {
-    company: "National Central University",
-    position: "Web Programming Course Teaching Assistant",
-    period: "03/2023 - 06/2023",
-    description: [
-      "Assisted professors and mentored students on core Web Programming concepts, enhancing communication skills."
-    ],
-    type: "work",
-    highlights: ["enhancing communication skills"],
-  },
 ];
 
 // Skills & Technologies
@@ -432,7 +422,7 @@ export const projects = [
     image: `/images/projects/myedit_biz.jpg`,
     tags: ["React", "Node.js", "JavaScript"],
     type: "frontend",
-    demo: "https://myedit.online/business",
+    demo: "https://business.myedit.online/",
     featured: true,
   },
 ];
