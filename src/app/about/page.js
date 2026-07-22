@@ -34,7 +34,7 @@ export default function AboutPage() {
               </p>
               <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-100">
                 <div className="text-center">
-                  <p className="text-2xl font-semibold text-gray-900">1+</p>
+                  <p className="text-2xl font-semibold text-gray-900">2+</p>
                   <p className="text-xs text-gray-500 mt-1">Years Experience</p>
                 </div>
                 <div className="text-center">
