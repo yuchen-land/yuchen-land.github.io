@@ -276,7 +276,7 @@ export const projects = [
   },
   {
     id: 10,
-    title: "Holly World V2.0 - E-commerce Platform",
+    title: "Holly World - E-commerce Platform",
     period: "2025 - Present",
     description: [
       "Migrated platform to Next.js 13/React 19 (SSR/TanStack Query), **reducing First Contentful Paint (FCP) by  50%.**",
@@ -288,7 +288,7 @@ export const projects = [
     imagePosition: "center 40%",
     tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
     type: "fullstack",
-    demo: "https://holly-world-v2-0.vercel.app",
+    demo: "https://www.holly-world.com.tw/",
     featured: false,
   },
   {
