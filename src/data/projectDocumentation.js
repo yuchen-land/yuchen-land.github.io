@@ -400,11 +400,11 @@ export const projectDocumentation = {
     },
   },
   10: {
-    id: "holly-world-v2",
-    title: "Holly World V2.0 - E-commerce Platform",
-    slug: "holly-world-v2",
+    id: "holly-world-ecommerce",
+    title: "Holly World - E-commerce Platform",
+    slug: "holly-world-ecommerce",
     screenshots: [
-      { src: "/images/projects/hollyworld2.jpg", alt: "Holly World V2.0", caption: "Modernized e-commerce platform with Next.js" },
+      { src: "/images/projects/hollyworld2.jpg", alt: "Holly World", caption: "Modernized e-commerce platform with Next.js" },
       // Add more screenshots here
     ],
     star: {
@@ -440,7 +440,7 @@ export const projectDocumentation = {
     ],
     roles: ["Founder", "Full-Stack Developer"],
     links: {
-      demo: "https://holly-world-v2-0.vercel.app",
+      demo: "https://www.holly-world.com.tw",
     },
   },
 };

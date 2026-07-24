@@ -140,7 +140,7 @@ export const brandVentures = [
         type: "Cosplay & Fashion",
         role: "Founder",
         description: "Masquerade and cosplay fashion e-commerce platform offering unique costume pieces and accessories.",
-        url: "https://holly-world-v2-0.vercel.app",
+        url: "https://www.holly-world.com.tw",
         logo: "/images/brands/holly_world.jpg",
         status: "Active",
         social: {
