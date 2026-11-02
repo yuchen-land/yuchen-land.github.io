@@ -20,15 +20,14 @@ export const projectDocumentation = {
         "Developed and implemented core features for image, audio, and video editing tools using React with a strong focus on UI/UX",
         "Integrated Google Analytics and multi-source data pipelines to enable comprehensive marketing analysis",
         "Automated weekly report generation using n8n, GA, and Google Sheets integration",
-        "Orchestrated cross-functional collaboration to streamline project delivery and reduce team workload"
+        "Led an AI-assisted testing system with the QE team and integrated automated verification into CI/CD"
       ],
-      result: "Reduced marketing analysis time by 86% and data discrepancies by 96% through optimized data integration. Automated reporting boosted efficiency by over 97% (from 4 hours to 5 minutes). Improved team workload efficiency by 60% while ensuring precise project delivery."
+      result: "Reduced BI reporting effort by 86%. Initiated and led an AI-assisted testing system with the QE team, integrated into CI/CD, reducing project delivery from 6 months to 1 month. Earned perfect collaboration scores across two consecutive review cycles."
     },
     stats: [
-      { value: "86%", label: "Analysis Time Reduced", icon: "clock" },
-      { value: "96%", label: "Data Discrepancy Reduced", icon: "chart" },
-      { value: "97%", label: "Report Automation", icon: "zap" },
-      { value: "60%", label: "Team Efficiency Improved", icon: "users" }
+      { value: "86%", label: "Reporting Effort Reduced", icon: "clock" },
+      { value: "1", label: "Month Delivery · Previously 6", icon: "rocket" },
+      { value: "2", label: "Perfect Collaboration Review Cycles", icon: "users" }
     ],
     techStack: {
       frontend: ["React", "JavaScript", "HTML/CSS"],
@@ -401,44 +400,48 @@ export const projectDocumentation = {
   },
   10: {
     id: "holly-world-ecommerce",
-    title: "Holly World - E-commerce Platform",
+    title: "Holly World — Costume Rental Platform",
     slug: "holly-world-ecommerce",
     screenshots: [
-      { src: "/images/projects/hollyworld2.jpg", alt: "Holly World", caption: "Modernized e-commerce platform with Next.js" },
-      // Add more screenshots here
+      { src: "/images/projects/hollyworld2.png", alt: "Holly World costume rental website", caption: "Costume discovery, themed collections, and LINE rental inquiries" },
     ],
     star: {
-      situation: "The original Holly World platform needed modernization to improve performance, maintainability, and developer experience. The legacy codebase lacked type safety, automated testing, and efficient development workflows.",
-      task: "Migrate the platform to modern technologies while improving performance metrics and code quality. Implement automation to eliminate manual workflows and reduce runtime errors.",
+      situation: "An established costume rental business needed a modern website to help customers discover costumes, understand rental arrangements, and contact the store. Its growing catalog also required reliable content, translation, and image maintenance.",
+      task: "Modernize the customer-facing rental experience and build maintainable catalog infrastructure, supporting multilingual discovery and the store's inquiry-based rental workflow.",
       action: [
-        "Migrated to Next.js 13 with React 19 for SSR capabilities",
-        "Enforced end-to-end type safety with TypeScript and Zod",
-        "Implemented Jest testing suite with Husky pre-commit hooks",
-        "Engineered custom Node.js scripts for data validation",
-        "Created image synchronization automation"
+        "Built the storefront with Next.js 16 App Router, React 19, TypeScript, and Tailwind CSS, with next-intl routing and localized content for Traditional Chinese, Simplified Chinese, English, Japanese, and Korean.",
+        "Organized costume discovery through categories, themed collections, search keywords, and product pages that guide customers toward LINE inquiries.",
+        "Integrated Neon PostgreSQL using Drizzle ORM and migrations for products, accessories, orders, settings, and admin audit records, with a local JSON catalog mode.",
+        "Implemented Cloudflare R2 image storage and Node.js scripts for WebP image processing, uploads, and image-reference validation.",
+        "Engineered an AI agent delivery harness with Codex and Claude Code: project rules, 7 CI validators, post-deploy smoke tests, verified promotion, and rollback.",
+        "Used GA4 and Search Console data to guide SEO/AEO work, including canonical fixes, structured data, and answer-ready content.",
+        "Implemented cached database reads and automatic static catalog fallback, with a rate-limited Cloudflare Workers gateway for R2 media."
       ],
-      result: "Reduced First Contentful Paint (FCP) by 50%. Decreased runtime errors by approximately 40%. Boosted maintenance efficiency by 70% through automated workflows. Eliminated manual data validation entirely."
+      result: "Built and operate a five-language production storefront with repeatable AI-assisted delivery and catalog maintenance. In the 28-day comparison documented in my resume, Google search clicks increased from 42 to 511 (approximately 12×), and CTR rose from 2.5% to 5.1%. Cached reads and automatic static fallback kept the storefront available during database outages. The local November 2026 catalog snapshot contains 2,099 entries across five source categories."
     },
     stats: [
-      { value: "50%", label: "FCP Improvement", icon: "zap" },
-      { value: "40%", label: "Errors Reduced", icon: "chart" },
-      { value: "70%", label: "Maintenance Efficiency", icon: "clock" }
+      { value: "5", label: "Supported Languages", icon: "users" },
+      { value: "7", label: "CI Validators", icon: "check" },
+      { value: "12×", label: "Search Clicks · 28-day Comparison", icon: "chart" }
     ],
     techStack: {
-      frontend: ["Next.js 13", "React 19", "TypeScript", "Tailwind CSS", "TanStack Query"],
-      backend: ["Supabase"],
-      tools: ["Jest", "Husky", "Zod", "Node.js Scripts"],
+      frontend: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "next-intl", "TanStack Query", "Zustand"],
+      backend: ["Neon PostgreSQL", "Drizzle ORM", "Cloudflare Workers", "Cloudflare R2"],
+      tools: ["Codex", "Claude Code", "GitHub Actions", "GA4", "Search Console", "Jest", "Playwright", "ESLint", "Husky", "Zod", "Sharp", "Node.js Scripts"],
     },
     features: [
-      "Server-Side Rendering (SSR)",
-      "TanStack Query integration",
-      "TypeScript + Zod type safety",
-      "Jest testing suite",
-      "Husky pre-commit hooks",
-      "Automated data validation",
-      "Image synchronization",
+      "Five-language storefront and localized product content",
+      "Category, theme, and keyword-based costume discovery",
+      "LINE rental inquiry journey",
+      "PostgreSQL catalog and operational data with schema migrations",
+      "Cloudflare R2 images and WebP processing workflow",
+      "Automated catalog, translation, image, and theme validation",
+      "Admin session authentication and audit records",
+      "AI agent rules, CI guardrails, smoke tests, and release rollback",
+      "SEO/AEO measurement and structured data",
+      "Cached reads and static catalog fallback during database outages",
     ],
-    roles: ["Founder", "Full-Stack Developer"],
+    roles: ["Full-Stack Developer"],
     links: {
       demo: "https://www.holly-world.com.tw",
     },

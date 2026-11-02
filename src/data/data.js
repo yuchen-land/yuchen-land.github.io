@@ -1,8 +1,8 @@
 // Personal Information
 export const personalInfo = {
   name: "Yu-Chen(Cindy), Liu",
-  title: "Software Engineer & Pâtissier",
-  description: "Hi! I'm Cindy. Welcome to my creative space!\nExplore my projects and the brand I built here.",
+  title: "AI-Native Software Engineer & Pâtissier",
+  description: "Hi! I'm Cindy. I build generative AI products and production systems with AI agents, automated verification, and reliable delivery.\nExplore my engineering work and the brand I built here.",
   avatar: `/images/avatar.jpg`,
   email: "yuchen880401@gmail.com",
   location: "Taipei, Taiwan",
@@ -100,11 +100,10 @@ export const experience = [
     position: "Software Engineer",
     period: "10/2024 - Present",
     description: [
-      "Owned end-to-end delivery of AI-powered creative tools and SEO-driven product features for MyEdit and MyEdit Business, serving large-scale customer-facing workflows.",
-      "Led cross-functional execution across Product, Design, SEO, QA, and Engineering teams, consistently delivering features on schedule while balancing technical constraints and business priorities.",
-      "Initiated and drove the development of an AI-assisted testing framework integrated into CI/CD pipelines, reducing project delivery timelines from 6 months to 1 month.",
-      "Built automated business intelligence pipelines by integrating Google Analytics and multiple external data sources, reducing reporting effort by 86% and improving data processing efficiency by 97%.",
-      "Played a key role in delivery planning, effort estimation, and risk assessment across multiple parallel projects, improving execution predictability and on-time delivery."
+      "Delivered generative AI creative tools and SEO-driven product features for MyEdit and MyEdit Business, a platform serving 10M+ creators and approximately 140K weekly users.",
+      "Initiated and led an AI-assisted automated testing system with the QE team, integrating it into CI/CD and reducing project delivery from 6 months to 1 month.",
+      "Built automated BI pipelines over Google Analytics and external data sources, cutting reporting effort by 86%; insights are used weekly by Senior VPs, Directors, and Product Owners.",
+      "Earned perfect cross-functional collaboration scores in 2 consecutive review cycles, from 5+ peers across Product, Design, SEO, QA, and Engineering."
     ],
     type: "work",
     links: {
@@ -173,6 +172,10 @@ export const skills = {
     "CI/CD",
     "Kubernetes",
     "Proxmox VE",
+    "Cloudflare Workers",
+    "Cloudflare R2",
+    "AWS",
+    "GitHub Actions",
     "Git",
   ],
   aiTools: [
@@ -181,6 +184,12 @@ export const skills = {
     "Gemini",
     "Codex",
     "Context Engineering",
+    "AI Agent Harness Engineering",
+    "Automated Verification & Rollback",
+    "AI-Assisted Testing",
+  ],
+  testingAnalytics: [
+    "Jest", "Playwright", "Google Analytics 4", "GTM", "SEO",
   ],
   design: [
     "Photoshop",
@@ -263,10 +272,10 @@ export const projects = [
     title: "MyEdit",
     period: "2024 - Present",
     description: [
-      "**Developed and implemented core features** for major image, audio, and video projects (e.g., Magic Designer, Podcast Studio, Video Editor).",
-      "**Prioritized a strong UI/UX focus** using React to ensure professional performance and a seamless user experience.",
-      "Integrated Google Analytics and multi-source data to optimize SEO, cutting marketing analysis time by 86% and reducing data discrepancies by 96%.",
-      "Orchestrated cross-functional collaboration across RD, SEO, PM, QA, and design teams, which slashed team workload by 60% and guaranteed precise project delivery."
+      "Developed **generative AI image, audio, and video tools** for MyEdit, including Magic Designer, Podcast Studio, and Video Editor.",
+      "Led an **AI-assisted testing system with the QE team**, integrated into CI/CD, reducing project delivery from **6 months to 1 month**.",
+      "Built Google Analytics and external-data BI pipelines, **reducing reporting effort by 86%** for weekly leadership insights.",
+      "Earned perfect cross-functional collaboration scores in **2 consecutive review cycles** across Product, Design, SEO, QA, and Engineering."
     ],
     image: `/images/projects/myedit.jpg`,
     tags: ["React", "Node.js", "JavaScript"],
@@ -276,20 +285,20 @@ export const projects = [
   },
   {
     id: 10,
-    title: "Holly World - E-commerce Platform",
+    title: "Holly World — Costume Rental Platform",
     period: "2025 - Present",
     description: [
-      "Migrated platform to Next.js 13/React 19 (SSR/TanStack Query), **reducing First Contentful Paint (FCP) by  50%.**",
-      "Enforced end-to-end type safety and validation using **TypeScript** and **Zod**, reducing runtime errors by approximately 40%.",
-      "Maintained code quality via **Jest** for testing and **Husky** for pre-commit hooks.",
-      "Engineered custom **Node.js scripts** to automate product data validation and image synchronization, eliminating manual workflows and **boosting maintenance efficiency by 70%.**"
+      "Built and operate a **5-language costume rental platform**, owning architecture, catalog operations, deployment, and analytics.",
+      "Engineered an **AI agent delivery workflow** with Codex and Claude Code: project rules, **7 CI validators**, post-deploy smoke tests, verified promotion, and rollback.",
+      "Used GA4 and Search Console insights to improve SEO/AEO; in a **28-day comparison**, Google search clicks grew from **42 to 511** and CTR from **2.5% to 5.1%**.",
+      "Implemented **cached database reads and static catalog fallback**, plus a rate-limited **Cloudflare Workers / R2** image gateway to improve storefront resilience."
     ],
     image: "/images/projects/hollyworld2.png",
     imagePosition: "center 40%",
-    tags: ["Founder", "Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
+    tags: ["Next.js", "TypeScript", "React", "Neon PostgreSQL", "Drizzle ORM", "Cloudflare R2", "AI Agents"],
     type: "fullstack",
     demo: "https://www.holly-world.com.tw/",
-    featured: false,
+    featured: true,
   },
   {
     id: 2,

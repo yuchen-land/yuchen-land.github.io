@@ -50,7 +50,7 @@ export default function ProjectDocPage({ params }) {
         {/* Back Button - Subtle */}
         <Link
           href="/portfolio"
-          className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 mb-12 group transition-colors"
+          className="inline-flex min-h-10 items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 mb-10 group transition-colors"
         >
           <svg
             className="w-4 h-4 transition-transform group-hover:-translate-x-0.5"

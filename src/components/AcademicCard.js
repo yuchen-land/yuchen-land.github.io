@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ExportedImage from "next-image-export-optimizer";
 
-export default function AcademicCard({ thesis }) {
+export default function AcademicCard({ thesis, featuredLayout = false }) {
   const [imgError, setImgError] = useState(false);
   const [imgLoading, setImgLoading] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -12,9 +12,9 @@ export default function AcademicCard({ thesis }) {
   const MAX_VISIBLE_ITEMS = 1;
 
   return (
-    <div className="bg-white/60 backdrop-blur-sm rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-white/60 group flex flex-col h-full">
+    <div className="bg-white rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(28,25,23,0.025)] hover:shadow-[0_6px_20px_rgba(28,25,23,0.06)] transition-all duration-300 border border-gray-200/80 group flex flex-col h-full">
       {/* Banner Image */}
-      <div className="relative h-40 bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100 overflow-hidden flex-shrink-0">
+      <div className={`relative ${featuredLayout ? "h-36" : "h-40"} bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100 overflow-hidden flex-shrink-0`}>
         {/* Loading Skeleton */}
         {imgLoading && !imgError && thesis.image && (
           <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-rose-100 to-pink-100">
@@ -60,14 +60,14 @@ export default function AcademicCard({ thesis }) {
       </div>
 
       {/* Content */}
-      <div className="p-5 flex flex-col flex-1">
+      <div className={`${featuredLayout ? "p-4" : "p-5"} flex flex-col flex-1`}>
         <div className="flex-1">
           <div className="mb-2">
-            <h3 className="text-base font-semibold text-gray-800 group-hover:text-rose-500 transition-colors mb-1.5 line-clamp-2">
+            <h3 className={`${featuredLayout ? "min-h-10 text-sm leading-5" : "text-base"} font-semibold text-gray-800 group-hover:text-rose-500 transition-colors mb-1.5 line-clamp-2`}>
               {thesis.title}
             </h3>
             {thesis.year && (
-              <span className="text-xs text-gray-400 font-medium">
+              <span className="text-xs text-gray-500 font-medium">
                 {thesis.year}
               </span>
             )}
@@ -76,16 +76,16 @@ export default function AcademicCard({ thesis }) {
           {/* Research Highlights with expand/collapse */}
           <ul className="text-gray-600 mb-3 space-y-2 list-none">
             {(isExpanded ? thesis.highlights : thesis.highlights.slice(0, MAX_VISIBLE_ITEMS)).map((highlight, index) => (
-              <li key={index} className="text-sm leading-relaxed pl-4 relative">
+              <li key={index} className={`${featuredLayout ? "text-[13px]" : "text-sm"} leading-relaxed pl-4 relative`}>
                 <span className="text-rose-400 absolute left-0 top-1 text-xs">•</span>
-                <span className="block">{highlight}</span>
+                <span className={isExpanded ? "block" : "line-clamp-3"}>{highlight}</span>
               </li>
             ))}
           </ul>
           {thesis.highlights.length > MAX_VISIBLE_ITEMS && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="text-rose-500 hover:text-rose-600 text-xs font-medium mb-3 flex items-center gap-1 transition-colors"
+              className="text-rose-500 hover:text-rose-600 text-xs font-medium mb-1 -ml-1 min-h-9 px-1 flex items-center gap-1 transition-colors"
             >
               {isExpanded ? (
                 <>
@@ -107,14 +107,17 @@ export default function AcademicCard({ thesis }) {
 
           {/* Tech Tags - Compact */}
           <div className="flex flex-wrap gap-1 mb-4">
-            {thesis.tags.map((tag) => (
+            {(isExpanded ? thesis.tags : thesis.tags.slice(0, 4)).map((tag) => (
               <span
                 key={tag}
-                className="text-rose-400 text-[11px] px-2 py-0.5 bg-rose-50/80 rounded-md"
+                className="text-stone-600 text-[11px] px-2 py-1 bg-stone-100 rounded-md"
               >
                 {tag}
               </span>
             ))}
+            {!isExpanded && thesis.tags.length > 4 && (
+              <button type="button" onClick={() => setIsExpanded(true)} aria-label="Show all research details and technologies" className="inline-flex min-h-8 min-w-8 items-center justify-center rounded-md px-2 text-[11px] text-gray-500 hover:bg-stone-100 hover:text-rose-500">+{thesis.tags.length - 4}</button>
+            )}
           </div>
         </div>
 
@@ -123,40 +126,15 @@ export default function AcademicCard({ thesis }) {
           {thesis.links.demo && (
             <a
               href={thesis.links.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group/btn flex-1 h-8 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-lg text-xs font-medium hover:from-rose-600 hover:to-pink-600 transition-all duration-200 flex items-center justify-center gap-1.5 shadow-sm"
+              {...(thesis.links.demo.startsWith("/")
+                ? {}
+                : { target: "_blank", rel: "noopener noreferrer" })}
+              className="group/btn min-w-0 flex-1 whitespace-nowrap px-2 h-10 md:h-8 bg-rose-50 text-rose-600 rounded-lg text-xs font-medium hover:bg-rose-100/80 transition-all duration-200 flex items-center justify-center gap-1.5"
             >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+              <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
-              <span>Live Demo</span>
-            </a>
-          )}
-          {thesis.links.advisor && (
-            <a
-              href={thesis.links.advisor}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group/btn flex-1 h-8 bg-gray-800 text-white rounded-lg text-xs font-medium hover:bg-gray-700 transition-all duration-200 flex items-center justify-center gap-1.5"
-            >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-              <span>Advisor</span>
-            </a>
-          )}
-          {thesis.links.conference && (
-            <a
-              href={thesis.links.conference}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group/btn flex-1 h-8 bg-rose-50/80 text-rose-500 rounded-lg text-xs font-medium hover:bg-rose-100/80 transition-all duration-200 flex items-center justify-center gap-1.5"
-            >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-              </svg>
-              <span>Conference</span>
+              <span>Demo</span>
             </a>
           )}
           {thesis.links.pdf && (
@@ -164,9 +142,9 @@ export default function AcademicCard({ thesis }) {
               href={thesis.links.pdf}
               target="_blank"
               rel="noopener noreferrer"
-              className="group/btn flex-1 h-8 bg-rose-50/80 text-rose-500 rounded-lg text-xs font-medium hover:bg-rose-100/80 transition-all duration-200 flex items-center justify-center gap-1.5"
+              className="group/btn min-w-0 flex-1 whitespace-nowrap px-2 h-10 md:h-8 bg-rose-50 text-rose-600 rounded-lg text-xs font-medium hover:bg-rose-100/80 transition-all duration-200 flex items-center justify-center gap-1.5"
             >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+              <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
               <span>PDF</span>

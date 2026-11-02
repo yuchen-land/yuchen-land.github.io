@@ -79,7 +79,7 @@ export default function NotFound() {
           Or try one of these:
           <Link href="/about" className="text-rose-400 hover:text-rose-500 ml-1">About</Link>
           <span className="mx-1">·</span>
-          <Link href="/beyond" className="text-rose-400 hover:text-rose-500">Beyond</Link>
+          <Link href="/portfolio" className="text-rose-400 hover:text-rose-500">Portfolio</Link>
         </p>
       </div>
     </div>

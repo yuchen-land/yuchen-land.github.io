@@ -8,30 +8,41 @@ export const metadata = {
 };
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50">
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_#fff1f2_0%,_#fafafa_45%,_#fafafa_100%)]">
       <Navbar />
 
-      <div className="relative z-10 min-h-screen py-16 px-6 pt-32 md:pt-40">
+      <div className="relative z-10 min-h-screen py-12 px-5 sm:px-6 pt-28 md:pt-32">
         <div className="max-w-4xl mx-auto">
           {/* Header - Premium Style */}
-          <div className="text-center mb-16 animate-fade-in-down">
+          <div className="text-center mb-10 md:mb-12 animate-fade-in-down">
             <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-4">
               About
             </p>
             <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight mb-4">
               Yu-Chen (Cindy) Liu
             </h1>
-            <p className="text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">
-              Software Engineer building AI-enabled products, networking systems, and cross-functional product delivery
+            <p className="text-gray-500 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+              AI-Native Software Engineer building generative AI products and reliable production systems
             </p>
           </div>
 
           {/* Introduction Card */}
-          <div className="mb-20 animate-fade-in-up">
-            <div className="backdrop-blur-sm bg-white/50 border border-white/60 rounded-2xl p-8 md:p-10 shadow-sm">
-              <p className="text-gray-700 text-base leading-relaxed mb-8">
-                Software Engineer with experience across AI-enabled products, networking systems, and cross-functional product delivery. My background spans Software-Defined Networking (SDN), product engineering, and business automation, with a proven track record of improving delivery speed and operational efficiency. I thrive in dynamic teams, enjoy turning complex ideas into reality, and bring positive energy and fresh perspectives to every project.
-              </p>
+          <div className="mb-14 animate-fade-in-up">
+            <div className="bg-white border border-gray-200/80 rounded-2xl p-6 md:p-8 shadow-sm">
+              <div className="max-w-2xl space-y-4 text-sm md:text-base leading-7 text-gray-600 mb-7">
+                <p>
+                  I develop generative AI creative tools at CyberLink and independently build and operate Holly World, a multilingual costume rental platform.
+                </p>
+                <p>
+                  I combine product engineering with AI-assisted development to deliver reliable software, supported by clear project rules, automated checks, deployment verification, and rollback.
+                </p>
+                <p>
+                  My research in SDN and SRv6 informs my approach to resilient systems. Across engineering, design, QA, and product teams, I focus on turning complex ideas into practical products.
+                </p>
+                <p className="pt-1 text-xs md:text-sm text-stone-500">
+                  Based in Taipei (UTC+8)<span aria-hidden="true" className="mx-2">·</span><span className="inline-block">Open to remote opportunities</span>
+                </p>
+              </div>
               <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-100">
                 <div className="text-center">
                   <p className="text-2xl font-semibold text-gray-900">2+</p>
@@ -50,23 +61,23 @@ export default function AboutPage() {
           </div>
 
           {/* Experience */}
-          <section className="mb-20 animate-fade-in-up">
-            <div className="mb-8">
+          <section className="mb-14 animate-fade-in-up">
+            <div className="mb-5">
               <h2 className="text-xl font-semibold text-gray-900 mb-1">Experience</h2>
-              <p className="text-sm text-gray-400">{experience.length} position{experience.length !== 1 ? "s" : ""}</p>
+              <p className="text-sm text-gray-500">{experience.length} position{experience.length !== 1 ? "s" : ""}</p>
             </div>
-            <div className="relative pl-8 border-l border-rose-200/60">
+            <div className="relative pl-6 border-l border-stone-200">
               {experience.map((exp, index) => (
                 <div key={index} className="mb-8 relative">
                   {/* Timeline Dot */}
-                  <div className="absolute -left-[25px] top-2 w-4 h-4 bg-rose-400 rounded-full border-4 border-pink-50"></div>
+                  <div className="absolute -left-[33px] top-2 w-4 h-4 bg-rose-400 rounded-full border-4 border-[#fafafa]"></div>
 
-                  <div className="backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl p-6 shadow-sm">
+                  <div className="bg-white border border-gray-200/80 rounded-xl p-5 md:p-6 shadow-sm">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-                      <h3 className="text-lg font-semibold text-gray-900">
+                      <h3 className="text-base font-semibold text-gray-900">
                         {exp.position}
                       </h3>
-                      <span className="text-rose-500 text-sm font-medium mt-1 md:mt-0">
+                      <span className="text-stone-500 text-xs font-medium mt-1 md:mt-0 whitespace-nowrap">
                         {exp.period}
                       </span>
                     </div>
@@ -82,23 +93,23 @@ export default function AboutPage() {
                       {exp.description.map((desc, i) => {
                         // Check if this is CyberLink experience with MyEdit link
                         if (exp.links?.myedit && desc.includes("MyEdit")) {
-                          const parts = desc.split("MyEdit");
+                          const parts = desc.split(/(MyEdit Business|MyEdit)/g);
                           return (
-                            <li key={i} className="text-gray-600 text-sm flex items-start gap-2">
+                            <li key={i} className="text-gray-600 text-sm leading-relaxed flex items-start gap-2">
                               <svg className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                               </svg>
                               <span className="flex-1">
-                                {parts[0]}
-                                <a
-                                  href={exp.links.myedit}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="font-medium text-rose-600 hover:text-rose-700 underline underline-offset-2"
-                                >
-                                  MyEdit
-                                </a>
-                                {parts.slice(1).join("MyEdit")}
+                                {parts.map((part, index) => {
+                                  const href = part === "MyEdit Business"
+                                    ? "https://business.myedit.online/"
+                                    : part === "MyEdit" ? exp.links.myedit : null;
+                                  return href ? (
+                                    <a key={index} href={href} target="_blank" rel="noopener noreferrer" className="font-medium text-rose-600 hover:text-rose-700 underline underline-offset-2">
+                                      {part}
+                                    </a>
+                                  ) : part;
+                                })}
                               </span>
                             </li>
                           );
@@ -110,7 +121,7 @@ export default function AboutPage() {
                             if (desc.includes(highlight)) {
                               const parts = desc.split(highlight);
                               return (
-                                <li key={i} className="text-gray-600 text-sm flex items-start gap-2">
+                                <li key={i} className="text-gray-600 text-sm leading-relaxed flex items-start gap-2">
                                   <svg className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                   </svg>
@@ -126,7 +137,7 @@ export default function AboutPage() {
                         }
 
                         return (
-                          <li key={i} className="text-gray-600 text-sm flex items-start gap-2">
+                          <li key={i} className="text-gray-600 text-sm leading-relaxed flex items-start gap-2">
                             <svg className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                             </svg>
@@ -142,16 +153,16 @@ export default function AboutPage() {
           </section>
 
           {/* Skills & Technologies */}
-          <section className="mb-20 animate-fade-in-up">
-            <div className="mb-8">
+          <section className="mb-14 animate-fade-in-up">
+            <div className="mb-5">
               <h2 className="text-xl font-semibold text-gray-900 mb-1">Skills & Technologies</h2>
-              <p className="text-sm text-gray-400">{Object.keys(skills).length} categories</p>
+              <p className="text-sm text-gray-500">{Object.keys(skills).length} categories</p>
             </div>
             <div className="grid md:grid-cols-2 gap-4">
               {Object.entries(skills).map(([category, items]) => (
                 <div
                   key={category}
-                  className="backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl p-5 shadow-sm"
+                  className="bg-white border border-gray-200/80 rounded-xl p-5 shadow-sm"
                 >
                   <h3 className="text-sm font-medium text-gray-900 mb-4">
                     {category === "frontend" && "Frontend Development"}
@@ -162,13 +173,14 @@ export default function AboutPage() {
                     {category === "database" && "Database & Storage"}
                     {category === "tools" && "Development Tools"}
                     {category === "design" && "Design & Multimedia"}
-                    {category === "aiTools" && "AI-Assisted Development"}
+                    {category === "testingAnalytics" && "Testing & Analytics"}
+                    {category === "aiTools" && "AI Agent Engineering"}
                   </h3>
                   <div className="flex flex-wrap gap-1.5">
                     {items.map((skill) => (
                       <span
                         key={skill}
-                        className="text-rose-400 text-xs px-2.5 py-1 bg-rose-50/80 rounded-lg"
+                        className="text-stone-600 text-xs px-2.5 py-1 bg-stone-100 rounded-lg"
                       >
                         {skill}
                       </span>
@@ -180,44 +192,44 @@ export default function AboutPage() {
           </section>
 
           {/* Education */}
-          <section className="mb-20 animate-fade-in-up">
-            <div className="mb-8">
+          <section className="mb-14 animate-fade-in-up">
+            <div className="mb-5">
               <h2 className="text-xl font-semibold text-gray-900 mb-1">Education</h2>
-              <p className="text-sm text-gray-400">{education.length} credential{education.length !== 1 ? "s" : ""}</p>
+              <p className="text-sm text-gray-500">{education.length} credential{education.length !== 1 ? "s" : ""}</p>
             </div>
             <div className="space-y-4">
               {education.map((edu, index) => (
                 <div
                   key={index}
-                  className="backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl p-6 shadow-sm"
+                  className="bg-white border border-gray-200/80 rounded-xl p-5 md:p-6 shadow-sm"
                 >
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <h3 className="text-lg font-semibold text-gray-900">
+                      <h3 className="text-base font-semibold text-gray-900">
                         {edu.school}
                       </h3>
                       {edu.level === "phd" && (
-                        <span className="text-[10px] bg-purple-50 text-purple-500 px-2 py-0.5 rounded-full font-medium">
+                        <span className="text-[10px] bg-stone-100 text-stone-600 px-2 py-0.5 rounded-full font-medium">
                           Ph.D.
                         </span>
                       )}
                       {edu.level === "master" && (
-                        <span className="text-[10px] bg-blue-50 text-blue-500 px-2 py-0.5 rounded-full font-medium">
+                        <span className="text-[10px] bg-stone-100 text-stone-600 px-2 py-0.5 rounded-full font-medium">
                           Master
                         </span>
                       )}
                       {edu.level === "bachelor" && (
-                        <span className="text-[10px] bg-green-50 text-green-500 px-2 py-0.5 rounded-full font-medium">
+                        <span className="text-[10px] bg-stone-100 text-stone-600 px-2 py-0.5 rounded-full font-medium">
                           Bachelor
                         </span>
                       )}
                       {edu.level === "high-school" && (
-                        <span className="text-[10px] bg-orange-50 text-orange-500 px-2 py-0.5 rounded-full font-medium">
+                        <span className="text-[10px] bg-stone-100 text-stone-600 px-2 py-0.5 rounded-full font-medium">
                           High School
                         </span>
                       )}
                     </div>
-                    <span className="text-rose-500 text-sm font-medium mt-1 md:mt-0">
+                    <span className="text-stone-500 text-xs font-medium mt-1 md:mt-0 whitespace-nowrap">
                       {edu.period}
                     </span>
                   </div>
@@ -236,7 +248,7 @@ export default function AboutPage() {
                         }
 
                         return (
-                          <li key={i} className="text-gray-600 text-sm flex items-start gap-2">
+                          <li key={i} className="text-gray-600 text-sm leading-relaxed flex items-start gap-2">
                             <span className="text-rose-400 mt-0.5">•</span>
                             <span className="flex-1 flex items-center gap-2">
                               {desc}
@@ -245,7 +257,7 @@ export default function AboutPage() {
                                   href={link.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-500 transition-colors"
+                                  className="relative inline-flex items-center justify-center w-5 h-5 rounded-full bg-rose-50 after:absolute after:-inset-2.5 after:content-[''] hover:bg-rose-100 text-rose-500 transition-colors"
                                 >
                                   <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -264,19 +276,19 @@ export default function AboutPage() {
           </section>
 
           {/* Publications */}
-          <section className="mb-20 animate-fade-in-up">
-            <div className="mb-8">
+          <section className="mb-14 animate-fade-in-up">
+            <div className="mb-5">
               <h2 className="text-xl font-semibold text-gray-900 mb-1">Publications</h2>
-              <p className="text-sm text-gray-400">{publications.length} publication{publications.length !== 1 ? "s" : ""}</p>
+              <p className="text-sm text-gray-500">{publications.length} publication{publications.length !== 1 ? "s" : ""}</p>
             </div>
             <div className="space-y-4">
               {publications.map((pub, index) => (
                 <div
                   key={index}
-                  className="backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl p-6 shadow-sm"
+                  className="bg-white border border-gray-200/80 rounded-xl p-5 md:p-6 shadow-sm"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-8 h-8 bg-rose-50 rounded-lg flex items-center justify-center text-rose-500 text-sm font-semibold">
+                    <div className="flex-shrink-0 w-8 h-8 bg-stone-100 rounded-lg flex items-center justify-center text-stone-600 text-sm font-semibold">
                       {index + 1}
                     </div>
                     <div className="flex-1">
@@ -309,16 +321,16 @@ export default function AboutPage() {
           </section>
 
           {/* Language Proficiency */}
-          <section className="mb-20 animate-fade-in-up">
-            <div className="mb-8">
+          <section className="mb-14 animate-fade-in-up">
+            <div className="mb-5">
               <h2 className="text-xl font-semibold text-gray-900 mb-1">Language Proficiency</h2>
-              <p className="text-sm text-gray-400">{languages.length} language{languages.length !== 1 ? "s" : ""}</p>
+              <p className="text-sm text-gray-500">{languages.length} language{languages.length !== 1 ? "s" : ""}</p>
             </div>
             <div className="grid md:grid-cols-2 gap-4">
               {languages.map((lang, index) => (
                 <div
                   key={index}
-                  className="backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl p-5 shadow-sm"
+                  className="bg-white border border-gray-200/80 rounded-xl p-5 shadow-sm"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="text-base font-semibold text-gray-900">{lang.name}</h3>
@@ -333,22 +345,22 @@ export default function AboutPage() {
           </section>
 
           {/* Activities & Involvement */}
-          <section className="mb-20 animate-fade-in-up">
-            <div className="mb-8">
+          <section className="mb-14 animate-fade-in-up">
+            <div className="mb-5">
               <h2 className="text-xl font-semibold text-gray-900 mb-1">Activities & Involvement</h2>
-              <p className="text-sm text-gray-400">{activities.length} activit{activities.length !== 1 ? "ies" : "y"}</p>
+              <p className="text-sm text-gray-500">{activities.length} activit{activities.length !== 1 ? "ies" : "y"}</p>
             </div>
             <div className="grid md:grid-cols-2 gap-4">
               {activities.map((activity, index) => (
                 <div
                   key={index}
-                  className="backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl p-5 shadow-sm"
+                  className="bg-white border border-gray-200/80 rounded-xl p-5 shadow-sm"
                 >
                   <div className="flex items-start justify-between mb-2">
                     <h3 className="text-base font-semibold text-gray-900 flex-1">
                       {activity.organization}
                     </h3>
-                    <span className="text-rose-500 text-xs font-medium">
+                    <span className="text-stone-500 text-xs font-medium">
                       {activity.period}
                     </span>
                   </div>
@@ -361,7 +373,7 @@ export default function AboutPage() {
 
           {/* CTA Section */}
           <section className="animate-fade-in">
-            <div className="backdrop-blur-sm bg-white/50 border border-white/60 rounded-2xl p-10 md:p-12 text-center shadow-sm">
+            <div className="bg-white border border-gray-200/80 rounded-2xl p-6 md:p-10 text-center shadow-sm">
               <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-3">
                 Get in Touch
               </p>

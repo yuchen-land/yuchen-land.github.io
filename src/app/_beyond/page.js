@@ -139,7 +139,7 @@ function HorizontalScrollContainer({ children, className = "", mobileArrowsOnly 
             {/* Scrollable Container */}
             <div
                 ref={scrollRef}
-                className={`flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-2 ${!hasOverflow ? 'justify-center' : ''}`}
+                className={`flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory pb-2 ${!hasOverflow ? 'justify-center' : ''}`}
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
                 {children}
@@ -221,14 +221,14 @@ function HorizontalGallery({ gallery, onImageClick }) {
             {/* Scrollable Container */}
             <div
                 ref={scrollRef}
-                className={`flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-2 ${!hasOverflow ? 'justify-center' : ''}`}
+                className={`flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory pb-2 ${!hasOverflow ? 'justify-center' : ''}`}
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
                 {gallery.map((image) => (
                     <div
                         key={image.id}
                         onClick={() => onImageClick(image, gallery)}
-                        className="group relative flex-shrink-0 w-48 h-48 md:w-56 md:h-56 rounded-xl overflow-hidden backdrop-blur-sm bg-white/50 border border-white/60 shadow-sm cursor-pointer hover:shadow-md transition-all duration-300"
+                        className="group relative flex-shrink-0 snap-start w-[62%] aspect-square sm:w-48 sm:h-48 sm:aspect-auto md:w-56 md:h-56 rounded-xl overflow-hidden backdrop-blur-sm bg-white/50 border border-white/60 shadow-sm cursor-pointer hover:shadow-md transition-all duration-300"
                         role="button"
                         tabIndex={0}
                         aria-label={`View ${image.alt || 'image'} in fullscreen`}
@@ -383,7 +383,7 @@ export default function BeyondPage() {
                             {brandVentures.map((brand) => (
                                 <div
                                     key={brand.id}
-                                    className="group flex-shrink-0 w-72 flex flex-col backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                                    className="group flex-shrink-0 w-[64%] snap-start sm:w-72 flex flex-col backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
                                 >
                                     {/* Brand Logo */}
                                     <div className="relative h-40 bg-gradient-to-br from-rose-50 to-pink-50 overflow-hidden">
@@ -476,7 +476,7 @@ export default function BeyondPage() {
                             {hobbyActivities.map((activity) => (
                                 <div
                                     key={activity.id}
-                                    className="group flex-shrink-0 w-80 backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                                    className="group flex-shrink-0 w-[64%] snap-start sm:w-80 backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
                                 >
                                     {/* Activity Image */}
                                     <div className="relative h-40 bg-gradient-to-br from-rose-50 to-pink-50 overflow-hidden">
@@ -529,7 +529,7 @@ export default function BeyondPage() {
                             {scholarships.map((scholarship) => (
                                 <div
                                     key={scholarship.id}
-                                    className="group flex-shrink-0 w-72 backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300"
+                                    className="group flex-shrink-0 w-[64%] snap-start sm:w-72 backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300"
                                 >
                                     {/* Year Badges */}
                                     <div className="flex gap-1.5 mb-3">
@@ -588,7 +588,7 @@ export default function BeyondPage() {
                                         {hobby.pets.map((pet) => (
                                             <div
                                                 key={pet.id}
-                                                className="group flex-shrink-0 w-52 backdrop-blur-sm bg-white/80 border border-rose-100/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+                                                className="group flex-shrink-0 w-[60%] snap-start sm:w-52 backdrop-blur-sm bg-white/80 border border-rose-100/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
                                             >
                                                 {/* Pet Photo */}
                                                 <div className="pt-6 pb-3 flex justify-center">

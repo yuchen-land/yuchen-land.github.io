@@ -51,7 +51,7 @@ export default function Home() {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50 relative overflow-hidden">
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_#fff1f2_0%,_#fafafa_45%,_#fafafa_100%)] relative overflow-hidden">
       <Navbar />
 
       {/* Soft Gradient Orb - Single optimized blob */}
@@ -214,105 +214,89 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-            {(() => {
-              const thesisFeatured = {
-                id: "thesis-srv6-demo",
-                title: "SRv6 PROA Dashboard — SDN Adaptive Path Selection",
-                description: [
-                  "Interactive routing visualization for my Master's thesis: real-time SDN/SRv6 topology, adaptive path selection (PROA), and SRH segment inspection — built front-end-first to bridge networking research and UI engineering.",
+            {[
+              {
+                id: "myedit-suite",
+                title: "MyEdit & MyEdit Business",
+                role: "Product Engineering",
+                summary: "Building AI image, audio, and video experiences for individual creators and business teams at CyberLink.",
+                image: projects.find((project) => project.id === 1).image,
+                tags: ["React", "Node.js", "UI/UX"],
+                links: [
+                  { label: "MyEdit", href: projects.find((project) => project.id === 1).demo },
+                  { label: "Business", href: projects.find((project) => project.id === 11).demo },
                 ],
+              },
+              {
+                id: "holly-world",
+                title: "Holly World — Costume Rental Platform",
+                role: "Full-stack Development",
+                summary: "A five-language rental platform built and operated with AI agents, automated release checks, and resilient catalog delivery.",
+                image: projects.find((project) => project.id === 10).image,
+                tags: ["Next.js", "TypeScript", "PostgreSQL"],
+                links: [
+                  { label: "View Project", href: "/projects/holly-world-ecommerce" },
+                  { label: "Live Site", href: projects.find((project) => project.id === 10).demo },
+                ],
+              },
+              {
+                id: "thesis-srv6-demo",
+                title: "SRv6 PROA Dashboard",
+                role: "Research & Visualization",
+                summary: "Turning networking research into an interactive exploration of adaptive routing, topology, and SRv6 paths.",
                 image: thesis.image,
-                tags: ["SRv6", "SDN", "IPv6", "Visualization", "Frontend"],
-                type: "research",
-                demo: "/srv6-proa",
-                featured: true,
-              };
-              const featuredList = projects.filter(
-                (project) => project.featured && project.id !== 2,
-              );
-              // Insert the thesis demo right after MyEdit Business (id 11),
-              // so the order is MyEdit → MyEdit Business → Thesis.
-              const afterIdx = featuredList.findIndex((p) => p.id === 11);
-              featuredList.splice(afterIdx + 1, 0, thesisFeatured);
-              return featuredList.map((project) => (
-                <div
-                  key={project.id}
-                  className="group backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full"
-                >
-                  {/* Project Image */}
-                  <div className="relative h-36 overflow-hidden flex-shrink-0 bg-gradient-to-br from-pink-50 to-rose-50">
-                    <ImageWithSkeleton
-                      src={project.image}
-                      alt={project.title}
-                      width={400}
-                      height={200}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
+                tags: ["SRv6", "SDN", "Visualization"],
+                links: [{ label: "Explore Dashboard", href: "/srv6-proa" }],
+              },
+            ].map((project) => (
+              <article
+                key={project.id}
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/80 bg-white/65 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-rose-100/50"
+              >
+                <div className="relative aspect-[16/9] overflow-hidden bg-rose-50">
+                  <ImageWithSkeleton
+                    src={project.image}
+                    alt={project.title}
+                    width={480}
+                    height={270}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-rose-500">
+                    {project.role}
+                  </p>
+                  <h3 className="mb-2 min-h-[2.75rem] text-base font-semibold leading-snug text-gray-900">
+                    {project.title}
+                  </h3>
+                  <p className="mb-5 text-xs leading-relaxed text-gray-500">
+                    {project.summary}
+                  </p>
+                  <div className="mb-5 mt-auto flex flex-wrap gap-1.5">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="rounded-md bg-rose-50 px-2 py-1 text-[10px] font-medium text-rose-500">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-
-                  {/* Project Content */}
-                  <div className="p-4 flex flex-col flex-1">
-                    <h3 className="text-sm font-semibold text-gray-900 mb-1.5 group-hover:text-rose-600 transition-colors line-clamp-1">
-                      {project.title}
-                    </h3>
-
-                    <p className="text-gray-500 text-xs leading-relaxed mb-3 line-clamp-2">
-                      {project.description[0].replace(/\*\*(.*?)\*\*/g, "$1")}
-                    </p>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-1 mb-3">
-                      {project.tags.slice(0, 2).map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-rose-400 text-[10px] px-2 py-0.5 bg-rose-50/80 rounded-md"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                      {project.tags.length > 2 && (
-                        <span className="text-gray-400 text-[10px]">
-                          +{project.tags.length - 2}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Spacer */}
-                    <div className="flex-grow"></div>
-
-                    {/* Links */}
-                    <div className="flex items-center gap-3 pt-2 border-t border-gray-100">
-                      {project.demo && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 text-rose-500 hover:text-rose-600 transition-colors text-xs"
-                        >
-                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                          </svg>
-                          Demo
+                  <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-rose-100/70 pt-3">
+                    {project.links.map((link) => {
+                      const external = link.href.startsWith("https://");
+                      const linkClass = "inline-flex min-h-10 md:min-h-8 items-center gap-1.5 text-xs font-medium text-gray-700 transition-colors hover:text-rose-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-400";
+                      return external ? (
+                        <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                          {link.label}<span aria-hidden="true">↗</span>
                         </a>
-                      )}
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 text-gray-500 hover:text-gray-700 transition-colors text-xs"
-                        >
-                          <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                            <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-                          </svg>
-                          GitHub
-                        </a>
-                      )}
-                    </div>
+                      ) : (
+                        <Link key={link.label} href={link.href} className={linkClass}>
+                          {link.label}<span aria-hidden="true">→</span>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
-              ));
-            })()}
+              </article>
+            ))}
           </div>
 
           {/* View All Projects Button */}

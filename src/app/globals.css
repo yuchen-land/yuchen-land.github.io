@@ -282,3 +282,16 @@ html {
     animation: none !important;
   }
 }
+
+/* Shared reading and interaction rhythm. */
+html { scroll-padding-top: 5.5rem; }
+body { -webkit-font-smoothing: antialiased; }
+::selection { background: #ffe4e6; color: #292524; }
+:focus-visible { outline: 2px solid #fb7185; outline-offset: 3px; }
+@supports (text-wrap: pretty) {
+  p { text-wrap: pretty; }
+}
+
+/* Horizontal swipe rows: hide the scrollbar, cards + peek signal swipeability */
+.scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }

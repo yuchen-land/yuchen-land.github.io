@@ -5,7 +5,7 @@ import ExportedImage from "next-image-export-optimizer";
 import Link from "next/link";
 import { projectDocumentation } from "@/data/data";
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, featuredLayout = false }) {
   const doc = projectDocumentation[project.id];
   const hasDocumentation = doc !== undefined;
   const projectSlug = doc?.slug;
@@ -17,9 +17,9 @@ export default function ProjectCard({ project }) {
   const MAX_VISIBLE_ITEMS = 1;
 
   return (
-    <div className="bg-white/60 backdrop-blur-sm rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-white/60 group flex flex-col h-full">
+    <div className="bg-white rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(28,25,23,0.025)] hover:shadow-[0_6px_20px_rgba(28,25,23,0.06)] transition-all duration-300 border border-gray-200/80 group flex flex-col h-full">
       {/* Project Image */}
-      <div className="relative h-40 bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100 overflow-hidden flex-shrink-0">
+      <div className={`relative ${featuredLayout ? "h-36" : "h-40"} bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100 overflow-hidden flex-shrink-0`}>
         {/* Loading Skeleton */}
         {imgLoading && !imgError && (
           <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-rose-100 to-pink-100">
@@ -61,7 +61,7 @@ export default function ProjectCard({ project }) {
         )}
 
         {/* Featured Star - Top Right, aligned with left tag */}
-        {project.featured && (
+        {false && project.featured && (
           <div className="absolute top-3 right-3 w-6 h-6 bg-amber-400 rounded-full flex items-center justify-center shadow-sm">
             <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -74,14 +74,14 @@ export default function ProjectCard({ project }) {
       </div>
 
       {/* Project Info */}
-      <div className="p-5 flex flex-col flex-1">
+      <div className={`${featuredLayout ? "p-4" : "p-5"} flex flex-col flex-1`}>
         <div className="flex-1">
           <div className="mb-2">
-            <h3 className="text-base font-semibold text-gray-800 group-hover:text-rose-500 transition-colors mb-1.5 line-clamp-2">
+            <h3 className={`${featuredLayout ? "min-h-10 text-sm leading-5" : "text-base"} font-semibold text-gray-800 group-hover:text-rose-500 transition-colors mb-1.5 line-clamp-2`}>
               {project.title}
             </h3>
             {project.period && (
-              <span className="text-xs text-gray-400 font-medium">
+              <span className="text-xs text-gray-500 font-medium">
                 {project.period}
               </span>
             )}
@@ -95,9 +95,9 @@ export default function ProjectCard({ project }) {
                   // Check if text contains **bold** markers
                   const parts = item.split(/\*\*(.*?)\*\*/g);
                   return (
-                    <li key={i} className="text-sm leading-relaxed pl-5 relative">
-                      <span className="text-rose-400 absolute left-0 top-1 text-xs">•</span>
-                      <span className="block">
+                    <li key={i} className={`${featuredLayout ? "text-[13px]" : "text-sm"} leading-relaxed pl-4 relative`}>
+                      <span className="text-rose-400 absolute left-0 top-0 text-xs">•</span>
+                      <span className={isExpanded ? "block" : "line-clamp-3"}>
                         {parts.map((part, idx) =>
                           idx % 2 === 1 ? (
                             <strong key={idx} className="font-bold text-gray-800">{part}</strong>
@@ -113,7 +113,7 @@ export default function ProjectCard({ project }) {
               {project.description.length > MAX_VISIBLE_ITEMS && (
                 <button
                   onClick={() => setIsExpanded(!isExpanded)}
-                  className="text-rose-500 hover:text-rose-600 text-xs font-medium mb-4 flex items-center gap-1 transition-colors"
+                  className="text-rose-500 hover:text-rose-600 text-xs font-medium mb-2 -ml-1 min-h-9 px-1 flex items-center gap-1 transition-colors"
                 >
                   {isExpanded ? (
                     <>
@@ -140,31 +140,35 @@ export default function ProjectCard({ project }) {
 
         {/* Tech Tags - Clean & Minimal */}
         <div className="flex flex-wrap gap-1 mb-4">
-          {project.tags.map((tag) => (
+          {(isExpanded ? project.tags : project.tags.slice(0, 4)).map((tag) => (
             <span
               key={tag}
-              className="text-rose-400 text-[11px] px-2 py-0.5 bg-rose-50/80 rounded-md"
+              className="text-stone-600 text-[11px] px-2 py-1 bg-stone-100 rounded-md"
             >
               {tag}
             </span>
           ))}
+          {!isExpanded && project.tags.length > 4 && (
+            <button type="button" onClick={() => setIsExpanded(true)} aria-label="Show all project details and technologies" className="inline-flex min-h-8 min-w-8 items-center justify-center rounded-md px-2 text-[11px] text-gray-500 hover:bg-stone-100 hover:text-rose-500">+{project.tags.length - 4}</button>
+          )}
         </div>
 
         {/* Action Buttons - Compact Style */}
-        <div className="flex gap-2 pt-1">
-          {project.github && (
+        <div className="flex items-center gap-2 pt-1">
+          {project.github && project.github !== `/projects/${projectSlug}` && (
             <a
               href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group/btn flex-1 h-8 bg-gray-800 text-white rounded-lg text-xs font-medium hover:bg-gray-700 transition-all duration-200 flex items-center justify-center gap-1.5"
+              {...(project.github.startsWith("/")
+                ? {}
+                : { target: "_blank", rel: "noopener noreferrer" })}
+              className="group/btn flex-auto whitespace-nowrap px-2 h-10 md:h-8 bg-slate-700 text-white rounded-lg text-xs font-medium hover:bg-gray-700 transition-all duration-200 flex items-center justify-center gap-1.5"
             >
               {project.github.includes('github.com') ? (
-                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
                   <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
                 </svg>
               ) : (
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               )}
@@ -174,24 +178,30 @@ export default function ProjectCard({ project }) {
           {project.demo && (
             <a
               href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group/btn flex-1 h-8 bg-rose-50/80 text-rose-500 rounded-lg text-xs font-medium hover:bg-rose-100/80 transition-all duration-200 flex items-center justify-center gap-1.5"
+              {...(project.demo.startsWith("/")
+                ? {}
+                : { target: "_blank", rel: "noopener noreferrer" })}
+              className="group/btn flex-auto whitespace-nowrap px-2 h-10 md:h-8 bg-rose-50 text-rose-600 rounded-lg text-xs font-medium hover:bg-rose-100/80 transition-all duration-200 flex items-center justify-center gap-1.5"
             >
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+              <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
               </svg>
               <span>Demo</span>
             </a>
           )}
-          {false && hasDocumentation && projectSlug && (
+          {hasDocumentation && projectSlug && (
             <Link
               href={`/projects/${projectSlug}`}
-              className="group/btn flex-1 h-8 bg-white/80 border border-gray-200/60 text-gray-600 rounded-lg text-xs font-medium hover:bg-gray-50 transition-all duration-200 flex items-center justify-center gap-1"
+              aria-label={`View project document for ${project.title}`}
+              title="View Project Document"
+              className={`group/btn h-10 md:h-8 ${!project.demo && (!project.github || project.github === `/projects/${projectSlug}`) ? "flex-1" : "w-10 md:w-8 shrink-0"} bg-transparent border border-stone-200 text-stone-500 rounded-lg hover:bg-rose-50 hover:text-rose-500 hover:border-rose-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-400 transition-all duration-200 flex items-center justify-center`}
             >
-              <span>More</span>
-              <svg className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              {!project.demo && (!project.github || project.github === `/projects/${projectSlug}`) && (
+                <span className="mr-1.5 text-xs font-medium">Project Document</span>
+              )}
+              <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.6}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14 2v6h6M8 13h8M8 17h5" />
               </svg>
             </Link>
           )}

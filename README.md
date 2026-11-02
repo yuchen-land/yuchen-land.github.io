@@ -34,7 +34,7 @@ Beyond coding, I'm also a baking enthusiast - I founded [BonBunny Pastry Studio]
 |---------|-------------|
 | **MyEdit** | AI-powered image, audio & video editing platform at CyberLink |
 | **BonBunny** | Modern artisanal pastry e-commerce platform (Founder) |
-| **Holly World V2.0** | Next.js e-commerce platform with 50% FCP improvement |
+| **Holly World V2.0** | Multilingual costume rental platform with Neon PostgreSQL and Cloudflare R2 |
 | **Master's Thesis** | SDN-based SRv6 adaptive path selection (APNOMS 2025) |
 
 ## Tech Stack

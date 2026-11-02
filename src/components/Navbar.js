@@ -25,7 +25,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isActive = (href) => pathname === href;
+  const isActive = (href) => pathname === href || (href === "/portfolio" && (pathname.startsWith("/projects/") || pathname.startsWith("/srv6-proa")));
 
   return (
     <nav
@@ -37,7 +37,7 @@ export default function Navbar() {
     >
       <div
         className={`max-w-6xl mx-auto px-4 md:px-6 flex items-center justify-between transition-all duration-500 ${
-          isScrolled ? "py-2.5" : "py-4"
+          "py-3"
         }`}
       >
         {/* Left: Mobile Menu Button + Logo */}
@@ -45,7 +45,7 @@ export default function Navbar() {
           {/* Hamburger Menu Button - Mobile Only */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="sm:hidden w-8 h-8 rounded-lg flex items-center justify-center text-gray-600 hover:text-rose-600 hover:bg-rose-50/80 transition-all duration-300"
+            className="md:hidden w-11 h-11 -ml-1.5 rounded-lg flex items-center justify-center text-gray-600 hover:text-rose-600 hover:bg-rose-50/80 transition-all duration-300"
             aria-label="Menu"
           >
             <svg
@@ -98,7 +98,7 @@ export default function Navbar() {
         {/* Right: Navigation Links + Action Icons */}
         <div className="flex items-center gap-6">
           {/* Navigation Links */}
-          <div className="hidden sm:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -122,7 +122,7 @@ export default function Navbar() {
             {/* Email */}
             <a
               href="mailto:yuchen880401@gmail.com"
-              className="w-9 h-9 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100/60 transition-all duration-200"
+              className="w-10 h-10 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100/60 transition-all duration-200"
               aria-label="Email"
               title="Email"
             >
@@ -146,7 +146,7 @@ export default function Navbar() {
               href="https://github.com/yuchen-land"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100/60 transition-all duration-200"
+              className="w-10 h-10 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100/60 transition-all duration-200"
               aria-label="GitHub"
               title="GitHub"
             >
@@ -164,7 +164,7 @@ export default function Navbar() {
               href="https://www.linkedin.com/in/yuchenliu0401/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100/60 transition-all duration-200"
+              className="w-10 h-10 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100/60 transition-all duration-200"
               aria-label="LinkedIn"
               title="LinkedIn"
             >
@@ -177,7 +177,7 @@ export default function Navbar() {
             <a
               href="/YuChen_Liu_Resume.pdf"
               download="YuChen_Liu_Resume.pdf"
-              className="w-9 h-9 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100/60 transition-all duration-200"
+              className="w-10 h-10 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100/60 transition-all duration-200"
               aria-label="Resume"
               title="Download Resume"
             >

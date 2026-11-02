@@ -18,7 +18,16 @@ export default function PortfolioContent() {
   });
 
   const visibleProjects = projects.filter((p) => !p.hidden);
-  const featuredProjects = visibleProjects.filter((p) => p.featured);
+  const featuredOrder = [1, 11, 10];
+  const featuredProjects = visibleProjects
+    .filter((p) => p.featured)
+    .sort((a, b) => {
+      const rank = (id) => {
+        const index = featuredOrder.indexOf(id);
+        return index === -1 ? featuredOrder.length : index;
+      };
+      return rank(a.id) - rank(b.id);
+    });
   const otherProjects = visibleProjects.filter((p) => !p.featured);
 
   // Filter projects based on selected tags only
@@ -58,20 +67,20 @@ export default function PortfolioContent() {
   return (
     <>
       {/* Header - Premium Style */}
-      <div className="text-center mb-16 animate-fade-in-down">
+      <div className="text-center mb-10 md:mb-12 animate-fade-in-down">
         <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-4">
           Portfolio
         </p>
         <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight mb-4">
           Selected Works
         </h1>
-        <p className="text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">
+        <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
           A curated collection of projects showcasing expertise in full-stack development and design.
         </p>
       </div>
 
       {/* Tag Filter */}
-      <div className="mb-16 animate-fade-in">
+      <div className="mb-10 animate-fade-in">
         <details className="group">
           <summary className="flex items-center justify-between cursor-pointer select-none py-3 px-4 rounded-lg hover:bg-gray-50/50 transition-colors">
             <span className="text-xs font-medium text-gray-500 uppercase tracking-widest">
@@ -131,7 +140,7 @@ export default function PortfolioContent() {
                       <button
                         key={tag}
                         onClick={() => toggleTag(tag)}
-                        className={`px-3 py-1 rounded-full text-xs transition-all duration-200 ${
+                        className={`px-3 py-2 md:py-1 rounded-full text-xs transition-all duration-200 ${
                           selectedTags.includes(tag)
                             ? "bg-rose-500 text-white shadow-md"
                             : "text-gray-600 hover:text-rose-600 hover:bg-rose-50/50"
@@ -150,32 +159,32 @@ export default function PortfolioContent() {
 
       {/* Featured Projects */}
       {(filteredFeatured.length > 0 || thesisMatchesTag) && (
-        <section className="mb-24 animate-fade-in-up">
-          <div className="mb-10">
-            <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight">
+        <section className="mb-16 animate-fade-in-up">
+          <div className="mb-6">
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 tracking-tight">
               Featured
             </h2>
-            <p className="text-sm text-gray-400 mt-1">
+            <p className="text-sm text-gray-500 mt-1">
               {filteredFeatured.length + (thesisMatchesTag ? 1 : 0)} highlighted project{filteredFeatured.length + (thesisMatchesTag ? 1 : 0) !== 1 ? "s" : ""}
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 items-stretch">
             {filteredFeatured.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+              <ProjectCard key={project.id} project={project} featuredLayout />
             ))}
-            {thesisMatchesTag && <AcademicCard thesis={thesis} />}
+            {thesisMatchesTag && <AcademicCard thesis={thesis} featuredLayout />}
           </div>
         </section>
       )}
 
       {/* Other Projects */}
       {filteredOther.length > 0 && (
-        <section className="mb-24 animate-fade-in-up">
-          <div className="mb-10">
-            <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 tracking-tight">
+        <section className="mb-16 animate-fade-in-up">
+          <div className="mb-6">
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 tracking-tight">
               More Projects
             </h2>
-            <p className="text-sm text-gray-400 mt-1">
+            <p className="text-sm text-gray-500 mt-1">
               {filteredOther.length} additional project{filteredOther.length !== 1 ? "s" : ""}
             </p>
           </div>
@@ -213,7 +222,7 @@ export default function PortfolioContent() {
         <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-4">
           Get in Touch
         </p>
-        <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-4">
+        <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
           Let&apos;s work together
         </h3>
         <p className="text-gray-500 mb-10 max-w-md mx-auto leading-relaxed">

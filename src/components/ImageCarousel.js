@@ -155,7 +155,7 @@ export default function ImageCarousel({
                   e.stopPropagation();
                   goToPrevious();
                 }}
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-rose-400"
+                className="absolute left-3 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 p-3 md:p-2 rounded-full shadow-lg transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-rose-400"
                 aria-label="Previous slide"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -169,7 +169,7 @@ export default function ImageCarousel({
                   e.stopPropagation();
                   goToNext();
                 }}
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-rose-400"
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 p-3 md:p-2 rounded-full shadow-lg transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-rose-400"
                 aria-label="Next slide"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -187,7 +187,7 @@ export default function ImageCarousel({
           {/* Fullscreen Button */}
           <button
             onClick={() => setIsFullscreen(true)}
-            className="absolute top-3 left-3 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+            className="absolute top-3 left-3 z-10 bg-black/50 hover:bg-black/70 text-white p-3 md:p-2 rounded-full transition-colors"
             aria-label="View fullscreen"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -205,30 +205,35 @@ export default function ImageCarousel({
 
         {/* Dot Indicators */}
         {images.length > 1 && (
-          <div className="flex justify-center gap-2 mt-4">
+          <div className="flex justify-center mt-2">
             {images.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? "bg-rose-500 w-6"
-                    : "bg-gray-300 hover:bg-gray-400"
-                }`}
+                className="group/dot flex h-10 min-w-8 items-center justify-center px-1"
                 aria-label={`Go to slide ${index + 1}`}
-              />
+                aria-current={index === currentIndex ? "true" : undefined}
+              >
+                <span
+                  className={`block h-2.5 rounded-full transition-all duration-300 ${
+                    index === currentIndex
+                      ? "bg-rose-500 w-6"
+                      : "w-2.5 bg-gray-300 group-hover/dot:bg-gray-400"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         )}
 
         {/* Thumbnail Strip (for more than 3 images) */}
         {images.length > 3 && (
-          <div className="mt-4 flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-rose-300 scrollbar-track-gray-100">
+          <div className="mt-4 flex gap-2 overflow-x-auto pb-2 pt-1 pl-1 scrollbar-hide snap-x snap-mandatory">
             {images.map((image, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`relative flex-shrink-0 w-20 h-14 rounded-lg overflow-hidden transition-all ${
+                className={`relative flex-shrink-0 snap-start w-20 h-14 rounded-lg overflow-hidden transition-all ${
                   index === currentIndex
                     ? "ring-2 ring-rose-500 ring-offset-2"
                     : "opacity-60 hover:opacity-100"
