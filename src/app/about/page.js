@@ -40,7 +40,7 @@ export default function AboutPage() {
                   My research in SDN and SRv6 informs my approach to resilient systems. Across engineering, design, QA, and product teams, I focus on turning complex ideas into practical products.
                 </p>
                 <p className="pt-1 text-xs md:text-sm text-stone-500">
-                  Based in Taipei (UTC+8)<span aria-hidden="true" className="mx-2">·</span><span className="inline-block">Open to remote opportunities</span>
+                  Based in Taipei (UTC+8)<span aria-hidden="true" className="mx-2">·</span><span className="inline-block">Open to work in Taiwan & remote</span>
                 </p>
               </div>
               <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-100">
