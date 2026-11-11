@@ -1,11 +1,8 @@
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import { education, experience, skills, publications, languages, activities } from "@/data/data";
+import { personalInfo, education, experience, skills, publications, languages, activities } from "@/data/data";
 
-export const metadata = {
-  title: "About Me - Yu-Chen(Cindy), Liu",
-  description: "Learn more about my education, experience, skills, and professional journey as a Software Engineer.",
-};
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_#fff1f2_0%,_#fafafa_45%,_#fafafa_100%)]">
@@ -19,7 +16,7 @@ export default function AboutPage() {
               About
             </p>
             <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight mb-4">
-              Yu-Chen (Cindy) Liu
+              {personalInfo.name}
             </h1>
             <p className="text-gray-500 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
               AI-Native Software Engineer building generative AI products and reliable production systems
@@ -234,9 +231,29 @@ export default function AboutPage() {
                     </span>
                   </div>
                   <p className="text-gray-700 font-medium text-sm mb-3">{edu.degree}</p>
+                  {edu.admission && (
+                    <details className="group mt-3 rounded-lg border border-stone-200 bg-stone-50/50 px-3 py-2.5">
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-rose-400 [&::-webkit-details-marker]:hidden">
+                        <div>
+                          <h4 className="text-[13px] font-medium leading-snug text-gray-800">Doctoral admission</h4>
+                          <p className="mt-0.5 text-[11px] text-stone-500">2024 · Electrical Engineering, Group F · Rank 1</p>
+                        </div>
+                        <span aria-hidden="true" className="shrink-0 text-stone-400 transition-transform group-open:rotate-180">⌄</span>
+                      </summary>
+                      <div className="mt-2 border-t border-stone-200/70 pt-2">
+                        <a href={edu.admission.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-xs font-medium text-rose-600 hover:underline underline-offset-4">Official announcement ↗</a>
+
+                      <a href={edu.admission.image} target="_blank" rel="noopener noreferrer" className="mx-auto block max-w-xl overflow-hidden rounded-lg border border-stone-200 bg-white transition-colors hover:border-rose-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-rose-400" aria-label="Open admission proof at full size">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={edu.admission.image} alt="成功大學113學年度博士班電機工程學系己組錄取名單，劉O蓁正取第一名" className="h-auto w-full" loading="lazy" />
+                      </a>
+                        <p className="mt-2 text-right text-[11px] text-stone-400">Click image to view full size ↗</p>
+                      </div>
+                    </details>
+                  )}
                   {edu.description && (
                     <ul className="space-y-1.5">
-                      {edu.description.map((desc, i) => {
+                      {edu.description.filter((desc) => !(edu.scholarshipProof && desc.startsWith("Scholarship:"))).map((desc, i) => {
                         let link = null;
 
                         if (desc.includes("Research Lab:") && edu.links?.lab) {
@@ -244,21 +261,23 @@ export default function AboutPage() {
                         } else if (desc.includes("Advisor:") && edu.links?.advisor) {
                           link = { url: edu.links.advisor };
                         } else if (desc.includes("Scholarship:") && edu.links?.scholarship) {
-                          link = { url: edu.links.scholarship };
+                          link = { url: edu.links.scholarship, text: "Scholarship announcement" };
                         }
 
                         return (
                           <li key={i} className="text-gray-600 text-sm leading-relaxed flex items-start gap-2">
                             <span className="text-rose-400 mt-0.5">•</span>
-                            <span className="flex-1 flex items-center gap-2">
+                            <span className="flex-1 flex flex-wrap items-center gap-2">
                               {desc}
                               {link && (
                                 <a
                                   href={link.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="relative inline-flex items-center justify-center w-5 h-5 rounded-full bg-rose-50 after:absolute after:-inset-2.5 after:content-[''] hover:bg-rose-100 text-rose-500 transition-colors"
+                                  aria-label={link.text || `Learn more: ${desc}`}
+                                  className={link.text ? "inline-flex min-h-11 items-center gap-1 text-rose-600 underline underline-offset-4 hover:text-rose-700" : "relative inline-flex items-center justify-center w-5 h-5 rounded-full bg-rose-50 after:absolute after:-inset-2.5 after:content-[''] hover:bg-rose-100 text-rose-500 transition-colors"}
                                 >
+                                  {link.text}
                                   <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                   </svg>
@@ -270,6 +289,27 @@ export default function AboutPage() {
                       })}
                     </ul>
                   )}
+                  {edu.scholarshipProof && (
+                    <details className="group mt-3 rounded-lg border border-stone-200 bg-stone-50/50 px-3 py-2.5">
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-rose-400 [&::-webkit-details-marker]:hidden">
+                        <div>
+                          <h4 className="text-[13px] font-medium leading-snug text-gray-800">NSTC Doctoral Research Scholarship</h4>
+                          <p className="mt-0.5 text-[11px] text-stone-500">2024 · Award recipient</p>
+                        </div>
+                        <span aria-hidden="true" className="shrink-0 text-stone-400 transition-transform group-open:rotate-180">⌄</span>
+                      </summary>
+                      <div className="mt-2 border-t border-stone-200/70 pt-2">
+                        <a href={edu.links.scholarship} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-xs font-medium text-rose-600 hover:underline underline-offset-4">Official announcement ↗</a>
+
+                      <a href={edu.scholarshipProof} target="_blank" rel="noopener noreferrer" className="mx-auto block max-w-xl overflow-hidden rounded-lg border border-stone-200 bg-white transition-colors hover:border-rose-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-rose-400" aria-label="Open scholarship award proof at full size">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={edu.scholarshipProof} alt="113年國科會博士生研究獎學金核定獎勵名單：劉宇蓁，國立中央大學資訊管理學系，正取" className="aspect-[6/1] w-full object-cover object-[50%_45%]" loading="lazy" />
+                      </a>
+                        <p className="mt-2 text-right text-[11px] text-stone-400">Click image to view full size ↗</p>
+                      </div>
+                    </details>
+                  )}
+
                 </div>
               ))}
             </div>
@@ -312,6 +352,11 @@ export default function AboutPage() {
                         <span>{pub.location}</span>
                         <span>•</span>
                         <span>{pub.date}</span>
+                      </div>
+                      <p className="mt-2 text-xs leading-relaxed text-stone-500">{pub.publisher} · {pub.series} · pp. {pub.pages}</p>
+                      <div className="mt-2 flex flex-wrap gap-x-4 text-xs font-medium text-rose-600">
+                        <a href={pub.doi} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center underline underline-offset-4 hover:text-rose-700">Published paper ↗</a>
+                        <a href={pub.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center underline underline-offset-4 hover:text-rose-700">NCKU publication record ↗</a>
                       </div>
                     </div>
                   </div>

@@ -2,10 +2,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import PortfolioContent from "@/components/PortfolioContent";
 
-export const metadata = {
-  title: "Portfolio - Yu-Chen(Cindy), Liu",
-  description: "Explore my featured projects and technical work showcasing my skills in web development and software engineering.",
-};
+
 
 export default function PortfolioPage() {
   return (

@@ -316,7 +316,7 @@ export default function Home() {
         {/* Footer - Minimal */}
         <div className="mt-auto pt-8 pb-4">
           <p className="text-center text-gray-400 text-xs tracking-wide">
-            © 2026 Yu-Chen Liu
+            © 2026 Yu-Chen (Cindy) Liu
           </p>
         </div>
       </div>

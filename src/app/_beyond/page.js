@@ -634,7 +634,7 @@ export default function BeyondPage() {
                 {/* Footer */}
                 <footer className="mt-24 pt-8 border-t border-rose-100/50">
                     <p className="text-center text-gray-400 text-xs">
-                        © 2026 Yu-Chen Liu
+                        © 2026 Yu-Chen (Cindy) Liu
                     </p>
                 </footer>
             </div>

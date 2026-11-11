@@ -1,6 +1,8 @@
+import { displayName } from "./siteMetadata";
+
 // Personal Information
 export const personalInfo = {
-  name: "Yu-Chen(Cindy), Liu",
+  name: displayName,
   title: "AI-Native Software Engineer & Pâtissier",
   description: "Hi! I'm Cindy. I build generative AI products and production systems with AI agents, automated verification, and reliable delivery.\nExplore my engineering work and the brand I built here.",
   avatar: `/images/avatar.jpg`,
@@ -50,9 +52,14 @@ export const internalLinks = [
 export const education = [
   {
     school: "National Cheng Kung University",
-    degree: "Ph.D. in Electrical Engineering",
-    period: "09/2024 - On Leave",
+    degree: "Doctoral studies in Electrical Engineering",
+    period: "09/2024 – 09/2026 · Withdrawn",
     level: "phd",
+    admission: {
+      url: "https://adms-acad.ncku.edu.tw/var/file/44/1044/img/4387/378648982.html",
+      image: "/images/education/ncku-admission.png",
+    },
+    scholarshipProof: "/images/education/nstc-scholarship.png",
     description: [
       "Scholarship: NSTC Doctoral Research Scholarship",
     ],
@@ -202,13 +209,19 @@ export const skills = {
 // Publications
 export const publications = [
   {
-    authors: "Yu.-Chen. Liu et al.",
-    title: "Design and Implementation of an Adaptive Path Selection in SDN-Enabled SRv6",
-    venue: "APNOMS 2025",
+    authors: "Ya-Chu Chuang, Yu-Chen Liu, Pang-Wei Tsai, and Chu-Sing Yang",
+    title: "Design and Implementation of an Intelligent Adaptive Path Selection Mechanism for SDN-Orchestrated SRv6 Networks",
+    venue: "ACIIDS 2026",
     location: "Kaohsiung, Taiwan",
-    date: "Sep. 22-24, 2025",
-    status: "Accepted",
+    date: "2026",
+    conferenceDates: "Apr. 13–15, 2026",
+    status: "Published",
     type: "conference",
+    publisher: "Springer",
+    series: "Communications in Computer and Information Science, vol. 2965",
+    pages: "294–307",
+    doi: "https://doi.org/10.1007/978-981-92-0263-8_21",
+    url: "https://researchoutput.ncku.edu.tw/en/publications/design-and-implementation-of-an-intelligent-adaptive-path-selecti/",
   },
 ];
 
@@ -238,10 +251,10 @@ export const thesis = {
     "This study proposes a Probabilistic Routing Optimization Algorithm (PROA) to improve SRv6's adaptive control and packet forwarding within a single domain.",
     "Results show that PROA significantly enhances fault recovery time, packet loss rate, and resource utilization compared to traditional intra-domain and segment routing protocols.",
   ],
-  tags: ["IPv6", "Segment Routing", "SRv6", "SDN", "Path Selection", "Network Resilience", "APNOMS 2025"],
+  tags: ["IPv6", "Segment Routing", "SRv6", "SDN", "Path Selection", "Network Resilience", "ACIIDS 2026"],
   links: {
     advisor: "https://www.itlab.ee.ncku.edu.tw/pwtsai/index.html",
-    conference: "https://apnoms.org/2025/",
+    publication: publications[0].doi,
     demo: "/srv6-proa",
   },
 };
@@ -472,6 +485,6 @@ export const tagCategories = {
     name: "Specialization",
     icon: "⭐",
     color: "from-rose-400 to-pink-500",
-    tags: ["Founder", "Team Leader", "IPv6", "Segment Routing", "SRv6", "SDN", "Path Selection", "Network Resilience", "APNOMS 2025"],
+    tags: ["Founder", "Team Leader", "IPv6", "Segment Routing", "SRv6", "SDN", "Path Selection", "Network Resilience", "ACIIDS 2026"],
   },
 };

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import { publications } from "@/data/data";
 
 const DEMO_SRC = "/srv6_proa_demo.html?lang=en";
 
@@ -68,6 +69,8 @@ export default function Srv6ProaContent() {
           <p className="mt-2 text-sm leading-6 text-gray-600">
             When a link fails, traditional routing has to wait for the network to reconverge before traffic flows again. PROA is an adaptive path selection method for SDN-enabled SRv6: the controller re-plans the segment list and steers traffic onto a backup path. This dashboard visualizes that recovery and compares it against Dijkstra, OSPFv3 and random path selection.
           </p>
+          <p className="mt-3 text-xs text-stone-500">Related publication · {publications[0].venue} · {publications[0].status}, {publications[0].date}</p>
+          <a href={publications[0].doi} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-xs font-medium text-indigo-600 underline underline-offset-4">Read the published paper ↗</a>
         </section>
 
         <section aria-labelledby="key-results" className="mb-5">

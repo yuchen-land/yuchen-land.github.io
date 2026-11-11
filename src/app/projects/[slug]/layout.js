@@ -1,3 +1,4 @@
+import { createPageMetadata } from "@/data/siteMetadata";
 import { findDocBySlug, getAllProjectSlugs } from "@/utils/projectHelpers";
 
 export async function generateStaticParams() {
@@ -15,17 +16,19 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const description = doc.star?.situation || doc.title;
-
-  return {
-    title: `${doc.title} - Project Documentation`,
-    description: description,
-    openGraph: {
-      title: `${doc.title} - Yu-Chen(Cindy), Liu`,
-      description: description,
-      type: "article",
-    },
+  const projectSummaries = {
+    "holly-world-ecommerce": "Holly World: a five-language costume rental platform with Neon PostgreSQL, resilient catalog delivery, Cloudflare media storage, and verified releases.",
+    myedit: "MyEdit product engineering at CyberLink: generative AI creative tools, automated reporting, and AI-assisted testing integrated into software delivery.",
   };
+  const summary = projectSummaries[doc.id] || `${doc.title}. ${doc.star?.task || "Engineering approach, implementation, and outcomes."}`;
+  const description = summary.length > 180 ? `${summary.slice(0, 177).trimEnd()}…` : summary;
+
+  return createPageMetadata({
+    title: doc.title,
+    description,
+    path: `/projects/${doc.slug}`,
+    type: "article",
+  });
 }
 
 export default function ProjectLayout({ children }) {

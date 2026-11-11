@@ -3,18 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-const sections = [
-  { id: "screenshots", label: "Screenshots" },
-  { id: "stats", label: "Highlights" },
-  { id: "star", label: "Journey" },
-  { id: "tech", label: "Tech Stack" },
-  { id: "features", label: "Features" },
-  { id: "roles", label: "Roles" },
-  { id: "links", label: "Links" },
-  { id: "related", label: "Related" },
-];
-
-export default function TableOfContents() {
+export default function TableOfContents({ sections }) {
   const [activeSection, setActiveSection] = useState("");
   const [isVisible, setIsVisible] = useState(false);
 
@@ -33,19 +22,25 @@ export default function TableOfContents() {
 
       const scrollPosition = window.scrollY + 200;
 
+      let nextActiveSection = "";
       for (let i = sectionElements.length - 1; i >= 0; i--) {
         const section = sectionElements[i];
         if (section.element.offsetTop <= scrollPosition) {
-          setActiveSection(section.id);
+          nextActiveSection = section.id;
           break;
         }
       }
+      setActiveSection(nextActiveSection);
     };
 
     window.addEventListener("scroll", handleScroll);
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("resize", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [sections]);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -61,6 +56,7 @@ export default function TableOfContents() {
 
   return (
     <motion.nav
+      aria-label="Project sections"
       initial={{ opacity: 0, x: -20 }}
       animate={{
         opacity: isVisible ? 1 : 0,
@@ -74,6 +70,8 @@ export default function TableOfContents() {
           {sections.map((section) => (
             <li key={section.id}>
               <button
+                type="button"
+                aria-current={activeSection === section.id ? "location" : undefined}
                 onClick={() => scrollToSection(section.id)}
                 className={`w-full flex items-center gap-2 px-2.5 py-1.5 rounded-md text-[11px] transition-all duration-200 ${
                   activeSection === section.id

@@ -6,12 +6,22 @@ import ImageCarousel from "@/components/ImageCarousel";
 import ScrollProgress from "@/components/ScrollProgress";
 import TableOfContents from "@/components/TableOfContents";
 import StarTimeline from "@/components/StarTimeline";
+import HollyArchitecture from "@/components/HollyArchitecture";
 import { findDocBySlug } from "@/utils/projectHelpers";
-import { use } from "react";
+import { use, useMemo } from "react";
 
 export default function ProjectDocPage({ params }) {
   const resolvedParams = use(params);
   const doc = findDocBySlug(resolvedParams.slug);
+
+  const sections = useMemo(() => [
+    ...(doc?.star?.result ? [{ id: "results", label: "Results" }] : []),
+    ...(doc?.id === "holly-world-ecommerce" ? [{ id: "architecture", label: "Architecture" }] : []),
+    ...(doc?.screenshots?.length ? [{ id: "screenshots", label: "Screenshots" }] : []),
+    ...(doc?.star && ["situation", "task", "action"].some((key) => doc.star[key]?.length) ? [{ id: "star", label: "Journey" }] : []),
+    ...(doc?.techStack && Object.keys(doc.techStack).length ? [{ id: "tech", label: "Tech Stack" }] : []),
+    ...(doc?.links && Object.keys(doc.links).length ? [{ id: "links", label: "Links" }] : []),
+  ], [doc]);
 
   if (!doc) {
     return (
@@ -43,7 +53,7 @@ export default function ProjectDocPage({ params }) {
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50">
       <ScrollProgress />
       <Navbar />
-      <TableOfContents />
+      <TableOfContents sections={sections} />
 
       {/* Main Content */}
       <div className="relative z-10 max-w-3xl mx-auto px-6 py-20 md:py-24 pt-32 md:pt-40">
@@ -86,6 +96,18 @@ export default function ProjectDocPage({ params }) {
           </div>
         </header>
 
+        {doc.star?.result && (
+          <section id="results" className="mb-12 scroll-mt-24">
+            <p className="mb-2 text-xs font-medium uppercase tracking-widest text-rose-500">Outcomes & impact</p>
+            <h2 className="mb-4 text-xl font-semibold text-gray-900">Results</h2>
+            <div className="rounded-2xl border border-rose-100 bg-white/70 p-5 shadow-sm md:p-6">
+              <p className="text-sm leading-7 text-gray-700">{doc.star.result}</p>
+            </div>
+          </section>
+        )}
+
+        {doc.id === "holly-world-ecommerce" && <HollyArchitecture />}
+
         {/* Project Screenshots Carousel */}
         {doc.screenshots && doc.screenshots.length > 0 && (
           <section id="screenshots" className="mb-20 animate-fade-in">
@@ -101,14 +123,11 @@ export default function ProjectDocPage({ params }) {
           </section>
         )}
 
-        {/* Stats Highlight — hidden for now */}
-        {/* <StatsHighlight stats={doc.stats} /> */}
-
-        {/* STAR Timeline */}
         <StarTimeline star={doc.star} />
 
         {/* Tech Stack Section */}
-        <section id="tech" className="mb-20 animate-fade-in">
+        {doc.techStack && Object.keys(doc.techStack).length > 0 && (
+        <section id="tech" className="mb-12 scroll-mt-24">
           <h2 className="text-xl font-semibold text-gray-900 mb-6">
             Tech Stack
           </h2>
@@ -136,33 +155,7 @@ export default function ProjectDocPage({ params }) {
             ))}
           </div>
         </section>
-
-        {/* Features Section */}
-        <section id="features" className="mb-20 animate-fade-in">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">
-            Key Features
-          </h2>
-
-          <div className="backdrop-blur-sm bg-white/50 border border-white/60 rounded-xl p-5 shadow-sm">
-            <ul className="space-y-3">
-              {doc.features.map((feature, idx) => (
-                <li
-                  key={idx}
-                  className="flex items-start gap-3"
-                >
-                  <svg className="w-5 h-5 text-rose-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="text-gray-700 text-sm leading-relaxed">
-                    {feature}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* Roles Section — hidden for now */}
+        )}
 
         {/* Links Section */}
         {doc.links && Object.keys(doc.links).length > 0 && (

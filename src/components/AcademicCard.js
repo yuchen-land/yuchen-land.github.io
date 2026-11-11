@@ -137,6 +137,9 @@ export default function AcademicCard({ thesis, featuredLayout = false }) {
               <span>Demo</span>
             </a>
           )}
+          {thesis.links.publication && (
+            <a href={thesis.links.publication} target="_blank" rel="noopener noreferrer" className="inline-flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-stone-100 px-2 text-xs font-medium text-stone-600 transition-colors hover:bg-stone-200 md:h-8">Paper ↗</a>
+          )}
           {thesis.links.pdf && (
             <a
               href={thesis.links.pdf}
