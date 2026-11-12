@@ -199,15 +199,15 @@ html {
 }
 
 .animate-fade-in-down {
-  animation: fade-in-down 0.8s ease-out;
+  animation: fade-in-down 0.35s ease-out;
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out;
+  animation: fade-in-up 0.35s ease-out;
 }
 
 .animate-fade-in {
-  animation: fade-in 1s ease-out;
+  animation: fade-in 0.4s ease-out;
 }
 
 /* Page Enter Animation */
@@ -299,15 +299,33 @@ body { -webkit-font-smoothing: antialiased; }
 /* Shared visual foundation for portfolio pages. */
 @layer components {
   .site-surface { background: radial-gradient(ellipse 85% 440px at 50% 0%, #fff1f4 0%, #faf9f8 100%); color: #292524; }
-  .page-shell { width: 100%; margin-inline: auto; padding: 6rem 1.25rem 3rem; }
+  .page-shell { width: 100%; margin-inline: auto; padding: 5.75rem 1.25rem 2.5rem; }
   .surface-card { border: 1px solid #e7e3e5; border-radius: 1rem; background: #fff; box-shadow: 0 2px 8px #38263304; }
   .section-label { font-size: .625rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #be647e; }
 }
 @media(min-width:640px){.page-shell{padding-inline:1.5rem}}
-@media(min-width:768px){.page-shell{padding-top:7rem;padding-bottom:4rem}}
+@media(min-width:768px){.page-shell{padding-top:6.5rem;padding-bottom:3.5rem}}
 @media(hover:hover) and (pointer:fine){.surface-card:hover{box-shadow:0 6px 20px #38263309}}
 html { scrollbar-gutter: stable; }
 body { overflow-wrap: break-word; }
 button,a,input,select,summary { -webkit-tap-highlight-color: transparent; }
 button:disabled { cursor: not-allowed; }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* A quiet peach scroll indicator; swipe controls keep their own clean edge. */
+html { scrollbar-color: #edc1bd #faf6f5; }
+@supports selector(::-webkit-scrollbar) { html { scrollbar-color: auto; } }
+@supports not selector(::-webkit-scrollbar) { html { scrollbar-width: thin; } }
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: #faf6f5; margin-top: 64px; }
+html::-webkit-scrollbar-button { display: none; }
+::-webkit-scrollbar-thumb { background: #edc1bd; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #dfa6a5; }
+:focus:not(:focus-visible) { outline: none; box-shadow: none; }
+.portfolio-filter-row { scrollbar-width: none; -ms-overflow-style: none; overscroll-behavior-x: contain; }
+.portfolio-filter-row::-webkit-scrollbar { display: none; width: 0; height: 0; }
+.portfolio-filter-button:focus:not(:focus-visible) { outline: none; box-shadow: none; }
+@media (max-width: 639px) {
+  .portfolio-filter-row { scroll-snap-type: x proximity; }
+  .portfolio-filter-button { flex: 0 0 calc((100% - 12px) / 3.5); scroll-snap-align: start; }
+}

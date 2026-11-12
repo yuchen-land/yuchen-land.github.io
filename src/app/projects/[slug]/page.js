@@ -1,12 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import HomeRedirect from "@/components/HomeRedirect";
 import Navbar from "@/components/Navbar";
 import ImageCarousel from "@/components/ImageCarousel";
 import ScrollProgress from "@/components/ScrollProgress";
 import TableOfContents from "@/components/TableOfContents";
 import StarTimeline from "@/components/StarTimeline";
 import SerialPortDemo from "@/components/SerialPortDemo";
+import AssemblerContent from "@/components/AssemblerContent";
+import ClchemyContent from "@/components/ClchemyContent";
 import HollyArchitecture from "@/components/HollyArchitecture";
 import { findDocBySlug } from "@/utils/projectHelpers";
 import { use, useMemo } from "react";
@@ -18,6 +21,8 @@ export default function ProjectDocPage({ params }) {
   const sections = useMemo(() => [
     ...(doc?.star?.result ? [{ id: "results", label: "Results" }] : []),
     ...(doc?.id === "holly-world-ecommerce" ? [{ id: "architecture", label: "Architecture" }] : []),
+    ...(doc?.id === "sic-assembler" ? [{ id: "assembler-design", label: "Assembly Pipeline" }] : []),
+    ...(doc?.id === "clchemy" ? [{ id: "game-design", label: "Game Design" }] : []),
     ...(doc?.id === "linux-serial-port" ? [{ id: "interactive-demo", label: "Live Demo" }] : []),
     ...(doc?.screenshots?.length ? [{ id: "screenshots", label: "Screenshots" }] : []),
     ...(doc?.star && ["situation", "task", "action"].some((key) => doc.star[key]?.length) ? [{ id: "star", label: "Journey" }] : []),
@@ -25,31 +30,7 @@ export default function ProjectDocPage({ params }) {
     ...(doc?.links && Object.keys(doc.links).length ? [{ id: "links", label: "Links" }] : []),
   ], [doc]);
 
-  if (!doc) {
-    return (
-      <div className="min-h-screen site-surface flex items-center justify-center px-4">
-        <div className="text-center">
-          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
-            <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <h1 className="text-2xl font-semibold text-gray-900 mb-2">
-            Project Not Found
-          </h1>
-          <p className="text-gray-500 mb-8 text-sm">
-            The project you&apos;re looking for doesn&apos;t exist.
-          </p>
-          <Link
-            href="/portfolio"
-            className="inline-flex items-center gap-2 bg-gray-900 text-white rounded-full px-6 py-2.5 text-sm font-medium hover:bg-gray-800 transition-colors"
-          >
-            Back to Portfolio
-          </Link>
-        </div>
-      </div>
-    );
-  }
+  if (!doc) return <HomeRedirect />;
 
   return (
     <div className="min-h-screen site-surface">
@@ -111,6 +92,9 @@ export default function ProjectDocPage({ params }) {
         {doc.id === "holly-world-ecommerce" && <HollyArchitecture />}
 
         {doc.id === "linux-serial-port" && <SerialPortDemo />}
+
+        {doc.id === "clchemy" && <ClchemyContent />}
+        {doc.id === "sic-assembler" && <AssemblerContent />}
 
         {/* Project Screenshots Carousel */}
         {doc.screenshots && doc.screenshots.length > 0 && (

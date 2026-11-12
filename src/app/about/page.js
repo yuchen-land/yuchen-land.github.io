@@ -1,30 +1,32 @@
 import Link from "next/link";
 import ExportedImage from "next-image-export-optimizer";
+import styles from "./AboutPage.module.css";
 import Navbar from "@/components/Navbar";
 import { personalInfo, education, experience, skills, publications, languages, activities } from "@/data/data";
 
 const websiteScreenshots = {
   "01": [
-    { src: "/images/screenshots/myedit-home-20261112.webp", width: 1440, height: 780, title: "MyEdit", caption: "AI image, video, and audio product homepage" },
-    { src: "/images/screenshots/myedit-business-home-20261112.webp", width: 1440, height: 780, title: "MyEdit Business", caption: "Creative tools for product and marketing workflows" },
+    { src: "/images/screenshots/myedit-home-20261112.webp", width: 1440, height: 780, title: "MyEdit", href: "https://myedit.online/en", caption: "AI image, video, and audio product homepage" },
+    { src: "/images/screenshots/myedit-business-home-20261112.webp", width: 1440, height: 780, title: "MyEdit Business", href: "https://business.myedit.online/", caption: "Creative tools for product and marketing workflows" },
   ],
   "02": [
-    { src: "/images/screenshots/holly-home-20261112.webp", width: 1429, height: 774, title: "Holly World · Homepage", caption: "Seasonal collections and costume discovery" },
-    { src: "/images/screenshots/holly-catalog-20261112.webp", width: 1429, height: 774, title: "Holly World · Catalog", caption: "Category navigation and product browsing" },
+    { src: "/images/screenshots/holly-home-20261112.webp", width: 1429, height: 774, title: "Holly World · Homepage", href: "/projects/holly-world-ecommerce", caption: "Seasonal collections and costume discovery" },
+    { src: "/images/screenshots/holly-catalog-20261112.webp", width: 1429, height: 774, title: "Holly World · Catalog", href: "/projects/holly-world-ecommerce", caption: "Category navigation and product browsing" },
+    { src: "/images/screenshots/holly-admin-redacted.webp", width: 1600, height: 758, title: "Holly World · Admin", href: "/projects/holly-world-ecommerce", caption: "Product catalog management · Prices and stock redacted", alt: "Holly World product management dashboard, with all visible price and stock values obscured" },
   ],
   "03": [
-    { src: "/images/screenshots/srv6-recovery-topology.webp", width: 389, height: 216, title: "SRv6 recovery topology", caption: "Primary path, failed link, and backup route", alt: "SRv6 topology showing primary path A–R1–R2–R3–R5–R6–B, a failed R3–R5 link, and backup route through R7 and R8" },
+    { src: "/images/screenshots/srv6-recovery-topology.webp", width: 389, height: 216, title: "SRv6 recovery topology", href: "/srv6-proa", caption: "Primary path, failed link, and backup route", alt: "SRv6 topology showing primary path A–R1–R2–R3–R5–R6–B, a failed R3–R5 link, and backup route through R7 and R8" },
   ],
 };
 
 function WebsiteScreenshots({ chapter }) {
   const screenshots = websiteScreenshots[chapter];
   if (!screenshots) return null;
-  return <div className={`mt-5 grid gap-4 ${screenshots.length > 1 ? "sm:grid-cols-2" : "max-w-sm"}`} aria-label="Project visuals">
-    {screenshots.map(screenshot => <figure key={screenshot.src} className="min-w-0">
-      <a href={screenshot.src} target="_blank" rel="noopener noreferrer" aria-label={`View ${screenshot.title} screenshot at full size`} className="group block overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm transition-colors hover:border-rose-300">
+  return <div className={`mt-5 grid gap-4 ${screenshots.length > 1 ? "sm:grid-cols-2" : "max-w-lg"}`} aria-label="Project visuals">
+    {screenshots.map((screenshot, index) => <figure key={screenshot.src} className={`min-w-0 ${screenshots.length > 1 && screenshots.length % 2 === 1 && index === screenshots.length - 1 ? "sm:col-span-2" : ""}`}>
+      <Link href={screenshot.href} {...(screenshot.href.startsWith("http") ? {target:"_blank",rel:"noopener noreferrer"} : {})} aria-label={`Explore ${screenshot.title}`} className="group block overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm transition-colors hover:border-rose-300">
         <ExportedImage src={screenshot.src} alt={screenshot.alt || `${screenshot.title} website screenshot`} width={screenshot.width} height={screenshot.height} unoptimized className="h-auto w-full" />
-      </a>
+      </Link>
       <figcaption className="mt-2 text-[11px] leading-5 text-stone-500"><span className="block font-medium text-stone-700">{screenshot.title}</span>{screenshot.caption}<span aria-hidden="true" className="ml-1 text-rose-500">↗</span></figcaption>
     </figure>)}
   </div>;
@@ -36,7 +38,7 @@ const approaches = [
   ["Work across disciplines", "I collaborate with product, design, marketing, and QE teams to connect technical decisions with the people using the product."],
 ];
 const chapters = [
-  { number: "01", label: "PRODUCT ENGINEERING · CYBERLINK", title: "Making creative tools useful.", body: "At CyberLink, I work on MyEdit and MyEdit Business, bringing AI image, audio, and video tools into usable product experiences. My work spans editing interfaces, subscription and purchase workflows, API integration, and analytics.", detail: "I also coordinate AT work across the two products with Engineering and QE, alongside my work on AI-assisted testing and reporting automation.", tags: ["React", "API integration", "Cross-team delivery"], href: "/projects/myedit", link: "Explore MyEdit" },
+  { number: "01", label: "PRODUCT ENGINEERING · CYBERLINK", title: "Making creative tools useful.", body: "At CyberLink, I work on MyEdit and MyEdit Business, bringing AI image, audio, and video tools into usable product experiences. My work spans editing interfaces, subscription and purchase workflows, API integration, and analytics.", detail: "I also coordinate AT work across the two products with Engineering and QE, alongside my work on AI-assisted testing and reporting automation.", tags: ["React", "API integration", "Cross-team delivery"], href: "https://myedit.online/en", link: "Explore MyEdit" },
   { number: "02", label: "INDEPENDENT BUILDING · HOLLY WORLD", title: "Owning what happens after launch.", body: "Building and operating Holly World brings me closer to the full life of a product: a multilingual catalog, day-to-day operations, search visibility, and reliable releases.", detail: "It is where I put AI-assisted development into practice, with project rules, automated validation, deployment checks, and rollback.", tags: ["Product ownership", "AI-assisted development", "Operations"], href: "/projects/holly-world-ecommerce", link: "Inside Holly World" },
   { number: "03", label: "RESEARCH · SDN & SRv6", title: "Understanding how systems recover.", body: "My research explored adaptive path selection in SDN-based SRv6 networks. It gave me a way to think about resilience: how a system responds when its expected path is no longer available.", detail: "I turned that research into an interactive dashboard, so the routing and recovery process can be explored rather than only read about.", tags: ["Network resilience", "Research", "Visualization"], href: "/srv6-proa", link: "Try the routing demo" },
 ];
@@ -44,28 +46,40 @@ const chapters = [
 export default function AboutPage() {
   return <div className="min-h-screen site-surface">
     <Navbar />
-    <main className="page-shell max-w-4xl">
-      <header className="grid items-center gap-7 border-b border-stone-200/80 pb-10 md:grid-cols-[minmax(0,1fr)_170px] md:gap-12 md:pb-12">
+    <main className="page-shell max-w-5xl">
+      <header className={styles.header}>
         <div>
           <p className="section-label mb-4">A little about me</p>
-          <h1 className="text-3xl font-semibold tracking-tight text-stone-800 sm:text-4xl">Hi, I’m Cindy.</h1>
+          <h1 className={styles.title}>Hi, I’m Cindy.</h1>
           <p className="mt-4 max-w-xl text-base leading-8 text-stone-600">I’m a software engineer who enjoys turning complicated ideas into things people can use.</p>
           <p className="mt-3 max-w-xl text-sm leading-7 text-stone-500">I build AI products at CyberLink, run Holly World, and explore resilient networks through research. Across these different settings, I care about how things work — and how they feel to the people using them.</p>
           <p className="mt-5 text-xs leading-6 text-stone-500">Taipei, Taiwan · Open to opportunities in Taiwan &amp; remote</p>
         </div>
-        <figure className="hidden md:block">
-          <div className="overflow-hidden rounded-[2rem] border border-white bg-rose-50 p-1 shadow-sm rotate-3">
-            <ExportedImage src={personalInfo.avatar} alt="Cindy enjoying a meal" width={170} height={210} className="aspect-[4/5] w-full rounded-[1.8rem] object-cover" />
+        <aside aria-label="Professional profile" className={styles.profile}>
+          <div className="flex items-center gap-3">
+            <ExportedImage src={personalInfo.avatar} alt="Cindy" width={48} height={48} className="h-12 w-12 shrink-0 rounded-full object-cover ring-2 ring-rose-50" />
+            <div className="min-w-0"><p className="text-sm font-semibold text-stone-800">Yu-Chen (Cindy) Liu</p><p className="mt-1 text-xs text-stone-500">Software Engineer</p></div>
           </div>
-          <figcaption className="mt-4 text-center text-[10px] text-stone-500">Engineering, with a human side.</figcaption>
-        </figure>
+          <p className="mt-3 text-xs leading-6 text-stone-600">Product engineering<br />Reliable systems · Applied research</p>
+          <p className="mt-2 text-[11px] text-stone-500">Taipei, Taiwan</p>
+          <div className={styles.profileLinks}>
+            {[
+              { title: "Personal GitHub", href: "https://github.com/yuchen-land", icon: "M9 19c-4 1-4-2-6-2m12 5v-4a3.5 3.5 0 00-1-3c3-.3 6-1.5 6-6a5 5 0 00-1.5-3.5 4.5 4.5 0 000-3.5s-1.5-.5-4 1a13 13 0 00-7 0c-2.5-1.5-4-1-4-1a4.5 4.5 0 000 3.5A5 5 0 002 9c0 4.5 3 5.7 6 6a3.5 3.5 0 00-1 3v4" },
+              { title: "Work GitHub", href: "https://github.com/cindyliu-dev", icon: "M9 19c-4 1-4-2-6-2m12 5v-4a3.5 3.5 0 00-1-3c3-.3 6-1.5 6-6a5 5 0 00-1.5-3.5 4.5 4.5 0 000-3.5s-1.5-.5-4 1a13 13 0 00-7 0c-2.5-1.5-4-1-4-1a4.5 4.5 0 000 3.5A5 5 0 002 9c0 4.5 3 5.7 6 6a3.5 3.5 0 00-1 3v4" },
+              { title: "LinkedIn", href: "https://www.linkedin.com/in/yuchenliu0401/", icon: "M4 9v11M4 4v.5M10 20V9h4v2c1-3 6-3 6 2v7" },
+            ].map(item => <a key={item.title} href={item.href} target="_blank" rel="noopener noreferrer" className={styles.profileLink}>
+              <svg aria-hidden="true" className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d={item.icon} /></svg>
+              <span>{item.title}</span><span aria-hidden="true" className={styles.external}>↗</span>
+            </a>)}
+          </div>
+        </aside>
       </header>
 
-      <section aria-labelledby="approach-title" className="py-10 md:py-12">
+      <section aria-labelledby="approach-title" className="py-8 md:py-12">
         <p className="section-label mb-2">My approach</p>
         <h2 id="approach-title" className="text-xl font-semibold tracking-tight text-stone-800">How I work</h2>
-        <div className="mt-6 grid gap-6 sm:grid-cols-3 sm:gap-7">
-          {approaches.map(([title, body], index) => <div key={title} className="border-l-2 border-rose-200/80 pl-4">
+        <div className={styles.approaches}>
+          {approaches.map(([title, body], index) => <div key={title} className={styles.approach}>
             <span className="text-[10px] tabular-nums text-rose-400">0{index + 1}</span>
             <h3 className="mb-2 mt-2 text-sm font-semibold text-stone-700">{title}</h3>
             <p className="text-[13px] leading-6 text-stone-500">{body}</p>
@@ -73,11 +87,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section aria-labelledby="chapters-title" className="border-t border-stone-200/80 pt-10 md:pt-12">
+      <section aria-labelledby="chapters-title" className="border-t border-stone-200/80 pt-8 md:pt-12">
         <p className="section-label mb-2">Different settings, shared curiosity</p>
         <h2 id="chapters-title" className="text-xl font-semibold tracking-tight text-stone-800">Three threads in my work</h2>
-        {chapters.map(chapter => <article key={chapter.number} className="grid gap-3 border-b border-stone-200/70 py-8 md:grid-cols-[190px_minmax(0,1fr)] md:gap-8 md:py-10">
-          <div><span className="text-[11px] tabular-nums text-rose-400">{chapter.number}</span><p className="mt-2 max-w-[170px] text-[10px] font-medium leading-5 tracking-[.1em] text-stone-500">{chapter.label}</p></div>
+        {chapters.map(chapter => <article key={chapter.number} className={styles.chapter}>
+          <div className={styles.chapterLabel}><span>{chapter.number}</span><p>{chapter.label}</p></div>
           <div className="min-w-0">
             <h3 className="text-lg font-semibold tracking-tight text-stone-800">{chapter.title}</h3>
             <p className="mt-3 text-sm leading-7 text-stone-600">{chapter.number === "01" ? chapter.body.split(/(MyEdit Business|MyEdit)/g).map((part, index) => {
@@ -85,22 +99,31 @@ export default function AboutPage() {
               return href ? <a key={index} href={href} target="_blank" rel="noopener noreferrer" className="font-medium text-rose-600 underline decoration-rose-200 underline-offset-4 transition-colors hover:text-rose-700 hover:decoration-rose-400">{part}</a> : part;
             }) : chapter.body}</p>
             <p className="mt-3 text-sm leading-7 text-stone-500">{chapter.detail}</p>
-            <WebsiteScreenshots chapter={chapter.number} />
             <p className="mt-4 text-xs leading-6 text-stone-500">{chapter.tags.join(" · ")}</p>
             <Link href={chapter.href} className="mt-2 inline-flex min-h-11 items-center gap-2 text-xs font-medium text-rose-600 hover:text-rose-700">{chapter.link}<span aria-hidden="true">→</span></Link>
+            {chapter.number === "01" && <a href="https://business.myedit.online/" target="_blank" rel="noopener noreferrer" className="ml-4 inline-flex min-h-11 items-center gap-2 text-xs font-medium text-rose-600 hover:text-rose-700">MyEdit Business <span aria-hidden="true">↗</span></a>}
+            {chapter.number === "02" && <a href="https://www.holly-world.com.tw/" target="_blank" rel="noopener noreferrer" className="ml-4 inline-flex min-h-11 items-center gap-2 text-xs font-medium text-rose-600 hover:text-rose-700">Live site <span aria-hidden="true">↗</span></a>}
             {chapter.number === "01" && <a href="https://github.com/cindyliu-dev" target="_blank" rel="noopener noreferrer" className="ml-4 inline-flex min-h-11 items-center gap-2 text-xs font-medium text-stone-600 hover:text-rose-600">Work GitHub <span aria-hidden="true">↗</span></a>}
           </div>
+          <div className="min-w-0 md:col-span-2"><WebsiteScreenshots chapter={chapter.number} /></div>
         </article>)}
       </section>
 
-      <section aria-labelledby="outside-title" className="py-10 md:py-12">
-        <p className="section-label mb-2">Beyond the screen</p>
-        <h2 id="outside-title" className="text-xl font-semibold tracking-tight text-stone-800">There’s a pâtissier here, too.</h2>
-        <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-600">Alongside engineering, I have a life in pastry and creative work. BonBunny brings those interests together with the experience of building a storefront.</p>
-        <Link href="/projects/bonbunny" className="mt-2 inline-flex min-h-11 items-center gap-2 text-xs font-medium text-rose-600 hover:text-rose-700">Meet BonBunny <span aria-hidden="true">→</span></Link>
+      <section aria-labelledby="outside-title" className="py-8 md:py-12">
+        <div className="grid items-center gap-6 rounded-3xl border border-rose-100 bg-gradient-to-br from-rose-50/80 to-white p-6 sm:grid-cols-[180px_1fr] sm:gap-8 sm:p-8">
+          <div className="relative mx-auto h-48 w-36 overflow-hidden rounded-2xl border border-white bg-stone-100 shadow-sm sm:h-60 sm:w-[180px]">
+            <ExportedImage src="/images/cindy-food-moment.webp" alt="Cindy enjoying food at a restaurant" width={600} height={800} unoptimized className="absolute bottom-0 left-0 h-full w-full object-cover object-left-bottom" />
+          </div>
+          <div>
+            <p className="section-label mb-2">Beyond the screen</p>
+            <h2 id="outside-title" className="text-xl font-semibold tracking-tight text-stone-800">There’s a pâtissier here, too.</h2>
+            <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600">Alongside engineering, I love making desserts and exploring new flavors. BonBunny brings my interest in pastry and creative work together with the experience of building a storefront.</p>
+            <Link href="/projects/bonbunny" className="mt-2 inline-flex min-h-11 items-center gap-2 text-xs font-medium text-rose-600 hover:text-rose-700">Meet BonBunny <span aria-hidden="true">→</span></Link>
+          </div>
+        </div>
       </section>
 
-      <section aria-labelledby="background-title" className="border-t border-stone-200/80 pt-10 md:pt-12">
+      <section aria-labelledby="background-title" className="border-t border-stone-200/80 pt-8 md:pt-12">
         <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
           <div><p className="section-label mb-2">The details, if you’re curious</p><h2 id="background-title" className="text-xl font-semibold tracking-tight text-stone-800">Background &amp; credentials</h2></div>
           <a href="/YuChen_Liu_Resume.pdf" download="YuChen_Liu_Resume.pdf" className="inline-flex min-h-11 items-center gap-2 text-xs font-medium text-rose-600">Download resume <span aria-hidden="true">↓</span></a>

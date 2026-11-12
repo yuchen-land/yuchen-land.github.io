@@ -1,256 +1,47 @@
 "use client";
 
-import Link from "next/link";
-import { projects, thesis, tagCategories } from "@/data/data";
-import ProjectCard from "@/components/ProjectCard";
-import AcademicCard from "@/components/AcademicCard";
 import { useState } from "react";
+import { projects, thesis, projectDocumentation } from "@/data/data";
+import PortfolioWorkCard from "@/components/PortfolioWorkCard";
 
+const filters = ["All", "Product", "Systems", "Creative"];
+const categories = {1:"Product",11:"Product",10:"Product",3:"Systems",8:"Systems",2:"Creative",7:"Creative"};
+const summaries = {
+  1:"AI image, audio and video tools, with product workflows, API integration and cross-team delivery at CyberLink.",
+  11:"Creative tools for business, connecting subscription workflows and reusable product experiences.",
+  10:"A multilingual costume rental platform, from catalog architecture to reliable releases and daily operations.",
+  3:"A Python tool for serial-port throughput testing and data transmission verification on Linux.",
+  2:"An artisanal pastry storefront bringing product presentation, ordering and a personal creative practice together.",
+  8:"A C assembler that resolves symbols, encodes SIC/XE instructions and generates relocation records.",
+  7:"A four-player tabletop learning game connecting physical cards with a bilingual Unity app.",
+};
+const titles = {10:"Holly World",2:"BonBunny Pastry Studio",3:"Linux Serial Port Test Tool",7:"Clchemy — Learn C++ through play"};
+function toWork(p) {
+  const doc=projectDocumentation[p.id];
+  const href=p.id===3 ? "/projects/linux-serial-port#interactive-demo" : doc ? `/projects/${doc.slug}` : p.demo;
+  return {...p,image:p.image,website:p.id===10 ? "https://www.holly-world.com.tw/" : undefined,title:titles[p.id] || p.title,category:categories[p.id] || "Product",summary:summaries[p.id] || p.description[0].replace(/\*\*/g,""),href,action:p.id===3 ? "Try interactive demo" : doc ? "Explore project" : "Visit website"};
+}
+const research={paper:thesis.links.publication,title:"SRv6 — Designing for recovery",category:"Systems",period:thesis.year,image:thesis.image,summary:"Adaptive path selection research, brought to life through an interactive network recovery dashboard.",tags:["SRv6","SDN","Network resilience"],href:"/srv6-proa",action:"Explore interactive demo"};
 export default function PortfolioContent() {
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [expandedCategories, setExpandedCategories] = useState({
-    frontend: true,
-    backend: true,
-    languages: true,
-    tools: true,
-    firmware: true,
-    specialization: true,
-  });
-
-  const visibleProjects = projects.filter((p) => !p.hidden);
-  const featuredOrder = [1, 11, 10];
-  const featuredProjects = visibleProjects
-    .filter((p) => p.featured)
-    .sort((a, b) => {
-      const rank = (id) => {
-        const index = featuredOrder.indexOf(id);
-        return index === -1 ? featuredOrder.length : index;
-      };
-      return rank(a.id) - rank(b.id);
-    });
-  const otherOrder = [3, 2, 8, 7];
-  const otherProjects = visibleProjects.filter((p) => !p.featured)
-    .sort((a, b) => otherOrder.indexOf(a.id) - otherOrder.indexOf(b.id));
-
-  // Filter projects based on selected tags only
-  const filterByTags = (projectList) => {
-    if (selectedTags.length === 0) return projectList;
-    return projectList.filter((p) =>
-      selectedTags.some((tag) => p.tags.includes(tag))
-    );
-  };
-
-  const filteredFeatured = filterByTags(featuredProjects);
-  const filteredOther = filterByTags(otherProjects);
-
-  // Check if thesis matches selected tags
-  const thesisMatchesTag = selectedTags.length === 0
-    ? true
-    : selectedTags.some((tag) => thesis.tags.includes(tag));
-
-  // Toggle category expansion
-  const toggleCategory = (categoryKey) => {
-    setExpandedCategories((prev) => ({
-      ...prev,
-      [categoryKey]: !prev[categoryKey],
-    }));
-  };
-
-  // Toggle tag selection (multi-select)
-  const toggleTag = (tag) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    );
-  };
-
-  // Clear all tags
-  const clearTags = () => setSelectedTags([]);
-
-  return (
-    <>
-      {/* Header - Premium Style */}
-      <div className="text-center mb-6 md:mb-8 animate-fade-in-down">
-        <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-3">
-          Portfolio
-        </p>
-        <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight mb-3">
-          Selected Works
-        </h1>
-        <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-          A selection of products, systems, and research — shaped by thoughtful engineering.
-        </p>
-      </div>
-
-      {/* Tag Filter */}
-      <div className="mb-6 animate-fade-in">
-        <details className="group">
-          <summary className="flex items-center justify-between cursor-pointer select-none py-3 px-4 rounded-lg hover:bg-gray-50/50 transition-colors">
-            <span className="text-xs font-medium text-gray-500 uppercase tracking-widest">
-              Filter by Technology {selectedTags.length > 0 && `(${selectedTags.length})`}
-            </span>
-            <svg
-              className="w-4 h-4 text-gray-400 transition-transform duration-300 group-open:rotate-180"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </summary>
-
-          {/* Tag Categories */}
-          <div className="space-y-3 pt-4">
-            {/* Clear Button */}
-            {selectedTags.length > 0 && (
-              <div className="flex items-center gap-2 pb-3 border-b border-pink-200/20 px-4">
-                <button
-                  onClick={clearTags}
-                  className="text-xs text-gray-500 hover:text-rose-600 transition-colors font-medium"
-                >
-                  Clear all
-                </button>
-              </div>
-            )}
-
-            {Object.entries(tagCategories).map(([categoryKey, category]) => (
-              <div key={categoryKey} className="border-l-2 border-pink-200/40 pl-4 py-2">
-                <button
-                  onClick={() => toggleCategory(categoryKey)}
-                  className="flex items-center justify-between w-full py-2 hover:opacity-80 transition-opacity"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm">{category.icon}</span>
-                    <span className="text-xs font-medium text-gray-600">{category.name}</span>
-                    <span className="text-xs text-gray-400">({category.tags.length})</span>
-                  </div>
-                  <svg
-                    className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${
-                      expandedCategories[categoryKey] ? "rotate-180" : ""
-                    }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-
-                {/* Category Tags */}
-                {expandedCategories[categoryKey] && (
-                  <div className="flex flex-wrap gap-2 mt-2 ml-6">
-                    {category.tags.map((tag) => (
-                      <button
-                        key={tag}
-                        onClick={() => toggleTag(tag)}
-                        className={`px-3 py-2 md:py-1 rounded-full text-xs transition-all duration-200 ${
-                          selectedTags.includes(tag)
-                            ? "bg-rose-500 text-white shadow-md"
-                            : "text-gray-600 hover:text-rose-600 hover:bg-rose-50/50"
-                        }`}
-                      >
-                        {selectedTags.includes(tag) ? "✓ " : ""}{tag}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </details>
-      </div>
-
-      {/* Featured Projects */}
-      {(filteredFeatured.length > 0 || thesisMatchesTag) && (
-        <section id="featured-projects" className="mb-10 md:mb-12 scroll-mt-24 animate-fade-in-up">
-          <div className="mb-5 flex items-end justify-between gap-4 border-b border-stone-200/80 pb-3">
-            <h2 className="text-xl font-semibold text-gray-900 tracking-tight">
-              Featured
-            </h2>
-            <p className="text-xs text-gray-500 shrink-0">
-              {filteredFeatured.length + (thesisMatchesTag ? 1 : 0)} highlighted project{filteredFeatured.length + (thesisMatchesTag ? 1 : 0) !== 1 ? "s" : ""}
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 items-stretch">
-            {filteredFeatured.map((project) => (
-              <ProjectCard key={project.id} project={project} featuredLayout />
-            ))}
-            {thesisMatchesTag && <AcademicCard thesis={thesis} featuredLayout />}
-          </div>
-        </section>
-      )}
-
-      {/* Other Projects */}
-      {filteredOther.length > 0 && (
-        <section id="more-projects" className="mb-10 md:mb-12 scroll-mt-24 animate-fade-in-up">
-          <div className="mb-5 flex items-end justify-between gap-4 border-b border-stone-200/80 pb-3">
-            <h2 className="text-xl font-semibold text-gray-900 tracking-tight">
-              More Projects
-            </h2>
-            <p className="text-xs text-gray-500 shrink-0">
-              {filteredOther.length} additional project{filteredOther.length !== 1 ? "s" : ""}
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 items-stretch">
-            {filteredOther.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* No Results */}
-      {filteredFeatured.length === 0 && filteredOther.length === 0 && !thesisMatchesTag && selectedTags.length > 0 && (
-        <div className="text-center py-24 animate-fade-in">
-          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
-            <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </div>
-          <h3 className="text-xl font-semibold text-gray-800 mb-2">No projects found</h3>
-          <p className="text-gray-500 mb-8 text-sm">
-            Try adjusting your filters to find what you&apos;re looking for.
-          </p>
-          <button
-            onClick={clearTags}
-            className="text-sm text-rose-500 hover:text-rose-600 font-medium transition-colors"
-          >
-            Clear all filters
-          </button>
-        </div>
-      )}
-
-      {/* CTA Section - Refined */}
-      <div className="mt-12 mb-6 text-center backdrop-blur-sm bg-white/50 border border-white/60 rounded-2xl px-6 py-8 md:px-10 md:py-10 animate-fade-in">
-        <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-4">
-          Get in Touch
-        </p>
-        <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
-          Let&apos;s work together
-        </h3>
-        <p className="text-gray-500 mb-6 max-w-md mx-auto leading-relaxed">
-          Interested in collaborating or discussing a project? I&apos;d love to hear from you.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <a
-            href="mailto:yuchen880401@gmail.com"
-            className="inline-flex items-center justify-center gap-2 bg-gray-900 text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            Send an email
-          </a>
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center gap-2 bg-white/80 border border-gray-200 text-gray-700 px-8 py-3 rounded-full text-sm font-medium hover:bg-white transition-colors"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back home
-          </Link>
-        </div>
-      </div>
-    </>
-  );
+  const [filter,setFilter]=useState("All");
+  const visible=projects.filter(p=>!p.hidden);
+  const featured=[1,10,11].map(id=>visible.find(p=>p.id===id)).filter(Boolean).map(toWork).concat(research);
+  const more=[3,2,8,7].map(id=>visible.find(p=>p.id===id)).filter(Boolean).map(toWork);
+  const matches=work=>filter==="All" || work.category===filter;
+  const groups=[["Featured",featured.filter(matches),false],["More Projects",more.filter(matches),true]];
+  return <>
+    <header className="mb-7 border-b border-stone-200/80 pb-7 sm:mb-9 sm:pb-8">
+      <p className="mb-3 text-[11px] font-medium uppercase tracking-[.2em] text-rose-500">Portfolio</p>
+      <div className="flex flex-wrap items-end justify-between gap-4"><h1 className="text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">Selected works.</h1><p className="max-w-sm text-sm leading-6 text-stone-500">Products, systems, and creative explorations.<br className="hidden sm:block"/> Thoughtful engineering, across different settings.</p></div>
+    </header>
+    <div className="sticky top-16 z-30 -mx-1 mb-6 flex items-center justify-between gap-3 border-b border-stone-200/70 bg-[#fcf8f8]/95 px-1 py-3 backdrop-blur-md sm:static sm:mb-8 sm:border-0 sm:bg-transparent sm:py-0" aria-label="Filter projects">
+      <div className="portfolio-filter-row flex min-w-0 flex-1 flex-nowrap gap-1 overflow-x-auto sm:flex-none">{filters.map(item=><button key={item} type="button" aria-pressed={filter===item} onClick={()=>setFilter(item)} className={`portfolio-filter-button min-h-11 shrink-0 whitespace-nowrap rounded-full px-3.5 text-xs font-medium transition-colors ${filter===item ? "bg-rose-500 text-white" : "text-stone-500 hover:bg-white hover:text-stone-900"}`}>{item}</button>)}</div>
+      <p aria-live="polite" className="sr-only text-xs text-stone-400 sm:not-sr-only">{featured.filter(matches).length+more.filter(matches).length} projects</p>
+    </div>
+    {groups.map(([title,works,compact])=>works.length>0 && <section key={title} className="mb-10 sm:mb-14" aria-label={title}>
+      <div className="mb-4 flex items-center justify-between"><h2 className="text-lg font-semibold tracking-tight text-stone-800">{title}</h2><span className="text-[11px] text-stone-400">{String(works.length).padStart(2,"0")} projects</span></div>
+      <div className={compact ? "grid gap-3" : "grid gap-5 sm:grid-cols-2"}>{works.map(work=><PortfolioWorkCard key={work.title} work={work} compact={compact}/>)}</div>
+    </section>)}
+    <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-stone-200 py-7"><div><p className="text-base font-medium text-stone-800">Have something in mind?</p><p className="mt-1 text-sm text-stone-500">Let’s make something useful together.</p></div><a href="mailto:yuchen880401@gmail.com" className="inline-flex min-h-11 items-center gap-3 rounded-full bg-stone-800 px-5 text-xs font-medium text-white hover:bg-stone-700">Let’s talk <span aria-hidden="true">↗</span></a></footer>
+  </>;
 }

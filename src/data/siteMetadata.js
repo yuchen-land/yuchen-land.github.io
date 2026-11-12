@@ -10,7 +10,7 @@ export const siteDescriptions = {
 
 export function createPageMetadata({ title, description, path, type = "website" }) {
   const pageTitle = title ? `${title} - ${displayName}` : `${displayName} - ${engineeringTitle}`;
-  const images = [{ url: "/images/Cindy.jpg", width: 1200, height: 630, alt: `${displayName} - ${engineeringTitle}` }];
+  const images = [{ url: "/images/og-portfolio-v2.jpg", width: 1200, height: 630, alt: `${displayName} - ${engineeringTitle}` }];
   return {
     title: pageTitle,
     description,
@@ -27,7 +27,7 @@ export function createPageMetadata({ title, description, path, type = "website" 
       card: "summary_large_image",
       title: pageTitle,
       description,
-      images: ["/images/Cindy.jpg"],
+      images: ["/images/og-portfolio-v2.jpg"],
     },
   };
 }

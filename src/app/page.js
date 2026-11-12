@@ -55,7 +55,7 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="page-shell relative z-10 flex min-h-screen flex-col items-center">
-        <section aria-labelledby="home-title" className="mb-14 grid w-full max-w-5xl items-center gap-8 md:mb-20 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-12 lg:py-8">
+        <section aria-labelledby="home-title" className="mb-10 grid w-full max-w-5xl items-center gap-6 md:mb-14 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-12 lg:py-6">
           <div className="text-center lg:text-left">
             <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-rose-500">Software engineer · Creative thinker</p>
             <h1 id="home-title" className="text-3xl font-semibold leading-tight tracking-tight text-stone-800 sm:text-4xl lg:text-[2.75rem]">{personalInfo.name}</h1>
@@ -75,7 +75,7 @@ export default function Home() {
             <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-3">
               Featured
             </p>
-            <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2">
               Selected Projects
             </h2>
             <p className="text-gray-500 text-sm max-w-lg mx-auto">
@@ -100,7 +100,7 @@ export default function Home() {
               {
                 id: "holly-world",
                 title: "Holly World — Costume Rental Platform",
-                role: "Full-stack Development",
+                role: "Platform Engineering",
                 summary: "A five-language rental platform built and operated with AI agents, automated release checks, and resilient catalog delivery.",
                 image: projects.find((project) => project.id === 10).image,
                 tags: ["Next.js", "TypeScript", "PostgreSQL"],

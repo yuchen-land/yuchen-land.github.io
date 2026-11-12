@@ -4,50 +4,6 @@
 // Screenshots format: { src: "/images/projects/[project]/screenshot.jpg", alt: "Description", caption: "Optional caption" }
 
 export const projectDocumentation = {
-  1: {
-    id: "myedit",
-    title: "MyEdit",
-    slug: "myedit",
-    screenshots: [
-      { src: "/images/projects/myedit.jpg", alt: "MyEdit Homepage", caption: "MyEdit main landing page" },
-      // Add more screenshots here
-    ],
-    // STAR methodology
-    star: {
-      situation: "CyberLink needed to develop and maintain MyEdit, a professional online editing platform for images, audio, and video. The platform required seamless integration of multiple editing tools while maintaining high performance and a user-friendly experience for content creators worldwide.",
-      task: "As a Software Engineer, I was responsible for developing core features across Magic Designer, Podcast Studio, and Video Editor projects. I needed to optimize SEO performance, integrate analytics for marketing insights, and coordinate cross-functional collaboration between RD, SEO, PM, QA, and Design teams.",
-      action: [
-        "Developed and implemented core features for image, audio, and video editing tools using React with a strong focus on UI/UX",
-        "Integrated Google Analytics and multi-source data pipelines to enable comprehensive marketing analysis",
-        "Automated weekly report generation using n8n, GA, and Google Sheets integration",
-        "Led an AI-assisted testing system with the QE team and integrated automated verification into CI/CD"
-      ],
-      result: "Reduced BI reporting effort by 86%. Initiated and led an AI-assisted testing system with the QE team, integrated into CI/CD, reducing project delivery from 6 months to 1 month. Earned perfect collaboration scores across two consecutive review cycles."
-    },
-    stats: [
-      { value: "86%", label: "Reporting Effort Reduced", icon: "clock" },
-      { value: "1", label: "Month Delivery · Previously 6", icon: "rocket" },
-      { value: "2", label: "Perfect Collaboration Review Cycles", icon: "users" }
-    ],
-    techStack: {
-      frontend: ["React", "JavaScript", "HTML/CSS"],
-      backend: ["Node.js"],
-      tools: ["Google Analytics", "n8n", "Git"],
-    },
-    features: [
-      "Image editing with Magic Designer",
-      "Audio editing with Podcast Studio",
-      "Video editing and processing",
-      "Professional UI/UX interface",
-      "Google Analytics integration",
-      "Automated report generation",
-    ],
-    roles: ["Frontend Developer", "UI/UX Designer", "Full-Stack Engineer"],
-    links: {
-      demo: "https://myedit.online/en",
-      github: "https://github.com/cindyliu-dev",
-    },
-  },
   2: {
     id: "bonbunny",
     title: "BonBunny Pastry Studio",
@@ -276,87 +232,69 @@ export const projectDocumentation = {
     title: "Clchemy - C++ Educational Game",
     slug: "clchemy",
     screenshots: [
-      { src: "/images/projects/clchemy.jpg", alt: "Clchemy Game", caption: "Educational C++ card game interface" },
-      // Add more screenshots here
+      { src: "/images/projects/clchemy/tabletop.webp", alt: "Clchemy physical board, character cards and QR-enabled item cards", caption: "The completed physical game set — report fig. 3-9, p. 20." },
+      { src: "/images/projects/clchemy/characters.webp", alt: "Four illustrated characters in the Unity character selection screen", caption: "Character selection before the shared-screen game — fig. 3-5, p. 15." },
+      { src: "/images/projects/clchemy/quiz.webp", alt: "Programming question with answer buttons, countdown and player ranking", caption: "Timed C++ questions with immediate score feedback and live ranking — fig. 3-7, p. 18." },
+      { src: "/images/projects/clchemy/board.webp", alt: "Alchemy-themed board with colored spaces and matching scan zones", caption: "Physical board design connects movement to app events — fig. 3-8, p. 19." },
+      { src: "/images/projects/clchemy/story.webp", alt: "Alchemy story dialogue in the bilingual app", caption: "Story-led onboarding introduces the alchemy setting — fig. 3-5, p. 15." },
     ],
     star: {
-      situation: "Taiwan's Ministry of Education sought innovative approaches to teach programming fundamentals to elementary students. Traditional text-based learning methods were not engaging enough for young learners, and bilingual education requirements added complexity.",
-      task: "As Team Leader, design and develop a bilingual (English/Chinese) educational card game that teaches C++ programming basics through gamified learning. The solution needed to align with government education policies and include assessment mechanisms.",
+      situation: "Programming can feel abstract to beginners. Our capstone explored how a shared tabletop experience could make introductory C++ more approachable for upper-elementary learners and above.",
+      task: "Create a bilingual learning game that brings physical play, programming questions and immediate feedback into one coherent experience for four players.",
       action: [
-        "Led the team and collaborated with Ministry of Education stakeholders",
-        "Designed gamified learning mechanics using card game concepts",
-        "Developed the application using C# and Unity game engine",
-        "Created 3D character and asset designs with Autodesk 3ds Max",
-        "Implemented bilingual interface and assessment tracking systems"
+        "Combined a Unity / C# app with a physical board, character cards and item cards.",
+        "Connected board spaces and selected item cards to app questions and events through QR scanning.",
+        "Designed multiple-choice, drag-and-drop programming-block and mixed question formats.",
+        "Included Chinese / English interfaces, shared-screen play, live scores and a review of incorrect answers."
       ],
-      result: "Achieved 70% contribution rate to the project. Improved learning efficiency by 80% according to educator feedback. Successfully aligned with Taiwan's bilingual education policies and created an engaging educational tool for elementary students."
+      result: "Delivered a hybrid educational game prototype combining a bilingual Unity app and a physical tabletop set. Playtest feedback described understandable instructions and learning through observing other players. The report documents usability feedback, rather than a controlled measurement of learning improvement."
     },
     stats: [
-      { value: "80%", label: "Learning Efficiency", icon: "chart" },
-      { value: "70%", label: "Project Contribution", icon: "star" },
-      { value: "2", label: "Languages Supported", icon: "users" }
+      { value: "4", label: "Local Players", icon: "users" },
+      { value: "2", label: "Interface Languages", icon: "code" },
+      { value: "87", label: "Discovery Survey Responses", icon: "chart" }
     ],
     techStack: {
-      programming: ["C++", "C#"],
-      gameEngine: ["Unity"],
-      design: ["Autodesk 3ds Max"],
-      approach: ["Gamified Learning"],
+      implementation: ["C#", "Unity"],
+      interaction: ["QR scanning", "Shared-screen play"],
+      artwork: ["Procreate", "Physical game assets"],
+      learning: ["C++ fundamentals", "Gamified learning"],
     },
-    features: [
-      "Bilingual interface (EN/ZH)",
-      "C++ concept tutorials",
-      "Interactive gameplay",
-      "Assessment tracking",
-      "Achievement system",
-      "3D character design",
-      "MOE curriculum aligned",
-    ],
-    roles: ["Team Leader", "Game Developer", "UI/UX Designer"],
-    links: {
-      demo: "https://www.youtube.com/watch?v=z9RUuTXWAO0&feature=youtu.be",
-    },
+    features: ["Bilingual interface (EN/ZH)", "Four-player local gameplay", "QR-connected board and cards", "Timed programming questions", "Live scores and ranking", "Incorrect-answer review"],
+    roles: ["Game Development", "Educational Game Design", "Team Capstone"],
+    links: { demo: "https://www.youtube.com/watch?v=z9RUuTXWAO0&feature=youtu.be" },
   },
   8: {
     id: "sic-assembler",
     title: "SIC/XE Two-pass Assembler",
     slug: "sic-assembler",
     screenshots: [
-      { src: "/images/projects/two_pass_assembler.jpg", alt: "SIC/XE Assembler", caption: "Two-pass assembler implementation" },
-      // Add more screenshots here
+      { src: "/images/projects/sic-assembler/object-records.webp", alt: "COPY object program with header, text, modification and end records", caption: "Object-file output shown in the original report, p. 2. This is a coursework sample, not a live execution." },
+      { src: "/images/projects/sic-assembler/source.webp", alt: "SIC/XE COPY source program with labels, instructions and directives", caption: "COPY assembly input from the report, p. 1. Open the image to inspect the full listing." },
     ],
     star: {
-      situation: "Understanding assembly language and compiler design is fundamental for computer science education. The SIC/XE instruction set provides an ideal learning platform for assembly concepts due to its well-documented specifications.",
-      task: "Implement a complete two-pass assembler in C for the SIC/XE instruction set. The assembler needed to correctly handle symbol tables, generate intermediate code, and produce executable output.",
+      situation: "A systems-programming assignment explored how symbolic SIC/XE assembly instructions become object code, including forward references, relative addressing and relocation.",
+      task: "Implement a two-pass assembler in C, from source parsing and symbol-table construction to instruction encoding and object-record generation.",
       action: [
-        "Studied SIC/XE instruction set specifications thoroughly",
-        "Designed efficient two-pass assembly process architecture",
-        "Implemented proper symbol table management",
-        "Developed intermediate code generation and handling",
-        "Built comprehensive error detection and reporting"
+        "Built OPTAB lookup, location-counter updates, SYMTAB and intermediate-file output in Pass 1.",
+        "Implemented instruction formats 1–4, register encoding and addressing-mode handling in Pass 2.",
+        "Recorded relocation addresses and generated header, text, modification and end records.",
+        "Debugged hexadecimal parsing and displacement formatting using the COPY sample program."
       ],
-      result: "Successfully implemented a complete, working two-pass assembler with proper error handling. Enhanced understanding of assembly language fundamentals and compiler design principles applicable to modern development."
+      result: "Produced an object-file example for the SIC/XE COPY program and documented the complete assembly pipeline. The project strengthened practical C string/file handling and understanding of instruction encoding. The report also records remaining gaps in Pass 2 error handling and opportunities to simplify parsing and file processing."
     },
     stats: [
       { value: "2", label: "Assembly Passes", icon: "code" },
       { value: "C", label: "Implementation Language", icon: "rocket" }
     ],
     techStack: {
-      programming: ["C"],
-      concepts: ["Assembly Language", "Firmware", "Compiler Design"],
-      tools: ["Git"],
+      programming: ["C", "String and file I/O"],
+      architecture: ["SIC/XE", "Instruction formats 1–4"],
+      concepts: ["Symbol tables", "Relative addressing", "Relocation records"],
     },
-    features: [
-      "Two-pass assembly process",
-      "Symbol table management",
-      "SIC/XE instruction support",
-      "Intermediate code generation",
-      "Error detection/reporting",
-      "Modular architecture",
-    ],
-    roles: ["Software Engineer", "Systems Programmer"],
-    links: {
-      github: "https://github.com/yuchen-land/2-pass-assembler",
-    },
+    features: ["Two-pass assembly", "OPTAB and SYMTAB", "Intermediate listing", "Instruction encoding", "H/T/M/E object records"],
+    roles: ["Sole Developer", "Systems Programming"],
+    links: { github: "https://github.com/yuchen-land/2-pass-assembler" },
   },
   9: {
     id: "holly-world",
@@ -404,6 +342,7 @@ export const projectDocumentation = {
     slug: "holly-world-ecommerce",
     screenshots: [
       { src: "/images/projects/hollyworld2.png", alt: "Holly World costume rental website", caption: "Costume discovery, themed collections, and LINE rental inquiries" },
+      { src: "/images/screenshots/holly-admin-redacted.webp", alt: "Holly World product administration dashboard with price and stock values redacted", caption: "Product catalog administration — prices and stock obscured for public display" },
     ],
     star: {
       situation: "An established costume rental business needed a modern website to help customers discover costumes, understand rental arrangements, and contact the store. Its growing catalog also required reliable content, translation, and image maintenance.",

@@ -9,7 +9,7 @@ export default function PortfolioPage() {
       <Navbar />
 
       <div className="page-shell relative z-10 min-h-screen">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <PortfolioContent />
         </div>
       </div>
