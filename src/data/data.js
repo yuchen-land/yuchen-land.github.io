@@ -344,6 +344,7 @@ export const projects = [
   },
   {
     id: 4,
+    hidden: true,
     title: "Lotus Peanut Candy E-Commerce",
     period: "2025 - Present",
     description: [
@@ -359,6 +360,7 @@ export const projects = [
   },
   {
     id: 5,
+    hidden: true,
     title: "Muse Classic - Korean Clothing E-commerce Platform",
     period: "2025 - Present",
     description: [

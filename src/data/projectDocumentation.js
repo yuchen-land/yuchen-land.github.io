@@ -45,7 +45,7 @@ export const projectDocumentation = {
     roles: ["Frontend Developer", "UI/UX Designer", "Full-Stack Engineer"],
     links: {
       demo: "https://myedit.online/en",
-      github: "https://github.com/CindyLiu-CL",
+      github: "https://github.com/cindyliu-dev",
     },
   },
   2: {

@@ -28,7 +28,9 @@ export default function PortfolioContent() {
       };
       return rank(a.id) - rank(b.id);
     });
-  const otherProjects = visibleProjects.filter((p) => !p.featured);
+  const otherOrder = [3, 2, 8, 7];
+  const otherProjects = visibleProjects.filter((p) => !p.featured)
+    .sort((a, b) => otherOrder.indexOf(a.id) - otherOrder.indexOf(b.id));
 
   // Filter projects based on selected tags only
   const filterByTags = (projectList) => {
@@ -67,20 +69,20 @@ export default function PortfolioContent() {
   return (
     <>
       {/* Header - Premium Style */}
-      <div className="text-center mb-10 md:mb-12 animate-fade-in-down">
-        <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-4">
+      <div className="text-center mb-6 md:mb-8 animate-fade-in-down">
+        <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-3">
           Portfolio
         </p>
-        <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight mb-4">
+        <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight mb-3">
           Selected Works
         </h1>
         <p className="text-gray-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-          A curated collection of projects showcasing expertise in full-stack development and design.
+          A selection of products, systems, and research — shaped by thoughtful engineering.
         </p>
       </div>
 
       {/* Tag Filter */}
-      <div className="mb-10 animate-fade-in">
+      <div className="mb-6 animate-fade-in">
         <details className="group">
           <summary className="flex items-center justify-between cursor-pointer select-none py-3 px-4 rounded-lg hover:bg-gray-50/50 transition-colors">
             <span className="text-xs font-medium text-gray-500 uppercase tracking-widest">
@@ -159,12 +161,12 @@ export default function PortfolioContent() {
 
       {/* Featured Projects */}
       {(filteredFeatured.length > 0 || thesisMatchesTag) && (
-        <section className="mb-16 animate-fade-in-up">
-          <div className="mb-6">
-            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 tracking-tight">
+        <section id="featured-projects" className="mb-10 md:mb-12 scroll-mt-24 animate-fade-in-up">
+          <div className="mb-5 flex items-end justify-between gap-4 border-b border-stone-200/80 pb-3">
+            <h2 className="text-xl font-semibold text-gray-900 tracking-tight">
               Featured
             </h2>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-xs text-gray-500 shrink-0">
               {filteredFeatured.length + (thesisMatchesTag ? 1 : 0)} highlighted project{filteredFeatured.length + (thesisMatchesTag ? 1 : 0) !== 1 ? "s" : ""}
             </p>
           </div>
@@ -179,16 +181,16 @@ export default function PortfolioContent() {
 
       {/* Other Projects */}
       {filteredOther.length > 0 && (
-        <section className="mb-16 animate-fade-in-up">
-          <div className="mb-6">
-            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 tracking-tight">
+        <section id="more-projects" className="mb-10 md:mb-12 scroll-mt-24 animate-fade-in-up">
+          <div className="mb-5 flex items-end justify-between gap-4 border-b border-stone-200/80 pb-3">
+            <h2 className="text-xl font-semibold text-gray-900 tracking-tight">
               More Projects
             </h2>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-xs text-gray-500 shrink-0">
               {filteredOther.length} additional project{filteredOther.length !== 1 ? "s" : ""}
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 items-stretch">
             {filteredOther.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
@@ -218,14 +220,14 @@ export default function PortfolioContent() {
       )}
 
       {/* CTA Section - Refined */}
-      <div className="mt-20 mb-10 text-center backdrop-blur-sm bg-white/50 border border-white/60 rounded-3xl p-12 md:p-16 animate-fade-in">
+      <div className="mt-12 mb-6 text-center backdrop-blur-sm bg-white/50 border border-white/60 rounded-2xl px-6 py-8 md:px-10 md:py-10 animate-fade-in">
         <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-4">
           Get in Touch
         </p>
         <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">
           Let&apos;s work together
         </h3>
-        <p className="text-gray-500 mb-10 max-w-md mx-auto leading-relaxed">
+        <p className="text-gray-500 mb-6 max-w-md mx-auto leading-relaxed">
           Interested in collaborating or discussing a project? I&apos;d love to hear from you.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">

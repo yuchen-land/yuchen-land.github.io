@@ -6,6 +6,7 @@ import ImageCarousel from "@/components/ImageCarousel";
 import ScrollProgress from "@/components/ScrollProgress";
 import TableOfContents from "@/components/TableOfContents";
 import StarTimeline from "@/components/StarTimeline";
+import SerialPortDemo from "@/components/SerialPortDemo";
 import HollyArchitecture from "@/components/HollyArchitecture";
 import { findDocBySlug } from "@/utils/projectHelpers";
 import { use, useMemo } from "react";
@@ -17,6 +18,7 @@ export default function ProjectDocPage({ params }) {
   const sections = useMemo(() => [
     ...(doc?.star?.result ? [{ id: "results", label: "Results" }] : []),
     ...(doc?.id === "holly-world-ecommerce" ? [{ id: "architecture", label: "Architecture" }] : []),
+    ...(doc?.id === "linux-serial-port" ? [{ id: "interactive-demo", label: "Live Demo" }] : []),
     ...(doc?.screenshots?.length ? [{ id: "screenshots", label: "Screenshots" }] : []),
     ...(doc?.star && ["situation", "task", "action"].some((key) => doc.star[key]?.length) ? [{ id: "star", label: "Journey" }] : []),
     ...(doc?.techStack && Object.keys(doc.techStack).length ? [{ id: "tech", label: "Tech Stack" }] : []),
@@ -25,7 +27,7 @@ export default function ProjectDocPage({ params }) {
 
   if (!doc) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50 flex items-center justify-center px-4">
+      <div className="min-h-screen site-surface flex items-center justify-center px-4">
         <div className="text-center">
           <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-gray-100 flex items-center justify-center">
             <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -50,17 +52,17 @@ export default function ProjectDocPage({ params }) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-orange-50">
+    <div className="min-h-screen site-surface">
       <ScrollProgress />
       <Navbar />
       <TableOfContents sections={sections} />
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-3xl mx-auto px-6 py-20 md:py-24 pt-32 md:pt-40">
+      <div className="relative z-10 page-shell max-w-3xl">
         {/* Back Button - Subtle */}
         <Link
           href="/portfolio"
-          className="inline-flex min-h-10 items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 mb-10 group transition-colors"
+          className="inline-flex min-h-10 items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 mb-6 group transition-colors"
         >
           <svg
             className="w-4 h-4 transition-transform group-hover:-translate-x-0.5"
@@ -75,11 +77,11 @@ export default function ProjectDocPage({ params }) {
         </Link>
 
         {/* Header - Premium Style */}
-        <header className="mb-16 animate-fade-in-down">
+        <header className="mb-8 md:mb-10 animate-fade-in-down">
           <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-4">
             Project
           </p>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 tracking-tight leading-tight mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight leading-tight mb-6">
             {doc.title}
           </h1>
 
@@ -108,9 +110,11 @@ export default function ProjectDocPage({ params }) {
 
         {doc.id === "holly-world-ecommerce" && <HollyArchitecture />}
 
+        {doc.id === "linux-serial-port" && <SerialPortDemo />}
+
         {/* Project Screenshots Carousel */}
         {doc.screenshots && doc.screenshots.length > 0 && (
-          <section id="screenshots" className="mb-20 animate-fade-in">
+          <section id="screenshots" className="mb-10 md:mb-14 animate-fade-in">
             <h2 className="text-xl font-semibold text-gray-900 mb-6">
               Screenshots
             </h2>
@@ -159,7 +163,7 @@ export default function ProjectDocPage({ params }) {
 
         {/* Links Section */}
         {doc.links && Object.keys(doc.links).length > 0 && (
-          <section id="links" className="mb-20 animate-fade-in">
+          <section id="links" className="mb-10 md:mb-14 animate-fade-in">
             <h2 className="text-xl font-semibold text-gray-900 mb-6">
               Project Links
             </h2>
@@ -191,8 +195,8 @@ export default function ProjectDocPage({ params }) {
         {/* Related Projects — hidden for now */}
 
         {/* CTA Section - Refined */}
-        <section className="mb-20 animate-fade-in">
-          <div className="backdrop-blur-sm bg-white/50 border border-white/60 rounded-2xl p-10 md:p-12 text-center shadow-sm">
+        <section className="mb-10 md:mb-14 animate-fade-in">
+          <div className="backdrop-blur-sm bg-white/50 border border-white/60 rounded-2xl p-6 md:p-8 text-center shadow-sm">
             <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-3">
               Get in Touch
             </p>

@@ -1,75 +1,126 @@
 import Link from "next/link";
+import ExportedImage from "next-image-export-optimizer";
 import Navbar from "@/components/Navbar";
 import { personalInfo, education, experience, skills, publications, languages, activities } from "@/data/data";
 
+const websiteScreenshots = {
+  "01": [
+    { src: "/images/screenshots/myedit-home-20261112.webp", width: 1440, height: 780, title: "MyEdit", caption: "AI image, video, and audio product homepage" },
+    { src: "/images/screenshots/myedit-business-home-20261112.webp", width: 1440, height: 780, title: "MyEdit Business", caption: "Creative tools for product and marketing workflows" },
+  ],
+  "02": [
+    { src: "/images/screenshots/holly-home-20261112.webp", width: 1429, height: 774, title: "Holly World · Homepage", caption: "Seasonal collections and costume discovery" },
+    { src: "/images/screenshots/holly-catalog-20261112.webp", width: 1429, height: 774, title: "Holly World · Catalog", caption: "Category navigation and product browsing" },
+  ],
+  "03": [
+    { src: "/images/screenshots/srv6-recovery-topology.webp", width: 389, height: 216, title: "SRv6 recovery topology", caption: "Primary path, failed link, and backup route", alt: "SRv6 topology showing primary path A–R1–R2–R3–R5–R6–B, a failed R3–R5 link, and backup route through R7 and R8" },
+  ],
+};
+
+function WebsiteScreenshots({ chapter }) {
+  const screenshots = websiteScreenshots[chapter];
+  if (!screenshots) return null;
+  return <div className={`mt-5 grid gap-4 ${screenshots.length > 1 ? "sm:grid-cols-2" : "max-w-sm"}`} aria-label="Project visuals">
+    {screenshots.map(screenshot => <figure key={screenshot.src} className="min-w-0">
+      <a href={screenshot.src} target="_blank" rel="noopener noreferrer" aria-label={`View ${screenshot.title} screenshot at full size`} className="group block overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm transition-colors hover:border-rose-300">
+        <ExportedImage src={screenshot.src} alt={screenshot.alt || `${screenshot.title} website screenshot`} width={screenshot.width} height={screenshot.height} unoptimized className="h-auto w-full" />
+      </a>
+      <figcaption className="mt-2 text-[11px] leading-5 text-stone-500"><span className="block font-medium text-stone-700">{screenshot.title}</span>{screenshot.caption}<span aria-hidden="true" className="ml-1 text-rose-500">↗</span></figcaption>
+    </figure>)}
+  </div>;
+}
+
+const approaches = [
+  ["Start with the user", "I look at the whole journey: what someone needs, where a workflow gets difficult, and how the interface can make the next step clear."],
+  ["Build for the real world", "Implementation is one part of delivery. I also work on automated checks, deployment verification, and recovery when something goes wrong."],
+  ["Work across disciplines", "I collaborate with product, design, marketing, and QE teams to connect technical decisions with the people using the product."],
+];
+const chapters = [
+  { number: "01", label: "PRODUCT ENGINEERING · CYBERLINK", title: "Making creative tools useful.", body: "At CyberLink, I work on MyEdit and MyEdit Business, bringing AI image, audio, and video tools into usable product experiences. My work spans editing interfaces, subscription and purchase workflows, API integration, and analytics.", detail: "I also coordinate AT work across the two products with Engineering and QE, alongside my work on AI-assisted testing and reporting automation.", tags: ["React", "API integration", "Cross-team delivery"], href: "/projects/myedit", link: "Explore MyEdit" },
+  { number: "02", label: "INDEPENDENT BUILDING · HOLLY WORLD", title: "Owning what happens after launch.", body: "Building and operating Holly World brings me closer to the full life of a product: a multilingual catalog, day-to-day operations, search visibility, and reliable releases.", detail: "It is where I put AI-assisted development into practice, with project rules, automated validation, deployment checks, and rollback.", tags: ["Product ownership", "AI-assisted development", "Operations"], href: "/projects/holly-world-ecommerce", link: "Inside Holly World" },
+  { number: "03", label: "RESEARCH · SDN & SRv6", title: "Understanding how systems recover.", body: "My research explored adaptive path selection in SDN-based SRv6 networks. It gave me a way to think about resilience: how a system responds when its expected path is no longer available.", detail: "I turned that research into an interactive dashboard, so the routing and recovery process can be explored rather than only read about.", tags: ["Network resilience", "Research", "Visualization"], href: "/srv6-proa", link: "Try the routing demo" },
+];
 
 export default function AboutPage() {
-  return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_#fff1f2_0%,_#fafafa_45%,_#fafafa_100%)]">
-      <Navbar />
-
-      <div className="relative z-10 min-h-screen py-12 px-5 sm:px-6 pt-28 md:pt-32">
-        <div className="max-w-4xl mx-auto">
-          {/* Header - Premium Style */}
-          <div className="text-center mb-10 md:mb-12 animate-fade-in-down">
-            <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-4">
-              About
-            </p>
-            <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight mb-4">
-              {personalInfo.name}
-            </h1>
-            <p className="text-gray-500 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-              AI-Native Software Engineer building generative AI products and reliable production systems
-            </p>
+  return <div className="min-h-screen site-surface">
+    <Navbar />
+    <main className="page-shell max-w-4xl">
+      <header className="grid items-center gap-7 border-b border-stone-200/80 pb-10 md:grid-cols-[minmax(0,1fr)_170px] md:gap-12 md:pb-12">
+        <div>
+          <p className="section-label mb-4">A little about me</p>
+          <h1 className="text-3xl font-semibold tracking-tight text-stone-800 sm:text-4xl">Hi, I’m Cindy.</h1>
+          <p className="mt-4 max-w-xl text-base leading-8 text-stone-600">I’m a software engineer who enjoys turning complicated ideas into things people can use.</p>
+          <p className="mt-3 max-w-xl text-sm leading-7 text-stone-500">I build AI products at CyberLink, run Holly World, and explore resilient networks through research. Across these different settings, I care about how things work — and how they feel to the people using them.</p>
+          <p className="mt-5 text-xs leading-6 text-stone-500">Taipei, Taiwan · Open to opportunities in Taiwan &amp; remote</p>
+        </div>
+        <figure className="hidden md:block">
+          <div className="overflow-hidden rounded-[2rem] border border-white bg-rose-50 p-1 shadow-sm rotate-3">
+            <ExportedImage src={personalInfo.avatar} alt="Cindy enjoying a meal" width={170} height={210} className="aspect-[4/5] w-full rounded-[1.8rem] object-cover" />
           </div>
+          <figcaption className="mt-4 text-center text-[10px] text-stone-500">Engineering, with a human side.</figcaption>
+        </figure>
+      </header>
 
-          {/* Introduction Card */}
-          <div className="mb-14 animate-fade-in-up">
-            <div className="bg-white border border-gray-200/80 rounded-2xl p-6 md:p-8 shadow-sm">
-              <div className="max-w-2xl space-y-4 text-sm md:text-base leading-7 text-gray-600 mb-7">
-                <p>
-                  I develop generative AI creative tools at CyberLink and independently build and operate Holly World, a multilingual costume rental platform.
-                </p>
-                <p>
-                  I combine product engineering with AI-assisted development to deliver reliable software, supported by clear project rules, automated checks, deployment verification, and rollback.
-                </p>
-                <p>
-                  My research in SDN and SRv6 informs my approach to resilient systems. Across engineering, design, QA, and product teams, I focus on turning complex ideas into practical products.
-                </p>
-                <p className="pt-1 text-xs md:text-sm text-stone-500">
-                  Based in Taipei (UTC+8)<span aria-hidden="true" className="mx-2">·</span><span className="inline-block">Open to work in Taiwan & remote</span>
-                </p>
-              </div>
-              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-gray-100">
-                <div className="text-center">
-                  <p className="text-2xl font-semibold text-gray-900">2+</p>
-                  <p className="text-xs text-gray-500 mt-1">Years Experience</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-2xl font-semibold text-gray-900">10+</p>
-                  <p className="text-xs text-gray-500 mt-1">Projects Built</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-2xl font-semibold text-gray-900">15+</p>
-                  <p className="text-xs text-gray-500 mt-1">Skills & Tech</p>
-                </div>
-              </div>
-            </div>
+      <section aria-labelledby="approach-title" className="py-10 md:py-12">
+        <p className="section-label mb-2">My approach</p>
+        <h2 id="approach-title" className="text-xl font-semibold tracking-tight text-stone-800">How I work</h2>
+        <div className="mt-6 grid gap-6 sm:grid-cols-3 sm:gap-7">
+          {approaches.map(([title, body], index) => <div key={title} className="border-l-2 border-rose-200/80 pl-4">
+            <span className="text-[10px] tabular-nums text-rose-400">0{index + 1}</span>
+            <h3 className="mb-2 mt-2 text-sm font-semibold text-stone-700">{title}</h3>
+            <p className="text-[13px] leading-6 text-stone-500">{body}</p>
+          </div>)}
+        </div>
+      </section>
+
+      <section aria-labelledby="chapters-title" className="border-t border-stone-200/80 pt-10 md:pt-12">
+        <p className="section-label mb-2">Different settings, shared curiosity</p>
+        <h2 id="chapters-title" className="text-xl font-semibold tracking-tight text-stone-800">Three threads in my work</h2>
+        {chapters.map(chapter => <article key={chapter.number} className="grid gap-3 border-b border-stone-200/70 py-8 md:grid-cols-[190px_minmax(0,1fr)] md:gap-8 md:py-10">
+          <div><span className="text-[11px] tabular-nums text-rose-400">{chapter.number}</span><p className="mt-2 max-w-[170px] text-[10px] font-medium leading-5 tracking-[.1em] text-stone-500">{chapter.label}</p></div>
+          <div className="min-w-0">
+            <h3 className="text-lg font-semibold tracking-tight text-stone-800">{chapter.title}</h3>
+            <p className="mt-3 text-sm leading-7 text-stone-600">{chapter.number === "01" ? chapter.body.split(/(MyEdit Business|MyEdit)/g).map((part, index) => {
+              const href = part === "MyEdit" ? "https://myedit.online/en" : part === "MyEdit Business" ? "https://business.myedit.online/" : null;
+              return href ? <a key={index} href={href} target="_blank" rel="noopener noreferrer" className="font-medium text-rose-600 underline decoration-rose-200 underline-offset-4 transition-colors hover:text-rose-700 hover:decoration-rose-400">{part}</a> : part;
+            }) : chapter.body}</p>
+            <p className="mt-3 text-sm leading-7 text-stone-500">{chapter.detail}</p>
+            <WebsiteScreenshots chapter={chapter.number} />
+            <p className="mt-4 text-xs leading-6 text-stone-500">{chapter.tags.join(" · ")}</p>
+            <Link href={chapter.href} className="mt-2 inline-flex min-h-11 items-center gap-2 text-xs font-medium text-rose-600 hover:text-rose-700">{chapter.link}<span aria-hidden="true">→</span></Link>
+            {chapter.number === "01" && <a href="https://github.com/cindyliu-dev" target="_blank" rel="noopener noreferrer" className="ml-4 inline-flex min-h-11 items-center gap-2 text-xs font-medium text-stone-600 hover:text-rose-600">Work GitHub <span aria-hidden="true">↗</span></a>}
           </div>
+        </article>)}
+      </section>
 
+      <section aria-labelledby="outside-title" className="py-10 md:py-12">
+        <p className="section-label mb-2">Beyond the screen</p>
+        <h2 id="outside-title" className="text-xl font-semibold tracking-tight text-stone-800">There’s a pâtissier here, too.</h2>
+        <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-600">Alongside engineering, I have a life in pastry and creative work. BonBunny brings those interests together with the experience of building a storefront.</p>
+        <Link href="/projects/bonbunny" className="mt-2 inline-flex min-h-11 items-center gap-2 text-xs font-medium text-rose-600 hover:text-rose-700">Meet BonBunny <span aria-hidden="true">→</span></Link>
+      </section>
+
+      <section aria-labelledby="background-title" className="border-t border-stone-200/80 pt-10 md:pt-12">
+        <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+          <div><p className="section-label mb-2">The details, if you’re curious</p><h2 id="background-title" className="text-xl font-semibold tracking-tight text-stone-800">Background &amp; credentials</h2></div>
+          <a href="/YuChen_Liu_Resume.pdf" download="YuChen_Liu_Resume.pdf" className="inline-flex min-h-11 items-center gap-2 text-xs font-medium text-rose-600">Download resume <span aria-hidden="true">↓</span></a>
+        </div>
+        <p className="mb-5 text-sm leading-7 text-stone-500">My background connects software engineering with quality assurance and network research. Expand a section for the timeline, technical toolkit, or supporting documents.</p>
+          <details className="group border-b border-stone-200/80 py-1">
+            <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-4 [&::-webkit-details-marker]:hidden">
+              <span><span className="block text-sm font-medium text-stone-700">Work history</span><span className="mt-1 block text-xs leading-5 text-stone-500">CyberLink · MOXA · National Center for High-Performance Computing</span></span>
+              <span aria-hidden="true" className="shrink-0 text-lg font-light text-rose-400 transition-transform group-open:rotate-45">+</span>
+            </summary>
           {/* Experience */}
-          <section className="mb-14 animate-fade-in-up">
-            <div className="mb-5">
-              <h2 className="text-xl font-semibold text-gray-900 mb-1">Experience</h2>
-              <p className="text-sm text-gray-500">{experience.length} position{experience.length !== 1 ? "s" : ""}</p>
-            </div>
+          <div className="pt-5">
+
             <div className="relative pl-6 border-l border-stone-200">
               {experience.map((exp, index) => (
                 <div key={index} className="mb-8 relative">
                   {/* Timeline Dot */}
                   <div className="absolute -left-[33px] top-2 w-4 h-4 bg-rose-400 rounded-full border-4 border-[#fafafa]"></div>
 
-                  <div className="bg-white border border-gray-200/80 rounded-xl p-5 md:p-6 shadow-sm">
+                  <div className="bg-white border border-gray-200/80 rounded-2xl p-5 md:p-6 shadow-sm">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
                       <h3 className="text-base font-semibold text-gray-900">
                         {exp.position}
@@ -147,14 +198,18 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-          </section>
+          </div>
 
+
+          </details>
+          <details className="group border-b border-stone-200/80 py-1">
+            <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-4 [&::-webkit-details-marker]:hidden">
+              <span><span className="block text-sm font-medium text-stone-700">Technical toolkit</span><span className="mt-1 block text-xs leading-5 text-stone-500">Languages, platforms, testing, and analytics</span></span>
+              <span aria-hidden="true" className="shrink-0 text-lg font-light text-rose-400 transition-transform group-open:rotate-45">+</span>
+            </summary>
           {/* Skills & Technologies */}
-          <section className="mb-14 animate-fade-in-up">
-            <div className="mb-5">
-              <h2 className="text-xl font-semibold text-gray-900 mb-1">Skills & Technologies</h2>
-              <p className="text-sm text-gray-500">{Object.keys(skills).length} categories</p>
-            </div>
+          <div className="pt-5">
+
             <div className="grid md:grid-cols-2 gap-4">
               {Object.entries(skills).map(([category, items]) => (
                 <div
@@ -186,19 +241,23 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-          </section>
+          </div>
 
+
+          </details>
+          <details className="group border-b border-stone-200/80 py-1">
+            <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-4 [&::-webkit-details-marker]:hidden">
+              <span><span className="block text-sm font-medium text-stone-700">Education & supporting documents</span><span className="mt-1 block text-xs leading-5 text-stone-500">Academic background, admission, and scholarship records</span></span>
+              <span aria-hidden="true" className="shrink-0 text-lg font-light text-rose-400 transition-transform group-open:rotate-45">+</span>
+            </summary>
           {/* Education */}
-          <section className="mb-14 animate-fade-in-up">
-            <div className="mb-5">
-              <h2 className="text-xl font-semibold text-gray-900 mb-1">Education</h2>
-              <p className="text-sm text-gray-500">{education.length} credential{education.length !== 1 ? "s" : ""}</p>
-            </div>
+          <div className="pt-5">
+
             <div className="space-y-4">
               {education.map((edu, index) => (
                 <div
                   key={index}
-                  className="bg-white border border-gray-200/80 rounded-xl p-5 md:p-6 shadow-sm"
+                  className="bg-white border border-gray-200/80 rounded-2xl p-5 md:p-6 shadow-sm"
                 >
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
                     <div className="flex items-center gap-2">
@@ -207,7 +266,7 @@ export default function AboutPage() {
                       </h3>
                       {edu.level === "phd" && (
                         <span className="text-[10px] bg-stone-100 text-stone-600 px-2 py-0.5 rounded-full font-medium">
-                          Ph.D.
+                          Doctoral studies
                         </span>
                       )}
                       {edu.level === "master" && (
@@ -313,19 +372,23 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-          </section>
+          </div>
 
+
+          </details>
+          <details className="group border-b border-stone-200/80 py-1">
+            <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-4 [&::-webkit-details-marker]:hidden">
+              <span><span className="block text-sm font-medium text-stone-700">Research publication</span><span className="mt-1 block text-xs leading-5 text-stone-500">Published SDN / SRv6 research and paper links</span></span>
+              <span aria-hidden="true" className="shrink-0 text-lg font-light text-rose-400 transition-transform group-open:rotate-45">+</span>
+            </summary>
           {/* Publications */}
-          <section className="mb-14 animate-fade-in-up">
-            <div className="mb-5">
-              <h2 className="text-xl font-semibold text-gray-900 mb-1">Publications</h2>
-              <p className="text-sm text-gray-500">{publications.length} publication{publications.length !== 1 ? "s" : ""}</p>
-            </div>
+          <div className="pt-5">
+
             <div className="space-y-4">
               {publications.map((pub, index) => (
                 <div
                   key={index}
-                  className="bg-white border border-gray-200/80 rounded-xl p-5 md:p-6 shadow-sm"
+                  className="bg-white border border-gray-200/80 rounded-2xl p-5 md:p-6 shadow-sm"
                 >
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-8 h-8 bg-stone-100 rounded-lg flex items-center justify-center text-stone-600 text-sm font-semibold">
@@ -363,14 +426,18 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-          </section>
+          </div>
 
+
+          </details>
+          <details className="group border-b border-stone-200/80 py-1">
+            <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-4 [&::-webkit-details-marker]:hidden">
+              <span><span className="block text-sm font-medium text-stone-700">Languages & activities</span><span className="mt-1 block text-xs leading-5 text-stone-500">Language proficiency, workshops, and community involvement</span></span>
+              <span aria-hidden="true" className="shrink-0 text-lg font-light text-rose-400 transition-transform group-open:rotate-45">+</span>
+            </summary>
           {/* Language Proficiency */}
-          <section className="mb-14 animate-fade-in-up">
-            <div className="mb-5">
-              <h2 className="text-xl font-semibold text-gray-900 mb-1">Language Proficiency</h2>
-              <p className="text-sm text-gray-500">{languages.length} language{languages.length !== 1 ? "s" : ""}</p>
-            </div>
+          <div className="pt-5">
+
             <div className="grid md:grid-cols-2 gap-4">
               {languages.map((lang, index) => (
                 <div
@@ -387,10 +454,10 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-          </section>
+          </div>
 
           {/* Activities & Involvement */}
-          <section className="mb-14 animate-fade-in-up">
+          <div className="pt-5">
             <div className="mb-5">
               <h2 className="text-xl font-semibold text-gray-900 mb-1">Activities & Involvement</h2>
               <p className="text-sm text-gray-500">{activities.length} activit{activities.length !== 1 ? "ies" : "y"}</p>
@@ -414,44 +481,20 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
-          </section>
+          </div>
 
-          {/* CTA Section */}
-          <section className="animate-fade-in">
-            <div className="bg-white border border-gray-200/80 rounded-2xl p-6 md:p-10 text-center shadow-sm">
-              <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-3">
-                Get in Touch
-              </p>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-3">
-                Let&apos;s connect
-              </h2>
-              <p className="text-gray-500 mb-8 max-w-md mx-auto text-sm leading-relaxed">
-                Interested in collaborating or just want to say hi? I&apos;d love to hear from you.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <a
-                  href="mailto:yuchen880401@gmail.com"
-                  className="inline-flex items-center justify-center gap-2 bg-gray-900 text-white rounded-full px-6 py-2.5 text-sm font-medium hover:bg-gray-800 transition-colors"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  Send an email
-                </a>
-                <Link
-                  href="/portfolio"
-                  className="inline-flex items-center justify-center gap-2 bg-white/80 border border-gray-200 text-gray-700 rounded-full px-6 py-2.5 text-sm font-medium hover:bg-white transition-colors"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                  </svg>
-                  View Portfolio
-                </Link>
-              </div>
-            </div>
-          </section>
+
+          </details>
+      </section>
+      <section aria-labelledby="connect-title" className="mt-10 rounded-2xl border border-rose-100 bg-rose-50/40 px-5 py-8 md:mt-12 md:px-8">
+        <p className="section-label mb-2">Let’s connect</p>
+        <h2 id="connect-title" className="text-xl font-semibold tracking-tight text-stone-800">Have something in mind?</h2>
+        <p className="mt-3 max-w-lg text-sm leading-7 text-stone-500">I’m happy to talk about products, engineering challenges, or an opportunity to work together.</p>
+        <div className="mt-5 flex flex-wrap gap-3">
+          <a href={`mailto:${personalInfo.email}`} className="inline-flex min-h-11 items-center rounded-full bg-rose-500 px-5 text-sm font-medium text-white hover:bg-rose-600">Say hello <span aria-hidden="true" className="ml-2">↗</span></a>
+          <a href="https://www.linkedin.com/in/yuchenliu0401/" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center rounded-full border border-stone-200 bg-white px-5 text-sm text-stone-600 hover:border-rose-200">LinkedIn <span aria-hidden="true" className="ml-2">↗</span></a>
         </div>
-      </div>
-    </div>
-  );
+      </section>
+    </main>
+  </div>;
 }

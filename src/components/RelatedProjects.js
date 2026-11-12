@@ -51,7 +51,7 @@ export default function RelatedProjects({ currentProjectSlug, currentTags = [] }
     // Find related projects based on tag overlap
     const projectsWithScore = projects
       .filter((p) => !currentProjectId || p.id !== parseInt(currentProjectId))
-      .filter((p) => projectDocumentation[p.id]) // Only show projects with documentation
+      .filter((p) => !p.hidden && projectDocumentation[p.id]) // Only show projects with documentation
       .map((project) => {
         const overlap = project.tags.filter((tag) => tagsToMatch.includes(tag)).length;
         const doc = projectDocumentation[project.id];
@@ -65,7 +65,7 @@ export default function RelatedProjects({ currentProjectSlug, currentTags = [] }
     if (projectsWithScore.length < 2) {
       const featured = projects
         .filter((p) => !currentProjectId || p.id !== parseInt(currentProjectId))
-        .filter((p) => projectDocumentation[p.id])
+        .filter((p) => !p.hidden && projectDocumentation[p.id])
         .filter((p) => p.featured)
         .filter((p) => !projectsWithScore.find((rp) => rp.id === p.id))
         .map((project) => {

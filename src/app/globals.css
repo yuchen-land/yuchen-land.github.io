@@ -295,3 +295,19 @@ body { -webkit-font-smoothing: antialiased; }
 /* Horizontal swipe rows: hide the scrollbar, cards + peek signal swipeability */
 .scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
 .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* Shared visual foundation for portfolio pages. */
+@layer components {
+  .site-surface { background: radial-gradient(ellipse 85% 440px at 50% 0%, #fff1f4 0%, #faf9f8 100%); color: #292524; }
+  .page-shell { width: 100%; margin-inline: auto; padding: 6rem 1.25rem 3rem; }
+  .surface-card { border: 1px solid #e7e3e5; border-radius: 1rem; background: #fff; box-shadow: 0 2px 8px #38263304; }
+  .section-label { font-size: .625rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #be647e; }
+}
+@media(min-width:640px){.page-shell{padding-inline:1.5rem}}
+@media(min-width:768px){.page-shell{padding-top:7rem;padding-bottom:4rem}}
+@media(hover:hover) and (pointer:fine){.surface-card:hover{box-shadow:0 6px 20px #38263309}}
+html { scrollbar-gutter: stable; }
+body { overflow-wrap: break-word; }
+button,a,input,select,summary { -webkit-tap-highlight-color: transparent; }
+button:disabled { cursor: not-allowed; }
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

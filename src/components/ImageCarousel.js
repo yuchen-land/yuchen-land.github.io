@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import ExportedImage from "next-image-export-optimizer";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -48,6 +49,29 @@ export default function ImageCarousel({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    if (!isFullscreen) return;
+    const previousFocus = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    modalRef.current?.querySelector("button")?.focus();
+    const trapFocus = (event) => {
+      if (event.key !== "Tab") return;
+      const controls = modalRef.current?.querySelectorAll("button, a[href], [tabindex='0']");
+      if (!controls?.length) return;
+      const first = controls[0], last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", trapFocus);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", trapFocus);
+      previousFocus?.focus();
+    };
+  }, [isFullscreen]);
 
   // Auto-play functionality
   useEffect(() => {
@@ -74,6 +98,7 @@ export default function ImageCarousel({
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
+      if (!isFullscreen) return;
       if (e.key === "ArrowLeft") {
         goToPrevious();
       } else if (e.key === "ArrowRight") {
@@ -251,14 +276,18 @@ export default function ImageCarousel({
         )}
       </div>
 
-      {/* Fullscreen Modal */}
-      <AnimatePresence>
+      {/* Portal avoids backdrop-filter ancestors trapping the fixed dialog. */}
+      {typeof document !== "undefined" && createPortal(<AnimatePresence>
         {isFullscreen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${title} image viewer`}
+            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
             onClick={() => setIsFullscreen(false)}
           >
             {/* Close Button */}
@@ -277,7 +306,7 @@ export default function ImageCarousel({
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
-              className="relative w-full h-full max-w-6xl max-h-[90vh] mx-4"
+              className="relative w-full h-full max-w-6xl max-h-[75dvh] mx-4"
               onClick={(e) => e.stopPropagation()}
             >
               <ImageWithSkeleton
@@ -320,19 +349,19 @@ export default function ImageCarousel({
             )}
 
             {/* Fullscreen Counter & Caption */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center">
+            <div className="absolute bottom-[max(1rem,env(safe-area-inset-bottom))] left-4 right-4 text-center">
               <div className="text-white/80 text-sm mb-1">
                 {currentIndex + 1} / {images.length}
               </div>
               {currentImage.caption && (
-                <p className="text-white/60 text-sm max-w-md">
+                <p className="text-white/70 text-xs sm:text-sm max-w-md mx-auto">
                   {currentImage.caption}
                 </p>
               )}
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>, document.body)}
     </>
   );
 }

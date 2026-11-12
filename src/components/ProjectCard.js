@@ -15,11 +15,14 @@ export default function ProjectCard({ project, featuredLayout = false }) {
 
   // Show only first bullet point by default
   const MAX_VISIBLE_ITEMS = 1;
+  const previewItems = featuredLayout && project.id === 10
+    ? [project.description[2]]
+    : project.description?.slice(0, MAX_VISIBLE_ITEMS);
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(28,25,23,0.025)] hover:shadow-[0_6px_20px_rgba(28,25,23,0.06)] transition-all duration-300 border border-gray-200/80 group flex flex-col h-full">
+    <div className="surface-card overflow-hidden transition-shadow duration-200 group flex flex-col h-full">
       {/* Project Image */}
-      <div className={`relative ${featuredLayout ? "h-36" : "h-40"} bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100 overflow-hidden flex-shrink-0`}>
+      <div className={`relative aspect-[16/9] bg-stone-50 overflow-hidden flex-shrink-0`}>
         {/* Loading Skeleton */}
         {imgLoading && !imgError && (
           <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-rose-100 to-pink-100">
@@ -34,9 +37,9 @@ export default function ProjectCard({ project, featuredLayout = false }) {
           <ExportedImage
             src={project.image}
             alt={project.title}
-            width={400}
-            height={224}
-            className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-110 ${imgLoading ? 'opacity-0' : 'opacity-100'}`}
+            width={featuredLayout ? 640 : 400}
+            height={featuredLayout ? 360 : 224}
+            className={`w-full h-full object-cover transition-opacity duration-300 ${imgLoading ? 'opacity-0' : 'opacity-100'}`}
             style={project.imagePosition ? { objectPosition: project.imagePosition } : undefined}
             onLoad={() => setImgLoading(false)}
             onError={() => {
@@ -74,10 +77,10 @@ export default function ProjectCard({ project, featuredLayout = false }) {
       </div>
 
       {/* Project Info */}
-      <div className={`${featuredLayout ? "p-4" : "p-5"} flex flex-col flex-1`}>
+      <div className={`p-4 flex flex-col flex-1`}>
         <div className="flex-1">
           <div className="mb-2">
-            <h3 className={`${featuredLayout ? "min-h-10 text-sm leading-5" : "text-base"} font-semibold text-gray-800 group-hover:text-rose-500 transition-colors mb-1.5 line-clamp-2`}>
+            <h3 className={`min-h-10 text-sm leading-5 font-semibold text-gray-800 group-hover:text-rose-500 transition-colors mb-1.5 line-clamp-2`}>
               {project.title}
             </h3>
             {project.period && (
@@ -91,13 +94,13 @@ export default function ProjectCard({ project, featuredLayout = false }) {
           {Array.isArray(project.description) ? (
             <>
               <ul className="text-gray-600 mb-3 space-y-2.5 list-none">
-                {(isExpanded ? project.description : project.description.slice(0, MAX_VISIBLE_ITEMS)).map((item, i) => {
+                {(isExpanded ? project.description : previewItems).map((item, i) => {
                   // Check if text contains **bold** markers
                   const parts = item.split(/\*\*(.*?)\*\*/g);
                   return (
-                    <li key={i} className={`${featuredLayout ? "text-[13px]" : "text-sm"} leading-relaxed pl-4 relative`}>
+                    <li key={i} className={`${"text-sm"} leading-relaxed pl-4 relative`}>
                       <span className="text-rose-400 absolute left-0 top-0 text-xs">•</span>
-                      <span className={isExpanded ? "block" : "line-clamp-3"}>
+                      <span className={isExpanded ? "block" : "line-clamp-2"}>
                         {parts.map((part, idx) =>
                           idx % 2 === 1 ? (
                             <strong key={idx} className="font-bold text-gray-800">{part}</strong>
@@ -139,8 +142,8 @@ export default function ProjectCard({ project, featuredLayout = false }) {
         </div>
 
         {/* Tech Tags - Clean & Minimal */}
-        <div className="flex flex-wrap gap-1 mb-4">
-          {(isExpanded ? project.tags : project.tags.slice(0, 4)).map((tag) => (
+        <div className="flex flex-wrap items-center gap-1 mb-3">
+          {(isExpanded ? project.tags : project.tags.slice(0, 3)).map((tag) => (
             <span
               key={tag}
               className="text-stone-600 text-[11px] px-2 py-1 bg-stone-100 rounded-md"
@@ -148,8 +151,8 @@ export default function ProjectCard({ project, featuredLayout = false }) {
               {tag}
             </span>
           ))}
-          {!isExpanded && project.tags.length > 4 && (
-            <button type="button" onClick={() => setIsExpanded(true)} aria-label="Show all project details and technologies" className="inline-flex min-h-8 min-w-8 items-center justify-center rounded-md px-2 text-[11px] text-gray-500 hover:bg-stone-100 hover:text-rose-500">+{project.tags.length - 4}</button>
+          {!isExpanded && project.tags.length > 3 && (
+            <button type="button" onClick={() => setIsExpanded(true)} aria-label="Show all project details and technologies" className="inline-flex min-h-7 min-w-7 items-center justify-center rounded-md px-2 text-[11px] text-gray-500 hover:bg-stone-100 hover:text-rose-500">+{project.tags.length - 3}</button>
           )}
         </div>
 
@@ -161,7 +164,7 @@ export default function ProjectCard({ project, featuredLayout = false }) {
               {...(project.github.startsWith("/")
                 ? {}
                 : { target: "_blank", rel: "noopener noreferrer" })}
-              className="group/btn flex-auto whitespace-nowrap px-2 h-10 md:h-8 bg-slate-700 text-white rounded-lg text-xs font-medium hover:bg-gray-700 transition-all duration-200 flex items-center justify-center gap-1.5"
+              className="group/btn flex-auto whitespace-nowrap px-2 h-11 bg-slate-700 text-white rounded-lg text-xs font-medium hover:bg-gray-700 transition-all duration-200 flex items-center justify-center gap-1.5"
             >
               {project.github.includes('github.com') ? (
                 <svg className="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
@@ -175,13 +178,18 @@ export default function ProjectCard({ project, featuredLayout = false }) {
               <span>{project.github.includes('github.com') ? 'GitHub' : 'Docs'}</span>
             </a>
           )}
+          {project.id === 3 && (
+            <Link href="/projects/linux-serial-port#interactive-demo" className="inline-flex h-11 flex-1 items-center justify-center rounded-lg bg-rose-50 px-3 text-xs font-medium text-rose-600 transition-colors hover:bg-rose-100">
+              Interactive Demo →
+            </Link>
+          )}
           {project.demo && (
             <a
               href={project.demo}
               {...(project.demo.startsWith("/")
                 ? {}
                 : { target: "_blank", rel: "noopener noreferrer" })}
-              className="group/btn flex-auto whitespace-nowrap px-2 h-10 md:h-8 bg-rose-50 text-rose-600 rounded-lg text-xs font-medium hover:bg-rose-100/80 transition-all duration-200 flex items-center justify-center gap-1.5"
+              className="group/btn flex-auto whitespace-nowrap px-2 h-11 bg-rose-50 text-rose-600 rounded-lg text-xs font-medium hover:bg-rose-100/80 transition-all duration-200 flex items-center justify-center gap-1.5"
             >
               <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
@@ -194,9 +202,9 @@ export default function ProjectCard({ project, featuredLayout = false }) {
               href={`/projects/${projectSlug}`}
               aria-label={`View project document for ${project.title}`}
               title="View Project Document"
-              className={`group/btn h-10 md:h-8 ${!project.demo && (!project.github || project.github === `/projects/${projectSlug}`) ? "flex-1" : "w-10 md:w-8 shrink-0"} bg-transparent border border-stone-200 text-stone-500 rounded-lg hover:bg-rose-50 hover:text-rose-500 hover:border-rose-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-400 transition-all duration-200 flex items-center justify-center`}
+              className={`group/btn h-11 ${!project.demo && project.id !== 3 && (!project.github || project.github === `/projects/${projectSlug}`) ? "flex-1" : "w-11 shrink-0"} bg-transparent border border-stone-200 text-stone-500 rounded-lg hover:bg-rose-50 hover:text-rose-500 hover:border-rose-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-400 transition-all duration-200 flex items-center justify-center`}
             >
-              {!project.demo && (!project.github || project.github === `/projects/${projectSlug}`) && (
+              {!project.demo && project.id !== 3 && (!project.github || project.github === `/projects/${projectSlug}`) && (
                 <span className="mr-1.5 text-xs font-medium">Project Document</span>
               )}
               <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.6}>

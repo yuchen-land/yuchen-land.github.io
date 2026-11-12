@@ -739,6 +739,18 @@
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
       }
+
+      /* Lightweight 2.5D topology; labels stay upright and coordinates stay unchanged. */
+      .topology-depth-key{display:flex;justify-content:space-between;gap:12px;margin:2px 0 12px;font-size:10px;letter-spacing:.04em;color:#85809c}.topology-depth-key span:last-child{display:none}
+      .topology-viewport{overflow-x:auto;overscroll-behavior-x:contain;border:1px solid #eef0f7;border-radius:12px;background:linear-gradient(155deg,#fdfcff,#f7f9fe);scrollbar-width:thin;scrollbar-color:#d1cde5 transparent}
+      .topology-viewport:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+      .node-circle{fill:url(#node-top);stroke:#aebad3}.node-circle.controller{fill:url(#controller-top)}.node-circle.host{fill:#f5f7fb}.node-circle.active{fill:#e4e1ff}.node-sublabel{fill:#637089}.link-weight{fill:#68758c;paint-order:stroke;stroke:#f7f9fe;stroke-width:4px;stroke-linejoin:round}
+      .control-link{stroke:#b0a7d4;stroke-dasharray:3 6;opacity:.55}.link-base{stroke:#b8c3d7;stroke-width:2}.link-active,.link-recovery{stroke-width:3!important}
+      .link-flow{stroke:transparent;stroke-width:4;pointer-events:none;stroke-linecap:round;stroke-dasharray:3 24;opacity:0}.flow-primary{stroke:#a8a1ff;opacity:.95;animation:trafficDash 1.4s linear 8}.flow-backup{stroke:#8ae4bc;opacity:.95;animation:trafficDash 1.1s linear 8}
+      .link-hit{stroke:transparent;stroke-width:26;pointer-events:none;fill:none}.link-hit.enabled{pointer-events:stroke;cursor:pointer}.link-hit.enabled:hover{stroke:#d7001512}.link-hit:focus-visible{outline:none;stroke:#5856d62a;stroke-dasharray:5 5}
+      @keyframes trafficDash{to{stroke-dashoffset:-54}}
+      @media(max-width:640px){#topology-svg{min-width:640px}.topology-depth-key{font-size:9px}.topology-depth-key span:last-child{display:inline}.node-label{font-size:14px}.node-sublabel{font-size:11px}}
+      @media(prefers-reduced-motion:reduce){.link-flow{animation:none!important}}
     </style>
   </head>
 
@@ -889,7 +901,10 @@
             </svg>
             <span data-i18n="panel.topology">網路拓樸</span>
           </div>
-          <svg id="topology-svg" viewBox="0 0 880 600" preserveAspectRatio="xMidYMid meet"></svg>
+          <div class="topology-depth-key"><span data-i18n="topo.depth">控制層 ↑ · 資料層 ↓</span><span data-i18n="topo.pan">小螢幕可左右滑動拓樸</span></div>
+          <div class="topology-viewport" tabindex="0" role="region" aria-label="Network topology; scroll horizontally on small screens">
+            <svg id="topology-svg" viewBox="0 0 880 600" preserveAspectRatio="xMidYMid meet" role="group" aria-label="Layered SDN controller and SRv6 network topology"></svg>
+          </div>
           <div class="legend">
             <span><i style="background:#5856d6"></i><span data-i18n="legend.primary">主路徑</span></span>
             <span><i style="background:#d70015"></i><span data-i18n="legend.failure">故障</span></span>
@@ -1064,6 +1079,8 @@
           "panel.srh": "SRv6 封包",
           "panel.console": "恢復演算法",
           "panel.log": "事件日誌",
+          "topo.depth": "控制層 ↑ · 資料層 ↓",
+          "topo.pan": "小螢幕可左右滑動拓樸",
           "legend.primary": "主路徑",
           "legend.failure": "故障",
           "legend.backup": "備援",
@@ -1131,6 +1148,8 @@
           "panel.srh": "SRv6 Packet",
           "panel.console": "Recovery Algorithm",
           "panel.log": "Event Log",
+          "topo.depth": "Control plane ↑ · Data plane ↓",
+          "topo.pan": "Swipe the topology on small screens",
           "legend.primary": "Primary",
           "legend.failure": "Failed",
           "legend.backup": "Backup",
@@ -1382,11 +1401,21 @@
       }
 
       let linkElements = {};
+      let flowElements = {};
+      let hitElements = {};
       let pkt, pktText, failureMark, alertSignal;
 
       function buildTopology() {
         while (svg.firstChild) svg.removeChild(svg.firstChild);
         linkElements = {};
+        flowElements = {};
+        hitElements = {};
+        const defs = el("defs");
+        defs.innerHTML = `<linearGradient id="node-top" x2="0.8" y2="1"><stop stop-color="#ffffff"/><stop offset="1" stop-color="#e9edf9"/></linearGradient><linearGradient id="node-side" x2="0" y2="1"><stop stop-color="#c6cfe6"/><stop offset="1" stop-color="#a0afd0"/></linearGradient><linearGradient id="controller-top" x2="1" y2="1"><stop stop-color="#faf9ff"/><stop offset="1" stop-color="#e4e0fc"/></linearGradient><pattern id="floor-grid" width="40" height="30" patternUnits="userSpaceOnUse"><path d="M40 0H0V30" fill="none" stroke="#dce2ef" stroke-width="0.6"/></pattern>`;
+        svg.appendChild(defs);
+        svg.appendChild(el("path", { d: "M25 160 L735 110 L865 485 L170 585 Z", fill: "#f5f7fc", stroke: "#e9edf6", "stroke-width": 1, "pointer-events": "none" }));
+        svg.appendChild(el("path", { d: "M25 160 L735 110 L865 485 L170 585 Z", fill: "url(#floor-grid)", opacity: 0.65, "pointer-events": "none" }));
+        svg.appendChild(el("ellipse", { cx: 440, cy: 92, rx: 105, ry: 13, fill: "#dcd8ef", opacity: 0.35, "pointer-events": "none" }));
         const N = nodes(), L = links();
         Object.keys(N).forEach((id) => {
           if (N[id].type !== "router") return;
@@ -1400,6 +1429,14 @@
           ln.addEventListener("click", () => onLinkClick(lk.id));
           svg.appendChild(ln);
           linkElements[lk.id] = ln;
+          const flow = el("line", { x1: a.x, y1: a.y, x2: b.x, y2: b.y, class: "link-flow", "aria-hidden": "true" });
+          svg.appendChild(flow);
+          flowElements[lk.id] = flow;
+          const hit = el("line", { x1: a.x, y1: a.y, x2: b.x, y2: b.y, class: "link-hit", role: "button", tabindex: -1, "aria-disabled": "true", "aria-label": `Break link ${a.label} to ${b.label}` });
+          hit.addEventListener("click", () => onLinkClick(lk.id));
+          hit.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onLinkClick(lk.id); } });
+          svg.appendChild(hit);
+          hitElements[lk.id] = hit;
           if (!lk.hideWeight) {
             const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2 - 6;
             svg.appendChild(el("text", { x: mx, y: my, class: "link-weight" }, `${lk.w}`));
@@ -1419,18 +1456,23 @@
       }
       function drawNode(id, n) {
         const g = el("g", { id: "node-" + id, transform: `translate(${n.x},${n.y})` });
+        g.appendChild(el("title", {}, `${n.label} · ${n.sub}`));
         if (n.type === "controller") {
+          g.appendChild(el("rect", { x: -82, y: -10, width: 164, height: 44, rx: 10, fill: "#b6abd8", stroke: "#a79aca", "pointer-events": "none" }));
           g.appendChild(el("rect", { x: -82, y: -22, width: 164, height: 44, rx: 10, class: "node-circle controller" }));
           g.appendChild(el("text", { y: -2, class: "node-label", fill: "var(--accent)" }, n.label));
           g.appendChild(el("text", { y: 13, class: "node-sublabel" }, n.sub));
         } else if (n.type === "host") {
+          g.appendChild(el("rect", { x: -22, y: -8, width: 44, height: 32, rx: 6, fill: "#bdc7d9", "pointer-events": "none" }));
           g.appendChild(el("rect", { x: -22, y: -16, width: 44, height: 32, rx: 6, class: "node-circle host" }));
           g.appendChild(el("text", { y: 3, class: "node-label" }, n.label));
           g.appendChild(el("text", { y: 30, class: "node-sublabel" }, n.sub));
         } else {
-          g.appendChild(el("circle", { r: 22, class: "node-circle" }));
+          g.appendChild(el("ellipse", { cx: 3, cy: 24, rx: 31, ry: 9, fill: "#c6cfdf", opacity: 0.35, "pointer-events": "none" }));
+          g.appendChild(el("path", { d: "M-26 0 A26 17 0 0 0 26 0 V12 A26 17 0 0 1 -26 12 Z", fill: "url(#node-side)", stroke: "#9aaaca", "stroke-width": 1, "pointer-events": "none" }));
+          g.appendChild(el("ellipse", { rx: 26, ry: 17, class: "node-circle" }));
           g.appendChild(el("text", { y: 4, class: "node-label" }, n.label));
-          g.appendChild(el("text", { y: 38, class: "node-sublabel" }, n.sub));
+          g.appendChild(el("text", { y: 44, class: "node-sublabel" }, n.sub));
         }
         svg.appendChild(g);
       }
@@ -1478,6 +1520,7 @@
         const ln = linkElements[linkId]; if (!ln) return;
         ln.classList.remove("link-active", "link-broken", "link-recovery", "link-preview");
         if (cls) ln.classList.add(cls);
+        if (flowElements[linkId]) flowElements[linkId].setAttribute("class", "link-flow " + (cls === "link-active" ? "flow-primary" : cls === "link-recovery" || cls === "link-preview" ? "flow-backup" : ""));
       }
       function highlightPath(hops, cls) {
         for (let i = 0; i < hops.length - 1; i++) highlightLink(findLinkId(hops[i], hops[i + 1]), cls);
@@ -1495,6 +1538,8 @@
       function setLinkHover(enabled) {
         Object.entries(linkElements).forEach(([id, ln]) => {
           const lk = getLink(id);
+          const clickable = !!(enabled && lk && !lk.hideWeight && ln.classList.contains("link-active"));
+          if (hitElements[id]) { hitElements[id].setAttribute("tabindex", clickable ? "0" : "-1"); hitElements[id].setAttribute("aria-disabled", String(!clickable)); hitElements[id].classList.toggle("enabled", clickable); }
           if (!lk || lk.hideWeight) { ln.classList.remove("link-clickable"); return; }
           if (enabled && ln.classList.contains("link-active")) ln.classList.add("link-clickable");
           else ln.classList.remove("link-clickable");
@@ -1688,6 +1733,7 @@
         state.current = snap.currentNode;
 
         // Reset link styles
+        Object.values(flowElements).forEach(flow => flow.setAttribute("class", "link-flow"));
         Object.values(linkElements).forEach((ln) =>
           ln.classList.remove("link-active", "link-broken", "link-recovery", "link-preview", "link-clickable", "scanning"),
         );
@@ -1754,6 +1800,7 @@
         };
         setPhaseLabel(GB("phase.idle"));
         hidePacket(); setPacketLost(false); setPacketLabel("");
+        Object.values(flowElements).forEach(flow => flow.setAttribute("class", "link-flow"));
         Object.values(linkElements).forEach((ln) =>
           ln.classList.remove("link-active", "link-broken", "link-recovery", "link-preview", "link-clickable", "scanning"),
         );
@@ -2180,6 +2227,7 @@
         state.segments = newSegs; state.sl = newSegs.length;
         renderSegmentList(); updateSrhView();
 
+        Object.values(flowElements).forEach(flow => flow.setAttribute("class", "link-flow"));
         Object.values(linkElements).forEach((ln) => {
           if (ln.id !== state.brokenLinkId) ln.classList.remove("link-active", "link-recovery");
         });

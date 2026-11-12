@@ -10,11 +10,12 @@ export default function AcademicCard({ thesis, featuredLayout = false }) {
 
   // Show only first highlight by default
   const MAX_VISIBLE_ITEMS = 1;
+  const previewHighlights = featuredLayout ? thesis.highlights.slice(2, 3) : thesis.highlights.slice(0, MAX_VISIBLE_ITEMS);
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(28,25,23,0.025)] hover:shadow-[0_6px_20px_rgba(28,25,23,0.06)] transition-all duration-300 border border-gray-200/80 group flex flex-col h-full">
+    <div className="surface-card overflow-hidden transition-shadow duration-200 group flex flex-col h-full">
       {/* Banner Image */}
-      <div className={`relative ${featuredLayout ? "h-36" : "h-40"} bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100 overflow-hidden flex-shrink-0`}>
+      <div className={`relative aspect-[16/9] bg-stone-50 overflow-hidden flex-shrink-0`}>
         {/* Loading Skeleton */}
         {imgLoading && !imgError && thesis.image && (
           <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-rose-100 to-pink-100">
@@ -30,7 +31,8 @@ export default function AcademicCard({ thesis, featuredLayout = false }) {
             src={thesis.image}
             alt={thesis.title}
             fill
-            className={`object-cover transition-all duration-500 group-hover:scale-105 ${imgLoading ? 'opacity-0' : 'opacity-100'}`}
+            sizes="(max-width: 767px) 100vw, 560px"
+            className={`object-cover transition-opacity duration-300 ${imgLoading ? 'opacity-0' : 'opacity-100'}`}
             onLoad={() => setImgLoading(false)}
             onError={() => {
               setImgError(true);
@@ -60,10 +62,10 @@ export default function AcademicCard({ thesis, featuredLayout = false }) {
       </div>
 
       {/* Content */}
-      <div className={`${featuredLayout ? "p-4" : "p-5"} flex flex-col flex-1`}>
+      <div className={`p-4 flex flex-col flex-1`}>
         <div className="flex-1">
           <div className="mb-2">
-            <h3 className={`${featuredLayout ? "min-h-10 text-sm leading-5" : "text-base"} font-semibold text-gray-800 group-hover:text-rose-500 transition-colors mb-1.5 line-clamp-2`}>
+            <h3 className={`min-h-10 text-sm leading-5 font-semibold text-gray-800 group-hover:text-rose-500 transition-colors mb-1.5 line-clamp-2`}>
               {thesis.title}
             </h3>
             {thesis.year && (
@@ -75,10 +77,10 @@ export default function AcademicCard({ thesis, featuredLayout = false }) {
 
           {/* Research Highlights with expand/collapse */}
           <ul className="text-gray-600 mb-3 space-y-2 list-none">
-            {(isExpanded ? thesis.highlights : thesis.highlights.slice(0, MAX_VISIBLE_ITEMS)).map((highlight, index) => (
-              <li key={index} className={`${featuredLayout ? "text-[13px]" : "text-sm"} leading-relaxed pl-4 relative`}>
+            {(isExpanded ? thesis.highlights : previewHighlights).map((highlight, index) => (
+              <li key={index} className={`${"text-sm"} leading-relaxed pl-4 relative`}>
                 <span className="text-rose-400 absolute left-0 top-1 text-xs">•</span>
-                <span className={isExpanded ? "block" : "line-clamp-3"}>{highlight}</span>
+                <span className={isExpanded ? "block" : "line-clamp-2"}>{highlight}</span>
               </li>
             ))}
           </ul>
@@ -106,8 +108,8 @@ export default function AcademicCard({ thesis, featuredLayout = false }) {
           )}
 
           {/* Tech Tags - Compact */}
-          <div className="flex flex-wrap gap-1 mb-4">
-            {(isExpanded ? thesis.tags : thesis.tags.slice(0, 4)).map((tag) => (
+          <div className="flex flex-wrap items-center gap-1 mb-3">
+            {(isExpanded ? thesis.tags : thesis.tags.slice(0, 3)).map((tag) => (
               <span
                 key={tag}
                 className="text-stone-600 text-[11px] px-2 py-1 bg-stone-100 rounded-md"
@@ -115,8 +117,8 @@ export default function AcademicCard({ thesis, featuredLayout = false }) {
                 {tag}
               </span>
             ))}
-            {!isExpanded && thesis.tags.length > 4 && (
-              <button type="button" onClick={() => setIsExpanded(true)} aria-label="Show all research details and technologies" className="inline-flex min-h-8 min-w-8 items-center justify-center rounded-md px-2 text-[11px] text-gray-500 hover:bg-stone-100 hover:text-rose-500">+{thesis.tags.length - 4}</button>
+            {!isExpanded && thesis.tags.length > 3 && (
+              <button type="button" onClick={() => setIsExpanded(true)} aria-label="Show all research details and technologies" className="inline-flex min-h-7 min-w-7 items-center justify-center rounded-md px-2 text-[11px] text-gray-500 hover:bg-stone-100 hover:text-rose-500">+{thesis.tags.length - 3}</button>
             )}
           </div>
         </div>
@@ -129,7 +131,7 @@ export default function AcademicCard({ thesis, featuredLayout = false }) {
               {...(thesis.links.demo.startsWith("/")
                 ? {}
                 : { target: "_blank", rel: "noopener noreferrer" })}
-              className="group/btn min-w-0 flex-1 whitespace-nowrap px-2 h-10 md:h-8 bg-rose-50 text-rose-600 rounded-lg text-xs font-medium hover:bg-rose-100/80 transition-all duration-200 flex items-center justify-center gap-1.5"
+              className="group/btn min-w-0 flex-1 whitespace-nowrap px-2 h-11 bg-rose-50 text-rose-600 rounded-lg text-xs font-medium hover:bg-rose-100/80 transition-all duration-200 flex items-center justify-center gap-1.5"
             >
               <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -138,14 +140,14 @@ export default function AcademicCard({ thesis, featuredLayout = false }) {
             </a>
           )}
           {thesis.links.publication && (
-            <a href={thesis.links.publication} target="_blank" rel="noopener noreferrer" className="inline-flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-stone-100 px-2 text-xs font-medium text-stone-600 transition-colors hover:bg-stone-200 md:h-8">Paper ↗</a>
+            <a href={thesis.links.publication} target="_blank" rel="noopener noreferrer" className="inline-flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-stone-100 px-2 text-xs font-medium text-stone-600 transition-colors hover:bg-stone-200 md:h-11">Paper ↗</a>
           )}
           {thesis.links.pdf && (
             <a
               href={thesis.links.pdf}
               target="_blank"
               rel="noopener noreferrer"
-              className="group/btn min-w-0 flex-1 whitespace-nowrap px-2 h-10 md:h-8 bg-rose-50 text-rose-600 rounded-lg text-xs font-medium hover:bg-rose-100/80 transition-all duration-200 flex items-center justify-center gap-1.5"
+              className="group/btn min-w-0 flex-1 whitespace-nowrap px-2 h-11 bg-rose-50 text-rose-600 rounded-lg text-xs font-medium hover:bg-rose-100/80 transition-all duration-200 flex items-center justify-center gap-1.5"
             >
               <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />

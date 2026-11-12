@@ -24,11 +24,13 @@ export default function BackToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-[calc(5rem+env(safe-area-inset-bottom))] md:bottom-6 right-6 z-40 w-11 h-11 md:w-10 md:h-10 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/60 shadow-lg flex items-center justify-center text-gray-500 hover:text-rose-500 hover:border-rose-200 hover:shadow-xl transition-all duration-300 ${
+      className={`fixed bottom-[calc(5rem+env(safe-area-inset-bottom))] md:bottom-6 right-4 md:right-6 z-40 w-11 h-11 md:w-10 md:h-10 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/60 shadow-sm flex items-center justify-center text-gray-500 hover:text-rose-500 hover:border-rose-200 hover:shadow-xl transition-all duration-300 ${
         isVisible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-4 pointer-events-none"
       }`}
+      tabIndex={isVisible ? 0 : -1}
+      aria-hidden={!isVisible}
       aria-label="Back to top"
     >
       <svg
