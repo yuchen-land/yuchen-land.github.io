@@ -1,37 +1,34 @@
 import "./globals.css";
+import localFont from "next/font/local";
 import { createPageMetadata, siteDescriptions } from "@/data/siteMetadata";
 import { Suspense } from "react";
-import { Nunito } from "next/font/google";
-import { Caveat } from "next/font/google";
-import { Comfortaa } from "next/font/google";
-import { Outfit } from "next/font/google";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import BackToTop from "@/components/BackToTop";
 import TopProgressBar from "@/components/TopProgressBar";
 
-const nunito = Nunito({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+const nunito = localFont({
+  src: "./fonts/nunito-latin.woff2",
+  weight: "300 700",
   display: "swap",
 });
 
-const caveat = Caveat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+const caveat = localFont({
+  src: "./fonts/caveat-latin.woff2",
+  weight: "300 700",
   display: "swap",
   variable: "--font-caveat",
 });
 
-const comfortaa = Comfortaa({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+const comfortaa = localFont({
+  src: "./fonts/comfortaa-latin.woff2",
+  weight: "300 700",
   display: "swap",
   variable: "--font-comfortaa",
 });
 
-const outfit = Outfit({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+const outfit = localFont({
+  src: "./fonts/outfit-latin.woff2",
+  weight: "300 700",
   display: "swap",
   variable: "--font-outfit",
 });
