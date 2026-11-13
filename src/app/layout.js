@@ -1,5 +1,6 @@
 import "./globals.css";
 import localFont from "next/font/local";
+import Script from "next/script";
 import { createPageMetadata, siteDescriptions } from "@/data/siteMetadata";
 import { Suspense } from "react";
 import MobileBottomNav from "@/components/MobileBottomNav";
@@ -52,6 +53,13 @@ export default function RootLayout({ children }) {
         {children}
         <BackToTop />
         <MobileBottomNav />
+        <Script
+          id="cloudflare-web-analytics"
+          type="module"
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: "93447695dfe34e6188126ff67afe0fc8" })}
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
