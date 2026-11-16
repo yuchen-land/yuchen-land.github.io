@@ -34,6 +34,13 @@ const outfit = localFont({
   variable: "--font-outfit",
 });
 
+const fraunces = localFont({
+  src: "./fonts/fraunces-latin.woff2",
+  weight: "300 700",
+  display: "swap",
+  variable: "--font-display",
+});
+
 export const metadata = {
   ...createPageMetadata({ description: siteDescriptions.home, path: "/" }),
   metadataBase: new URL("https://yuchen-land.github.io"),
@@ -46,7 +53,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${nunito.className} ${caveat.variable} ${comfortaa.variable} ${outfit.variable} pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0`} suppressHydrationWarning>
+      <body className={`${nunito.className} ${caveat.variable} ${comfortaa.variable} ${outfit.variable} ${fraunces.variable} pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0`} suppressHydrationWarning>
         <Suspense fallback={null}>
           <TopProgressBar />
         </Suspense>

@@ -300,8 +300,8 @@ body { -webkit-font-smoothing: antialiased; }
 @layer components {
   .site-surface { background: radial-gradient(ellipse 85% 440px at 50% 0%, #fff1f4 0%, #faf9f8 100%); color: #292524; }
   .page-shell { width: 100%; margin-inline: auto; padding: 5.75rem 1.25rem 2.5rem; }
-  .surface-card { border: 1px solid #e7e3e5; border-radius: 1rem; background: #fff; box-shadow: 0 2px 8px #38263304; }
-  .section-label { font-size: .625rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #be647e; }
+  .surface-card { border: 1px solid #e7e3e5; border-radius: .5rem; background: #fff; box-shadow: 0 2px 8px #38263304; }
+  .section-label { font-size: .6875rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #be647e; }
 }
 @media(min-width:640px){.page-shell{padding-inline:1.5rem}}
 @media(min-width:768px){.page-shell{padding-top:6.5rem;padding-bottom:3.5rem}}
@@ -329,3 +329,6 @@ html::-webkit-scrollbar-button { display: none; }
   .portfolio-filter-row { scroll-snap-type: x proximity; }
   .portfolio-filter-button { flex: 0 0 calc((100% - 12px) / 3.5); scroll-snap-align: start; }
 }
+
+/* Editorial display type: serif headings, used on the portfolio and project pages. */
+.font-display { font-family: var(--font-display), "Iowan Old Style", Georgia, serif; font-weight: 400; font-optical-sizing: auto; letter-spacing: -.015em; }

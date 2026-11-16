@@ -57,14 +57,13 @@ export default function Home() {
       <div className="page-shell relative z-10 flex min-h-screen flex-col items-center">
         <section aria-labelledby="home-title" className="mb-10 grid w-full max-w-5xl items-center gap-6 md:mb-14 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-12 lg:py-6">
           <div className="text-center lg:text-left">
-            <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.18em] text-rose-500">Software engineer · Creative thinker</p>
-            <h1 id="home-title" className="text-3xl font-semibold leading-tight tracking-tight text-stone-800 sm:text-4xl lg:text-[2.75rem]">{personalInfo.name}</h1>
-            <p className="mx-auto mt-5 max-w-lg text-sm leading-7 text-stone-500 lg:mx-0 md:text-base md:leading-8">I build AI products and reliable production systems. From creative tools at CyberLink to the brand I run, I turn ideas into useful, thoughtful experiences.</p>
+            <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.18em] text-rose-600">AI-Native Software Engineer</p>
+            <h1 id="home-title" className="font-display text-4xl leading-[1.1] text-stone-900 sm:text-5xl lg:text-[3.25rem]">{personalInfo.name}</h1>
+            <p className="mx-auto mt-5 max-w-lg text-[15px] leading-7 text-stone-600 lg:mx-0 md:text-base md:leading-8">I build AI products and reliable production systems. From creative tools used by 10M+ creators at CyberLink to the brand I run, I turn ideas into useful, thoughtful experiences.</p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
               <Link href="/portfolio" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-rose-500 px-5 text-sm font-medium text-white transition-colors hover:bg-rose-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-400">View projects <span aria-hidden="true">→</span></Link>
-              <Link href="/about" className="inline-flex min-h-11 items-center rounded-full px-4 text-sm text-stone-600 transition-colors hover:bg-white hover:text-rose-600">About me</Link>
+              <a href="/YuChen_Liu_Resume.pdf" download="YuChen_Liu_Resume.pdf" className="inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-sm text-stone-600 transition-colors hover:bg-white hover:text-rose-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose-400">Download resume <span aria-hidden="true">↓</span></a>
             </div>
-            <a href="/YuChen_Liu_Resume.pdf" download="YuChen_Liu_Resume.pdf" className="mt-3 inline-flex min-h-11 items-center gap-2 text-xs text-stone-500 transition-colors hover:text-rose-600">Download resume <span aria-hidden="true">↓</span></a>
           </div>
           <HeroOrbit />
         </section>
@@ -72,10 +71,10 @@ export default function Home() {
         {/* Featured Projects */}
         <div className="w-full max-w-5xl animate-fade-in mb-12 md:mb-16">
           <div className="text-center mb-6 md:mb-8">
-            <p className="text-sm font-medium text-rose-500/80 tracking-widest uppercase mb-3">
+            <p className="section-label mb-3">
               Featured
             </p>
-            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2">
+            <h2 className="font-display text-2xl md:text-3xl text-stone-900 mb-2">
               Selected Projects
             </h2>
             <p className="text-gray-500 text-sm max-w-lg mx-auto">
@@ -90,6 +89,7 @@ export default function Home() {
                 title: "MyEdit & MyEdit Business",
                 role: "Product Engineering",
                 summary: "Building AI image, audio, and video experiences for individual creators and business teams at CyberLink.",
+                outcome: "10M+ creators · reporting effort cut by 86%",
                 image: projects.find((project) => project.id === 1).image,
                 tags: ["React", "Node.js", "UI/UX"],
                 links: [
@@ -102,6 +102,7 @@ export default function Home() {
                 title: "Holly World — Costume Rental Platform",
                 role: "Platform Engineering",
                 summary: "A five-language rental platform built and operated with AI agents, automated release checks, and resilient catalog delivery.",
+                outcome: "Solo build · live in production",
                 image: projects.find((project) => project.id === 10).image,
                 tags: ["Next.js", "TypeScript", "PostgreSQL"],
                 links: [
@@ -114,6 +115,7 @@ export default function Home() {
                 title: "SRv6 PROA Dashboard",
                 role: "Research & Visualization",
                 summary: "Turning networking research into an interactive exploration of adaptive routing, topology, and SRv6 paths.",
+                outcome: "Published at ACIIDS 2026",
                 image: thesis.image,
                 tags: ["SRv6", "SDN", "Visualization"],
                 links: [{ label: "Explore Dashboard", href: "/srv6-proa" }],
@@ -133,18 +135,21 @@ export default function Home() {
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-5">
-                  <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-rose-500">
+                  <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-rose-600">
                     {project.role}
                   </p>
-                  <h3 className="mb-2 min-h-[2.75rem] text-base font-semibold leading-snug text-gray-900">
+                  <h3 className="font-display mb-2 min-h-[2.75rem] text-lg leading-snug text-stone-900">
                     {project.title}
                   </h3>
-                  <p className="mb-5 text-[13px] leading-6 text-stone-600">
+                  <p className="mb-2 text-[13px] leading-6 text-stone-600">
                     {project.summary}
+                  </p>
+                  <p className="mb-5 text-xs leading-5 text-stone-500">
+                    {project.outcome}
                   </p>
                   <div className="mb-5 mt-auto flex flex-wrap gap-1.5">
                     {project.tags.map((tag) => (
-                      <span key={tag} className="rounded-md bg-rose-50 px-2 py-1 text-[10px] font-medium text-rose-500">
+                      <span key={tag} className="rounded-md bg-rose-50 px-2 py-1 text-[11px] font-medium text-rose-600">
                         {tag}
                       </span>
                     ))}
@@ -184,11 +189,17 @@ export default function Home() {
         </div>
 
         {/* Footer - Minimal */}
-        <div className="mt-auto pt-8 pb-4">
-          <p className="text-center text-stone-500 text-xs tracking-wide">
-            © 2026 Yu-Chen (Cindy) Liu
+        <footer className="mt-auto flex w-full max-w-5xl flex-col items-center gap-3 border-t border-stone-200/70 pt-6 pb-4 md:flex-row md:justify-between">
+          <p className="text-xs tracking-wide text-stone-600">
+            © 2026 Yu-Chen (Cindy) Liu · Taipei, Taiwan
           </p>
-        </div>
+          <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-xs text-stone-600">
+            <li><a href={`mailto:${personalInfo.email}`} className="inline-flex min-h-11 items-center hover:text-rose-600">Email</a></li>
+            <li><a href="https://github.com/yuchen-land" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center hover:text-rose-600">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/yuchenliu0401/" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center hover:text-rose-600">LinkedIn</a></li>
+            <li><a href="/YuChen_Liu_Resume.pdf" download="YuChen_Liu_Resume.pdf" className="inline-flex min-h-11 items-center hover:text-rose-600">Resume</a></li>
+          </ul>
+        </footer>
       </div>
     </div>
   );

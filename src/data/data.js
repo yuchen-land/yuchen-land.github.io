@@ -290,7 +290,7 @@ export const projects = [
       "Built Google Analytics and external-data BI pipelines, **reducing reporting effort by 86%** for weekly leadership insights.",
       "Earned perfect cross-functional collaboration scores in **2 consecutive review cycles** across Product, Design, SEO, QA, and Engineering."
     ],
-    image: `/images/projects/myedit.jpg`,
+    image: "/images/screenshots/myedit-home-20261112.webp",
     tags: ["React", "Node.js", "JavaScript"],
     type: "frontend",
     demo: "https://myedit.online/en",
@@ -442,7 +442,7 @@ export const projects = [
       "Integrated Google Analytics and multi-source data to optimize SEO and the business landing experience, improving marketing insight and reducing data discrepancies.",
       "Orchestrated cross-functional collaboration across RD, SEO, PM, QA, and design teams to ensure precise feature delivery.",
     ],
-    image: `/images/projects/myedit_biz.jpg`,
+    image: "/images/screenshots/myedit-business-home-20261112.webp",
     tags: ["React", "Node.js", "JavaScript"],
     type: "frontend",
     demo: "https://business.myedit.online/",

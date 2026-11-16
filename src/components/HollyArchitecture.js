@@ -88,7 +88,7 @@ export default function HollyArchitecture() {
     <section id="architecture" className="mb-20 scroll-mt-24">
       <div className="mb-6">
         <p className="mb-2 text-xs font-medium uppercase tracking-widest text-rose-500">System design</p>
-        <h2 className="text-xl font-semibold text-gray-900">Architecture</h2>
+        <h2 className="font-display text-2xl text-stone-900">Architecture</h2>
         <p className="mt-3 text-sm leading-relaxed text-gray-500">A multilingual storefront with independent media delivery, resilient catalog reads, and a verified release workflow.</p>
       </div>
       <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white/70 shadow-sm">

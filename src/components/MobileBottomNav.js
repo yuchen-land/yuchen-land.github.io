@@ -44,7 +44,7 @@ export default function MobileBottomNav() {
               ? pathname.startsWith("/portfolio") || pathname.startsWith("/projects/") || pathname.startsWith("/srv6-proa")
               : pathname.startsWith(item.href));
           return (
-            <Link key={item.href} href={item.href} download={item.download} aria-label={item.download ? "Download resume" : item.label} aria-current={active ? "page" : undefined} className={`flex flex-col items-center justify-center gap-1 text-[10px] font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-rose-400 ${active ? "text-rose-500" : "text-stone-500 hover:text-rose-500"}`}>
+            <Link key={item.href} href={item.href} download={item.download} aria-label={item.download ? "Download resume" : item.label} aria-current={active ? "page" : undefined} className={`flex flex-col items-center justify-center gap-1 text-[11px] font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-rose-400 ${active ? "text-rose-500" : "text-stone-600 hover:text-rose-500"}`}>
               <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={active ? 1.9 : 1.6} strokeLinecap="round" strokeLinejoin="round">
                 <path d={item.path} />
               </svg>

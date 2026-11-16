@@ -97,7 +97,7 @@ export default function SerialPortDemo() {
   }, [step, running]);
 
   return <section id="interactive-demo" className={`${styles.section} mb-16 scroll-mt-24`}>
-    <div className={styles.intro}><div><p className={styles.eyebrow}>FROM COMMAND TO CONNECTION</p><h2>Inside the serial test bench</h2></div><span className={styles.demoBadge}>Interactive simulation</span></div>
+    <div className={styles.intro}><div><p className={styles.eyebrow}>FROM COMMAND TO CONNECTION</p><h2 className="font-display">Inside the serial test bench</h2></div><span className={styles.demoBadge}>Interactive simulation</span></div>
     <p className={styles.description}>Configure a connection and watch the test move from port setup to a finished report.</p>
     <div className={styles.bench}>
       <div className={styles.benchHeader}><span><i /> SERIAL LAB / 01</span><span>{running ? "TEST IN PROGRESS" : complete ? "TEST COMPLETE" : "READY TO CONNECT"}</span></div>

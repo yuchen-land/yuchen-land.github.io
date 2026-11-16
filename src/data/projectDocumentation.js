@@ -55,8 +55,8 @@ export const projectDocumentation = {
     title: "Linux Serial Port Burning Test Tool",
     slug: "linux-serial-port",
     screenshots: [
-      { src: "/images/projects/moxa_ui.png", alt: "Command-line interface", caption: "Figure 1 — Command-line interface for configuring ports and running tests" },
-      { src: "/images/projects/moxa_exec_arch.png", alt: "Execution architecture", caption: "Figure 2 — Execution architecture" },
+      { src: "/images/projects/moxa_exec_arch_v2.png", alt: "Execution architecture: a Python tool with argument parsing, external commands, serial port control and data transfer, running on x86 and ARM Debian Linux and driving two MOXA computers over RS-232, RS-485-2W and RS-485-4W/RS-422 cables", caption: "Execution architecture — from CLI arguments to the output file, across x86 and ARM" },
+      { src: "/images/projects/moxa_ui.png", alt: "Command-line interface", caption: "Command-line interface for configuring ports and running tests" },
       { src: "/images/projects/moxa_software_arch.png", alt: "Software architecture", caption: "Figure 3 — Software architecture (modular design)" },
       { src: "/images/projects/moxa_class_diagram.png", alt: "Class diagram", caption: "Figure 4 — Class diagram" },
     ],
@@ -342,6 +342,8 @@ export const projectDocumentation = {
     slug: "holly-world-ecommerce",
     screenshots: [
       { src: "/images/projects/hollyworld2.png", alt: "Holly World costume rental website", caption: "Costume discovery, themed collections, and LINE rental inquiries" },
+      { src: "/images/screenshots/holly-home-20261112.webp", alt: "Holly World homepage", caption: "Homepage — seasonal collections and costume discovery" },
+      { src: "/images/screenshots/holly-catalog-20261112.webp", alt: "Holly World catalog page", caption: "Catalog — category navigation and product browsing" },
       { src: "/images/screenshots/holly-admin-redacted.webp", alt: "Holly World product administration dashboard with price and stock values redacted", caption: "Product catalog administration — prices and stock obscured for public display" },
     ],
     star: {

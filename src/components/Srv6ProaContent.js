@@ -58,7 +58,7 @@ export default function Srv6ProaContent() {
         <header className="mb-6 flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div className="max-w-2xl">
             <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-indigo-500">Research / Interactive experience</p>
-            <h1 className="text-2xl font-semibold tracking-tight text-gray-900 md:text-3xl">SRv6 PROA Dashboard</h1>
+            <h1 className="font-display text-3xl text-stone-900 md:text-4xl">SRv6 PROA Dashboard</h1>
             <p className="mt-3 text-sm leading-6 text-gray-500">Explore how adaptive routing responds to a broken network link. Follow a packet, trigger a failure, and compare PROA with traditional routing algorithms.</p>
           </div>
           <a href={DEMO_SRC} target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 self-start items-center gap-2 rounded-lg border border-indigo-200 bg-white px-4 py-2.5 text-xs font-medium text-indigo-600 transition-colors hover:bg-indigo-50">Open standalone demo <span aria-hidden="true">↗</span></a>

@@ -13,7 +13,7 @@ export default function AssemblerContent() {
   return (
     <section id="assembler-design" className="mb-12 scroll-mt-24">
       <p className="mb-2 text-xs font-medium uppercase tracking-widest text-rose-500">Inside the assembler</p>
-      <h2 className="mb-4 text-xl font-semibold text-gray-900">From source text to object records</h2>
+      <h2 className="font-display mb-4 text-2xl text-stone-900">From source text to object records</h2>
       <p className="mb-6 text-sm leading-7 text-gray-600">A C implementation for the educational SIC/XE architecture. Two passes separate address assignment from instruction encoding, allowing later-defined symbols to be resolved through an intermediate file and symbol table.</p>
       <div className="mb-8 grid gap-3 sm:grid-cols-2">
         {stages.map(([step, title, text]) => <article key={step} className="rounded-2xl border border-gray-200/70 bg-white/70 p-5"><p className="text-xs font-medium tracking-wide text-rose-500">{step}</p><h3 className="mb-2 mt-3 text-base font-medium text-gray-900">{title}</h3><p className="text-sm leading-6 text-gray-600">{text}</p></article>)}

@@ -9,7 +9,7 @@ export default function ClchemyContent() {
   return (
     <section id="game-design" className="mb-12 scroll-mt-24">
       <p className="mb-2 text-xs font-medium uppercase tracking-widest text-rose-500">From tabletop to code</p>
-      <h2 className="mb-4 text-xl font-semibold text-gray-900">Learning through shared play</h2>
+      <h2 className="font-display mb-4 text-2xl text-stone-900">Learning through shared play</h2>
       <p className="mb-6 text-sm leading-7 text-gray-600">Clchemy places introductory programming inside an alchemy adventure. The physical board creates face-to-face interaction; the app handles questions, timing and feedback. C++ is the learning subject, while Unity and C# power the application.</p>
       <div className="mb-8 grid gap-3 sm:grid-cols-2">
         {loop.map(([number, title, text]) => (

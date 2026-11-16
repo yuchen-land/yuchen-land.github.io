@@ -38,3 +38,7 @@ next-env.d.ts
 # next-image-export-optimizer (auto-generated optimized images)
 **/nextImageExportOptimizer/
 public/images/next-image-export-optimizer-hashes.json
+
+# local assistant files (never publish)
+/.claude/
+/Claude outputs/

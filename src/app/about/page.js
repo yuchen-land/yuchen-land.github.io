@@ -33,14 +33,14 @@ function WebsiteScreenshots({ chapter }) {
 }
 
 const approaches = [
-  ["Start with the user", "I look at the whole journey: what someone needs, where a workflow gets difficult, and how the interface can make the next step clear."],
-  ["Build for the real world", "Implementation is one part of delivery. I also work on automated checks, deployment verification, and recovery when something goes wrong."],
-  ["Work across disciplines", "I collaborate with product, design, marketing, and QE teams to connect technical decisions with the people using the product."],
+  ["Start with the user", "I look at the whole journey and make the next step clear."],
+  ["Build for the real world", "Beyond implementation: automated checks, deployment verification, and recovery."],
+  ["Work across disciplines", "I connect technical decisions with product, design, marketing, and QE."],
 ];
 const chapters = [
-  { number: "01", label: "PRODUCT ENGINEERING · CYBERLINK", title: "Making creative tools useful.", body: "At CyberLink, I work on MyEdit and MyEdit Business, bringing AI image, audio, and video tools into usable product experiences. My work spans editing interfaces, subscription and purchase workflows, API integration, and analytics.", detail: "I also coordinate AT work across the two products with Engineering and QE, alongside my work on AI-assisted testing and reporting automation.", tags: ["React", "API integration", "Cross-team delivery"], href: "https://myedit.online/en", link: "Explore MyEdit" },
-  { number: "02", label: "INDEPENDENT BUILDING · HOLLY WORLD", title: "Owning what happens after launch.", body: "Building and operating Holly World brings me closer to the full life of a product: a multilingual catalog, day-to-day operations, search visibility, and reliable releases.", detail: "It is where I put AI-assisted development into practice, with project rules, automated validation, deployment checks, and rollback.", tags: ["Product ownership", "AI-assisted development", "Operations"], href: "/projects/holly-world-ecommerce", link: "Inside Holly World" },
-  { number: "03", label: "RESEARCH · SDN & SRv6", title: "Understanding how systems recover.", body: "My research explored adaptive path selection in SDN-based SRv6 networks. It gave me a way to think about resilience: how a system responds when its expected path is no longer available.", detail: "I turned that research into an interactive dashboard, so the routing and recovery process can be explored rather than only read about.", tags: ["Network resilience", "Research", "Visualization"], href: "/srv6-proa", link: "Try the routing demo" },
+  { number: "01", label: "PRODUCT ENGINEERING · CYBERLINK", title: "Making creative tools useful.", body: "At CyberLink, I work on MyEdit and MyEdit Business, bringing AI image, audio, and video tools into usable product experiences. My work spans editing interfaces, subscription and purchase workflows, API integration, and analytics.", detail: "I also coordinate AT work across the two products with Engineering and QE, alongside my work on AI-assisted testing and reporting automation.", facts: [["10M+", "creators on the products"], ["6 → 1 mo", "delivery with AI-assisted testing"], ["86%", "less reporting effort"]], tags: ["React", "API integration", "Cross-team delivery"], href: "https://myedit.online/en", link: "Explore MyEdit" },
+  { number: "02", label: "INDEPENDENT BUILDING · HOLLY WORLD", title: "Owning what happens after launch.", body: "Building and operating Holly World brings me closer to the full life of a product: a multilingual catalog, day-to-day operations, search visibility, and reliable releases.", detail: "It is where I put AI-assisted development into practice, with project rules, automated validation, deployment checks, and rollback.", facts: [["5", "languages"], ["7", "CI validators"], ["12×", "search clicks in 28 days"]], tags: ["Product ownership", "AI-assisted development", "Operations"], href: "/projects/holly-world-ecommerce", link: "Inside Holly World" },
+  { number: "03", label: "RESEARCH · SDN & SRv6", title: "Understanding how systems recover.", body: "My research explored adaptive path selection in SDN-based SRv6 networks. It gave me a way to think about resilience: how a system responds when its expected path is no longer available.", detail: "I turned that research into an interactive dashboard, so the routing and recovery process can be explored rather than only read about.", facts: [["PROA", "adaptive path selection"], ["ACIIDS 2026", "published paper"], ["Live demo", "interactive dashboard"]], tags: ["Network resilience", "Research", "Visualization"], href: "/srv6-proa", link: "Try the routing demo" },
 ];
 
 export default function AboutPage() {
@@ -50,7 +50,7 @@ export default function AboutPage() {
       <header className={styles.header}>
         <div>
           <p className="section-label mb-4">A little about me</p>
-          <h1 className={styles.title}>Hi, I’m Cindy.</h1>
+          <h1 className={`font-display ${styles.title}`}>Hi, I’m Cindy.</h1>
           <p className="mt-4 max-w-xl text-base leading-8 text-stone-600">I’m a software engineer who enjoys turning complicated ideas into things people can use.</p>
           <p className="mt-3 max-w-xl text-sm leading-7 text-stone-500">I build AI products at CyberLink, run Holly World, and explore resilient networks through research. Across these different settings, I care about how things work — and how they feel to the people using them.</p>
           <p className="mt-5 text-xs leading-6 text-stone-500">Taipei, Taiwan · Open to opportunities in Taiwan &amp; remote</p>
@@ -77,7 +77,7 @@ export default function AboutPage() {
 
       <section aria-labelledby="approach-title" className="py-8 md:py-12">
         <p className="section-label mb-2">My approach</p>
-        <h2 id="approach-title" className="text-xl font-semibold tracking-tight text-stone-800">How I work</h2>
+        <h2 id="approach-title" className="font-display text-2xl text-stone-800">How I work</h2>
         <div className={styles.approaches}>
           {approaches.map(([title, body], index) => <div key={title} className={styles.approach}>
             <span className="text-[10px] tabular-nums text-rose-400">0{index + 1}</span>
@@ -89,17 +89,33 @@ export default function AboutPage() {
 
       <section aria-labelledby="chapters-title" className="border-t border-stone-200/80 pt-8 md:pt-12">
         <p className="section-label mb-2">Different settings, shared curiosity</p>
-        <h2 id="chapters-title" className="text-xl font-semibold tracking-tight text-stone-800">Three threads in my work</h2>
+        <h2 id="chapters-title" className="font-display text-2xl text-stone-800">Three threads in my work</h2>
         {chapters.map(chapter => <article key={chapter.number} className={styles.chapter}>
           <div className={styles.chapterLabel}><span>{chapter.number}</span><p>{chapter.label}</p></div>
           <div className="min-w-0">
-            <h3 className="text-lg font-semibold tracking-tight text-stone-800">{chapter.title}</h3>
-            <p className="mt-3 text-sm leading-7 text-stone-600">{chapter.number === "01" ? chapter.body.split(/(MyEdit Business|MyEdit)/g).map((part, index) => {
-              const href = part === "MyEdit" ? "https://myedit.online/en" : part === "MyEdit Business" ? "https://business.myedit.online/" : null;
-              return href ? <a key={index} href={href} target="_blank" rel="noopener noreferrer" className="font-medium text-rose-600 underline decoration-rose-200 underline-offset-4 transition-colors hover:text-rose-700 hover:decoration-rose-400">{part}</a> : part;
-            }) : chapter.body}</p>
-            <p className="mt-3 text-sm leading-7 text-stone-500">{chapter.detail}</p>
-            <p className="mt-4 text-xs leading-6 text-stone-500">{chapter.tags.join(" · ")}</p>
+            <h3 className="font-display text-xl text-stone-800">{chapter.title}</h3>
+            {(() => {
+              const [lead, ...rest] = chapter.body.split(/(?<=[.!?])\s+/);
+              const linkify = (text) => chapter.number === "01" ? text.split(/(MyEdit Business|MyEdit)/g).map((part, index) => {
+                const href = part === "MyEdit" ? "https://myedit.online/en" : part === "MyEdit Business" ? "https://business.myedit.online/" : null;
+                return href ? <a key={index} href={href} target="_blank" rel="noopener noreferrer" className="font-medium text-rose-600 underline decoration-rose-200 underline-offset-4 transition-colors hover:text-rose-700 hover:decoration-rose-400">{part}</a> : part;
+              }) : text;
+              return <>
+                <p className="mt-3 text-sm leading-7 text-stone-600">{linkify(lead)}</p>
+                <dl className="mt-4 grid divide-y divide-stone-200/80 border-y border-stone-200/80 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+                  {chapter.facts.map(([figure, label]) => <div key={label} className="flex flex-row-reverse items-baseline justify-end gap-4 py-3 sm:flex-col-reverse sm:items-stretch sm:gap-1 sm:px-4 sm:py-3.5 sm:first:pl-0">
+                    <dt className="text-[11px] leading-5 text-stone-500">{label}</dt>
+                    <dd className="w-28 shrink-0 text-base font-semibold tracking-tight text-stone-800 sm:w-auto sm:text-lg">{figure}</dd>
+                  </div>)}
+                </dl>
+                <details className="group mt-1">
+                  <summary className="inline-flex min-h-10 cursor-pointer list-none items-center gap-2 text-xs font-medium text-stone-500 transition-colors hover:text-rose-600 [&::-webkit-details-marker]:hidden">More detail <span aria-hidden="true" className="transition-transform group-open:rotate-180">⌄</span></summary>
+                  {rest.length > 0 && <p className="mt-1 text-sm leading-7 text-stone-600">{rest.join(" ")}</p>}
+                  <p className="mt-3 text-sm leading-7 text-stone-500">{chapter.detail}</p>
+                </details>
+              </>;
+            })()}
+            <p className="mt-2 text-xs leading-6 text-stone-500">{chapter.tags.join(" · ")}</p>
             <Link href={chapter.href} className="mt-2 inline-flex min-h-11 items-center gap-2 text-xs font-medium text-rose-600 hover:text-rose-700">{chapter.link}<span aria-hidden="true">→</span></Link>
             {chapter.number === "01" && <a href="https://business.myedit.online/" target="_blank" rel="noopener noreferrer" className="ml-4 inline-flex min-h-11 items-center gap-2 text-xs font-medium text-rose-600 hover:text-rose-700">MyEdit Business <span aria-hidden="true">↗</span></a>}
             {chapter.number === "02" && <a href="https://www.holly-world.com.tw/" target="_blank" rel="noopener noreferrer" className="ml-4 inline-flex min-h-11 items-center gap-2 text-xs font-medium text-rose-600 hover:text-rose-700">Live site <span aria-hidden="true">↗</span></a>}
@@ -116,7 +132,7 @@ export default function AboutPage() {
           </div>
           <div>
             <p className="section-label mb-2">Beyond the screen</p>
-            <h2 id="outside-title" className="text-xl font-semibold tracking-tight text-stone-800">There’s a pâtissier here, too.</h2>
+            <h2 id="outside-title" className="font-display text-2xl text-stone-800">There’s a pâtissier here, too.</h2>
             <p className="mt-4 max-w-xl text-sm leading-7 text-stone-600">Alongside engineering, I love making desserts and exploring new flavors. BonBunny brings my interest in pastry and creative work together with the experience of building a storefront.</p>
             <Link href="/projects/bonbunny" className="mt-2 inline-flex min-h-11 items-center gap-2 text-xs font-medium text-rose-600 hover:text-rose-700">Meet BonBunny <span aria-hidden="true">→</span></Link>
           </div>
@@ -125,7 +141,7 @@ export default function AboutPage() {
 
       <section aria-labelledby="background-title" className="border-t border-stone-200/80 pt-8 md:pt-12">
         <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
-          <div><p className="section-label mb-2">The details, if you’re curious</p><h2 id="background-title" className="text-xl font-semibold tracking-tight text-stone-800">Background &amp; credentials</h2></div>
+          <div><p className="section-label mb-2">The details, if you’re curious</p><h2 id="background-title" className="font-display text-2xl text-stone-800">Background &amp; credentials</h2></div>
           <a href="/YuChen_Liu_Resume.pdf" download="YuChen_Liu_Resume.pdf" className="inline-flex min-h-11 items-center gap-2 text-xs font-medium text-rose-600">Download resume <span aria-hidden="true">↓</span></a>
         </div>
         <p className="mb-5 text-sm leading-7 text-stone-500">My background connects software engineering with quality assurance and network research. Expand a section for the timeline, technical toolkit, or supporting documents.</p>
@@ -511,7 +527,7 @@ export default function AboutPage() {
       </section>
       <section aria-labelledby="connect-title" className="mt-10 rounded-2xl border border-rose-100 bg-rose-50/40 px-5 py-8 md:mt-12 md:px-8">
         <p className="section-label mb-2">Let’s connect</p>
-        <h2 id="connect-title" className="text-xl font-semibold tracking-tight text-stone-800">Have something in mind?</h2>
+        <h2 id="connect-title" className="font-display text-2xl text-stone-800">Have something in mind?</h2>
         <p className="mt-3 max-w-lg text-sm leading-7 text-stone-500">I’m happy to talk about products, engineering challenges, or an opportunity to work together.</p>
         <div className="mt-5 flex flex-wrap gap-3">
           <a href={`mailto:${personalInfo.email}`} className="inline-flex min-h-11 items-center rounded-full bg-rose-500 px-5 text-sm font-medium text-white hover:bg-rose-600">Say hello <span aria-hidden="true" className="ml-2">↗</span></a>
